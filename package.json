@@ -1,0 +1,20 @@
+{
+  "name": "morphaweb",
+  "version": "1.0.0",
+  "source": "src/index.html",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "parcel": "latest",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.18"
+  },
+  "dependencies": {
+    "waveform-data": "^4.3.0",
+    "wavesurfer.js": "^5.2.0"
+  }
+}
