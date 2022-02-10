@@ -311,11 +311,81 @@ Ensure the default browser behavior of the `hidden` attribute.
   .container {
     max-width: 1536px;
   }
+}.z-40 {
+  z-index: 40;
+}.z-30 {
+  z-index: 30;
+}.col-span-2 {
+  grid-column: span 2 / span 2;
+}.col-span-1 {
+  grid-column: span 1 / span 1;
+}.col-span-4 {
+  grid-column: span 4 / span 4;
+}.col-span-7 {
+  grid-column: span 7 / span 7;
 }.mx-auto {
   margin-left: auto;
   margin-right: auto;
+}.grid {
+  display: grid;
+}.h-60 {
+  height: 15rem;
+}.h-full {
+  height: 100%;
+}.h-14 {
+  height: 3.5rem;
+}.h-40 {
+  height: 10rem;
+}.h-2\/4 {
+  height: 50%;
+}.h-2\/5 {
+  height: 40%;
+}.h-4\/5 {
+  height: 80%;
+}.w-full {
+  width: 100%;
+}.w-2\/4 {
+  width: 50%;
+}.flex-1 {
+  flex: 1 1 0%;
+}.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}.gap-16 {
+  gap: 4rem;
+}.gap-4 {
+  gap: 1rem;
+}.rounded-lg {
+  border-radius: 0.5rem;
+}.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }.bg-red-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}.text-center {
+  text-align: center;
+}.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}.font-black {
+  font-weight: 900;
+}.uppercase {
+  text-transform: uppercase;
+}body {
+    overflow:hidden;
+}@media (prefers-color-scheme: dark) {
+
+  .dark\:bg-slate-300 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+  }
 }
 /*# sourceMappingURL=index.82ec24cf.css.map */
