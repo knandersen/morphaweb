@@ -1,8 +1,23 @@
 import { WaveFile } from "wavefile";
 import { saveAs } from "file-saver";
 
+export default class WavHandler {
 
-export default class WavExport {
+    async loadMarkersFromFile (file,callback) {
+        let fr = new FileReader()
+        let cues = []
+        fr.readAsDataURL(file)
+        fr.onloadend = () => {
+            let f = new WaveFile()
+            const base64String = fr.result
+            .replace("data:", "")
+            .replace(/^.+,/, "");
+            f.fromBase64(base64String)
+            cues = f.listCuePoints()
+            callback(cues)
+        }
+    }
+
     createFileFromBuffer(buffer,markers) {
         let file = new WaveFile()
         file.fromScratch(2, 48000, '32f', buffer)

@@ -1,15 +1,14 @@
 import WaveSurfer from "wavesurfer.js"
 import MarkersPlugin from "wavesurfer.js/src/plugin/markers";
 import { throttle } from "lodash";
-import WavExport from "./WavExport";
+import WavHandler from "./WavHandler";
 import { WaveFile } from "wavefile";
 
-const wavExport = new WavExport()
+const wavHandler = new WavHandler()
 
 const playButton = document.getElementById("play")
 const pauseButton = document.getElementById("pause")
 const exportButton = document.getElementById("export")
-const container = document.getElementById("container")
 
 let scrollPos = 0
 let scrollMin = 0
@@ -74,12 +73,12 @@ const createMarker = (time,type="bottom") => {
         o.color = '#00ffcc'
     }
     wavesurfer.addMarker(o)
-
 }
 
 const createMarkerAtCurrentPosition = () => {
     createMarker(playOffset * wavesurfer.getDuration(),"bottom")
 }
+
 let playOffset=0
 const onSeek = (p) => {
     playOffset = p
@@ -87,12 +86,11 @@ const onSeek = (p) => {
     createMarker(playOffset * wavesurfer.getDuration(),"top")
     wavesurfer.play()
 }
+wavesurfer.on('seek',onSeek)
 
 const onFinish = () => {
     // Do nothing
 }
-
-wavesurfer.on('seek',onSeek)
 wavesurfer.on('finish',onFinish)
 
 const onWheel = (e) => {
@@ -101,13 +99,18 @@ const onWheel = (e) => {
         wavesurfer.zoom(scrollPos)
     }
 }
-
 window.addEventListener("wheel",throttle(onWheel,10))
 
-const onReady = () => {
+const addMarkers = (markers) => {
+    for (let marker of markers) {
+        createMarker(marker.position / 1000)
+    }
+}
+
+const onReady = async () => {
     scrollMin = Math.round(wavesurfer.container.scrollWidth / wavesurfer.getDuration())
     scrollPos = scrollMin
-    loadMarkersFromFile(activeFile)
+    wavHandler.loadMarkersFromFile(activeFile,addMarkers)
 }
 wavesurfer.on('ready',onReady)
 
@@ -128,23 +131,6 @@ const allowDrop = (e) => {
     e.preventDefault()
 }
 document.addEventListener("dragover",allowDrop)
-
-const loadMarkersFromFile = (file) => {
-    let fr = new FileReader()
-    fr.readAsDataURL(file)
-    fr.onloadend = () => {
-        let f = new WaveFile()
-        const base64String = fr.result
-        .replace("data:", "")
-        .replace(/^.+,/, "");
-        f.fromBase64(base64String)
-        const cues = f.listCuePoints()
-        for (let marker of cues) {
-            createMarker(marker.position / 1000)
-        }
-    }
-}
-
 
 const onDrop = (e) => {
     e.preventDefault()
