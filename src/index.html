@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="style.css">
     <title>morphaweb</title>
 </head>
-<body>
-    <section class="container bg-red-300 mx-auto">
-
+<body class="dark:bg-slate-900">
+    <section id="container" class="container bg-slate-100 mx-auto">
+        <div id="waveform"></div>
+    
     </section>
-    <div id="waveform"></div>
-    <button id="play">play
+    <section id="dtest"></section>
+    <button id="play" class="h-14 w-40 rounded-lg bg-slate-100">play
     </button>
-    <button id="pause">pause</button>
+    <button id="pause" class="h-14 w-40 rounded-lg bg-slate-100">pause</button>
+    <button id="export" class="h-14 w-40 rounded-lg bg-slate-100">export</button>
     <script type="module" src="index.js"></script>
 </body>
 </html>
