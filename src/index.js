@@ -8,17 +8,17 @@ const w = new URL('../assets/export-19.wav',import.meta.url)
 
 const wavExport = new WavExport()
 
-const playButton = document.querySelector("#play")
-const pauseButton = document.querySelector("#pause")
-const exportButton = document.querySelector("#export")
-const container = document.querySelector("#container")
+const playButton = document.getElementById("play")
+const pauseButton = document.getElementById("pause")
+const exportButton = document.getElementById("export")
+const container = document.getElementById("container")
 let scrollPos = 0
 let scrollMin = 0
+let activeFile = null
 
 var wavesurfer = WaveSurfer.create({
     container: '#waveform',
     waveColor: 'black',
-    height:300,
     //backend:"MediaElement",
     progressColor: 'purple',
     plugins: [
@@ -70,7 +70,8 @@ const createMarker = (time,type="bottom") => {
     let o = {
         time: time,
         position: "bottom",
-        color: '#ff990a'
+        color: '#ff990a',
+        draggable:true
     }
     if(type == "top") {
         o.position = "top",
@@ -110,8 +111,7 @@ window.addEventListener("wheel",throttle(onWheel,10))
 const onReady = () => {
     scrollMin = Math.round(wavesurfer.container.scrollWidth / wavesurfer.getDuration())
     scrollPos = scrollMin
-    console.log(wavesurfer)
-    
+    loadMarkersFromFile(activeFile)
 }
 wavesurfer.on('ready',onReady)
 
@@ -133,12 +133,7 @@ const allowDrop = (e) => {
 }
 document.addEventListener("dragover",allowDrop)
 
-const onDrop = (e) => {
-    e.preventDefault()
-    //wavesurfer.empty()
-    let file = e.dataTransfer.files[0]
-    wavesurfer.loadBlob(file)
-    
+const loadMarkersFromFile = (file) => {
     let fr = new FileReader()
     fr.readAsDataURL(file)
     fr.onloadend = () => {
@@ -152,6 +147,16 @@ const onDrop = (e) => {
             createMarker(marker.position / 1000)
         }
     }
-    
 }
-container.addEventListener("drop",onDrop)
+
+
+const onDrop = (e) => {
+    e.preventDefault()
+    if(e.dataTransfer.files.length > 1) {
+        console.log(e.dataTransfer.files)
+    } else {
+        activeFile = e.dataTransfer.files[0]
+    }
+    wavesurfer.loadBlob(activeFile)
+}
+document.addEventListener("drop",onDrop)
