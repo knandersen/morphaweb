@@ -4,14 +4,13 @@ import { throttle } from "lodash";
 import WavExport from "./WavExport";
 import { WaveFile } from "wavefile";
 
-const w = new URL('../assets/export-19.wav',import.meta.url)
-
 const wavExport = new WavExport()
 
 const playButton = document.getElementById("play")
 const pauseButton = document.getElementById("pause")
 const exportButton = document.getElementById("export")
 const container = document.getElementById("container")
+
 let scrollPos = 0
 let scrollMin = 0
 let activeFile = null
@@ -19,11 +18,8 @@ let activeFile = null
 var wavesurfer = WaveSurfer.create({
     container: '#waveform',
     waveColor: 'black',
-    //backend:"MediaElement",
     progressColor: 'purple',
-    plugins: [
-        MarkersPlugin.create()
-]    
+    plugins: [MarkersPlugin.create()]    
 });
 
 const onMarkerClick = (e) => {
