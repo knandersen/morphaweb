@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build --public-url ./",
+    "build": "yarn clean && parcel build --public-url ./",
     "clean": "rm -rf dist/",
-    "deploy": "gh-pages -d dist"
+    "deploy": "yarn build && gh-pages -d dist"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
