@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel",
     "build": "parcel build --public-url ./",
+    "clean": "rm -rf dist/",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
