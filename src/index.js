@@ -2,6 +2,9 @@ import WaveSurfer from "wavesurfer.js"
 import MarkersPlugin from "wavesurfer.js/src/plugin/markers";
 import { throttle } from "lodash";
 import WavExport from "./WavExport";
+import { WaveFile } from "wavefile";
+
+const w = new URL('../assets/export-19.wav',import.meta.url)
 
 const wavExport = new WavExport()
 
@@ -19,9 +22,7 @@ var wavesurfer = WaveSurfer.create({
     //backend:"MediaElement",
     progressColor: 'purple',
     plugins: [
-        MarkersPlugin.create({
-            markers: []
-        })
+        MarkersPlugin.create()
 ]    
 });
 
@@ -65,7 +66,7 @@ const removeMarker = (type) => {
     wavesurfer.markers.remove(i)
 }
 
-const createMarker = (time,type) => {
+const createMarker = (time,type="bottom") => {
     let o = {
         time: time,
         position: "bottom",
@@ -110,6 +111,7 @@ const onReady = () => {
     scrollMin = Math.round(wavesurfer.container.scrollWidth / wavesurfer.getDuration())
     scrollPos = scrollMin
     console.log(wavesurfer)
+    
 }
 wavesurfer.on('ready',onReady)
 
@@ -133,7 +135,23 @@ document.addEventListener("dragover",allowDrop)
 
 const onDrop = (e) => {
     e.preventDefault()
+    //wavesurfer.empty()
     let file = e.dataTransfer.files[0]
-    wavesurfer.loadBlob(file)    
+    wavesurfer.loadBlob(file)
+    
+    let fr = new FileReader()
+    fr.readAsDataURL(file)
+    fr.onloadend = () => {
+        let f = new WaveFile()
+        const base64String = fr.result
+        .replace("data:", "")
+        .replace(/^.+,/, "");
+        f.fromBase64(base64String)
+        const cues = f.listCuePoints()
+        for (let marker of cues) {
+            createMarker(marker.position / 1000)
+        }
+    }
+    
 }
 container.addEventListener("drop",onDrop)
