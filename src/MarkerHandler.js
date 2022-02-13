@@ -1,14 +1,16 @@
-import { Morphaweb } from "./Morphaweb";
+export default class MarkerHandler {
+    constructor(morphaweb){
+        this.morphaweb = morphaweb
+    }
 
-export class MarkerHandler extends Morphaweb {
     addMarkers = (markers) => {
         for (let marker of markers) {
             this.createMarker(marker.position / 1000)
         }
     }
     removeMarker(type) {
-        const i = super.wavesurfer.markers.markers.map(m => m.position).indexOf('top')
-        super.wavesurfer.markers.remove(i)
+        const i = this.morphaweb.wavesurfer.markers.markers.map(m => m.position).indexOf('top')
+        this.morphaweb.wavesurfer.markers.remove(i)
     }
     
     createMarker(time,type="bottom") {
@@ -22,10 +24,10 @@ export class MarkerHandler extends Morphaweb {
             o.position = "top",
             o.color = '#00ffcc'
         }
-        super.wavesurfer.addMarker(o)
+        this.morphaweb.wavesurfer.addMarker(o)
     }
     
     createMarkerAtCurrentPosition() {
-        createMarker(playOffset * super.wavesurfer.getDuration(),"bottom")
+        this.createMarker(this.morphaweb.playOffset * this.morphaweb.wavesurfer.getDuration(),"bottom")
     }
 }
