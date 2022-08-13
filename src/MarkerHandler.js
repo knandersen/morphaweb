@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export default class MarkerHandler {
     constructor(morphaweb){
         this.morphaweb = morphaweb
@@ -18,13 +20,13 @@ export default class MarkerHandler {
             time: time,
             position: "bottom",
             color: '#ff990a',
+            label: uuidv4(),
             draggable:true
         }
         if(type == "top") {
             o.position = "top",
             o.color = '#00ffcc'
         }
-        this.morphaweb.wavesurfer.addMarker(o)
     }
     
     createMarkerAtCurrentPosition() {
