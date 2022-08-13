@@ -32,7 +32,7 @@ export default class ControlsHandler {
 
     onSeek = (p) => {
         this.morphaweb.playOffset = p
-        this.morphaweb.markerHandler.removeMarker("top")
+        this.morphaweb.markerHandler.removeTopMarker("top")
         this.morphaweb.markerHandler.createMarker(this.morphaweb.playOffset * this.morphaweb.wavesurfer.getDuration(),"top")
         this.morphaweb.wavesurfer.play()
     }
@@ -50,11 +50,11 @@ export default class ControlsHandler {
     
     onKeydown = (e) => {
         switch(e.key) {
-            case "m":
+            case "j":
                 this.morphaweb.markerHandler.createMarkerAtCurrentPosition()
                 break;
-            case "p":
-                //playFromCursor()
+            case "k":
+                this.morphaweb.markerHandler.removeSelectedMarker()
                 break;
         }
     }
