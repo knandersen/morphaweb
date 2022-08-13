@@ -44,7 +44,7 @@ export default class MarkerHandler {
     }
     
     createMarker(time,type="bottom") {
-        if(this.getMarkerAtTime(time) != -1) {return false}
+        if(type == "bottom" && this.getMarkerAtTime(time) != -1) {return false}
         let o = {
             time: time,
             position: "bottom",
