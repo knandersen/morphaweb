@@ -4,9 +4,6 @@ import DropHandler from "./DropHandler";
 import ControlsHandler from "./ControlsHandler";
 import MarkerHandler from "./MarkerHandler";
 import WavHandler from "./WavHandler";
-
-
-const surl = new URL('../assets/walksign.wav',import.meta.url)
 export default class Morphaweb {
     constructor() {
         this.scrollPos = 0
