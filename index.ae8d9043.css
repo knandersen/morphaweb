@@ -1,0 +1,204 @@
+/* roboto-mono-cyrillic-ext-400-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("roboto-mono-cyrillic-ext-400-normal.23f5f3df.woff2") format('woff2'), url("roboto-mono-all-400-normal.2ad8590e.woff") format('woff');
+  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+}
+/* roboto-mono-cyrillic-400-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("roboto-mono-cyrillic-400-normal.3d4ad489.woff2") format('woff2'), url("roboto-mono-all-400-normal.2ad8590e.woff") format('woff');
+  unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+/* roboto-mono-greek-400-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("roboto-mono-greek-400-normal.3cf9c8b4.woff2") format('woff2'), url("roboto-mono-all-400-normal.2ad8590e.woff") format('woff');
+  unicode-range: U+0370-03FF;
+}
+/* roboto-mono-vietnamese-400-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("roboto-mono-vietnamese-400-normal.d3a730ce.woff2") format('woff2'), url("roboto-mono-all-400-normal.2ad8590e.woff") format('woff');
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB;
+}
+/* roboto-mono-latin-ext-400-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("roboto-mono-latin-ext-400-normal.4abf6f1c.woff2") format('woff2'), url("roboto-mono-all-400-normal.2ad8590e.woff") format('woff');
+  unicode-range: U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+/* roboto-mono-latin-400-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("roboto-mono-latin-400-normal.c5786f4e.woff2") format('woff2'), url("roboto-mono-all-400-normal.2ad8590e.woff") format('woff');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* roboto-mono-cyrillic-ext-700-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("roboto-mono-cyrillic-ext-700-normal.6c5b05f2.woff2") format('woff2'), url("roboto-mono-all-700-normal.04776f1b.woff") format('woff');
+  unicode-range: U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
+}
+/* roboto-mono-cyrillic-700-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("roboto-mono-cyrillic-700-normal.b19befa8.woff2") format('woff2'), url("roboto-mono-all-700-normal.04776f1b.woff") format('woff');
+  unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
+}
+/* roboto-mono-greek-700-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("roboto-mono-greek-700-normal.7ea0a3b5.woff2") format('woff2'), url("roboto-mono-all-700-normal.04776f1b.woff") format('woff');
+  unicode-range: U+0370-03FF;
+}
+/* roboto-mono-vietnamese-700-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("roboto-mono-vietnamese-700-normal.89d8a2fd.woff2") format('woff2'), url("roboto-mono-all-700-normal.04776f1b.woff") format('woff');
+  unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+1EA0-1EF9,U+20AB;
+}
+/* roboto-mono-latin-ext-700-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("roboto-mono-latin-ext-700-normal.37fa93cf.woff2") format('woff2'), url("roboto-mono-all-700-normal.04776f1b.woff") format('woff');
+  unicode-range: U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+/* roboto-mono-latin-700-normal*/
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("roboto-mono-latin-700-normal.96e5b068.woff2") format('woff2'), url("roboto-mono-all-700-normal.04776f1b.woff") format('woff');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+:root {
+    --main-bg-color: #333;
+    --main-color: #ffd000;
+    --font: 'Roboto Mono', monospace;
+}
+div {
+    display: inline-block;
+}
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-color);
+    font-family: var(--font);
+}
+#container {
+    max-width: 60rem;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "main main"
+        "controls help"
+        "footer footer";
+    row-gap: 3rem;
+    column-gap: 2rem;
+}
+#waveform {
+    width: 100%;
+    height: 100%;
+}
+.editor {
+    grid-area: main;
+    border: 1px solid;
+    border-color: var(--main-color)
+}
+.controls {
+    grid-area: controls;
+}
+.help {
+    grid-area: help;
+}
+.footer {
+    grid-area: footer;
+    font-size: 0.7rem;
+    text-align: center;
+}
+h3 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.4rem;
+    background-color: var(--main-color);
+    color: var(--main-bg-color);
+    padding: 0.4rem;
+}
+a {
+    color: var(--main-color);
+}
+.shortcut {
+    vertical-align: middle;
+    margin: 1rem 0;
+}
+.shortcut-icon {
+    background-color: var(--main-color);
+    color: var(--main-bg-color);
+    border-bottom: 2px inset rgba(0, 0, 0, .5);
+    border-left: 2px inset rgba(0, 0, 0, .5);
+    border-right: 2px inset rgba(255, 255, 255, .5);
+    border-top: 2px inset rgba(255, 255, 255, .5);
+    width: 2rem;
+    height: 2rem;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}
+button {
+    font-family: 'Roboto Mono';
+    background-color: var(--main-color);
+    color: var(--main-bg-color);
+    border-bottom: 2px inset rgba(0, 0, 0, .5);
+    border-left: 2px inset rgba(0, 0, 0, .5);
+    border-right: 2px inset rgba(255, 255, 255, .5);
+    border-top: 2px inset rgba(255, 255, 255, .5);
+    padding: 1rem;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+}
+.shortcut-icon div {
+    vertical-align: middle;
+}
+/*# sourceMappingURL=index.ae8d9043.css.map */
