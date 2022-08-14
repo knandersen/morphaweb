@@ -56,6 +56,10 @@ body {
     text-align: center;
 }
 
+.linethrough {
+    text-decoration: line-through;
+}
+
 h3 {
     text-transform: uppercase;
     font-weight: 700;
