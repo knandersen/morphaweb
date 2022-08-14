@@ -13,8 +13,8 @@ export default class Morphaweb {
         
         this.wavesurfer = WaveSurfer.create({
             container: '#waveform',
-            waveColor: 'black',
-            progressColor: 'purple',
+            waveColor: '#ffd000',
+            progressColor: 'white',
             plugins: [MarkersPlugin.create()]    
         });
 

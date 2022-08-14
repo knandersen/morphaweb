@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 export default class MarkerHandler {
     constructor(morphaweb){
         this.color = '#ff990a'
-        this.colorHighlight = "#3333ff"
+        this.colorHighlight = "#ff1111"
+        this.colorTopMarker = "#ff00bb"
 
         this.morphaweb = morphaweb
         this.morphaweb.wavesurfer.on('marker-click',this.onClick.bind(this))
@@ -54,7 +55,7 @@ export default class MarkerHandler {
         }
         if(type == "top") {
             o.position = "top",
-            o.color = '#00ffcc'
+            o.color = this.colorTopMarker
         }
         this.morphaweb.wavesurfer.addMarker(o)
     }
