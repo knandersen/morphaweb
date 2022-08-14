@@ -154,6 +154,9 @@ body {
     font-size: 0.7rem;
     text-align: center;
 }
+.linethrough {
+    text-decoration: line-through;
+}
 h3 {
     text-transform: uppercase;
     font-weight: 700;
@@ -197,6 +200,9 @@ button {
     text-align: center;
     vertical-align: middle;
     display: inline-block;
+}
+.grey {
+    background-color: #999;
 }
 .shortcut-icon div {
     vertical-align: middle;
