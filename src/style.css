@@ -28,6 +28,7 @@ body {
         "controls help"
         "footer footer";
     row-gap: 3rem;
+    column-gap: 2rem;
 }
 
 #waveform {
