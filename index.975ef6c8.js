@@ -142,89 +142,15 @@
       this[globalName] = mainExports;
     }
   }
-})({"hN5yK":[function(require,module,exports) {
+})({"ShInH":[function(require,module,exports) {
 "use strict";
+var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "5aa861c55ea6b9c6";
-function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _createForOfIteratorHelper(o, allowArrayLike) {
-    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-    if (!it) {
-        if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-            if (it) o = it;
-            var i = 0;
-            var F = function F() {
-            };
-            return {
-                s: F,
-                n: function n() {
-                    if (i >= o.length) return {
-                        done: true
-                    };
-                    return {
-                        done: false,
-                        value: o[i++]
-                    };
-                },
-                e: function e(_e) {
-                    throw _e;
-                },
-                f: F
-            };
-        }
-        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }
-    var normalCompletion = true, didErr = false, err;
-    return {
-        s: function s() {
-            it = it.call(o);
-        },
-        n: function n() {
-            var step = it.next();
-            normalCompletion = step.done;
-            return step;
-        },
-        e: function e(_e2) {
-            didErr = true;
-            err = _e2;
-        },
-        f: function f() {
-            try {
-                if (!normalCompletion && it.return != null) it.return();
-            } finally{
-                if (didErr) throw err;
-            }
-        }
-    };
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE */ /*::
+module.bundle.HMR_BUNDLE_ID = "890e741a975ef6c8";
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
   HMRAsset,
   HMRMessage,
@@ -251,12 +177,25 @@ interface ParcelModule {
     _disposeCallbacks: Array<(mixed) => void>,
   |};
 }
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
+  |};
+}
 declare var module: {bundle: ParcelRequire, ...};
 declare var HMR_HOST: string;
 declare var HMR_PORT: string;
 declare var HMR_ENV_HASH: string;
 declare var HMR_SECURE: boolean;
-*/ var OVERLAY_ID = '__parcel__error__overlay__';
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = "__parcel__error__overlay__";
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
     OldModule.call(this, moduleName);
@@ -264,72 +203,66 @@ function Module(moduleName) {
         data: module.bundle.hotData,
         _acceptCallbacks: [],
         _disposeCallbacks: [],
-        accept: function accept(fn) {
-            this._acceptCallbacks.push(fn || function() {
-            });
+        accept: function(fn) {
+            this._acceptCallbacks.push(fn || function() {});
         },
-        dispose: function dispose(fn) {
+        dispose: function(fn) {
             this._disposeCallbacks.push(fn);
         }
     };
     module.bundle.hotData = undefined;
 }
 module.bundle.Module = Module;
-var checkedAssets, acceptedAssets, assetsToAccept;
+var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
-    return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
 }
 function getPort() {
     return HMR_PORT || location.port;
 } // eslint-disable-next-line no-redeclare
 var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
     var hostname = getHostname();
     var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == 'https:' && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? 'wss' : 'ws';
-    var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/'); // $FlowFixMe
-    ws.onmessage = function(event) {
-        checkedAssets = {
-        };
-        acceptedAssets = {
-        };
+    var protocol = HMR_SECURE || location.protocol == "https:" && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? "wss" : "ws";
+    var ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/"); // Web extension context
+    var extCtx = typeof chrome === "undefined" ? typeof browser === "undefined" ? null : browser : chrome; // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes("test.js");
+    } // $FlowFixMe
+    ws.onmessage = async function(event) {
+        checkedAssets = {} /*: {|[string]: boolean|} */ ;
+        acceptedAssets = {} /*: {|[string]: boolean|} */ ;
         assetsToAccept = [];
         var data = JSON.parse(event.data);
-        if (data.type === 'update') {
+        if (data.type === "update") {
             // Remove error overlay if there is one
-            if (typeof document !== 'undefined') removeErrorOverlay();
-            var assets = data.assets.filter(function(asset) {
-                return asset.envHash === HMR_ENV_HASH;
-            }); // Handle HMR Update
-            var handled = assets.every(function(asset) {
-                return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+            if (typeof document !== "undefined") removeErrorOverlay();
+            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH); // Handle HMR Update
+            let handled = assets.every((asset)=>{
+                return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
             });
             if (handled) {
-                console.clear();
-                assets.forEach(function(asset) {
-                    hmrApply(module.bundle.root, asset);
-                });
+                console.clear(); // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+                if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
+                await hmrApplyUpdates(assets);
                 for(var i = 0; i < assetsToAccept.length; i++){
                     var id = assetsToAccept[i][1];
                     if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
                 }
-            } else window.location.reload();
+            } else fullReload();
         }
-        if (data.type === 'error') {
+        if (data.type === "error") {
             // Log parcel errors to console
-            var _iterator = _createForOfIteratorHelper(data.diagnostics.ansi), _step;
-            try {
-                for(_iterator.s(); !(_step = _iterator.n()).done;){
-                    var ansiDiagnostic = _step.value;
-                    var stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
-                    console.error('🚨 [parcel]: ' + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
-                }
-            } catch (err) {
-                _iterator.e(err);
-            } finally{
-                _iterator.f();
+            for (let ansiDiagnostic of data.diagnostics.ansi){
+                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
             }
-            if (typeof document !== 'undefined') {
+            if (typeof document !== "undefined") {
                 // Render the fancy html overlay
                 removeErrorOverlay();
                 var overlay = createErrorOverlay(data.diagnostics.html); // $FlowFixMe
@@ -341,37 +274,46 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         console.error(e.message);
     };
     ws.onclose = function() {
-        console.warn('[parcel] 🚨 Connection to the HMR server was lost');
+        console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
     };
 }
 function removeErrorOverlay() {
     var overlay = document.getElementById(OVERLAY_ID);
     if (overlay) {
         overlay.remove();
-        console.log('[parcel] ✨ Error resolved');
+        console.log("[parcel] ✨ Error resolved");
     }
 }
 function createErrorOverlay(diagnostics) {
-    var overlay = document.createElement('div');
+    var overlay = document.createElement("div");
     overlay.id = OVERLAY_ID;
-    var errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
-    var _iterator2 = _createForOfIteratorHelper(diagnostics), _step2;
-    try {
-        for(_iterator2.s(); !(_step2 = _iterator2.n()).done;){
-            var diagnostic = _step2.value;
-            var stack = diagnostic.codeframe ? diagnostic.codeframe : diagnostic.stack;
-            errorHTML += "\n      <div>\n        <div style=\"font-size: 18px; font-weight: bold; margin-top: 20px;\">\n          \uD83D\uDEA8 ".concat(diagnostic.message, "\n        </div>\n        <pre>").concat(stack, "</pre>\n        <div>\n          ").concat(diagnostic.hints.map(function(hint) {
-                return '<div>💡 ' + hint + '</div>';
-            }).join(''), "\n        </div>\n        ").concat(diagnostic.documentation ? "<div>\uD83D\uDCDD <a style=\"color: violet\" href=\"".concat(diagnostic.documentation, "\" target=\"_blank\">Learn more</a></div>") : '', "\n      </div>\n    ");
-        }
-    } catch (err) {
-        _iterator2.e(err);
-    } finally{
-        _iterator2.f();
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, "") : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          🚨 ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + "</div>").join("")}
+        </div>
+        ${diagnostic.documentation ? `<div>📝 <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ""}
+      </div>
+    `;
     }
-    errorHTML += '</div>';
+    errorHTML += "</div>";
     overlay.innerHTML = errorHTML;
     return overlay;
+}
+function fullReload() {
+    if ("reload" in location) location.reload();
+    else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
 }
 function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
     var modules = bundle.modules;
@@ -394,7 +336,7 @@ function updateLink(link) {
         if (link.parentNode !== null) // $FlowFixMe
         link.parentNode.removeChild(link);
     };
-    newLink.setAttribute('href', link.getAttribute('href').split('?')[0] + '?' + Date.now()); // $FlowFixMe
+    newLink.setAttribute("href", link.getAttribute("href").split("?")[0] + "?" + Date.now()); // $FlowFixMe
     link.parentNode.insertBefore(newLink, link.nextSibling);
 }
 var cssTimeout = null;
@@ -404,33 +346,105 @@ function reloadCSS() {
         var links = document.querySelectorAll('link[rel="stylesheet"]');
         for(var i = 0; i < links.length; i++){
             // $FlowFixMe[incompatible-type]
-            var href = links[i].getAttribute('href');
+            var href = links[i].getAttribute("href");
             var hostname = getHostname();
-            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
-            var absolute = /^https?:\/\//i.test(href) && href.indexOf(window.location.origin) !== 0 && !servedFromHMRServer;
+            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
+            var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
             if (!absolute) updateLink(links[i]);
         }
         cssTimeout = null;
     }, 50);
 }
+function hmrDownload(asset) {
+    if (asset.type === "js") {
+        if (typeof document !== "undefined") {
+            let script = document.createElement("script");
+            script.src = asset.url + "?t=" + Date.now();
+            if (asset.outputFormat === "esmodule") script.type = "module";
+            return new Promise((resolve, reject)=>{
+                var _document$head;
+                script.onload = ()=>resolve(script);
+                script.onerror = reject;
+                (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+            });
+        } else if (typeof importScripts === "function") {
+            // Worker scripts
+            if (asset.outputFormat === "esmodule") return import(asset.url + "?t=" + Date.now());
+            else return new Promise((resolve, reject)=>{
+                try {
+                    importScripts(asset.url + "?t=" + Date.now());
+                    resolve();
+                } catch (err) {
+                    reject(err);
+                }
+            });
+        }
+    }
+}
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                var _hmrDownload;
+                return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch((err)=>{
+                    // Web extension bugfix for Chromium
+                    // https://bugs.chromium.org/p/chromium/issues/detail?id=1255412#c12
+                    if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3) {
+                        if (typeof ServiceWorkerGlobalScope != "undefined" && global instanceof ServiceWorkerGlobalScope) {
+                            extCtx.runtime.reload();
+                            return;
+                        }
+                        asset.url = extCtx.runtime.getURL("/__parcel_hmr_proxy__?url=" + encodeURIComponent(asset.url + "?t=" + Date.now()));
+                        return hmrDownload(asset);
+                    }
+                    throw err;
+                });
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
 function hmrApply(bundle, asset) {
     var modules = bundle.modules;
     if (!modules) return;
-    if (asset.type === 'css') reloadCSS();
-    else if (asset.type === 'js') {
-        var deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+    if (asset.type === "css") reloadCSS();
+    else if (asset.type === "js") {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
         if (deps) {
             if (modules[asset.id]) {
                 // Remove dependencies that are removed and will become orphaned.
                 // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
-                var oldDeps = modules[asset.id][1];
-                for(var dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
-                    var id = oldDeps[dep];
-                    var parents = getParents(module.bundle.root, id);
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
                     if (parents.length === 1) hmrDelete(module.bundle.root, id);
                 }
             }
-            var fn = new Function('require', 'module', 'exports', asset.output);
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+             // $FlowFixMe
+            let fn = global.parcelHotUpdate[asset.id];
             modules[asset.id] = [
                 fn,
                 deps
@@ -438,43 +452,43 @@ function hmrApply(bundle, asset) {
         } else if (bundle.parent) hmrApply(bundle.parent, asset);
     }
 }
-function hmrDelete(bundle, id1) {
-    var modules = bundle.modules;
+function hmrDelete(bundle, id) {
+    let modules = bundle.modules;
     if (!modules) return;
-    if (modules[id1]) {
+    if (modules[id]) {
         // Collect dependencies that will become orphaned when this module is deleted.
-        var deps = modules[id1][1];
-        var orphans = [];
-        for(var dep in deps){
-            var parents = getParents(module.bundle.root, deps[dep]);
+        let deps = modules[id][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
             if (parents.length === 1) orphans.push(deps[dep]);
         } // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
-        delete modules[id1];
-        delete bundle.cache[id1]; // Now delete the orphans.
-        orphans.forEach(function(id) {
+        delete modules[id];
+        delete bundle.cache[id]; // Now delete the orphans.
+        orphans.forEach((id)=>{
             hmrDelete(module.bundle.root, id);
         });
-    } else if (bundle.parent) hmrDelete(bundle.parent, id1);
+    } else if (bundle.parent) hmrDelete(bundle.parent, id);
 }
 function hmrAcceptCheck(bundle, id, depsByBundle) {
     if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
      // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
-    var parents = getParents(module.bundle.root, id);
-    var accepted = false;
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
     while(parents.length > 0){
-        var v = parents.shift();
-        var a = hmrAcceptCheckOne(v[0], v[1], null);
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
         if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
         accepted = true;
         else {
             // Otherwise, queue the parents in the next level upward.
-            var p = getParents(module.bundle.root, v[1]);
+            let p = getParents(module.bundle.root, v[1]);
             if (p.length === 0) {
                 // If there are no parents, then we've reached an entry without accepting. Reload.
                 accepted = false;
                 break;
             }
-            parents.push.apply(parents, _toConsumableArray(p));
+            parents.push(...p);
         }
     }
     return accepted;
@@ -499,8 +513,7 @@ function hmrAcceptCheckOne(bundle, id, depsByBundle) {
 }
 function hmrAcceptRun(bundle, id) {
     var cached = bundle.cache[id];
-    bundle.hotData = {
-    };
+    bundle.hotData = {};
     if (cached && cached.hot) cached.hot.data = bundle.hotData;
     if (cached && cached.hot && cached.hot._disposeCallbacks.length) cached.hot._disposeCallbacks.forEach(function(cb) {
         cb(bundle.hotData);
@@ -518,13 +531,22 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"a104Y":[function(require,module,exports) {
+},{}],"8lqZg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _morphaweb = require("./Morphaweb");
 var _morphawebDefault = parcelHelpers.interopDefault(_morphaweb);
-const morphaweb = new _morphawebDefault.default();
+var _panelbearJs = require("@panelbear/panelbear-js");
+const morphaweb = new (0, _morphawebDefault.default)();
+/**
+ * Tracking
+ */ _panelbearJs.load("z6xwVIhy6M");
+_panelbearJs.trackPageview();
+const exportButton = document.getElementById("export");
+exportButton.addEventListener("click", (e)=>{
+    _panelbearJs.track("export");
+});
 
-},{"./Morphaweb":"lrcn2","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"lrcn2":[function(require,module,exports) {
+},{"./Morphaweb":"l7LGk","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@panelbear/panelbear-js":"2H3g6"}],"l7LGk":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _wavesurferJs = require("wavesurfer.js");
@@ -545,19 +567,19 @@ class Morphaweb {
         this.scrollMin = 0;
         this.activeFile = null;
         this.playOffset = 0;
-        this.wavesurfer = _wavesurferJsDefault.default.create({
-            container: '#waveform',
-            waveColor: '#ffd000',
-            progressColor: 'white',
+        this.wavesurfer = (0, _wavesurferJsDefault.default).create({
+            container: "#waveform",
+            waveColor: "#ffd000",
+            progressColor: "white",
             plugins: [
-                _markersDefault.default.create()
+                (0, _markersDefault.default).create()
             ]
         });
-        this.dropHandler = new _dropHandlerDefault.default(this);
-        this.markerHandler = new _markerHandlerDefault.default(this);
-        this.controlsHandler = new _controlsHandlerDefault.default(this);
-        this.wavHandler = new _wavHandlerDefault.default();
-        this.wavesurfer.on('ready', this.onReady.bind(this));
+        this.dropHandler = new (0, _dropHandlerDefault.default)(this);
+        this.markerHandler = new (0, _markerHandlerDefault.default)(this);
+        this.controlsHandler = new (0, _controlsHandlerDefault.default)(this);
+        this.wavHandler = new (0, _wavHandlerDefault.default)();
+        this.wavesurfer.on("ready", this.onReady.bind(this));
     }
     onReady = async ()=>{
         this.scrollMin = Math.round(this.wavesurfer.container.scrollWidth / this.wavesurfer.getDuration());
@@ -567,20 +589,18 @@ class Morphaweb {
 }
 exports.default = Morphaweb;
 
-},{"wavesurfer.js":"jvcq5","wavesurfer.js/src/plugin/markers":"gbirD","./DropHandler":"jKMG0","./ControlsHandler":"aEpgz","./MarkerHandler":"8bV5p","./WavHandler":"gsBYB","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"jvcq5":[function(require,module,exports) {
+},{"wavesurfer.js":"b0TgV","wavesurfer.js/src/plugin/markers":"drAS8","./DropHandler":"iU0AL","./ControlsHandler":"3b5Tt","./MarkerHandler":"1PVD7","./WavHandler":"6ZK6N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b0TgV":[function(require,module,exports) {
 /*!
  * wavesurfer.js 6.2.0 (2022-05-16)
  * https://wavesurfer-js.org
  * @license BSD-3-Clause
  */ (function webpackUniversalModuleDefinition(root, factory) {
-    if (typeof exports === 'object' && typeof module === 'object') module.exports = factory();
-    else if (typeof define === 'function' && define.amd) define("WaveSurfer", [], factory);
-    else if (typeof exports === 'object') exports["WaveSurfer"] = factory();
-    else root["WaveSurfer"] = factory();
+    module.exports = factory();
 })(self, ()=>{
-    return(/******/ (()=>{
+    return /******/ (()=>{
         /******/ var __webpack_modules__ = {
-            /***/ "./src/drawer.canvasentry.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/drawer.canvasentry.js": (module1, exports, __webpack_require__)=>{
+                "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
                 });
@@ -618,7 +638,7 @@ exports.default = Morphaweb;
  *
  * The `MultiCanvas` renderer uses one or more `CanvasEntry` instances to
  * render a waveform, depending on the zoom level.
- */ var CanvasEntry1 = /*#__PURE__*/ function() {
+ */ var CanvasEntry = /*#__PURE__*/ function() {
                     function CanvasEntry() {
                         _classCallCheck(this, CanvasEntry);
                         /**
@@ -655,13 +675,12 @@ exports.default = Morphaweb;
      * Unique identifier for this entry
      *
      * @type {string}
-     */ this.id = (0, _getId.default)(typeof this.constructor.name !== 'undefined' ? this.constructor.name.toLowerCase() + '_' : 'canvasentry_');
+     */ this.id = (0, _getId.default)(typeof this.constructor.name !== "undefined" ? this.constructor.name.toLowerCase() + "_" : "canvasentry_");
                         /**
      * Canvas 2d context attributes
      *
      * @type {object}
-     */ this.canvasContextAttributes = {
-                        };
+     */ this.canvasContextAttributes = {};
                     }
                     /**
    * Store the wave canvas element and create the 2D rendering context
@@ -672,14 +691,14 @@ exports.default = Morphaweb;
                             key: "initWave",
                             value: function initWave(element) {
                                 this.wave = element;
-                                this.waveCtx = this.wave.getContext('2d', this.canvasContextAttributes);
+                                this.waveCtx = this.wave.getContext("2d", this.canvasContextAttributes);
                             }
                         },
                         {
                             key: "initProgress",
                             value: function initProgress(element) {
                                 this.progress = element;
-                                this.progressCtx = this.progress.getContext('2d', this.canvasContextAttributes);
+                                this.progressCtx = this.progress.getContext("2d", this.canvasContextAttributes);
                             }
                         },
                         {
@@ -692,7 +711,7 @@ exports.default = Morphaweb;
                                 this.wave.width = width;
                                 this.wave.height = height;
                                 var elementSize = {
-                                    width: elementWidth + 'px'
+                                    width: elementWidth + "px"
                                 };
                                 (0, _style.default)(this.wave, elementSize);
                                 if (this.hasProgressCanvas) {
@@ -721,7 +740,7 @@ exports.default = Morphaweb;
                         {
                             key: "getFillStyle",
                             value: function getFillStyle(ctx, color) {
-                                if (typeof color == 'string' || color instanceof CanvasGradient) return color;
+                                if (typeof color == "string" || color instanceof CanvasGradient) return color;
                                 var waveGradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
                                 color.forEach(function(value, index) {
                                     return waveGradient.addColorStop(index / color.length, value);
@@ -809,7 +828,7 @@ exports.default = Morphaweb;
                                 } // draw the bottom edge going backwards, to make a single
                                 // closed hull to fill
                                 var j = canvasEnd - 1;
-                                for(; j >= canvasStart; j--){
+                                for(j; j >= canvasStart; j--){
                                     peak = peaks[2 * j + 1] || 0;
                                     h = Math.round(peak / absmaxHalf);
                                     ctx.lineTo((j - first) * scale + this.halfPixel, halfOffset - h);
@@ -832,39 +851,40 @@ exports.default = Morphaweb;
                             key: "getImage",
                             value: function getImage(format, quality, type) {
                                 var _this = this;
-                                if (type === 'blob') return new Promise(function(resolve) {
+                                if (type === "blob") return new Promise(function(resolve) {
                                     _this.wave.toBlob(resolve, format, quality);
                                 });
-                                else if (type === 'dataURL') return this.wave.toDataURL(format, quality);
+                                else if (type === "dataURL") return this.wave.toDataURL(format, quality);
                             }
                         }
                     ]);
                     return CanvasEntry;
                 }();
-                exports["default"] = CanvasEntry1;
-                module.exports = exports.default;
+                exports["default"] = CanvasEntry;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/drawer.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/drawer.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
-                function _typeof(obj1) {
+                function _typeof(obj) {
+                    "@babel/helpers - typeof";
                     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                         return typeof obj;
                     } : function(obj) {
                         return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-                    }, _typeof(obj1);
+                    }, _typeof(obj);
                 }
                 Object.defineProperty(exports, "__esModule", {
                     value: true
                 });
                 exports["default"] = void 0;
                 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
-                function _getRequireWildcardCache(nodeInterop1) {
+                function _getRequireWildcardCache(nodeInterop) {
                     if (typeof WeakMap !== "function") return null;
                     var cacheBabelInterop = new WeakMap();
                     var cacheNodeInterop = new WeakMap();
                     return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
                         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-                    })(nodeInterop1);
+                    })(nodeInterop);
                 }
                 function _interopRequireWildcard(obj, nodeInterop) {
                     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -873,8 +893,7 @@ exports.default = Morphaweb;
                     };
                     var cache = _getRequireWildcardCache(nodeInterop);
                     if (cache && cache.has(obj)) return cache.get(obj);
-                    var newObj = {
-                    };
+                    var newObj = {};
                     var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
                     for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
                         var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
@@ -919,12 +938,12 @@ exports.default = Morphaweb;
                     });
                     if (superClass) _setPrototypeOf(subClass, superClass);
                 }
-                function _setPrototypeOf(o1, p1) {
+                function _setPrototypeOf(o, p) {
                     _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
                         o.__proto__ = p;
                         return o;
                     };
-                    return _setPrototypeOf(o1, p1);
+                    return _setPrototypeOf(o, p);
                 }
                 function _createSuper(Derived) {
                     var hasNativeReflectConstruct = _isNativeReflectConstruct();
@@ -937,38 +956,37 @@ exports.default = Morphaweb;
                         return _possibleConstructorReturn(this, result);
                     };
                 }
-                function _possibleConstructorReturn(self, call) {
+                function _possibleConstructorReturn(self1, call) {
                     if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
                     else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-                    return _assertThisInitialized(self);
+                    return _assertThisInitialized(self1);
                 }
-                function _assertThisInitialized(self) {
-                    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                    return self;
+                function _assertThisInitialized(self1) {
+                    if (self1 === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    return self1;
                 }
                 function _isNativeReflectConstruct() {
                     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
                     if (Reflect.construct.sham) return false;
                     if (typeof Proxy === "function") return true;
                     try {
-                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-                        }));
+                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
                         return true;
                     } catch (e) {
                         return false;
                     }
                 }
-                function _getPrototypeOf(o2) {
+                function _getPrototypeOf(o) {
                     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
                         return o.__proto__ || Object.getPrototypeOf(o);
                     };
-                    return _getPrototypeOf(o2);
+                    return _getPrototypeOf(o);
                 }
                 /**
  * Parent class for renderers
  *
  * @extends {Observer}
- */ var Drawer1 = /*#__PURE__*/ function(_util$Observer) {
+ */ var Drawer = /*#__PURE__*/ function(_util$Observer) {
                     _inherits(Drawer, _util$Observer);
                     var _super = _createSuper(Drawer);
                     /**
@@ -1013,19 +1031,19 @@ exports.default = Morphaweb;
                         {
                             key: "createWrapper",
                             value: function createWrapper() {
-                                this.wrapper = util.withOrientation(this.container.appendChild(document.createElement('wave')), this.params.vertical);
+                                this.wrapper = util.withOrientation(this.container.appendChild(document.createElement("wave")), this.params.vertical);
                                 this.style(this.wrapper, {
-                                    display: 'block',
-                                    position: 'relative',
-                                    userSelect: 'none',
-                                    webkitUserSelect: 'none',
-                                    height: this.params.height + 'px'
+                                    display: "block",
+                                    position: "relative",
+                                    userSelect: "none",
+                                    webkitUserSelect: "none",
+                                    height: this.params.height + "px"
                                 });
                                 if (this.params.fillParent || this.params.scrollParent) this.style(this.wrapper, {
-                                    width: '100%',
-                                    cursor: this.params.hideCursor ? 'none' : 'auto',
-                                    overflowX: this.params.hideScrollbar ? 'hidden' : 'auto',
-                                    overflowY: 'hidden'
+                                    width: "100%",
+                                    cursor: this.params.hideCursor ? "none" : "auto",
+                                    overflowX: this.params.hideScrollbar ? "hidden" : "auto",
+                                    overflowY: "hidden"
                                 });
                                 this.setupWrapperEvents();
                             }
@@ -1056,7 +1074,7 @@ exports.default = Morphaweb;
                             key: "setupWrapperEvents",
                             value: function setupWrapperEvents() {
                                 var _this2 = this;
-                                this.wrapper.addEventListener('click', function(e) {
+                                this.wrapper.addEventListener("click", function(e) {
                                     var orientedEvent = util.withOrientation(e, _this2.params.vertical);
                                     var scrollbarHeight = _this2.wrapper.offsetHeight - _this2.wrapper.clientHeight;
                                     if (scrollbarHeight !== 0) {
@@ -1065,13 +1083,13 @@ exports.default = Morphaweb;
                                         if (orientedEvent.clientY >= bbox.bottom - scrollbarHeight) // ignore mousedown as it was on the scrollbar
                                         return;
                                     }
-                                    if (_this2.params.interact) _this2.fireEvent('click', e, _this2.handleEvent(e));
+                                    if (_this2.params.interact) _this2.fireEvent("click", e, _this2.handleEvent(e));
                                 });
-                                this.wrapper.addEventListener('dblclick', function(e) {
-                                    if (_this2.params.interact) _this2.fireEvent('dblclick', e, _this2.handleEvent(e));
+                                this.wrapper.addEventListener("dblclick", function(e) {
+                                    if (_this2.params.interact) _this2.fireEvent("dblclick", e, _this2.handleEvent(e));
                                 });
-                                this.wrapper.addEventListener('scroll', function(e) {
-                                    return _this2.fireEvent('scroll', e);
+                                this.wrapper.addEventListener("scroll", function(e) {
+                                    return _this2.fireEvent("scroll", e);
                                 });
                             }
                         },
@@ -1149,10 +1167,10 @@ exports.default = Morphaweb;
                                 if (this.width == width) return false;
                                 this.width = width;
                                 if (this.params.fillParent || this.params.scrollParent) this.style(this.wrapper, {
-                                    width: ''
+                                    width: ""
                                 });
                                 else {
-                                    var newWidth = ~~(this.width / this.params.pixelRatio) + 'px';
+                                    var newWidth = ~~(this.width / this.params.pixelRatio) + "px";
                                     this.style(this.wrapper, {
                                         width: newWidth
                                     });
@@ -1167,7 +1185,7 @@ exports.default = Morphaweb;
                                 if (height == this.height) return false;
                                 this.height = height;
                                 this.style(this.wrapper, {
-                                    height: ~~(this.height / this.params.pixelRatio) + 'px'
+                                    height: ~~(this.height / this.params.pixelRatio) + "px"
                                 });
                                 this.updateSize();
                                 return true;
@@ -1200,48 +1218,43 @@ exports.default = Morphaweb;
                         },
                         {
                             key: "updateCursor",
-                            value: function updateCursor() {
-                            }
+                            value: function updateCursor() {}
                         },
                         {
                             key: "updateSize",
-                            value: function updateSize() {
-                            }
+                            value: function updateSize() {}
                         },
                         {
                             key: "drawBars",
-                            value: function drawBars(peaks, channelIndex, start, end) {
-                            }
+                            value: function drawBars(peaks, channelIndex, start, end) {}
                         },
                         {
                             key: "drawWave",
-                            value: function drawWave(peaks, channelIndex, start, end) {
-                            }
+                            value: function drawWave(peaks, channelIndex, start, end) {}
                         },
                         {
                             key: "clearWave",
-                            value: function clearWave() {
-                            }
+                            value: function clearWave() {}
                         },
                         {
                             key: "updateProgress",
-                            value: function updateProgress(position) {
-                            }
+                            value: function updateProgress(position) {}
                         }
                     ]);
                     return Drawer;
                 }(util.Observer);
-                exports["default"] = Drawer1;
-                module.exports = exports.default;
+                exports["default"] = Drawer;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/drawer.multicanvas.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/drawer.multicanvas.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
-                function _typeof(obj2) {
+                function _typeof(obj) {
+                    "@babel/helpers - typeof";
                     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                         return typeof obj;
                     } : function(obj) {
                         return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-                    }, _typeof(obj2);
+                    }, _typeof(obj);
                 }
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -1250,13 +1263,13 @@ exports.default = Morphaweb;
                 var _drawer = _interopRequireDefault(__webpack_require__(/*! ./drawer */ "./src/drawer.js"));
                 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
                 var _drawer2 = _interopRequireDefault(__webpack_require__(/*! ./drawer.canvasentry */ "./src/drawer.canvasentry.js"));
-                function _getRequireWildcardCache(nodeInterop2) {
+                function _getRequireWildcardCache(nodeInterop) {
                     if (typeof WeakMap !== "function") return null;
                     var cacheBabelInterop = new WeakMap();
                     var cacheNodeInterop = new WeakMap();
                     return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
                         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-                    })(nodeInterop2);
+                    })(nodeInterop);
                 }
                 function _interopRequireWildcard(obj, nodeInterop) {
                     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -1265,8 +1278,7 @@ exports.default = Morphaweb;
                     };
                     var cache = _getRequireWildcardCache(nodeInterop);
                     if (cache && cache.has(obj)) return cache.get(obj);
-                    var newObj = {
-                    };
+                    var newObj = {};
                     var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
                     for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
                         var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
@@ -1316,12 +1328,12 @@ exports.default = Morphaweb;
                     });
                     if (superClass) _setPrototypeOf(subClass, superClass);
                 }
-                function _setPrototypeOf(o3, p2) {
+                function _setPrototypeOf(o, p) {
                     _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
                         o.__proto__ = p;
                         return o;
                     };
-                    return _setPrototypeOf(o3, p2);
+                    return _setPrototypeOf(o, p);
                 }
                 function _createSuper(Derived) {
                     var hasNativeReflectConstruct = _isNativeReflectConstruct();
@@ -1334,32 +1346,31 @@ exports.default = Morphaweb;
                         return _possibleConstructorReturn(this, result);
                     };
                 }
-                function _possibleConstructorReturn(self, call) {
+                function _possibleConstructorReturn(self1, call) {
                     if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
                     else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-                    return _assertThisInitialized(self);
+                    return _assertThisInitialized(self1);
                 }
-                function _assertThisInitialized(self) {
-                    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                    return self;
+                function _assertThisInitialized(self1) {
+                    if (self1 === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    return self1;
                 }
                 function _isNativeReflectConstruct() {
                     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
                     if (Reflect.construct.sham) return false;
                     if (typeof Proxy === "function") return true;
                     try {
-                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-                        }));
+                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
                         return true;
                     } catch (e) {
                         return false;
                     }
                 }
-                function _getPrototypeOf(o4) {
+                function _getPrototypeOf(o) {
                     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
                         return o.__proto__ || Object.getPrototypeOf(o);
                     };
-                    return _getPrototypeOf(o4);
+                    return _getPrototypeOf(o);
                 }
                 /**
  * MultiCanvas renderer for wavesurfer. Is currently the default and sole
@@ -1367,7 +1378,7 @@ exports.default = Morphaweb;
  *
  * A `MultiCanvas` consists of one or more `CanvasEntry` instances, depending
  * on the zoom level.
- */ var MultiCanvas1 = /*#__PURE__*/ function(_Drawer) {
+ */ var MultiCanvas = /*#__PURE__*/ function(_Drawer) {
                     _inherits(MultiCanvas, _Drawer);
                     var _super = _createSuper(MultiCanvas);
                     /**
@@ -1441,19 +1452,19 @@ exports.default = Morphaweb;
                         {
                             key: "createElements",
                             value: function createElements() {
-                                this.progressWave = util.withOrientation(this.wrapper.appendChild(document.createElement('wave')), this.params.vertical);
+                                this.progressWave = util.withOrientation(this.wrapper.appendChild(document.createElement("wave")), this.params.vertical);
                                 this.style(this.progressWave, {
-                                    position: 'absolute',
+                                    position: "absolute",
                                     zIndex: 3,
                                     left: 0,
                                     top: 0,
                                     bottom: 0,
-                                    overflow: 'hidden',
-                                    width: '0',
-                                    display: 'none',
-                                    boxSizing: 'border-box',
-                                    borderRightStyle: 'solid',
-                                    pointerEvents: 'none'
+                                    overflow: "hidden",
+                                    width: "0",
+                                    display: "none",
+                                    boxSizing: "border-box",
+                                    borderRightStyle: "solid",
+                                    pointerEvents: "none"
                                 });
                                 this.addCanvas();
                                 this.updateCursor();
@@ -1463,7 +1474,7 @@ exports.default = Morphaweb;
                             key: "updateCursor",
                             value: function updateCursor() {
                                 this.style(this.progressWave, {
-                                    borderRightWidth: this.params.cursorWidth + 'px',
+                                    borderRightWidth: this.params.cursorWidth + "px",
                                     borderRightColor: this.params.cursorColor
                                 });
                             }
@@ -1494,25 +1505,25 @@ exports.default = Morphaweb;
                                 entry.hasProgressCanvas = this.hasProgressCanvas;
                                 entry.halfPixel = this.halfPixel;
                                 var leftOffset = this.maxCanvasElementWidth * this.canvases.length; // wave
-                                var wave = util.withOrientation(this.wrapper.appendChild(document.createElement('canvas')), this.params.vertical);
+                                var wave = util.withOrientation(this.wrapper.appendChild(document.createElement("canvas")), this.params.vertical);
                                 this.style(wave, {
-                                    position: 'absolute',
+                                    position: "absolute",
                                     zIndex: 2,
-                                    left: leftOffset + 'px',
+                                    left: leftOffset + "px",
                                     top: 0,
                                     bottom: 0,
-                                    height: '100%',
-                                    pointerEvents: 'none'
+                                    height: "100%",
+                                    pointerEvents: "none"
                                 });
                                 entry.initWave(wave); // progress
                                 if (this.hasProgressCanvas) {
-                                    var progress = util.withOrientation(this.progressWave.appendChild(document.createElement('canvas')), this.params.vertical);
+                                    var progress = util.withOrientation(this.progressWave.appendChild(document.createElement("canvas")), this.params.vertical);
                                     this.style(progress, {
-                                        position: 'absolute',
-                                        left: leftOffset + 'px',
+                                        position: "absolute",
+                                        left: leftOffset + "px",
                                         top: 0,
                                         bottom: 0,
-                                        height: '100%'
+                                        height: "100%"
                                     });
                                     entry.initProgress(progress);
                                 }
@@ -1540,7 +1551,7 @@ exports.default = Morphaweb;
                                 var totalWidth = Math.round(this.width / this.params.pixelRatio); // update canvas dimensions
                                 entry.updateDimensions(elementWidth, totalWidth, width, height); // style element
                                 this.style(this.progressWave, {
-                                    display: 'block'
+                                    display: "block"
                                 });
                             }
                         },
@@ -1557,9 +1568,9 @@ exports.default = Morphaweb;
                         },
                         {
                             key: "drawBars",
-                            value: function drawBars(peaks1, channelIndex, start, end) {
+                            value: function drawBars(peaks, channelIndex, start, end) {
                                 var _this4 = this;
-                                return this.prepareDraw(peaks1, channelIndex, start, end, function(_ref) {
+                                return this.prepareDraw(peaks, channelIndex, start, end, function(_ref) {
                                     var absmax = _ref.absmax, hasMinVals = _ref.hasMinVals, height = _ref.height, offsetY = _ref.offsetY, halfH = _ref.halfH, peaks = _ref.peaks, ch = _ref.channelIndex;
                                     // if drawBars was called within ws.empty we don't pass a start and
                                     // don't want anything to happen
@@ -1574,7 +1585,7 @@ exports.default = Morphaweb;
                                     var first = start;
                                     var last = end;
                                     var peakIndex = first;
-                                    for(; peakIndex < last; peakIndex += step){
+                                    for(peakIndex; peakIndex < last; peakIndex += step){
                                         // search for the highest peak in the range this bar falls into
                                         var peak = 0;
                                         var peakIndexRange = Math.floor(peakIndex * scale) * peakIndexScale; // start index
@@ -1584,7 +1595,7 @@ exports.default = Morphaweb;
                                             var newPeak = Math.abs(peaks[peakIndexRange]); // for arrays starting with negative values
                                             if (newPeak > peak) peak = newPeak; // higher
                                             peakIndexRange += peakIndexScale; // skip every other value for negatives
-                                        }while (peakIndexRange < peakIndexEnd) // calculate the height of this bar according to the highest peak found
+                                        }while (peakIndexRange < peakIndexEnd); // calculate the height of this bar according to the highest peak found
                                         var h = Math.round(peak / absmax * halfH); // in case of silences, allow the user to specify that we
                                         // always draw *something* (normally a 1px high bar)
                                         if (h == 0 && _this4.params.barMinHeight) h = _this4.params.barMinHeight;
@@ -1595,15 +1606,15 @@ exports.default = Morphaweb;
                         },
                         {
                             key: "drawWave",
-                            value: function drawWave(peaks2, channelIndex1, start, end) {
+                            value: function drawWave(peaks, channelIndex, start, end) {
                                 var _this5 = this;
-                                return this.prepareDraw(peaks2, channelIndex1, start, end, function(_ref2) {
+                                return this.prepareDraw(peaks, channelIndex, start, end, function(_ref2) {
                                     var absmax = _ref2.absmax, hasMinVals = _ref2.hasMinVals, height = _ref2.height, offsetY = _ref2.offsetY, halfH = _ref2.halfH, peaks = _ref2.peaks, channelIndex = _ref2.channelIndex;
                                     if (!hasMinVals) {
                                         var reflectedPeaks = [];
                                         var len = peaks.length;
                                         var i = 0;
-                                        for(; i < len; i++){
+                                        for(i; i < len; i++){
                                             reflectedPeaks[2 * i] = peaks[i];
                                             reflectedPeaks[2 * i + 1] = -peaks[i];
                                         }
@@ -1620,8 +1631,7 @@ exports.default = Morphaweb;
                             key: "drawLine",
                             value: function drawLine(peaks, absmax, halfH, offsetY, start, end, channelIndex) {
                                 var _this6 = this;
-                                var _ref3 = this.params.splitChannelsOptions.channelColors[channelIndex] || {
-                                }, waveColor = _ref3.waveColor, progressColor = _ref3.progressColor;
+                                var _ref3 = this.params.splitChannelsOptions.channelColors[channelIndex] || {}, waveColor = _ref3.waveColor, progressColor = _ref3.progressColor;
                                 this.canvases.forEach(function(entry, i) {
                                     _this6.setFillStyles(entry, waveColor, progressColor);
                                     _this6.applyCanvasTransforms(entry, _this6.params.vertical);
@@ -1635,7 +1645,7 @@ exports.default = Morphaweb;
                                 var startCanvas = Math.floor(x / this.maxCanvasWidth);
                                 var endCanvas = Math.min(Math.ceil((x + width) / this.maxCanvasWidth) + 1, this.canvases.length);
                                 var i = startCanvas;
-                                for(; i < endCanvas; i++){
+                                for(i; i < endCanvas; i++){
                                     var entry = this.canvases[i];
                                     var leftOffset = i * this.maxCanvasWidth;
                                     var intersection = {
@@ -1645,8 +1655,7 @@ exports.default = Morphaweb;
                                         y2: y + height
                                     };
                                     if (intersection.x1 < intersection.x2) {
-                                        var _ref4 = this.params.splitChannelsOptions.channelColors[channelIndex] || {
-                                        }, waveColor = _ref4.waveColor, progressColor = _ref4.progressColor;
+                                        var _ref4 = this.params.splitChannelsOptions.channelColors[channelIndex] || {}, waveColor = _ref4.waveColor, progressColor = _ref4.progressColor;
                                         this.setFillStyles(entry, waveColor, progressColor);
                                         this.applyCanvasTransforms(entry, this.params.vertical);
                                         entry.fillRects(intersection.x1 - leftOffset, intersection.y1, intersection.x2 - intersection.x1, intersection.y2 - intersection.y1, radius);
@@ -1729,10 +1738,10 @@ exports.default = Morphaweb;
                         {
                             key: "getImage",
                             value: function getImage(format, quality, type) {
-                                if (type === 'blob') return Promise.all(this.canvases.map(function(entry) {
+                                if (type === "blob") return Promise.all(this.canvases.map(function(entry) {
                                     return entry.getImage(format, quality, type);
                                 }));
-                                else if (type === 'dataURL') {
+                                else if (type === "dataURL") {
                                     var images = this.canvases.map(function(entry) {
                                         return entry.getImage(format, quality, type);
                                     });
@@ -1744,24 +1753,25 @@ exports.default = Morphaweb;
                             key: "updateProgress",
                             value: function updateProgress(position) {
                                 this.style(this.progressWave, {
-                                    width: position + 'px'
+                                    width: position + "px"
                                 });
                             }
                         }
                     ]);
                     return MultiCanvas;
                 }(_drawer.default);
-                exports["default"] = MultiCanvas1;
-                module.exports = exports.default;
+                exports["default"] = MultiCanvas;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/mediaelement-webaudio.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/mediaelement-webaudio.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
-                function _typeof(obj3) {
+                function _typeof(obj) {
+                    "@babel/helpers - typeof";
                     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                         return typeof obj;
                     } : function(obj) {
                         return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-                    }, _typeof(obj3);
+                    }, _typeof(obj);
                 }
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -1825,12 +1835,12 @@ exports.default = Morphaweb;
                     });
                     if (superClass) _setPrototypeOf(subClass, superClass);
                 }
-                function _setPrototypeOf(o5, p3) {
+                function _setPrototypeOf(o, p) {
                     _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
                         o.__proto__ = p;
                         return o;
                     };
-                    return _setPrototypeOf(o5, p3);
+                    return _setPrototypeOf(o, p);
                 }
                 function _createSuper(Derived) {
                     var hasNativeReflectConstruct = _isNativeReflectConstruct();
@@ -1843,32 +1853,31 @@ exports.default = Morphaweb;
                         return _possibleConstructorReturn(this, result);
                     };
                 }
-                function _possibleConstructorReturn(self, call) {
+                function _possibleConstructorReturn(self1, call) {
                     if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
                     else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-                    return _assertThisInitialized(self);
+                    return _assertThisInitialized(self1);
                 }
-                function _assertThisInitialized(self) {
-                    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                    return self;
+                function _assertThisInitialized(self1) {
+                    if (self1 === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    return self1;
                 }
                 function _isNativeReflectConstruct() {
                     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
                     if (Reflect.construct.sham) return false;
                     if (typeof Proxy === "function") return true;
                     try {
-                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-                        }));
+                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
                         return true;
                     } catch (e) {
                         return false;
                     }
                 }
-                function _getPrototypeOf(o6) {
+                function _getPrototypeOf(o) {
                     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
                         return o.__proto__ || Object.getPrototypeOf(o);
                     };
-                    return _getPrototypeOf(o6);
+                    return _getPrototypeOf(o);
                 }
                 /**
  * MediaElementWebAudio backend: load audio via an HTML5 audio tag, but playback with the WebAudio API.
@@ -1878,7 +1887,7 @@ exports.default = Morphaweb;
  * Note that in order to use range requests and prevent buffering, you must provide peak data.
  *
  * @since 3.2.0
- */ var MediaElementWebAudio1 = /*#__PURE__*/ function(_MediaElement) {
+ */ var MediaElementWebAudio = /*#__PURE__*/ function(_MediaElement) {
                     _inherits(MediaElementWebAudio, _MediaElement);
                     var _super = _createSuper(MediaElementWebAudio);
                     /**
@@ -1937,17 +1946,18 @@ exports.default = Morphaweb;
                     ]);
                     return MediaElementWebAudio;
                 }(_mediaelement.default);
-                exports["default"] = MediaElementWebAudio1;
-                module.exports = exports.default;
+                exports["default"] = MediaElementWebAudio;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/mediaelement.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/mediaelement.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
-                function _typeof(obj4) {
+                function _typeof(obj) {
+                    "@babel/helpers - typeof";
                     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                         return typeof obj;
                     } : function(obj) {
                         return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-                    }, _typeof(obj4);
+                    }, _typeof(obj);
                 }
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -1955,13 +1965,13 @@ exports.default = Morphaweb;
                 exports["default"] = void 0;
                 var _webaudio = _interopRequireDefault(__webpack_require__(/*! ./webaudio */ "./src/webaudio.js"));
                 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
-                function _getRequireWildcardCache(nodeInterop3) {
+                function _getRequireWildcardCache(nodeInterop) {
                     if (typeof WeakMap !== "function") return null;
                     var cacheBabelInterop = new WeakMap();
                     var cacheNodeInterop = new WeakMap();
                     return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
                         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-                    })(nodeInterop3);
+                    })(nodeInterop);
                 }
                 function _interopRequireWildcard(obj, nodeInterop) {
                     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -1970,8 +1980,7 @@ exports.default = Morphaweb;
                     };
                     var cache = _getRequireWildcardCache(nodeInterop);
                     if (cache && cache.has(obj)) return cache.get(obj);
-                    var newObj = {
-                    };
+                    var newObj = {};
                     var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
                     for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
                         var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
@@ -2039,12 +2048,12 @@ exports.default = Morphaweb;
                     });
                     if (superClass) _setPrototypeOf(subClass, superClass);
                 }
-                function _setPrototypeOf(o7, p4) {
+                function _setPrototypeOf(o, p) {
                     _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
                         o.__proto__ = p;
                         return o;
                     };
-                    return _setPrototypeOf(o7, p4);
+                    return _setPrototypeOf(o, p);
                 }
                 function _createSuper(Derived) {
                     var hasNativeReflectConstruct = _isNativeReflectConstruct();
@@ -2057,36 +2066,35 @@ exports.default = Morphaweb;
                         return _possibleConstructorReturn(this, result);
                     };
                 }
-                function _possibleConstructorReturn(self, call) {
+                function _possibleConstructorReturn(self1, call) {
                     if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
                     else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-                    return _assertThisInitialized(self);
+                    return _assertThisInitialized(self1);
                 }
-                function _assertThisInitialized(self) {
-                    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                    return self;
+                function _assertThisInitialized(self1) {
+                    if (self1 === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    return self1;
                 }
                 function _isNativeReflectConstruct() {
                     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
                     if (Reflect.construct.sham) return false;
                     if (typeof Proxy === "function") return true;
                     try {
-                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-                        }));
+                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
                         return true;
                     } catch (e) {
                         return false;
                     }
                 }
-                function _getPrototypeOf(o8) {
+                function _getPrototypeOf(o) {
                     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
                         return o.__proto__ || Object.getPrototypeOf(o);
                     };
-                    return _getPrototypeOf(o8);
+                    return _getPrototypeOf(o);
                 }
                 /**
  * MediaElement backend
- */ var MediaElement1 = /*#__PURE__*/ function(_WebAudio) {
+ */ var MediaElement = /*#__PURE__*/ function(_WebAudio) {
                     _inherits(MediaElement, _WebAudio);
                     var _super = _createSuper(MediaElement);
                     /**
@@ -2107,10 +2115,8 @@ exports.default = Morphaweb;
                             duration: 0,
                             paused: true,
                             playbackRate: 1,
-                            play: function play() {
-                            },
-                            pause: function pause() {
-                            },
+                            play: function play() {},
+                            pause: function pause() {},
                             volume: 0
                         };
                         /** @private */ _this.mediaType = params.mediaType.toLowerCase();
@@ -2121,8 +2127,7 @@ exports.default = Morphaweb;
                         /** @private */ _this.isMuted = false;
                         /** @private */ _this.buffer = null;
                         /** @private */ _this.onPlayEnd = null;
-                        /** @private */ _this.mediaListeners = {
-                        };
+                        /** @private */ _this.mediaListeners = {};
                         return _this;
                     }
                     /**
@@ -2140,29 +2145,29 @@ exports.default = Morphaweb;
                             value: function _setupMediaListeners() {
                                 var _this2 = this;
                                 this.mediaListeners.error = function() {
-                                    _this2.fireEvent('error', 'Error loading media element');
+                                    _this2.fireEvent("error", "Error loading media element");
                                 };
                                 this.mediaListeners.canplay = function() {
-                                    _this2.fireEvent('canplay');
+                                    _this2.fireEvent("canplay");
                                 };
                                 this.mediaListeners.ended = function() {
-                                    _this2.fireEvent('finish');
+                                    _this2.fireEvent("finish");
                                 }; // listen to and relay play, pause and seeked events to enable
                                 // playback control from the external media element
                                 this.mediaListeners.play = function() {
-                                    _this2.fireEvent('play');
+                                    _this2.fireEvent("play");
                                 };
                                 this.mediaListeners.pause = function() {
-                                    _this2.fireEvent('pause');
+                                    _this2.fireEvent("pause");
                                 };
                                 this.mediaListeners.seeked = function(event) {
-                                    _this2.fireEvent('seek');
+                                    _this2.fireEvent("seek");
                                 };
                                 this.mediaListeners.volumechange = function(event) {
                                     _this2.isMuted = _this2.media.muted;
                                     if (_this2.isMuted) _this2.volume = 0;
                                     else _this2.volume = _this2.media.volume;
-                                    _this2.fireEvent('volume');
+                                    _this2.fireEvent("volume");
                                 }; // reset event listeners
                                 Object.keys(this.mediaListeners).forEach(function(id) {
                                     _this2.media.removeEventListener(id, _this2.mediaListeners[id]);
@@ -2174,15 +2179,15 @@ exports.default = Morphaweb;
                             key: "createTimer",
                             value: function createTimer() {
                                 var _this3 = this;
-                                var onAudioProcess1 = function onAudioProcess() {
+                                var onAudioProcess = function onAudioProcess() {
                                     if (_this3.isPaused()) return;
-                                    _this3.fireEvent('audioprocess', _this3.getCurrentTime()); // Call again in the next frame
+                                    _this3.fireEvent("audioprocess", _this3.getCurrentTime()); // Call again in the next frame
                                     util.frame(onAudioProcess)();
                                 };
-                                this.on('play', onAudioProcess1); // Update the progress one more time to prevent it from being stuck in
+                                this.on("play", onAudioProcess); // Update the progress one more time to prevent it from being stuck in
                                 // case of lower framerates
-                                this.on('pause', function() {
-                                    _this3.fireEvent('audioprocess', _this3.getCurrentTime());
+                                this.on("pause", function() {
+                                    _this3.fireEvent("audioprocess", _this3.getCurrentTime());
                                 });
                             }
                         },
@@ -2192,9 +2197,9 @@ exports.default = Morphaweb;
                                 var media = document.createElement(this.mediaType);
                                 media.controls = this.params.mediaControls;
                                 media.autoplay = this.params.autoplay || false;
-                                media.preload = preload == null ? 'auto' : preload;
+                                media.preload = preload == null ? "auto" : preload;
                                 media.src = url;
-                                media.style.width = '100%';
+                                media.style.width = "100%";
                                 var prevMedia = container.querySelector(this.mediaType);
                                 if (prevMedia) container.removeChild(prevMedia);
                                 container.appendChild(media);
@@ -2213,13 +2218,13 @@ exports.default = Morphaweb;
                             key: "_load",
                             value: function _load(media, peaks, preload) {
                                 // verify media element is valid
-                                if (!(media instanceof HTMLMediaElement) || typeof media.addEventListener === 'undefined') throw new Error('media parameter is not a valid media element');
+                                if (!(media instanceof HTMLMediaElement) || typeof media.addEventListener === "undefined") throw new Error("media parameter is not a valid media element");
                                  // load must be called manually on iOS, otherwise peaks won't draw
                                 // until a user interaction triggers load --> 'ready' event
                                 //
                                 // note that we avoid calling media.load here when given peaks and preload == 'none'
                                 // as this almost always triggers some browser fetch of the media.
-                                if (typeof media.load == 'function' && !(peaks && preload == 'none')) // Resets the media element and restarts the media resource. Any
+                                if (typeof media.load == "function" && !(peaks && preload == "none")) // Resets the media element and restarts the media resource. Any
                                 // pending events are discarded. How much media data is fetched is
                                 // still affected by the preload attribute.
                                 media.load();
@@ -2310,14 +2315,14 @@ exports.default = Morphaweb;
                                         _this4.seekTo(end);
                                     }
                                 };
-                                this.on('audioprocess', this._onPlayEnd);
+                                this.on("audioprocess", this._onPlayEnd);
                             }
                         },
                         {
                             key: "clearPlayEnd",
                             value: function clearPlayEnd() {
                                 if (this._onPlayEnd) {
-                                    this.un('audioprocess', this._onPlayEnd);
+                                    this.un("audioprocess", this._onPlayEnd);
                                     this._onPlayEnd = null;
                                 }
                             }
@@ -2333,10 +2338,10 @@ exports.default = Morphaweb;
                             key: "setSinkId",
                             value: function setSinkId(deviceId) {
                                 if (deviceId) {
-                                    if (!this.media.setSinkId) return Promise.reject(new Error('setSinkId is not supported in your browser'));
+                                    if (!this.media.setSinkId) return Promise.reject(new Error("setSinkId is not supported in your browser"));
                                     return this.media.setSinkId(deviceId);
                                 }
-                                return Promise.reject(new Error('Invalid deviceId: ' + deviceId));
+                                return Promise.reject(new Error("Invalid deviceId: " + deviceId));
                             }
                         },
                         {
@@ -2377,10 +2382,10 @@ exports.default = Morphaweb;
                     ]);
                     return MediaElement;
                 }(_webaudio.default);
-                exports["default"] = MediaElement1;
-                module.exports = exports.default;
+                exports["default"] = MediaElement;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/peakcache.js": (module, exports)=>{
+            /***/ "./src/peakcache.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2410,7 +2415,7 @@ exports.default = Morphaweb;
  * Caches the decoded peaks data to improve rendering speed for large audio
  *
  * Is used if the option parameter `partialRender` is set to `true`
- */ var PeakCache1 = /*#__PURE__*/ function() {
+ */ var PeakCache = /*#__PURE__*/ function() {
                     /**
    * Instantiate cache
    */ function PeakCache() {
@@ -2496,10 +2501,10 @@ exports.default = Morphaweb;
                     ]);
                     return PeakCache;
                 }();
-                exports["default"] = PeakCache1;
-                module.exports = exports.default;
+                exports["default"] = PeakCache;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/absMax.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/util/absMax.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2524,9 +2529,9 @@ exports.default = Morphaweb;
                     var min = (0, _min.default)(values);
                     return -min > max ? -min : max;
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/clamp.js": (module, exports)=>{
+            /***/ "./src/util/clamp.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2542,9 +2547,9 @@ exports.default = Morphaweb;
  */ function clamp(val, min, max) {
                     return Math.min(Math.max(min, val), max);
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/fetch.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/util/fetch.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2576,7 +2581,7 @@ exports.default = Morphaweb;
                     });
                     return Constructor;
                 }
-                var ProgressHandler1 = /*#__PURE__*/ function() {
+                var ProgressHandler = /*#__PURE__*/ function() {
                     /**
    * Instantiate ProgressHandler
    *
@@ -2601,7 +2606,7 @@ exports.default = Morphaweb;
                             key: "start",
                             value: function start(controller) {
                                 var _this = this;
-                                var read1 = function read() {
+                                var read = function read() {
                                     // instance._reader.read() returns a promise that resolves
                                     // when a value has been received
                                     _this.instance._reader.read().then(function(_ref) {
@@ -2632,7 +2637,7 @@ exports.default = Morphaweb;
                                         controller.error(error);
                                     });
                                 };
-                                read1();
+                                read();
                             }
                         }
                     ]);
@@ -2679,8 +2684,8 @@ exports.default = Morphaweb;
  *     console.warn('fetchFile error: ', e);
  * });
  */ function fetchFile(options) {
-                    if (!options) throw new Error('fetch options missing');
-                    else if (!options.url) throw new Error('fetch url missing');
+                    if (!options) throw new Error("fetch options missing");
+                    else if (!options.url) throw new Error("fetch url missing");
                     var instance = new _observer.default();
                     var fetchHeaders = new Headers();
                     var fetchRequest = new Request(options.url); // add ability to abort
@@ -2690,15 +2695,15 @@ exports.default = Morphaweb;
                         fetchHeaders.append(header.key, header.value);
                     });
                      // parse fetch options
-                    var responseType = options.responseType || 'json';
+                    var responseType = options.responseType || "json";
                     var fetchOptions = {
-                        method: options.method || 'GET',
+                        method: options.method || "GET",
                         headers: fetchHeaders,
-                        mode: options.mode || 'cors',
-                        credentials: options.credentials || 'same-origin',
-                        cache: options.cache || 'default',
-                        redirect: options.redirect || 'follow',
-                        referrer: options.referrer || 'client',
+                        mode: options.mode || "cors",
+                        credentials: options.credentials || "same-origin",
+                        cache: options.cache || "default",
+                        redirect: options.redirect || "follow",
+                        referrer: options.referrer || "client",
                         signal: instance.controller.signal
                     };
                     fetch(fetchRequest, fetchOptions).then(function(response) {
@@ -2709,7 +2714,7 @@ exports.default = Morphaweb;
                         // see https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
                         progressAvailable = false;
                          // Server must send CORS header "Access-Control-Expose-Headers: content-length"
-                        var contentLength = response.headers.get('content-length');
+                        var contentLength = response.headers.get("content-length");
                         if (contentLength === null) // Content-Length server response header missing.
                         // Don't evaluate download progress if we can't compare against a total size
                         // see https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Access-Control-Expose-Headers
@@ -2718,37 +2723,37 @@ exports.default = Morphaweb;
                         return response;
                          // fire progress event when during load
                         instance.onProgress = function(e) {
-                            instance.fireEvent('progress', e);
+                            instance.fireEvent("progress", e);
                         };
-                        return new Response(new ReadableStream(new ProgressHandler1(instance, contentLength, response)), fetchOptions);
+                        return new Response(new ReadableStream(new ProgressHandler(instance, contentLength, response)), fetchOptions);
                     }).then(function(response) {
                         var errMsg;
                         if (response.ok) switch(responseType){
-                            case 'arraybuffer':
+                            case "arraybuffer":
                                 return response.arrayBuffer();
-                            case 'json':
+                            case "json":
                                 return response.json();
-                            case 'blob':
+                            case "blob":
                                 return response.blob();
-                            case 'text':
+                            case "text":
                                 return response.text();
                             default:
-                                errMsg = 'Unknown responseType: ' + responseType;
+                                errMsg = "Unknown responseType: " + responseType;
                                 break;
                         }
-                        if (!errMsg) errMsg = 'HTTP error status: ' + response.status;
+                        if (!errMsg) errMsg = "HTTP error status: " + response.status;
                         throw new Error(errMsg);
                     }).then(function(response) {
-                        instance.fireEvent('success', response);
+                        instance.fireEvent("success", response);
                     }).catch(function(error) {
-                        instance.fireEvent('error', error);
+                        instance.fireEvent("error", error);
                     }); // return the fetch request
                     instance.fetchRequest = fetchRequest;
                     return instance;
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/frame.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/util/frame.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2775,9 +2780,9 @@ exports.default = Morphaweb;
                         });
                     };
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/get-id.js": (module, exports)=>{
+            /***/ "./src/util/get-id.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2794,10 +2799,10 @@ exports.default = Morphaweb;
  * let prefix = 'foo-';
  * console.log(getId(prefix)); // logs 'foo-b5pors4ru6g'
  */ function getId(prefix) {
-                    if (prefix === undefined) prefix = 'wavesurfer_';
+                    if (prefix === undefined) prefix = "wavesurfer_";
                     return prefix + Math.random().toString(32).substring(2);
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
             /***/ "./src/util/index.js": (__unused_webpack_module, exports, __webpack_require__)=>{
                 "use strict";
@@ -2908,7 +2913,7 @@ exports.default = Morphaweb;
                     };
                 }
             /***/ },
-            /***/ "./src/util/max.js": (module, exports)=>{
+            /***/ "./src/util/max.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2927,9 +2932,9 @@ exports.default = Morphaweb;
                     });
                     return largest;
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/min.js": (module, exports)=>{
+            /***/ "./src/util/min.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2948,9 +2953,9 @@ exports.default = Morphaweb;
                     });
                     return smallest;
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/observer.js": (module, exports)=>{
+            /***/ "./src/util/observer.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -2983,7 +2988,7 @@ exports.default = Morphaweb;
  * @property {function} un The function to call to remove the listener
  */ /**
  * Observer class
- */ var Observer1 = /*#__PURE__*/ function() {
+ */ var Observer = /*#__PURE__*/ function() {
                     /**
    * Instantiate Observer
    */ function Observer() {
@@ -3004,16 +3009,15 @@ exports.default = Morphaweb;
    */ _createClass(Observer, [
                         {
                             key: "on",
-                            value: function on(event, fn1) {
+                            value: function on(event, fn) {
                                 var _this = this;
-                                if (!this.handlers) this.handlers = {
-                                };
+                                if (!this.handlers) this.handlers = {};
                                 var handlers = this.handlers[event];
                                 if (!handlers) handlers = this.handlers[event] = [];
-                                handlers.push(fn1); // Return an event descriptor
+                                handlers.push(fn); // Return an event descriptor
                                 return {
                                     name: event,
-                                    callback: fn1,
+                                    callback: fn,
                                     un: function un(e, fn) {
                                         return _this.un(e, fn);
                                     }
@@ -3043,14 +3047,14 @@ exports.default = Morphaweb;
                             key: "once",
                             value: function once(event, handler) {
                                 var _this2 = this;
-                                var fn2 = function fn() {
+                                var fn = function fn() {
                                     for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++)args[_key] = arguments[_key];
                                     /*  eslint-disable no-invalid-this */ handler.apply(_this2, args);
                                     /*  eslint-enable no-invalid-this */ setTimeout(function() {
                                         _this2.un(event, fn);
                                     }, 0);
                                 };
-                                return this.on(event, fn2);
+                                return this.on(event, fn);
                             }
                         },
                         {
@@ -3079,37 +3083,37 @@ exports.default = Morphaweb;
                     ]);
                     return Observer;
                 }();
-                exports["default"] = Observer1;
-                module.exports = exports.default;
+                exports["default"] = Observer;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/orientation.js": (module, exports)=>{
+            /***/ "./src/util/orientation.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
                 });
                 exports["default"] = withOrientation;
                 var verticalPropMap = {
-                    width: 'height',
-                    height: 'width',
-                    overflowX: 'overflowY',
-                    overflowY: 'overflowX',
-                    clientWidth: 'clientHeight',
-                    clientHeight: 'clientWidth',
-                    clientX: 'clientY',
-                    clientY: 'clientX',
-                    scrollWidth: 'scrollHeight',
-                    scrollLeft: 'scrollTop',
-                    offsetLeft: 'offsetTop',
-                    offsetTop: 'offsetLeft',
-                    offsetHeight: 'offsetWidth',
-                    offsetWidth: 'offsetHeight',
-                    left: 'top',
-                    right: 'bottom',
-                    top: 'left',
-                    bottom: 'right',
-                    borderRightStyle: 'borderBottomStyle',
-                    borderRightWidth: 'borderBottomWidth',
-                    borderRightColor: 'borderBottomColor'
+                    width: "height",
+                    height: "width",
+                    overflowX: "overflowY",
+                    overflowY: "overflowX",
+                    clientWidth: "clientHeight",
+                    clientHeight: "clientWidth",
+                    clientX: "clientY",
+                    clientY: "clientX",
+                    scrollWidth: "scrollHeight",
+                    scrollLeft: "scrollTop",
+                    offsetLeft: "offsetTop",
+                    offsetTop: "offsetLeft",
+                    offsetHeight: "offsetWidth",
+                    offsetWidth: "offsetHeight",
+                    left: "top",
+                    right: "bottom",
+                    top: "left",
+                    bottom: "right",
+                    borderRightStyle: "borderBottomStyle",
+                    borderRightWidth: "borderBottomWidth",
+                    borderRightColor: "borderBottomColor"
                 };
                 /**
  * Convert a horizontally-oriented property name to a vertical one.
@@ -3140,18 +3144,18 @@ exports.default = Morphaweb;
                     else return new Proxy(target, {
                         get: function get(obj, prop, receiver) {
                             if (prop === isProxy) return true;
-                            else if (prop === 'domElement') return obj;
-                            else if (prop === 'style') return withOrientation(obj.style, vertical);
-                            else if (prop === 'canvas') return withOrientation(obj.canvas, vertical);
-                            else if (prop === 'getBoundingClientRect') return function() {
+                            else if (prop === "domElement") return obj;
+                            else if (prop === "style") return withOrientation(obj.style, vertical);
+                            else if (prop === "canvas") return withOrientation(obj.canvas, vertical);
+                            else if (prop === "getBoundingClientRect") return function() {
                                 return withOrientation(obj.getBoundingClientRect.apply(obj, arguments), vertical);
                             };
-                            else if (prop === 'getContext') return function() {
+                            else if (prop === "getContext") return function() {
                                 return withOrientation(obj.getContext.apply(obj, arguments), vertical);
                             };
                             else {
                                 var value = obj[mapProp(prop, vertical)];
-                                return typeof value == 'function' ? value.bind(obj) : value;
+                                return typeof value == "function" ? value.bind(obj) : value;
                             }
                         },
                         set: function set(obj, prop, value) {
@@ -3160,9 +3164,9 @@ exports.default = Morphaweb;
                         }
                     });
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/prevent-click.js": (module, exports)=>{
+            /***/ "./src/util/prevent-click.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -3175,18 +3179,18 @@ exports.default = Morphaweb;
  * @param {object} event The click event
  */ function preventClickHandler(event) {
                     event.stopPropagation();
-                    document.body.removeEventListener('click', preventClickHandler, true);
+                    document.body.removeEventListener("click", preventClickHandler, true);
                 }
                 /**
  * Starts listening for click event and prevent propagation
  *
  * @param {object} values Values
  */ function preventClick(values) {
-                    document.body.addEventListener('click', preventClickHandler, true);
+                    document.body.addEventListener("click", preventClickHandler, true);
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/request-animation-frame.js": (module, exports)=>{
+            /***/ "./src/util/request-animation-frame.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -3201,9 +3205,9 @@ exports.default = Morphaweb;
                     return setTimeout(callback, 1000 / 60);
                 }).bind(window);
                 exports["default"] = _default;
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/silence-mode.js": (module, exports)=>{
+            /***/ "./src/util/silence-mode.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -3236,9 +3240,9 @@ exports.default = Morphaweb;
                     audioSilentMode.remove();
                     tmp.remove();
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/util/style.js": (module, exports)=>{
+            /***/ "./src/util/style.js": (module1, exports)=>{
                 "use strict";
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -3257,16 +3261,17 @@ exports.default = Morphaweb;
                     });
                     return el;
                 }
-                module.exports = exports.default;
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/wavesurfer.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/wavesurfer.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
-                function _typeof(obj5) {
+                function _typeof(obj) {
+                    "@babel/helpers - typeof";
                     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                         return typeof obj;
                     } : function(obj) {
                         return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-                    }, _typeof(obj5);
+                    }, _typeof(obj);
                 }
                 Object.defineProperty(exports, "__esModule", {
                     value: true
@@ -3283,13 +3288,13 @@ exports.default = Morphaweb;
                         default: obj
                     };
                 }
-                function _getRequireWildcardCache(nodeInterop4) {
+                function _getRequireWildcardCache(nodeInterop) {
                     if (typeof WeakMap !== "function") return null;
                     var cacheBabelInterop = new WeakMap();
                     var cacheNodeInterop = new WeakMap();
                     return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
                         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-                    })(nodeInterop4);
+                    })(nodeInterop);
                 }
                 function _interopRequireWildcard(obj, nodeInterop) {
                     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -3298,8 +3303,7 @@ exports.default = Morphaweb;
                     };
                     var cache = _getRequireWildcardCache(nodeInterop);
                     if (cache && cache.has(obj)) return cache.get(obj);
-                    var newObj = {
-                    };
+                    var newObj = {};
                     var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
                     for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
                         var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
@@ -3324,12 +3328,12 @@ exports.default = Morphaweb;
                     });
                     if (superClass) _setPrototypeOf(subClass, superClass);
                 }
-                function _setPrototypeOf(o9, p5) {
+                function _setPrototypeOf(o, p) {
                     _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
                         o.__proto__ = p;
                         return o;
                     };
-                    return _setPrototypeOf(o9, p5);
+                    return _setPrototypeOf(o, p);
                 }
                 function _createSuper(Derived) {
                     var hasNativeReflectConstruct = _isNativeReflectConstruct();
@@ -3342,32 +3346,31 @@ exports.default = Morphaweb;
                         return _possibleConstructorReturn(this, result);
                     };
                 }
-                function _possibleConstructorReturn(self, call) {
+                function _possibleConstructorReturn(self1, call) {
                     if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
                     else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-                    return _assertThisInitialized(self);
+                    return _assertThisInitialized(self1);
                 }
-                function _assertThisInitialized(self) {
-                    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                    return self;
+                function _assertThisInitialized(self1) {
+                    if (self1 === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    return self1;
                 }
                 function _isNativeReflectConstruct() {
                     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
                     if (Reflect.construct.sham) return false;
                     if (typeof Proxy === "function") return true;
                     try {
-                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-                        }));
+                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
                         return true;
                     } catch (e) {
                         return false;
                     }
                 }
-                function _getPrototypeOf(o10) {
+                function _getPrototypeOf(o) {
                     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
                         return o.__proto__ || Object.getPrototypeOf(o);
                     };
-                    return _getPrototypeOf(o10);
+                    return _getPrototypeOf(o);
                 }
                 function _defineProperty(obj, key, value) {
                     if (key in obj) Object.defineProperty(obj, key, {
@@ -3563,7 +3566,7 @@ exports.default = Morphaweb;
  * `wavesurfer.addPlugin`.
  *
  * @extends {Observer}
- */ var PluginClass1 = /*#__PURE__*/ function() {
+ */ var PluginClass = /*#__PURE__*/ function() {
                     /**
    * Construct the plugin
    *
@@ -3589,18 +3592,15 @@ exports.default = Morphaweb;
      * It returns a `PluginDefinition` object representing the plugin.
      *
      * @param {Object} params={} The plugin params (specific to the plugin)
-     */ function create(params) {
-                            }
+     */ function create(params) {}
                         },
                         {
                             key: "init",
-                            value: function init() {
-                            }
+                            value: function init() {}
                         },
                         {
                             key: "destroy",
-                            value: function destroy() {
-                            }
+                            value: function destroy() {}
                         }
                     ]);
                     return PluginClass;
@@ -3625,7 +3625,7 @@ exports.default = Morphaweb;
  *
  * // load audio file
  * wavesurfer.load('example/media/demo.wav');
- */ var WaveSurfer1 = /*#__PURE__*/ function(_util$Observer) {
+ */ var WaveSurfer = /*#__PURE__*/ function(_util$Observer) {
                     _inherits(WaveSurfer, _util$Observer);
                     var _super = _createSuper(WaveSurfer);
                     /**
@@ -3649,14 +3649,14 @@ exports.default = Morphaweb;
                             autoCenter: true,
                             autoCenterRate: 5,
                             autoCenterImmediately: false,
-                            backend: 'WebAudio',
+                            backend: "WebAudio",
                             backgroundColor: null,
                             barHeight: 1,
                             barRadius: 0,
                             barGap: null,
                             barMinHeight: null,
                             container: null,
-                            cursorColor: '#333',
+                            cursorColor: "#333",
                             cursorWidth: 1,
                             dragSelection: true,
                             drawingContextAttributes: {
@@ -3677,13 +3677,13 @@ exports.default = Morphaweb;
                             maxCanvasWidth: 4000,
                             mediaContainer: null,
                             mediaControls: false,
-                            mediaType: 'audio',
+                            mediaType: "audio",
                             minPxPerSec: 20,
                             normalize: false,
                             partialRender: false,
                             pixelRatio: window.devicePixelRatio || screen.deviceXDPI / screen.logicalXDPI,
                             plugins: [],
-                            progressColor: '#555',
+                            progressColor: "#555",
                             removeMediaElementOnDestroy: true,
                             renderer: _drawer.default,
                             responsive: false,
@@ -3693,15 +3693,13 @@ exports.default = Morphaweb;
                             splitChannels: false,
                             splitChannelsOptions: {
                                 overlay: false,
-                                channelColors: {
-                                },
+                                channelColors: {},
                                 filterChannels: [],
                                 relativeNormalization: false
                             },
                             vertical: false,
-                            waveColor: '#999',
-                            xhr: {
-                            }
+                            waveColor: "#999",
+                            xhr: {}
                         });
                         _defineProperty(_assertThisInitialized(_this), "backends", {
                             MediaElement: _mediaelement.default,
@@ -3709,24 +3707,22 @@ exports.default = Morphaweb;
                             MediaElementWebAudio: _mediaelementWebaudio.default
                         });
                         _defineProperty(_assertThisInitialized(_this), "util", util);
-                        _this.params = Object.assign({
-                        }, _this.defaultParams, params);
-                        _this.params.splitChannelsOptions = Object.assign({
-                        }, _this.defaultParams.splitChannelsOptions, params.splitChannelsOptions);
-                        /** @private */ _this.container = 'string' == typeof params.container ? document.querySelector(_this.params.container) : _this.params.container;
-                        if (!_this.container) throw new Error('Container element not found');
+                        _this.params = Object.assign({}, _this.defaultParams, params);
+                        _this.params.splitChannelsOptions = Object.assign({}, _this.defaultParams.splitChannelsOptions, params.splitChannelsOptions);
+                        /** @private */ _this.container = "string" == typeof params.container ? document.querySelector(_this.params.container) : _this.params.container;
+                        if (!_this.container) throw new Error("Container element not found");
                         if (_this.params.mediaContainer == null) /** @private */ _this.mediaContainer = _this.container;
-                        else if (typeof _this.params.mediaContainer == 'string') /** @private */ _this.mediaContainer = document.querySelector(_this.params.mediaContainer);
+                        else if (typeof _this.params.mediaContainer == "string") /** @private */ _this.mediaContainer = document.querySelector(_this.params.mediaContainer);
                         else /** @private */ _this.mediaContainer = _this.params.mediaContainer;
-                        if (!_this.mediaContainer) throw new Error('Media Container element not found');
-                        if (_this.params.maxCanvasWidth <= 1) throw new Error('maxCanvasWidth must be greater than 1');
-                        else if (_this.params.maxCanvasWidth % 2 == 1) throw new Error('maxCanvasWidth must be an even number');
+                        if (!_this.mediaContainer) throw new Error("Media Container element not found");
+                        if (_this.params.maxCanvasWidth <= 1) throw new Error("maxCanvasWidth must be greater than 1");
+                        else if (_this.params.maxCanvasWidth % 2 == 1) throw new Error("maxCanvasWidth must be an even number");
                         if (_this.params.rtl === true) {
                             if (_this.params.vertical === true) util.style(_this.container, {
-                                transform: 'rotateX(180deg)'
+                                transform: "rotateX(180deg)"
                             });
                             else util.style(_this.container, {
-                                transform: 'rotateY(180deg)'
+                                transform: "rotateY(180deg)"
                             });
                         }
                         if (_this.params.backgroundColor) _this.setBackgroundColor(_this.params.backgroundColor);
@@ -3752,20 +3748,19 @@ exports.default = Morphaweb;
                         /** @private */ _this.drawer = null;
                         /** @private */ _this.backend = null;
                         /** @private */ _this.peakCache = null; // cache constructor objects
-                        if (typeof _this.params.renderer !== 'function') throw new Error('Renderer parameter is invalid');
+                        if (typeof _this.params.renderer !== "function") throw new Error("Renderer parameter is invalid");
                         /**
      * @private The uninitialised Drawer class
      */ _this.Drawer = _this.params.renderer;
                         /**
      * @private The uninitialised Backend class
      */ // Back compat
-                        if (_this.params.backend == 'AudioElement') _this.params.backend = 'MediaElement';
-                        if ((_this.params.backend == 'WebAudio' || _this.params.backend === 'MediaElementWebAudio') && !_webaudio.default.prototype.supportsWebAudio.call(null)) _this.params.backend = 'MediaElement';
+                        if (_this.params.backend == "AudioElement") _this.params.backend = "MediaElement";
+                        if ((_this.params.backend == "WebAudio" || _this.params.backend === "MediaElementWebAudio") && !_webaudio.default.prototype.supportsWebAudio.call(null)) _this.params.backend = "MediaElement";
                         _this.Backend = _this.backends[_this.params.backend];
                         /**
      * @private map of plugin names that are currently initialised
-     */ _this.initialisedPluginList = {
-                        };
+     */ _this.initialisedPluginList = {};
                         /** @private */ _this.isDestroyed = false;
                         /**
      * Get the current ready status.
@@ -3780,9 +3775,9 @@ exports.default = Morphaweb;
                             if (_this.drawer.wrapper && prevWidth != _this.drawer.wrapper.clientWidth && !_this.params.scrollParent) {
                                 prevWidth = _this.drawer.wrapper.clientWidth;
                                 if (prevWidth) // redraw only if waveform container is rendered and has a width
-                                _this.drawer.fireEvent('redraw');
+                                _this.drawer.fireEvent("redraw");
                             }
-                        }, typeof _this.params.responsive === 'number' ? _this.params.responsive : 100);
+                        }, typeof _this.params.responsive === "number" ? _this.params.responsive : 100);
                         return _possibleConstructorReturn(_this, _assertThisInitialized(_this));
                     }
                     /**
@@ -3816,7 +3811,7 @@ exports.default = Morphaweb;
                                     // in that case you would manually use initPlugins()
                                     if (!plugin.deferInit) _this2.initPlugin(plugin.name);
                                 });
-                                this.fireEvent('plugins-registered', plugins);
+                                this.fireEvent("plugins-registered", plugins);
                                 return this;
                             }
                         },
@@ -3830,7 +3825,7 @@ exports.default = Morphaweb;
                             key: "addPlugin",
                             value: function addPlugin(plugin) {
                                 var _this3 = this;
-                                if (!plugin.name) throw new Error('Plugin does not have a name!');
+                                if (!plugin.name) throw new Error("Plugin does not have a name!");
                                 if (!plugin.instance) throw new Error("Plugin ".concat(plugin.name, " does not have an instance property!"));
                                  // staticProps properties are applied to wavesurfer instance
                                 if (plugin.staticProps) Object.keys(plugin.staticProps).forEach(function(pluginStaticProp) {
@@ -3848,9 +3843,8 @@ exports.default = Morphaweb;
        * Instantiated plugin classes are added as a property of the wavesurfer
        * instance
        * @type {Object}
-       */ this[plugin.name] = new Instance(plugin.params || {
-                                }, this);
-                                this.fireEvent('plugin-added', plugin.name);
+       */ this[plugin.name] = new Instance(plugin.params || {}, this);
+                                this.fireEvent("plugin-added", plugin.name);
                                 return this;
                             }
                         },
@@ -3862,7 +3856,7 @@ exports.default = Morphaweb;
                                 this.destroyPlugin(name);
                                 this[name].init();
                                 this.initialisedPluginList[name] = true;
-                                this.fireEvent('plugin-initialised', name);
+                                this.fireEvent("plugin-initialised", name);
                                 return this;
                             }
                         },
@@ -3871,10 +3865,10 @@ exports.default = Morphaweb;
                             value: function destroyPlugin(name) {
                                 if (!this[name]) throw new Error("Plugin ".concat(name, " has not been added yet and cannot be destroyed!"));
                                 if (!this.initialisedPluginList[name]) throw new Error("Plugin ".concat(name, " is not active and cannot be destroyed!"));
-                                if (typeof this[name].destroy !== 'function') throw new Error("Plugin ".concat(name, " does not have a destroy function!"));
+                                if (typeof this[name].destroy !== "function") throw new Error("Plugin ".concat(name, " does not have a destroy function!"));
                                 this[name].destroy();
                                 delete this.initialisedPluginList[name];
-                                this.fireEvent('plugin-destroyed', name);
+                                this.fireEvent("plugin-destroyed", name);
                                 return this;
                             }
                         },
@@ -3893,23 +3887,23 @@ exports.default = Morphaweb;
                                 var _this5 = this;
                                 this.drawer = new this.Drawer(this.container, this.params);
                                 this.drawer.init();
-                                this.fireEvent('drawer-created', this.drawer);
+                                this.fireEvent("drawer-created", this.drawer);
                                 if (this.params.responsive !== false) {
-                                    window.addEventListener('resize', this._onResize, true);
-                                    window.addEventListener('orientationchange', this._onResize, true);
+                                    window.addEventListener("resize", this._onResize, true);
+                                    window.addEventListener("orientationchange", this._onResize, true);
                                 }
-                                this.drawer.on('redraw', function() {
+                                this.drawer.on("redraw", function() {
                                     _this5.drawBuffer();
                                     _this5.drawer.progress(_this5.backend.getPlayedPercents());
                                 }); // Click-to-seek
-                                this.drawer.on('click', function(e, progress) {
+                                this.drawer.on("click", function(e, progress) {
                                     setTimeout(function() {
                                         return _this5.seekTo(progress);
                                     }, 0);
                                 }); // Relay the scroll event from the drawer
-                                this.drawer.on('scroll', function(e) {
+                                this.drawer.on("scroll", function(e) {
                                     if (_this5.params.partialRender) _this5.drawBuffer();
-                                    _this5.fireEvent('scroll', e);
+                                    _this5.fireEvent("scroll", e);
                                 });
                             }
                         },
@@ -3920,31 +3914,31 @@ exports.default = Morphaweb;
                                 if (this.backend) this.backend.destroy();
                                 this.backend = new this.Backend(this.params);
                                 this.backend.init();
-                                this.fireEvent('backend-created', this.backend);
-                                this.backend.on('finish', function() {
+                                this.fireEvent("backend-created", this.backend);
+                                this.backend.on("finish", function() {
                                     _this6.drawer.progress(_this6.backend.getPlayedPercents());
-                                    _this6.fireEvent('finish');
+                                    _this6.fireEvent("finish");
                                 });
-                                this.backend.on('play', function() {
-                                    return _this6.fireEvent('play');
+                                this.backend.on("play", function() {
+                                    return _this6.fireEvent("play");
                                 });
-                                this.backend.on('pause', function() {
-                                    return _this6.fireEvent('pause');
+                                this.backend.on("pause", function() {
+                                    return _this6.fireEvent("pause");
                                 });
-                                this.backend.on('audioprocess', function(time) {
+                                this.backend.on("audioprocess", function(time) {
                                     _this6.drawer.progress(_this6.backend.getPlayedPercents());
-                                    _this6.fireEvent('audioprocess', time);
+                                    _this6.fireEvent("audioprocess", time);
                                 }); // only needed for MediaElement and MediaElementWebAudio backend
-                                if (this.params.backend === 'MediaElement' || this.params.backend === 'MediaElementWebAudio') {
-                                    this.backend.on('seek', function() {
+                                if (this.params.backend === "MediaElement" || this.params.backend === "MediaElementWebAudio") {
+                                    this.backend.on("seek", function() {
                                         _this6.drawer.progress(_this6.backend.getPlayedPercents());
                                     });
-                                    this.backend.on('volume', function() {
+                                    this.backend.on("volume", function() {
                                         var newVolume = _this6.getVolume();
-                                        _this6.fireEvent('volume', newVolume);
+                                        _this6.fireEvent("volume", newVolume);
                                         if (_this6.backend.isMuted !== _this6.isMuted) {
                                             _this6.isMuted = _this6.backend.isMuted;
-                                            _this6.fireEvent('mute', _this6.isMuted);
+                                            _this6.fireEvent("mute", _this6.isMuted);
                                         }
                                     });
                                 }
@@ -3981,7 +3975,7 @@ exports.default = Morphaweb;
                                 var _this7 = this;
                                 if (this.params.ignoreSilenceMode) // ignores device hardware silence mode
                                 util.ignoreSilenceMode();
-                                this.fireEvent('interaction', function() {
+                                this.fireEvent("interaction", function() {
                                     return _this7.play(start, end);
                                 });
                                 return this.backend.play(start, end);
@@ -4044,11 +4038,11 @@ exports.default = Morphaweb;
                             value: function seekTo(progress) {
                                 var _this8 = this;
                                 // return an error if progress is not a number between 0 and 1
-                                if (typeof progress !== 'number' || !isFinite(progress) || progress < 0 || progress > 1) throw new Error('Error calling wavesurfer.seekTo, parameter must be a number between 0 and 1!');
-                                this.fireEvent('interaction', function() {
+                                if (typeof progress !== "number" || !isFinite(progress) || progress < 0 || progress > 1) throw new Error("Error calling wavesurfer.seekTo, parameter must be a number between 0 and 1!");
+                                this.fireEvent("interaction", function() {
                                     return _this8.seekTo(progress);
                                 });
-                                var isWebAudioBackend = this.params.backend === 'WebAudio';
+                                var isWebAudioBackend = this.params.backend === "WebAudio";
                                 var paused = this.backend.isPaused();
                                 if (isWebAudioBackend && !paused) this.backend.pause();
                                  // avoid small scrolls while paused seeking
@@ -4058,7 +4052,7 @@ exports.default = Morphaweb;
                                 this.drawer.progress(progress);
                                 if (isWebAudioBackend && !paused) this.backend.play();
                                 this.params.scrollParent = oldScrollParent;
-                                this.fireEvent('seek', progress);
+                                this.fireEvent("seek", progress);
                             }
                         },
                         {
@@ -4079,7 +4073,7 @@ exports.default = Morphaweb;
                             key: "setVolume",
                             value: function setVolume(newVolume) {
                                 this.backend.setVolume(newVolume);
-                                this.fireEvent('volume', newVolume);
+                                this.fireEvent("volume", newVolume);
                             }
                         },
                         {
@@ -4111,7 +4105,7 @@ exports.default = Morphaweb;
                             value: function setMute(mute) {
                                 // ignore all muting requests if the audio is already in that state
                                 if (mute === this.isMuted) {
-                                    this.fireEvent('mute', this.isMuted);
+                                    this.fireEvent("mute", this.isMuted);
                                     return;
                                 }
                                 if (this.backend.setMute) {
@@ -4125,15 +4119,15 @@ exports.default = Morphaweb;
                                     this.savedVolume = this.backend.getVolume();
                                     this.backend.setVolume(0);
                                     this.isMuted = true;
-                                    this.fireEvent('volume', 0);
+                                    this.fireEvent("volume", 0);
                                 } else {
                                     // If currently muted then restore to the saved volume
                                     // and update the mute properties
                                     this.backend.setVolume(this.savedVolume);
                                     this.isMuted = false;
-                                    this.fireEvent('volume', this.savedVolume);
+                                    this.fireEvent("volume", this.savedVolume);
                                 }
-                                this.fireEvent('mute', this.isMuted);
+                                this.fireEvent("mute", this.isMuted);
                             }
                         },
                         {
@@ -4268,7 +4262,7 @@ exports.default = Morphaweb;
                                     peaks = this.backend.getPeaks(width, start, end);
                                     this.drawer.drawPeaks(peaks, width, start, end);
                                 }
-                                this.fireEvent('redraw', peaks, width);
+                                this.fireEvent("redraw", peaks, width);
                             }
                         },
                         {
@@ -4284,7 +4278,7 @@ exports.default = Morphaweb;
                                 this.drawBuffer();
                                 this.drawer.progress(this.backend.getPlayedPercents());
                                 this.drawer.recenter(this.getCurrentTime() / this.getDuration());
-                                this.fireEvent('zoom', pxPerSec);
+                                this.fireEvent("zoom", pxPerSec);
                             }
                         },
                         {
@@ -4302,7 +4296,7 @@ exports.default = Morphaweb;
                                 this.backend.load(buffer);
                                 this.drawBuffer();
                                 this.isReady = true;
-                                this.fireEvent('ready');
+                                this.fireEvent("ready");
                             }
                         },
                         {
@@ -4311,14 +4305,14 @@ exports.default = Morphaweb;
                                 var _this10 = this;
                                 // Create file reader
                                 var reader = new FileReader();
-                                reader.addEventListener('progress', function(e) {
+                                reader.addEventListener("progress", function(e) {
                                     return _this10.onProgress(e);
                                 });
-                                reader.addEventListener('load', function(e) {
+                                reader.addEventListener("load", function(e) {
                                     return _this10.loadArrayBuffer(e.target.result);
                                 });
-                                reader.addEventListener('error', function() {
-                                    return _this10.fireEvent('error', 'Error reading file');
+                                reader.addEventListener("error", function() {
+                                    return _this10.fireEvent("error", "Error reading file");
                                 });
                                 reader.readAsArrayBuffer(blob);
                                 this.empty();
@@ -4327,40 +4321,40 @@ exports.default = Morphaweb;
                         {
                             key: "load",
                             value: function load(url, peaks, preload, duration) {
-                                if (!url) throw new Error('url parameter cannot be empty');
+                                if (!url) throw new Error("url parameter cannot be empty");
                                 this.empty();
                                 if (preload) {
                                     // check whether the preload attribute will be usable and if not log
                                     // a warning listing the reasons why not and nullify the variable
                                     var preloadIgnoreReasons = {
                                         "Preload is not 'auto', 'none' or 'metadata'": [
-                                            'auto',
-                                            'metadata',
-                                            'none'
+                                            "auto",
+                                            "metadata",
+                                            "none"
                                         ].indexOf(preload) === -1,
-                                        'Peaks are not provided': !peaks,
+                                        "Peaks are not provided": !peaks,
                                         "Backend is not of type 'MediaElement' or 'MediaElementWebAudio'": [
-                                            'MediaElement',
-                                            'MediaElementWebAudio'
+                                            "MediaElement",
+                                            "MediaElementWebAudio"
                                         ].indexOf(this.params.backend) === -1,
-                                        'Url is not of type string': typeof url !== 'string'
+                                        "Url is not of type string": typeof url !== "string"
                                     };
                                     var activeReasons = Object.keys(preloadIgnoreReasons).filter(function(reason) {
                                         return preloadIgnoreReasons[reason];
                                     });
                                     if (activeReasons.length) {
                                         // eslint-disable-next-line no-console
-                                        console.warn('Preload parameter of wavesurfer.load will be ignored because:\n\t- ' + activeReasons.join('\n\t- ')); // stop invalid values from being used
+                                        console.warn("Preload parameter of wavesurfer.load will be ignored because:\n	- " + activeReasons.join("\n	- ")); // stop invalid values from being used
                                         preload = null;
                                     }
                                 } // loadBuffer(url, peaks, duration) requires that url is a string
                                 // but users can pass in a HTMLMediaElement to WaveSurfer
-                                if (this.params.backend === 'WebAudio' && url instanceof HTMLMediaElement) url = url.src;
+                                if (this.params.backend === "WebAudio" && url instanceof HTMLMediaElement) url = url.src;
                                 switch(this.params.backend){
-                                    case 'WebAudio':
+                                    case "WebAudio":
                                         return this.loadBuffer(url, peaks, duration);
-                                    case 'MediaElement':
-                                    case 'MediaElementWebAudio':
+                                    case "MediaElement":
+                                    case "MediaElementWebAudio":
                                         return this.loadMediaElement(url, peaks, preload, duration);
                                 }
                             }
@@ -4370,7 +4364,7 @@ exports.default = Morphaweb;
                             value: function loadBuffer(url, peaks, duration) {
                                 var _this11 = this;
                                 var load = function load(action) {
-                                    if (action) _this11.tmpEvents.push(_this11.once('ready', action));
+                                    if (action) _this11.tmpEvents.push(_this11.once("ready", action));
                                     return _this11.getArrayBuffer(url, function(data) {
                                         return _this11.loadArrayBuffer(data);
                                     });
@@ -4378,8 +4372,8 @@ exports.default = Morphaweb;
                                 if (peaks) {
                                     this.backend.setPeaks(peaks, duration);
                                     this.drawBuffer();
-                                    this.fireEvent('waveform-ready');
-                                    this.tmpEvents.push(this.once('interaction', load));
+                                    this.fireEvent("waveform-ready");
+                                    this.tmpEvents.push(this.once("interaction", load));
                                 } else return load();
                             }
                         },
@@ -4388,27 +4382,27 @@ exports.default = Morphaweb;
                             value: function loadMediaElement(urlOrElt, peaks, preload, duration) {
                                 var _this12 = this;
                                 var url = urlOrElt;
-                                if (typeof urlOrElt === 'string') this.backend.load(url, this.mediaContainer, peaks, preload);
+                                if (typeof urlOrElt === "string") this.backend.load(url, this.mediaContainer, peaks, preload);
                                 else {
                                     var elt = urlOrElt;
                                     this.backend.loadElt(elt, peaks); // If peaks are not provided,
                                     // url = element.src so we can get peaks with web audio
                                     url = elt.src;
                                 }
-                                this.tmpEvents.push(this.backend.once('canplay', function() {
+                                this.tmpEvents.push(this.backend.once("canplay", function() {
                                     // ignore when backend was already destroyed
                                     if (!_this12.backend.destroyed) {
                                         _this12.drawBuffer();
                                         _this12.isReady = true;
-                                        _this12.fireEvent('ready');
+                                        _this12.fireEvent("ready");
                                     }
-                                }), this.backend.once('error', function(err) {
-                                    return _this12.fireEvent('error', err);
+                                }), this.backend.once("error", function(err) {
+                                    return _this12.fireEvent("error", err);
                                 })); // If peaks are provided, render them and fire the `waveform-ready` event.
                                 if (peaks) {
                                     this.backend.setPeaks(peaks, duration);
                                     this.drawBuffer();
-                                    this.fireEvent('waveform-ready');
+                                    this.fireEvent("waveform-ready");
                                 } // If no pre-decoded peaks are provided, or are provided with
                                 // forceDecode flag, attempt to download the audio file and decode it
                                 // with Web Audio.
@@ -4417,7 +4411,7 @@ exports.default = Morphaweb;
                                         _this12.backend.buffer = buffer;
                                         _this12.backend.setPeaks(null);
                                         _this12.drawBuffer();
-                                        _this12.fireEvent('waveform-ready');
+                                        _this12.fireEvent("waveform-ready");
                                     });
                                 });
                             }
@@ -4436,7 +4430,7 @@ exports.default = Morphaweb;
                                             _this13.arraybuffer = null;
                                         }
                                     }, function() {
-                                        return _this13.fireEvent('error', 'Error decoding audiobuffer');
+                                        return _this13.fireEvent("error", "Error decoding audiobuffer");
                                     });
                                 }
                             }
@@ -4447,17 +4441,17 @@ exports.default = Morphaweb;
                                 var _this14 = this;
                                 var options = Object.assign({
                                     url: url,
-                                    responseType: 'arraybuffer'
+                                    responseType: "arraybuffer"
                                 }, this.params.xhr);
                                 var request = util.fetchFile(options);
                                 this.currentRequest = request;
-                                this.tmpEvents.push(request.on('progress', function(e) {
+                                this.tmpEvents.push(request.on("progress", function(e) {
                                     _this14.onProgress(e);
-                                }), request.on('success', function(data) {
+                                }), request.on("success", function(data) {
                                     callback(data);
                                     _this14.currentRequest = null;
-                                }), request.on('error', function(e) {
-                                    _this14.fireEvent('error', e);
+                                }), request.on("error", function(e) {
+                                    _this14.fireEvent("error", e);
                                     _this14.currentRequest = null;
                                 }));
                                 return request;
@@ -4471,7 +4465,7 @@ exports.default = Morphaweb;
                                 else // Approximate progress with an asymptotic
                                 // function, and assume downloads in the 1-3 MB range.
                                 percentComplete = e.loaded / (e.loaded + 1000000);
-                                this.fireEvent('loading', Math.round(percentComplete * 100), e.target);
+                                this.fireEvent("loading", Math.round(percentComplete * 100), e.target);
                             }
                         },
                         {
@@ -4490,7 +4484,7 @@ exports.default = Morphaweb;
                                         var blobJSON = new Blob([
                                             JSON.stringify(arr)
                                         ], {
-                                            type: 'application/json;charset=utf-8'
+                                            type: "application/json;charset=utf-8"
                                         });
                                         var objURL = URL.createObjectURL(blobJSON);
                                         window.open(objURL);
@@ -4503,9 +4497,9 @@ exports.default = Morphaweb;
                         {
                             key: "exportImage",
                             value: function exportImage(format, quality, type) {
-                                if (!format) format = 'image/png';
+                                if (!format) format = "image/png";
                                 if (!quality) quality = 1;
-                                if (!type) type = 'dataURL';
+                                if (!type) type = "dataURL";
                                 return this.drawer.getImage(format, quality, type);
                             }
                         },
@@ -4517,8 +4511,7 @@ exports.default = Morphaweb;
                                     // See: Wavesurfer issue #2042
                                     // See Firefox bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1583815
                                     if (this.currentRequest._reader) // Ignoring exceptions thrown by call to cancel()
-                                    this.currentRequest._reader.cancel().catch(function(err) {
-                                    });
+                                    this.currentRequest._reader.cancel().catch(function(err) {});
                                     this.currentRequest.controller.abort();
                                     this.currentRequest = null;
                                 }
@@ -4553,13 +4546,13 @@ exports.default = Morphaweb;
                             key: "destroy",
                             value: function destroy() {
                                 this.destroyAllPlugins();
-                                this.fireEvent('destroy');
+                                this.fireEvent("destroy");
                                 this.cancelAjax();
                                 this.clearTmpEvents();
                                 this.unAll();
                                 if (this.params.responsive !== false) {
-                                    window.removeEventListener('resize', this._onResize, true);
-                                    window.removeEventListener('orientationchange', this._onResize, true);
+                                    window.removeEventListener("resize", this._onResize, true);
+                                    window.removeEventListener("orientationchange", this._onResize, true);
                                 }
                                 if (this.backend) {
                                     this.backend.destroy(); // clears memory usage
@@ -4588,32 +4581,33 @@ exports.default = Morphaweb;
                     ]);
                     return WaveSurfer;
                 }(util.Observer);
-                exports["default"] = WaveSurfer1;
-                _defineProperty(WaveSurfer1, "VERSION", "6.2.0");
-                _defineProperty(WaveSurfer1, "util", util);
-                module.exports = exports.default;
+                exports["default"] = WaveSurfer;
+                _defineProperty(WaveSurfer, "VERSION", "6.2.0");
+                _defineProperty(WaveSurfer, "util", util);
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./src/webaudio.js": (module, exports, __webpack_require__)=>{
+            /***/ "./src/webaudio.js": (module1, exports, __webpack_require__)=>{
                 "use strict";
-                function _typeof(obj6) {
+                function _typeof(obj) {
+                    "@babel/helpers - typeof";
                     return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
                         return typeof obj;
                     } : function(obj) {
                         return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-                    }, _typeof(obj6);
+                    }, _typeof(obj);
                 }
                 Object.defineProperty(exports, "__esModule", {
                     value: true
                 });
                 exports["default"] = void 0;
                 var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
-                function _getRequireWildcardCache(nodeInterop5) {
+                function _getRequireWildcardCache(nodeInterop) {
                     if (typeof WeakMap !== "function") return null;
                     var cacheBabelInterop = new WeakMap();
                     var cacheNodeInterop = new WeakMap();
                     return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
                         return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-                    })(nodeInterop5);
+                    })(nodeInterop);
                 }
                 function _interopRequireWildcard(obj, nodeInterop) {
                     if (!nodeInterop && obj && obj.__esModule) return obj;
@@ -4622,8 +4616,7 @@ exports.default = Morphaweb;
                     };
                     var cache = _getRequireWildcardCache(nodeInterop);
                     if (cache && cache.has(obj)) return cache.get(obj);
-                    var newObj = {
-                    };
+                    var newObj = {};
                     var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
                     for(var key in obj)if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
                         var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
@@ -4668,12 +4661,12 @@ exports.default = Morphaweb;
                     });
                     if (superClass) _setPrototypeOf(subClass, superClass);
                 }
-                function _setPrototypeOf(o11, p6) {
+                function _setPrototypeOf(o, p) {
                     _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
                         o.__proto__ = p;
                         return o;
                     };
-                    return _setPrototypeOf(o11, p6);
+                    return _setPrototypeOf(o, p);
                 }
                 function _createSuper(Derived) {
                     var hasNativeReflectConstruct = _isNativeReflectConstruct();
@@ -4686,32 +4679,31 @@ exports.default = Morphaweb;
                         return _possibleConstructorReturn(this, result);
                     };
                 }
-                function _possibleConstructorReturn(self, call) {
+                function _possibleConstructorReturn(self1, call) {
                     if (call && (_typeof(call) === "object" || typeof call === "function")) return call;
                     else if (call !== void 0) throw new TypeError("Derived constructors may only return object or undefined");
-                    return _assertThisInitialized(self);
+                    return _assertThisInitialized(self1);
                 }
-                function _assertThisInitialized(self) {
-                    if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-                    return self;
+                function _assertThisInitialized(self1) {
+                    if (self1 === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+                    return self1;
                 }
                 function _isNativeReflectConstruct() {
                     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
                     if (Reflect.construct.sham) return false;
                     if (typeof Proxy === "function") return true;
                     try {
-                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-                        }));
+                        Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {}));
                         return true;
                     } catch (e) {
                         return false;
                     }
                 }
-                function _getPrototypeOf(o12) {
+                function _getPrototypeOf(o) {
                     _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
                         return o.__proto__ || Object.getPrototypeOf(o);
                     };
-                    return _getPrototypeOf(o12);
+                    return _getPrototypeOf(o);
                 }
                 function _defineProperty(obj, key, value) {
                     if (key in obj) Object.defineProperty(obj, key, {
@@ -4724,14 +4716,14 @@ exports.default = Morphaweb;
                     return obj;
                 }
                 // using constants to prevent someone writing the string wrong
-                var PLAYING = 'playing';
-                var PAUSED = 'paused';
-                var FINISHED = 'finished';
+                var PLAYING = "playing";
+                var PAUSED = "paused";
+                var FINISHED = "finished";
                 /**
  * WebAudio backend
  *
  * @extends {Observer}
- */ var WebAudio1 = /*#__PURE__*/ function(_util$Observer) {
+ */ var WebAudio = /*#__PURE__*/ function(_util$Observer) {
                     _inherits(WebAudio, _util$Observer);
                     var _super = _createSuper(WebAudio);
                     /**
@@ -4745,8 +4737,7 @@ exports.default = Morphaweb;
                         _this = _super.call(this);
                         /** @private */ _defineProperty(_assertThisInitialized(_this), "audioContext", null);
                         _defineProperty(_assertThisInitialized(_this), "offlineAudioContext", null);
-                        _defineProperty(_assertThisInitialized(_this), "stateBehaviors", (_defineProperty2 = {
-                        }, _defineProperty(_defineProperty2, PLAYING, {
+                        _defineProperty(_assertThisInitialized(_this), "stateBehaviors", (_defineProperty2 = {}, _defineProperty(_defineProperty2, PLAYING, {
                             init: function init() {
                                 this.addOnAudioProcess();
                             },
@@ -4771,7 +4762,7 @@ exports.default = Morphaweb;
                         }), _defineProperty(_defineProperty2, FINISHED, {
                             init: function init() {
                                 this.removeOnAudioProcess();
-                                this.fireEvent('finish');
+                                this.fireEvent("finish");
                             },
                             getPlayedPercents: function getPlayedPercents() {
                                 return 1;
@@ -4781,13 +4772,11 @@ exports.default = Morphaweb;
                             }
                         }), _defineProperty2));
                         _this.params = params;
-                        /** ac: Audio Context instance */ _this.ac = params.audioContext || (_this.supportsWebAudio() ? _this.getAudioContext() : {
-                        });
+                        /** ac: Audio Context instance */ _this.ac = params.audioContext || (_this.supportsWebAudio() ? _this.getAudioContext() : {});
                         /**@private */ _this.lastPlay = _this.ac.currentTime;
                         /** @private */ _this.startPosition = 0;
                         /** @private */ _this.scheduledPause = null;
-                        /** @private */ _this.states = (_this$states = {
-                        }, _defineProperty(_this$states, PLAYING, Object.create(_this.stateBehaviors[PLAYING])), _defineProperty(_this$states, PAUSED, Object.create(_this.stateBehaviors[PAUSED])), _defineProperty(_this$states, FINISHED, Object.create(_this.stateBehaviors[FINISHED])), _this$states);
+                        /** @private */ _this.states = (_this$states = {}, _defineProperty(_this$states, PLAYING, Object.create(_this.stateBehaviors[PLAYING])), _defineProperty(_this$states, PAUSED, Object.create(_this.stateBehaviors[PAUSED])), _defineProperty(_this$states, FINISHED, Object.create(_this.stateBehaviors[FINISHED])), _this$states);
                         /** @private */ _this.buffer = null;
                         /** @private */ _this.filters = [];
                         /** gainNode: allows to control audio volume */ _this.gainNode = null;
@@ -4906,9 +4895,9 @@ exports.default = Morphaweb;
                                     var time = _this2.getCurrentTime();
                                     if (time >= _this2.getDuration()) {
                                         _this2.setState(FINISHED);
-                                        _this2.fireEvent('pause');
+                                        _this2.fireEvent("pause");
                                     } else if (time >= _this2.scheduledPause) _this2.pause();
-                                    else if (_this2.state === _this2.states[PLAYING]) _this2.fireEvent('audioprocess', time);
+                                    else if (_this2.state === _this2.states[PLAYING]) _this2.fireEvent("audioprocess", time);
                                 };
                             }
                         },
@@ -4947,13 +4936,13 @@ exports.default = Morphaweb;
                                         this.sinkAudioElement = new window.Audio(); // autoplay is necessary since we're not invoking .play()
                                         this.sinkAudioElement.autoplay = true;
                                     }
-                                    if (!this.sinkAudioElement.setSinkId) return Promise.reject(new Error('setSinkId is not supported in your browser'));
+                                    if (!this.sinkAudioElement.setSinkId) return Promise.reject(new Error("setSinkId is not supported in your browser"));
                                     if (!this.sinkStreamDestination) this.sinkStreamDestination = this.ac.createMediaStreamDestination();
                                     this.gainNode.disconnect();
                                     this.gainNode.connect(this.sinkStreamDestination);
                                     this.sinkAudioElement.srcObject = this.sinkStreamDestination.stream;
                                     return this.sinkAudioElement.setSinkId(deviceId);
-                                } else return Promise.reject(new Error('Invalid deviceId: ' + deviceId));
+                                } else return Promise.reject(new Error("Invalid deviceId: " + deviceId));
                             }
                         },
                         {
@@ -4972,7 +4961,7 @@ exports.default = Morphaweb;
                             key: "decodeArrayBuffer",
                             value: function decodeArrayBuffer(arraybuffer, callback, errback) {
                                 if (!this.offlineAc) this.offlineAc = this.getOfflineAudioContext(this.ac && this.ac.sampleRate ? this.ac.sampleRate : 44100);
-                                if ('webkitAudioContext' in window) // Safari: no support for Promise-based decodeAudioData enabled
+                                if ("webkitAudioContext" in window) // Safari: no support for Promise-based decodeAudioData enabled
                                 // Enable it in Safari using the Experimental Features > Modern WebAudio API option
                                 this.offlineAc.decodeAudioData(arraybuffer, function(data) {
                                     return callback(data);
@@ -5084,7 +5073,7 @@ exports.default = Morphaweb;
                                 this.analyser.disconnect(); // close the audioContext if closeAudioContext option is set to true
                                 if (this.params.closeAudioContext) {
                                     // check if browser supports AudioContext.close()
-                                    if (typeof this.ac.close === 'function' && this.ac.state != 'closed') this.ac.close();
+                                    if (typeof this.ac.close === "function" && this.ac.state != "closed") this.ac.close();
                                      // clear the reference to the audiocontext
                                     this.ac = null; // clear the actual audiocontext, either passed as param or the
                                     // global singleton
@@ -5135,7 +5124,7 @@ exports.default = Morphaweb;
                         {
                             key: "resumeAudioContext",
                             value: function resumeAudioContext() {
-                                if (this.ac.state == 'suspended') this.ac.resume && this.ac.resume();
+                                if (this.ac.state == "suspended") this.ac.resume && this.ac.resume();
                             }
                         },
                         {
@@ -5190,7 +5179,7 @@ exports.default = Morphaweb;
                                 this.source.start(0, start);
                                 this.resumeAudioContext();
                                 this.setState(PLAYING);
-                                this.fireEvent('play');
+                                this.fireEvent("play");
                             }
                         },
                         {
@@ -5208,7 +5197,7 @@ exports.default = Morphaweb;
                                 // - The node might not have been started yet, in which case we just want to carry on without causing any trouble.
                                 }
                                 this.setState(PAUSED);
-                                this.fireEvent('pause');
+                                this.fireEvent("pause");
                             }
                         },
                         {
@@ -5239,11 +5228,11 @@ exports.default = Morphaweb;
                     ]);
                     return WebAudio;
                 }(util.Observer);
-                exports["default"] = WebAudio1;
-                _defineProperty(WebAudio1, "scriptBufferSize", 256);
-                module.exports = exports.default;
+                exports["default"] = WebAudio;
+                _defineProperty(WebAudio, "scriptBufferSize", 256);
+                module1.exports = exports.default;
             /***/ },
-            /***/ "./node_modules/debounce/index.js": (module)=>{
+            /***/ "./node_modules/debounce/index.js": (module1)=>{
                 /**
  * Returns a function, that, as long as it continues to be invoked, will not
  * be triggered. The function will be called after it stops being called for
@@ -5301,38 +5290,36 @@ exports.default = Morphaweb;
                 }
                 // Adds compatibility for ES modules
                 debounce.debounce = debounce;
-                module.exports = debounce;
+                module1.exports = debounce;
             /***/ }
         };
         /************************************************************************/ /******/ // The module cache
-        /******/ var __webpack_module_cache__ = {
-        };
+        /******/ var __webpack_module_cache__ = {};
         /******/ /******/ // The require function
-        /******/ function __webpack_require__1(moduleId) {
+        /******/ function __webpack_require__(moduleId) {
             /******/ // Check if module is in cache
             /******/ var cachedModule = __webpack_module_cache__[moduleId];
             /******/ if (cachedModule !== undefined) /******/ return cachedModule.exports;
             /******/ // Create a new module (and put it into the cache)
-            /******/ var module = __webpack_module_cache__[moduleId] = {
+            /******/ var module1 = __webpack_module_cache__[moduleId] = {
                 /******/ // no module.id needed
                 /******/ // no module.loaded needed
-                /******/ exports: {
-                }
+                /******/ exports: {}
             };
             /******/ /******/ // Execute the module function
-            /******/ __webpack_modules__[moduleId](module, module.exports, __webpack_require__1);
+            /******/ __webpack_modules__[moduleId](module1, module1.exports, __webpack_require__);
             /******/ /******/ // Return the exports of the module
-            /******/ return module.exports;
+            /******/ return module1.exports;
         /******/ }
         /******/ /************************************************************************/ /******/ /******/ // startup
         /******/ // Load entry module and return exports
         /******/ // This entry module is referenced by other modules so it can't be inlined
-        /******/ var __webpack_exports__ = __webpack_require__1("./src/wavesurfer.js");
+        /******/ var __webpack_exports__ = __webpack_require__("./src/wavesurfer.js");
         /******/ /******/ return __webpack_exports__;
-    /******/ })());
+    /******/ })();
 });
 
-},{}],"gbirD":[function(require,module,exports) {
+},{}],"drAS8":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
@@ -5385,12 +5372,12 @@ class MarkersPlugin {
      * @return {PluginDefinition} an object representing the plugin
      */ static create(params) {
         return {
-            name: 'markers',
+            name: "markers",
             deferInit: params && params.deferInit ? params.deferInit : false,
             params: params,
             staticProps: {
                 addMarker (options) {
-                    if (!this.initialisedPluginList.markers) this.initPlugin('markers');
+                    if (!this.initialisedPluginList.markers) this.initPlugin("markers");
                     return this.markers.add(options);
                 },
                 clearMarkers () {
@@ -5414,18 +5401,14 @@ class MarkersPlugin {
         };
         this._onBackendCreated = ()=>{
             this.wrapper = this.wavesurfer.drawer.wrapper;
-            if (this.params.markers) this.params.markers.forEach((marker)=>this.add(marker)
-            );
-            window.addEventListener('resize', this._onResize, true);
-            window.addEventListener('orientationchange', this._onResize, true);
-            this.wavesurfer.on('zoom', this._onResize);
-            if (!this.markers.find((marker)=>marker.draggable
-            )) return;
-            this.onMouseMove = (e)=>this._onMouseMove(e)
-            ;
-            window.addEventListener('mousemove', this.onMouseMove);
-            this.onMouseUp = (e)=>this._onMouseUp(e)
-            ;
+            if (this.params.markers) this.params.markers.forEach((marker)=>this.add(marker));
+            window.addEventListener("resize", this._onResize, true);
+            window.addEventListener("orientationchange", this._onResize, true);
+            this.wavesurfer.on("zoom", this._onResize);
+            if (!this.markers.find((marker)=>marker.draggable)) return;
+            this.onMouseMove = (e)=>this._onMouseMove(e);
+            window.addEventListener("mousemove", this.onMouseMove);
+            this.onMouseUp = (e)=>this._onMouseUp(e);
             window.addEventListener("mouseup", this.onMouseUp);
         };
         this.markers = [];
@@ -5440,17 +5423,17 @@ class MarkersPlugin {
             this._onBackendCreated();
             this._onReady();
         } else {
-            this.wavesurfer.once('ready', this._onReady);
-            this.wavesurfer.once('backend-created', this._onBackendCreated);
+            this.wavesurfer.once("ready", this._onReady);
+            this.wavesurfer.once("backend-created", this._onBackendCreated);
         }
     }
     destroy() {
-        this.wavesurfer.un('ready', this._onReady);
-        this.wavesurfer.un('backend-created', this._onBackendCreated);
-        this.wavesurfer.un('zoom', this._onResize);
-        window.removeEventListener('resize', this._onResize, true);
-        window.removeEventListener('orientationchange', this._onResize, true);
-        if (this.onMouseMove) window.removeEventListener('mousemove', this.onMouseMove);
+        this.wavesurfer.un("ready", this._onReady);
+        this.wavesurfer.un("backend-created", this._onBackendCreated);
+        this.wavesurfer.un("zoom", this._onResize);
+        window.removeEventListener("resize", this._onResize, true);
+        window.removeEventListener("orientationchange", this._onResize, true);
+        if (this.onMouseMove) window.removeEventListener("mousemove", this.onMouseMove);
         if (this.onMouseUp) window.removeEventListener("mouseup", this.onMouseUp);
         this.clear();
     }
@@ -5505,7 +5488,7 @@ class MarkersPlugin {
     }
     _createMarkerElement(marker, markerElement) {
         let label = marker.label;
-        const el = document.createElement('marker');
+        const el = document.createElement("marker");
         el.className = "wavesurfer-marker";
         this.style(el, {
             position: "absolute",
@@ -5514,7 +5497,7 @@ class MarkersPlugin {
             overflow: "hidden",
             "flex-direction": marker.position == "top" ? "column-reverse" : "column"
         });
-        const line = document.createElement('div');
+        const line = document.createElement("div");
         const width = markerElement ? markerElement.width : this.markerWidth;
         marker.offset = (width - this.markerLineWidth) / 2;
         this.style(line, {
@@ -5525,12 +5508,12 @@ class MarkersPlugin {
             opacity: 0.1
         });
         el.appendChild(line);
-        const labelDiv = document.createElement('div');
+        const labelDiv = document.createElement("div");
         const point = markerElement || this._createPointerSVG(marker.color, marker.position);
         if (marker.draggable) point.draggable = false;
         labelDiv.appendChild(point);
         if (label) {
-            const labelEl = document.createElement('span');
+            const labelEl = document.createElement("span");
             labelEl.innerText = label;
             this.style(labelEl, {
                 "font-family": "monospace",
@@ -5623,20 +5606,20 @@ class MarkersPlugin {
 }
 exports.default = MarkersPlugin;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"j3Gbs":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
+    Object.defineProperty(a, "__esModule", {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function() {
@@ -5653,7 +5636,7 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"jKMG0":[function(require,module,exports) {
+},{}],"iU0AL":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 class DropHandler {
@@ -5674,7 +5657,7 @@ class DropHandler {
 }
 exports.default = DropHandler;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"aEpgz":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3b5Tt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _lodash = require("lodash");
@@ -5684,14 +5667,16 @@ class ControlsHandler {
         this.playButton = document.getElementById("play");
         this.pauseButton = document.getElementById("pause");
         this.exportButton = document.getElementById("export");
-        this.exportButton.addEventListener('click', this.exportWavFile);
-        this.playButton.addEventListener('click', this.play);
-        document.addEventListener('keydown', this.onKeydown.bind(this));
-        this.morphaweb.wavesurfer.on('seek', this.onSeek.bind(this));
-        this.morphaweb.wavesurfer.on('finish', this.onFinish.bind(this));
-        window.addEventListener("wheel", _lodash.throttle(this.onWheel.bind(this), 10));
+        this.exportButton.addEventListener("click", this.exportWavFile);
+        this.playButton.addEventListener("click", this.play);
+        document.addEventListener("keydown", this.onKeydown.bind(this));
+        this.morphaweb.wavesurfer.on("seek", this.onSeek.bind(this));
+        this.morphaweb.wavesurfer.on("finish", this.onFinish.bind(this));
+        window.addEventListener("wheel", (0, _lodash.throttle)(this.onWheel.bind(this), 10));
     }
     exportWavFile = ()=>{
+        if (this.morphaweb.wavesurfer.getDuration() === 0) return false;
+        //if()
         const buffer = [
             this.morphaweb.wavesurfer.backend.buffer.getChannelData(0),
             this.morphaweb.wavesurfer.backend.buffer.getChannelData(1)
@@ -5731,64 +5716,64 @@ class ControlsHandler {
 }
 exports.default = ControlsHandler;
 
-},{"lodash":"ddrpy","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"ddrpy":[function(require,module,exports) {
+},{"lodash":"3qBDj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3qBDj":[function(require,module,exports) {
 var global = arguments[3];
 (function() {
     /** Used as a safe reference for `undefined` in pre-ES5 environments. */ var undefined;
-    /** Used as the semantic version number. */ var VERSION = '4.17.21';
+    /** Used as the semantic version number. */ var VERSION = "4.17.21";
     /** Used as the size to enable large array optimizations. */ var LARGE_ARRAY_SIZE = 200;
-    /** Error message constants. */ var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://npms.io/search?q=ponyfill.', FUNC_ERROR_TEXT = 'Expected a function', INVALID_TEMPL_VAR_ERROR_TEXT = 'Invalid `variable` option passed into `_.template`';
-    /** Used to stand-in for `undefined` hash values. */ var HASH_UNDEFINED = '__lodash_hash_undefined__';
+    /** Error message constants. */ var CORE_ERROR_TEXT = "Unsupported core-js use. Try https://npms.io/search?q=ponyfill.", FUNC_ERROR_TEXT = "Expected a function", INVALID_TEMPL_VAR_ERROR_TEXT = "Invalid `variable` option passed into `_.template`";
+    /** Used to stand-in for `undefined` hash values. */ var HASH_UNDEFINED = "__lodash_hash_undefined__";
     /** Used as the maximum memoize cache size. */ var MAX_MEMOIZE_SIZE = 500;
-    /** Used as the internal argument placeholder. */ var PLACEHOLDER = '__lodash_placeholder__';
+    /** Used as the internal argument placeholder. */ var PLACEHOLDER = "__lodash_placeholder__";
     /** Used to compose bitmasks for cloning. */ var CLONE_DEEP_FLAG = 1, CLONE_FLAT_FLAG = 2, CLONE_SYMBOLS_FLAG = 4;
     /** Used to compose bitmasks for value comparisons. */ var COMPARE_PARTIAL_FLAG = 1, COMPARE_UNORDERED_FLAG = 2;
     /** Used to compose bitmasks for function metadata. */ var WRAP_BIND_FLAG = 1, WRAP_BIND_KEY_FLAG = 2, WRAP_CURRY_BOUND_FLAG = 4, WRAP_CURRY_FLAG = 8, WRAP_CURRY_RIGHT_FLAG = 16, WRAP_PARTIAL_FLAG = 32, WRAP_PARTIAL_RIGHT_FLAG = 64, WRAP_ARY_FLAG = 128, WRAP_REARG_FLAG = 256, WRAP_FLIP_FLAG = 512;
-    /** Used as default options for `_.truncate`. */ var DEFAULT_TRUNC_LENGTH = 30, DEFAULT_TRUNC_OMISSION = '...';
+    /** Used as default options for `_.truncate`. */ var DEFAULT_TRUNC_LENGTH = 30, DEFAULT_TRUNC_OMISSION = "...";
     /** Used to detect hot functions by number of calls within a span of milliseconds. */ var HOT_COUNT = 800, HOT_SPAN = 16;
     /** Used to indicate the type of lazy iteratees. */ var LAZY_FILTER_FLAG = 1, LAZY_MAP_FLAG = 2, LAZY_WHILE_FLAG = 3;
-    /** Used as references for various `Number` constants. */ var INFINITY = 1 / 0, MAX_SAFE_INTEGER = 9007199254740991, MAX_INTEGER = 179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, NAN = 0 / 0;
+    /** Used as references for various `Number` constants. */ var INFINITY = 1 / 0, MAX_SAFE_INTEGER = 9007199254740991, MAX_INTEGER = 1.7976931348623157e+308, NAN = 0 / 0;
     /** Used as references for the maximum length and index of an array. */ var MAX_ARRAY_LENGTH = 4294967295, MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1, HALF_MAX_ARRAY_LENGTH = MAX_ARRAY_LENGTH >>> 1;
     /** Used to associate wrap methods with their bit flags. */ var wrapFlags = [
         [
-            'ary',
+            "ary",
             WRAP_ARY_FLAG
         ],
         [
-            'bind',
+            "bind",
             WRAP_BIND_FLAG
         ],
         [
-            'bindKey',
+            "bindKey",
             WRAP_BIND_KEY_FLAG
         ],
         [
-            'curry',
+            "curry",
             WRAP_CURRY_FLAG
         ],
         [
-            'curryRight',
+            "curryRight",
             WRAP_CURRY_RIGHT_FLAG
         ],
         [
-            'flip',
+            "flip",
             WRAP_FLIP_FLAG
         ],
         [
-            'partial',
+            "partial",
             WRAP_PARTIAL_FLAG
         ],
         [
-            'partialRight',
+            "partialRight",
             WRAP_PARTIAL_RIGHT_FLAG
         ],
         [
-            'rearg',
+            "rearg",
             WRAP_REARG_FLAG
         ]
     ];
-    /** `Object#toString` result references. */ var argsTag = '[object Arguments]', arrayTag = '[object Array]', asyncTag = '[object AsyncFunction]', boolTag = '[object Boolean]', dateTag = '[object Date]', domExcTag = '[object DOMException]', errorTag = '[object Error]', funcTag = '[object Function]', genTag = '[object GeneratorFunction]', mapTag = '[object Map]', numberTag = '[object Number]', nullTag = '[object Null]', objectTag = '[object Object]', promiseTag = '[object Promise]', proxyTag = '[object Proxy]', regexpTag = '[object RegExp]', setTag = '[object Set]', stringTag = '[object String]', symbolTag = '[object Symbol]', undefinedTag = '[object Undefined]', weakMapTag = '[object WeakMap]', weakSetTag = '[object WeakSet]';
-    var arrayBufferTag = '[object ArrayBuffer]', dataViewTag = '[object DataView]', float32Tag = '[object Float32Array]', float64Tag = '[object Float64Array]', int8Tag = '[object Int8Array]', int16Tag = '[object Int16Array]', int32Tag = '[object Int32Array]', uint8Tag = '[object Uint8Array]', uint8ClampedTag = '[object Uint8ClampedArray]', uint16Tag = '[object Uint16Array]', uint32Tag = '[object Uint32Array]';
+    /** `Object#toString` result references. */ var argsTag = "[object Arguments]", arrayTag = "[object Array]", asyncTag = "[object AsyncFunction]", boolTag = "[object Boolean]", dateTag = "[object Date]", domExcTag = "[object DOMException]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", nullTag = "[object Null]", objectTag = "[object Object]", promiseTag = "[object Promise]", proxyTag = "[object Proxy]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", undefinedTag = "[object Undefined]", weakMapTag = "[object WeakMap]", weakSetTag = "[object WeakSet]";
+    var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
     /** Used to match empty string literals in compiled template source. */ var reEmptyStringLeading = /\b__p \+= '';/g, reEmptyStringMiddle = /\b(__p \+=) '' \+/g, reEmptyStringTrailing = /(__e\(.*?\)|\b__t\)) \+\n'';/g;
     /** Used to match HTML entities and HTML characters. */ var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g, reUnescapedHtml = /[&<>"']/g, reHasEscapedHtml = RegExp(reEscapedHtml.source), reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
     /** Used to match template delimiters. */ var reEscape = /<%-([\s\S]+?)%>/g, reEvaluate = /<%([\s\S]+?)%>/g, reInterpolate = /<%=([\s\S]+?)%>/g;
@@ -5825,323 +5810,320 @@ var global = arguments[3];
     /** Used to match Latin Unicode letters (excluding mathematical operators). */ var reLatin = /[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g;
     /** Used to ensure capturing order of template delimiters. */ var reNoMatch = /($^)/;
     /** Used to match unescaped characters in compiled string literals. */ var reUnescapedString = /['\n\r\u2028\u2029\\]/g;
-    /** Used to compose unicode character classes. */ var rsAstralRange = '\\ud800-\\udfff', rsComboMarksRange = '\\u0300-\\u036f', reComboHalfMarksRange = '\\ufe20-\\ufe2f', rsComboSymbolsRange = '\\u20d0-\\u20ff', rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange, rsDingbatRange = '\\u2700-\\u27bf', rsLowerRange = 'a-z\\xdf-\\xf6\\xf8-\\xff', rsMathOpRange = '\\xac\\xb1\\xd7\\xf7', rsNonCharRange = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf', rsPunctuationRange = '\\u2000-\\u206f', rsSpaceRange = ' \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000', rsUpperRange = 'A-Z\\xc0-\\xd6\\xd8-\\xde', rsVarRange = '\\ufe0e\\ufe0f', rsBreakRange = rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
-    /** Used to compose unicode capture groups. */ var rsApos = "['\u2019]", rsAstral = '[' + rsAstralRange + ']', rsBreak = '[' + rsBreakRange + ']', rsCombo = '[' + rsComboRange + ']', rsDigits = '\\d+', rsDingbat = '[' + rsDingbatRange + ']', rsLower = '[' + rsLowerRange + ']', rsMisc = '[^' + rsAstralRange + rsBreakRange + rsDigits + rsDingbatRange + rsLowerRange + rsUpperRange + ']', rsFitz = '\\ud83c[\\udffb-\\udfff]', rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')', rsNonAstral = '[^' + rsAstralRange + ']', rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}', rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]', rsUpper = '[' + rsUpperRange + ']', rsZWJ = '\\u200d';
-    /** Used to compose unicode regexes. */ var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')', rsMiscUpper = '(?:' + rsUpper + '|' + rsMisc + ')', rsOptContrLower = '(?:' + rsApos + '(?:d|ll|m|re|s|t|ve))?', rsOptContrUpper = '(?:' + rsApos + '(?:D|LL|M|RE|S|T|VE))?', reOptMod = rsModifier + '?', rsOptVar = '[' + rsVarRange + ']?', rsOptJoin = '(?:' + rsZWJ + '(?:' + [
+    /** Used to compose unicode character classes. */ var rsAstralRange = "\ud800-\udfff", rsComboMarksRange = "\\u0300-\\u036f", reComboHalfMarksRange = "\\ufe20-\\ufe2f", rsComboSymbolsRange = "\\u20d0-\\u20ff", rsComboRange = rsComboMarksRange + reComboHalfMarksRange + rsComboSymbolsRange, rsDingbatRange = "\\u2700-\\u27bf", rsLowerRange = "a-z\\xdf-\\xf6\\xf8-\\xff", rsMathOpRange = "\\xac\\xb1\\xd7\\xf7", rsNonCharRange = "\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf", rsPunctuationRange = "\\u2000-\\u206f", rsSpaceRange = " \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000", rsUpperRange = "A-Z\\xc0-\\xd6\\xd8-\\xde", rsVarRange = "\\ufe0e\\ufe0f", rsBreakRange = rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
+    /** Used to compose unicode capture groups. */ var rsApos = "['’]", rsAstral = "[" + rsAstralRange + "]", rsBreak = "[" + rsBreakRange + "]", rsCombo = "[" + rsComboRange + "]", rsDigits = "\\d+", rsDingbat = "[" + rsDingbatRange + "]", rsLower = "[" + rsLowerRange + "]", rsMisc = "[^" + rsAstralRange + rsBreakRange + rsDigits + rsDingbatRange + rsLowerRange + rsUpperRange + "]", rsFitz = "\ud83c[\udffb-\udfff]", rsModifier = "(?:" + rsCombo + "|" + rsFitz + ")", rsNonAstral = "[^" + rsAstralRange + "]", rsRegional = "(?:\ud83c[\udde6-\uddff]){2}", rsSurrPair = "[\ud800-\udbff][\udc00-\udfff]", rsUpper = "[" + rsUpperRange + "]", rsZWJ = "\\u200d";
+    /** Used to compose unicode regexes. */ var rsMiscLower = "(?:" + rsLower + "|" + rsMisc + ")", rsMiscUpper = "(?:" + rsUpper + "|" + rsMisc + ")", rsOptContrLower = "(?:" + rsApos + "(?:d|ll|m|re|s|t|ve))?", rsOptContrUpper = "(?:" + rsApos + "(?:D|LL|M|RE|S|T|VE))?", reOptMod = rsModifier + "?", rsOptVar = "[" + rsVarRange + "]?", rsOptJoin = "(?:" + rsZWJ + "(?:" + [
         rsNonAstral,
         rsRegional,
         rsSurrPair
-    ].join('|') + ')' + rsOptVar + reOptMod + ')*', rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])', rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])', rsSeq = rsOptVar + reOptMod + rsOptJoin, rsEmoji = '(?:' + [
+    ].join("|") + ")" + rsOptVar + reOptMod + ")*", rsOrdLower = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])", rsOrdUpper = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])", rsSeq = rsOptVar + reOptMod + rsOptJoin, rsEmoji = "(?:" + [
         rsDingbat,
         rsRegional,
         rsSurrPair
-    ].join('|') + ')' + rsSeq, rsSymbol = '(?:' + [
-        rsNonAstral + rsCombo + '?',
+    ].join("|") + ")" + rsSeq, rsSymbol = "(?:" + [
+        rsNonAstral + rsCombo + "?",
         rsCombo,
         rsRegional,
         rsSurrPair,
         rsAstral
-    ].join('|') + ')';
-    /** Used to match apostrophes. */ var reApos = RegExp(rsApos, 'g');
+    ].join("|") + ")";
+    /** Used to match apostrophes. */ var reApos = RegExp(rsApos, "g");
     /**
    * Used to match [combining diacritical marks](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks) and
    * [combining diacritical marks for symbols](https://en.wikipedia.org/wiki/Combining_Diacritical_Marks_for_Symbols).
-   */ var reComboMark = RegExp(rsCombo, 'g');
-    /** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */ var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq, 'g');
+   */ var reComboMark = RegExp(rsCombo, "g");
+    /** Used to match [string symbols](https://mathiasbynens.be/notes/javascript-unicode). */ var reUnicode = RegExp(rsFitz + "(?=" + rsFitz + ")|" + rsSymbol + rsSeq, "g");
     /** Used to match complex or compound words. */ var reUnicodeWord = RegExp([
-        rsUpper + '?' + rsLower + '+' + rsOptContrLower + '(?=' + [
+        rsUpper + "?" + rsLower + "+" + rsOptContrLower + "(?=" + [
             rsBreak,
             rsUpper,
-            '$'
-        ].join('|') + ')',
-        rsMiscUpper + '+' + rsOptContrUpper + '(?=' + [
+            "$"
+        ].join("|") + ")",
+        rsMiscUpper + "+" + rsOptContrUpper + "(?=" + [
             rsBreak,
             rsUpper + rsMiscLower,
-            '$'
-        ].join('|') + ')',
-        rsUpper + '?' + rsMiscLower + '+' + rsOptContrLower,
-        rsUpper + '+' + rsOptContrUpper,
+            "$"
+        ].join("|") + ")",
+        rsUpper + "?" + rsMiscLower + "+" + rsOptContrLower,
+        rsUpper + "+" + rsOptContrUpper,
         rsOrdUpper,
         rsOrdLower,
         rsDigits,
         rsEmoji
-    ].join('|'), 'g');
-    /** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */ var reHasUnicode = RegExp('[' + rsZWJ + rsAstralRange + rsComboRange + rsVarRange + ']');
+    ].join("|"), "g");
+    /** Used to detect strings with [zero-width joiners or code points from the astral planes](http://eev.ee/blog/2015/09/12/dark-corners-of-unicode/). */ var reHasUnicode = RegExp("[" + rsZWJ + rsAstralRange + rsComboRange + rsVarRange + "]");
     /** Used to detect strings that need a more robust regexp to match words. */ var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
     /** Used to assign default `context` object properties. */ var contextProps = [
-        'Array',
-        'Buffer',
-        'DataView',
-        'Date',
-        'Error',
-        'Float32Array',
-        'Float64Array',
-        'Function',
-        'Int8Array',
-        'Int16Array',
-        'Int32Array',
-        'Map',
-        'Math',
-        'Object',
-        'Promise',
-        'RegExp',
-        'Set',
-        'String',
-        'Symbol',
-        'TypeError',
-        'Uint8Array',
-        'Uint8ClampedArray',
-        'Uint16Array',
-        'Uint32Array',
-        'WeakMap',
-        '_',
-        'clearTimeout',
-        'isFinite',
-        'parseInt',
-        'setTimeout'
+        "Array",
+        "Buffer",
+        "DataView",
+        "Date",
+        "Error",
+        "Float32Array",
+        "Float64Array",
+        "Function",
+        "Int8Array",
+        "Int16Array",
+        "Int32Array",
+        "Map",
+        "Math",
+        "Object",
+        "Promise",
+        "RegExp",
+        "Set",
+        "String",
+        "Symbol",
+        "TypeError",
+        "Uint8Array",
+        "Uint8ClampedArray",
+        "Uint16Array",
+        "Uint32Array",
+        "WeakMap",
+        "_",
+        "clearTimeout",
+        "isFinite",
+        "parseInt",
+        "setTimeout"
     ];
     /** Used to make template sourceURLs easier to identify. */ var templateCounter = -1;
-    /** Used to identify `toStringTag` values of typed arrays. */ var typedArrayTags = {
-    };
+    /** Used to identify `toStringTag` values of typed arrays. */ var typedArrayTags = {};
     typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[int16Tag] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] = typedArrayTags[uint32Tag] = true;
     typedArrayTags[argsTag] = typedArrayTags[arrayTag] = typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] = typedArrayTags[dataViewTag] = typedArrayTags[dateTag] = typedArrayTags[errorTag] = typedArrayTags[funcTag] = typedArrayTags[mapTag] = typedArrayTags[numberTag] = typedArrayTags[objectTag] = typedArrayTags[regexpTag] = typedArrayTags[setTag] = typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false;
-    /** Used to identify `toStringTag` values supported by `_.clone`. */ var cloneableTags = {
-    };
+    /** Used to identify `toStringTag` values supported by `_.clone`. */ var cloneableTags = {};
     cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
     cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
     /** Used to map Latin Unicode letters to basic Latin letters. */ var deburredLetters = {
         // Latin-1 Supplement block.
-        '\xc0': 'A',
-        '\xc1': 'A',
-        '\xc2': 'A',
-        '\xc3': 'A',
-        '\xc4': 'A',
-        '\xc5': 'A',
-        '\xe0': 'a',
-        '\xe1': 'a',
-        '\xe2': 'a',
-        '\xe3': 'a',
-        '\xe4': 'a',
-        '\xe5': 'a',
-        '\xc7': 'C',
-        '\xe7': 'c',
-        '\xd0': 'D',
-        '\xf0': 'd',
-        '\xc8': 'E',
-        '\xc9': 'E',
-        '\xca': 'E',
-        '\xcb': 'E',
-        '\xe8': 'e',
-        '\xe9': 'e',
-        '\xea': 'e',
-        '\xeb': 'e',
-        '\xcc': 'I',
-        '\xcd': 'I',
-        '\xce': 'I',
-        '\xcf': 'I',
-        '\xec': 'i',
-        '\xed': 'i',
-        '\xee': 'i',
-        '\xef': 'i',
-        '\xd1': 'N',
-        '\xf1': 'n',
-        '\xd2': 'O',
-        '\xd3': 'O',
-        '\xd4': 'O',
-        '\xd5': 'O',
-        '\xd6': 'O',
-        '\xd8': 'O',
-        '\xf2': 'o',
-        '\xf3': 'o',
-        '\xf4': 'o',
-        '\xf5': 'o',
-        '\xf6': 'o',
-        '\xf8': 'o',
-        '\xd9': 'U',
-        '\xda': 'U',
-        '\xdb': 'U',
-        '\xdc': 'U',
-        '\xf9': 'u',
-        '\xfa': 'u',
-        '\xfb': 'u',
-        '\xfc': 'u',
-        '\xdd': 'Y',
-        '\xfd': 'y',
-        '\xff': 'y',
-        '\xc6': 'Ae',
-        '\xe6': 'ae',
-        '\xde': 'Th',
-        '\xfe': 'th',
-        '\xdf': 'ss',
+        "\xc0": "A",
+        "\xc1": "A",
+        "\xc2": "A",
+        "\xc3": "A",
+        "\xc4": "A",
+        "\xc5": "A",
+        "\xe0": "a",
+        "\xe1": "a",
+        "\xe2": "a",
+        "\xe3": "a",
+        "\xe4": "a",
+        "\xe5": "a",
+        "\xc7": "C",
+        "\xe7": "c",
+        "\xd0": "D",
+        "\xf0": "d",
+        "\xc8": "E",
+        "\xc9": "E",
+        "\xca": "E",
+        "\xcb": "E",
+        "\xe8": "e",
+        "\xe9": "e",
+        "\xea": "e",
+        "\xeb": "e",
+        "\xcc": "I",
+        "\xcd": "I",
+        "\xce": "I",
+        "\xcf": "I",
+        "\xec": "i",
+        "\xed": "i",
+        "\xee": "i",
+        "\xef": "i",
+        "\xd1": "N",
+        "\xf1": "n",
+        "\xd2": "O",
+        "\xd3": "O",
+        "\xd4": "O",
+        "\xd5": "O",
+        "\xd6": "O",
+        "\xd8": "O",
+        "\xf2": "o",
+        "\xf3": "o",
+        "\xf4": "o",
+        "\xf5": "o",
+        "\xf6": "o",
+        "\xf8": "o",
+        "\xd9": "U",
+        "\xda": "U",
+        "\xdb": "U",
+        "\xdc": "U",
+        "\xf9": "u",
+        "\xfa": "u",
+        "\xfb": "u",
+        "\xfc": "u",
+        "\xdd": "Y",
+        "\xfd": "y",
+        "\xff": "y",
+        "\xc6": "Ae",
+        "\xe6": "ae",
+        "\xde": "Th",
+        "\xfe": "th",
+        "\xdf": "ss",
         // Latin Extended-A block.
-        '\u0100': 'A',
-        '\u0102': 'A',
-        '\u0104': 'A',
-        '\u0101': 'a',
-        '\u0103': 'a',
-        '\u0105': 'a',
-        '\u0106': 'C',
-        '\u0108': 'C',
-        '\u010a': 'C',
-        '\u010c': 'C',
-        '\u0107': 'c',
-        '\u0109': 'c',
-        '\u010b': 'c',
-        '\u010d': 'c',
-        '\u010e': 'D',
-        '\u0110': 'D',
-        '\u010f': 'd',
-        '\u0111': 'd',
-        '\u0112': 'E',
-        '\u0114': 'E',
-        '\u0116': 'E',
-        '\u0118': 'E',
-        '\u011a': 'E',
-        '\u0113': 'e',
-        '\u0115': 'e',
-        '\u0117': 'e',
-        '\u0119': 'e',
-        '\u011b': 'e',
-        '\u011c': 'G',
-        '\u011e': 'G',
-        '\u0120': 'G',
-        '\u0122': 'G',
-        '\u011d': 'g',
-        '\u011f': 'g',
-        '\u0121': 'g',
-        '\u0123': 'g',
-        '\u0124': 'H',
-        '\u0126': 'H',
-        '\u0125': 'h',
-        '\u0127': 'h',
-        '\u0128': 'I',
-        '\u012a': 'I',
-        '\u012c': 'I',
-        '\u012e': 'I',
-        '\u0130': 'I',
-        '\u0129': 'i',
-        '\u012b': 'i',
-        '\u012d': 'i',
-        '\u012f': 'i',
-        '\u0131': 'i',
-        '\u0134': 'J',
-        '\u0135': 'j',
-        '\u0136': 'K',
-        '\u0137': 'k',
-        '\u0138': 'k',
-        '\u0139': 'L',
-        '\u013b': 'L',
-        '\u013d': 'L',
-        '\u013f': 'L',
-        '\u0141': 'L',
-        '\u013a': 'l',
-        '\u013c': 'l',
-        '\u013e': 'l',
-        '\u0140': 'l',
-        '\u0142': 'l',
-        '\u0143': 'N',
-        '\u0145': 'N',
-        '\u0147': 'N',
-        '\u014a': 'N',
-        '\u0144': 'n',
-        '\u0146': 'n',
-        '\u0148': 'n',
-        '\u014b': 'n',
-        '\u014c': 'O',
-        '\u014e': 'O',
-        '\u0150': 'O',
-        '\u014d': 'o',
-        '\u014f': 'o',
-        '\u0151': 'o',
-        '\u0154': 'R',
-        '\u0156': 'R',
-        '\u0158': 'R',
-        '\u0155': 'r',
-        '\u0157': 'r',
-        '\u0159': 'r',
-        '\u015a': 'S',
-        '\u015c': 'S',
-        '\u015e': 'S',
-        '\u0160': 'S',
-        '\u015b': 's',
-        '\u015d': 's',
-        '\u015f': 's',
-        '\u0161': 's',
-        '\u0162': 'T',
-        '\u0164': 'T',
-        '\u0166': 'T',
-        '\u0163': 't',
-        '\u0165': 't',
-        '\u0167': 't',
-        '\u0168': 'U',
-        '\u016a': 'U',
-        '\u016c': 'U',
-        '\u016e': 'U',
-        '\u0170': 'U',
-        '\u0172': 'U',
-        '\u0169': 'u',
-        '\u016b': 'u',
-        '\u016d': 'u',
-        '\u016f': 'u',
-        '\u0171': 'u',
-        '\u0173': 'u',
-        '\u0174': 'W',
-        '\u0175': 'w',
-        '\u0176': 'Y',
-        '\u0177': 'y',
-        '\u0178': 'Y',
-        '\u0179': 'Z',
-        '\u017b': 'Z',
-        '\u017d': 'Z',
-        '\u017a': 'z',
-        '\u017c': 'z',
-        '\u017e': 'z',
-        '\u0132': 'IJ',
-        '\u0133': 'ij',
-        '\u0152': 'Oe',
-        '\u0153': 'oe',
-        '\u0149': "'n",
-        '\u017f': 's'
+        "Ā": "A",
+        "Ă": "A",
+        "Ą": "A",
+        "ā": "a",
+        "ă": "a",
+        "ą": "a",
+        "Ć": "C",
+        "Ĉ": "C",
+        "Ċ": "C",
+        "Č": "C",
+        "ć": "c",
+        "ĉ": "c",
+        "ċ": "c",
+        "č": "c",
+        "Ď": "D",
+        "Đ": "D",
+        "ď": "d",
+        "đ": "d",
+        "Ē": "E",
+        "Ĕ": "E",
+        "Ė": "E",
+        "Ę": "E",
+        "Ě": "E",
+        "ē": "e",
+        "ĕ": "e",
+        "ė": "e",
+        "ę": "e",
+        "ě": "e",
+        "Ĝ": "G",
+        "Ğ": "G",
+        "Ġ": "G",
+        "Ģ": "G",
+        "ĝ": "g",
+        "ğ": "g",
+        "ġ": "g",
+        "ģ": "g",
+        "Ĥ": "H",
+        "Ħ": "H",
+        "ĥ": "h",
+        "ħ": "h",
+        "Ĩ": "I",
+        "Ī": "I",
+        "Ĭ": "I",
+        "Į": "I",
+        "İ": "I",
+        "ĩ": "i",
+        "ī": "i",
+        "ĭ": "i",
+        "į": "i",
+        "ı": "i",
+        "Ĵ": "J",
+        "ĵ": "j",
+        "Ķ": "K",
+        "ķ": "k",
+        "ĸ": "k",
+        "Ĺ": "L",
+        "Ļ": "L",
+        "Ľ": "L",
+        "Ŀ": "L",
+        "Ł": "L",
+        "ĺ": "l",
+        "ļ": "l",
+        "ľ": "l",
+        "ŀ": "l",
+        "ł": "l",
+        "Ń": "N",
+        "Ņ": "N",
+        "Ň": "N",
+        "Ŋ": "N",
+        "ń": "n",
+        "ņ": "n",
+        "ň": "n",
+        "ŋ": "n",
+        "Ō": "O",
+        "Ŏ": "O",
+        "Ő": "O",
+        "ō": "o",
+        "ŏ": "o",
+        "ő": "o",
+        "Ŕ": "R",
+        "Ŗ": "R",
+        "Ř": "R",
+        "ŕ": "r",
+        "ŗ": "r",
+        "ř": "r",
+        "Ś": "S",
+        "Ŝ": "S",
+        "Ş": "S",
+        "Š": "S",
+        "ś": "s",
+        "ŝ": "s",
+        "ş": "s",
+        "š": "s",
+        "Ţ": "T",
+        "Ť": "T",
+        "Ŧ": "T",
+        "ţ": "t",
+        "ť": "t",
+        "ŧ": "t",
+        "Ũ": "U",
+        "Ū": "U",
+        "Ŭ": "U",
+        "Ů": "U",
+        "Ű": "U",
+        "Ų": "U",
+        "ũ": "u",
+        "ū": "u",
+        "ŭ": "u",
+        "ů": "u",
+        "ű": "u",
+        "ų": "u",
+        "Ŵ": "W",
+        "ŵ": "w",
+        "Ŷ": "Y",
+        "ŷ": "y",
+        "Ÿ": "Y",
+        "Ź": "Z",
+        "Ż": "Z",
+        "Ž": "Z",
+        "ź": "z",
+        "ż": "z",
+        "ž": "z",
+        "Ĳ": "IJ",
+        "ĳ": "ij",
+        "Œ": "Oe",
+        "œ": "oe",
+        "ŉ": "'n",
+        "ſ": "s"
     };
     /** Used to map characters to HTML entities. */ var htmlEscapes = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
     };
     /** Used to map HTML entities to characters. */ var htmlUnescapes = {
-        '&amp;': '&',
-        '&lt;': '<',
-        '&gt;': '>',
-        '&quot;': '"',
-        '&#39;': "'"
+        "&amp;": "&",
+        "&lt;": "<",
+        "&gt;": ">",
+        "&quot;": '"',
+        "&#39;": "'"
     };
     /** Used to escape characters for inclusion in compiled string literals. */ var stringEscapes = {
-        '\\': '\\',
+        "\\": "\\",
         "'": "'",
-        '\n': 'n',
-        '\r': 'r',
-        '\u2028': 'u2028',
-        '\u2029': 'u2029'
+        "\n": "n",
+        "\r": "r",
+        "\u2028": "u2028",
+        "\u2029": "u2029"
     };
     /** Built-in method references without a dependency on `root`. */ var freeParseFloat = parseFloat, freeParseInt = parseInt;
-    /** Detect free variable `global` from Node.js. */ var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
-    /** Detect free variable `self`. */ var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-    /** Used as a reference to the global object. */ var root = freeGlobal || freeSelf || Function('return this')();
-    /** Detect free variable `exports`. */ var freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports;
-    /** Detect free variable `module`. */ var freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module;
+    /** Detect free variable `global` from Node.js. */ var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+    /** Detect free variable `self`. */ var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+    /** Used as a reference to the global object. */ var root = freeGlobal || freeSelf || Function("return this")();
+    /** Detect free variable `exports`. */ var freeExports = exports && !exports.nodeType && exports;
+    /** Detect free variable `module`. */ var freeModule = freeExports && true && module && !module.nodeType && module;
     /** Detect the popular CommonJS extension `module.exports`. */ var moduleExports = freeModule && freeModule.exports === freeExports;
     /** Detect free variable `process` from Node.js. */ var freeProcess = moduleExports && freeGlobal.process;
     /** Used to access faster Node.js helpers. */ var nodeUtil = function() {
         try {
             // Use `util.types` for Node.js 10+.
-            var types = freeModule && freeModule.require && freeModule.require('util').types;
+            var types = freeModule && freeModule.require && freeModule.require("util").types;
             if (types) return types;
             // Legacy `process.binding('util')` for Node.js < 10.
-            return freeProcess && freeProcess.binding && freeProcess.binding('util');
-        } catch (e) {
-        }
+            return freeProcess && freeProcess.binding && freeProcess.binding("util");
+        } catch (e) {}
     }();
     /* Node.js helper references. */ var nodeIsArrayBuffer = nodeUtil && nodeUtil.isArrayBuffer, nodeIsDate = nodeUtil && nodeUtil.isDate, nodeIsMap = nodeUtil && nodeUtil.isMap, nodeIsRegExp = nodeUtil && nodeUtil.isRegExp, nodeIsSet = nodeUtil && nodeUtil.isSet, nodeIsTypedArray = nodeUtil && nodeUtil.isTypedArray;
     /*--------------------------------------------------------------------------*/ /**
@@ -6353,7 +6335,7 @@ var global = arguments[3];
    * @private
    * @param {string} string The string inspect.
    * @returns {number} Returns the string size.
-   */ var asciiSize = baseProperty('length');
+   */ var asciiSize = baseProperty("length");
     /**
    * Converts an ASCII `string` to an array.
    *
@@ -6361,7 +6343,7 @@ var global = arguments[3];
    * @param {string} string The string to convert.
    * @returns {Array} Returns the converted array.
    */ function asciiToArray(string) {
-        return string.split('');
+        return string.split("");
     }
     /**
    * Splits an ASCII `string` into an array of its words.
@@ -6382,9 +6364,9 @@ var global = arguments[3];
    * @param {Function} predicate The function invoked per iteration.
    * @param {Function} eachFunc The function to iterate over `collection`.
    * @returns {*} Returns the found element or its key, else `undefined`.
-   */ function baseFindKey(collection1, predicate, eachFunc) {
+   */ function baseFindKey(collection, predicate, eachFunc) {
         var result;
-        eachFunc(collection1, function(value, key, collection) {
+        eachFunc(collection, function(value, key, collection) {
             if (predicate(value, key, collection)) {
                 result = key;
                 return false;
@@ -6491,8 +6473,8 @@ var global = arguments[3];
    *  `collection` as the initial value.
    * @param {Function} eachFunc The function to iterate over `collection`.
    * @returns {*} Returns the accumulated value.
-   */ function baseReduce(collection2, iteratee, accumulator, initAccum, eachFunc) {
-        eachFunc(collection2, function(value, index, collection) {
+   */ function baseReduce(collection, iteratee, accumulator, initAccum, eachFunc) {
+        eachFunc(collection, function(value, index, collection) {
             accumulator = initAccum ? (initAccum = false, value) : iteratee(accumulator, value, index, collection);
         });
         return accumulator;
@@ -6564,7 +6546,7 @@ var global = arguments[3];
    * @param {string} string The string to trim.
    * @returns {string} Returns the trimmed string.
    */ function baseTrim(string) {
-        return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
+        return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, "") : string;
     }
     /**
    * The base implementation of `_.unary` without support for storing metadata.
@@ -6661,7 +6643,7 @@ var global = arguments[3];
    * @param {string} chr The matched character to escape.
    * @returns {string} Returns the escaped character.
    */ function escapeStringChar(chr) {
-        return '\\' + stringEscapes[chr];
+        return "\\" + stringEscapes[chr];
     }
     /**
    * Gets the value at `key` of `object`.
@@ -6904,43 +6886,39 @@ var global = arguments[3];
    *
    * // Create a suped-up `defer` in Node.js.
    * var defer = _.runInContext({ 'setTimeout': setImmediate }).defer;
-   */ var runInContext1 = function runInContext(context) {
+   */ var runInContext = function runInContext(context) {
         context = context == null ? root : _.defaults(root.Object(), context, _.pick(root, contextProps));
-        /** Built-in constructor references. */ var Array = context.Array, Date = context.Date, Error = context.Error, Function = context.Function, Math = context.Math, Object = context.Object, RegExp = context.RegExp, String = context.String, TypeError = context.TypeError;
-        /** Used for built-in method references. */ var arrayProto = Array.prototype, funcProto = Function.prototype, objectProto = Object.prototype;
-        /** Used to detect overreaching core-js shims. */ var coreJsData = context['__core-js_shared__'];
+        /** Built-in constructor references. */ var Array1 = context.Array, Date = context.Date, Error = context.Error, Function1 = context.Function, Math = context.Math, Object1 = context.Object, RegExp1 = context.RegExp, String = context.String, TypeError = context.TypeError;
+        /** Used for built-in method references. */ var arrayProto = Array1.prototype, funcProto = Function1.prototype, objectProto = Object1.prototype;
+        /** Used to detect overreaching core-js shims. */ var coreJsData = context["__core-js_shared__"];
         /** Used to resolve the decompiled source of functions. */ var funcToString = funcProto.toString;
         /** Used to check objects for own properties. */ var hasOwnProperty = objectProto.hasOwnProperty;
         /** Used to generate unique IDs. */ var idCounter = 0;
         /** Used to detect methods masquerading as native. */ var maskSrcKey = function() {
-            var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
-            return uid ? 'Symbol(src)_1.' + uid : '';
+            var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
+            return uid ? "Symbol(src)_1." + uid : "";
         }();
         /**
      * Used to resolve the
      * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
      * of values.
      */ var nativeObjectToString = objectProto.toString;
-        /** Used to infer the `Object` constructor. */ var objectCtorString = funcToString.call(Object);
+        /** Used to infer the `Object` constructor. */ var objectCtorString = funcToString.call(Object1);
         /** Used to restore the original `_` reference in `_.noConflict`. */ var oldDash = root._;
-        /** Used to detect if a method is native. */ var reIsNative = RegExp('^' + funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&').replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$');
-        /** Built-in value references. */ var Buffer = moduleExports ? context.Buffer : undefined, Symbol = context.Symbol, Uint8Array = context.Uint8Array, allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined, symIterator = Symbol ? Symbol.iterator : undefined, symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+        /** Used to detect if a method is native. */ var reIsNative = RegExp1("^" + funcToString.call(hasOwnProperty).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$");
+        /** Built-in value references. */ var Buffer = moduleExports ? context.Buffer : undefined, Symbol = context.Symbol, Uint8Array = context.Uint8Array, allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined, getPrototype = overArg(Object1.getPrototypeOf, Object1), objectCreate = Object1.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined, symIterator = Symbol ? Symbol.iterator : undefined, symToStringTag = Symbol ? Symbol.toStringTag : undefined;
         var defineProperty = function() {
             try {
-                var func = getNative(Object, 'defineProperty');
-                func({
-                }, '', {
-                });
+                var func = getNative(Object1, "defineProperty");
+                func({}, "", {});
                 return func;
-            } catch (e) {
-            }
+            } catch (e) {}
         }();
         /** Mocked built-ins. */ var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout, ctxNow = Date && Date.now !== root.Date.now && Date.now, ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
-        /* Built-in method references for those with the same name as other `lodash` methods. */ var nativeCeil = Math.ceil, nativeFloor = Math.floor, nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object.keys, Object), nativeMax = Math.max, nativeMin = Math.min, nativeNow = Date.now, nativeParseInt = context.parseInt, nativeRandom = Math.random, nativeReverse = arrayProto.reverse;
-        /* Built-in method references that are verified to be native. */ var DataView = getNative(context, 'DataView'), Map = getNative(context, 'Map'), Promise = getNative(context, 'Promise'), Set = getNative(context, 'Set'), WeakMap = getNative(context, 'WeakMap'), nativeCreate = getNative(Object, 'create');
+        /* Built-in method references for those with the same name as other `lodash` methods. */ var nativeCeil = Math.ceil, nativeFloor = Math.floor, nativeGetSymbols = Object1.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object1.keys, Object1), nativeMax = Math.max, nativeMin = Math.min, nativeNow = Date.now, nativeParseInt = context.parseInt, nativeRandom = Math.random, nativeReverse = arrayProto.reverse;
+        /* Built-in method references that are verified to be native. */ var DataView = getNative(context, "DataView"), Map = getNative(context, "Map"), Promise = getNative(context, "Promise"), Set = getNative(context, "Set"), WeakMap = getNative(context, "WeakMap"), nativeCreate = getNative(Object1, "create");
         /** Used to store function metadata. */ var metaMap = WeakMap && new WeakMap;
-        /** Used to lookup unminified function names. */ var realNames = {
-        };
+        /** Used to lookup unminified function names. */ var realNames = {};
         /** Used to detect maps, sets, and weakmaps. */ var dataViewCtorString = toSource(DataView), mapCtorString = toSource(Map), promiseCtorString = toSource(Promise), setCtorString = toSource(Set), weakMapCtorString = toSource(WeakMap);
         /** Used to convert symbols to primitives and strings. */ var symbolProto = Symbol ? Symbol.prototype : undefined, symbolValueOf = symbolProto ? symbolProto.valueOf : undefined, symbolToString = symbolProto ? symbolProto.toString : undefined;
         /*------------------------------------------------------------------------*/ /**
@@ -7062,7 +7040,7 @@ var global = arguments[3];
      */ function lodash(value) {
             if (isObjectLike(value) && !isArray(value) && !(value instanceof LazyWrapper)) {
                 if (value instanceof LodashWrapper) return value;
-                if (hasOwnProperty.call(value, '__wrapped__')) return wrapperClone(value);
+                if (hasOwnProperty.call(value, "__wrapped__")) return wrapperClone(value);
             }
             return new LodashWrapper(value);
         }
@@ -7074,11 +7052,9 @@ var global = arguments[3];
      * @param {Object} proto The object to inherit from.
      * @returns {Object} Returns the new object.
      */ var baseCreate = function() {
-            function object() {
-            }
+            function object() {}
             return function(proto) {
-                if (!isObject(proto)) return {
-                };
+                if (!isObject(proto)) return {};
                 if (objectCreate) return objectCreate(proto);
                 object.prototype = proto;
                 var result = new object;
@@ -7120,37 +7096,37 @@ var global = arguments[3];
        *
        * @memberOf _.templateSettings
        * @type {RegExp}
-       */ 'escape': reEscape,
+       */ "escape": reEscape,
             /**
        * Used to detect code to be evaluated.
        *
        * @memberOf _.templateSettings
        * @type {RegExp}
-       */ 'evaluate': reEvaluate,
+       */ "evaluate": reEvaluate,
             /**
        * Used to detect `data` property values to inject.
        *
        * @memberOf _.templateSettings
        * @type {RegExp}
-       */ 'interpolate': reInterpolate,
+       */ "interpolate": reInterpolate,
             /**
        * Used to reference the data object in the template text.
        *
        * @memberOf _.templateSettings
        * @type {string}
-       */ 'variable': '',
+       */ "variable": "",
             /**
        * Used to import variables into the compiled template.
        *
        * @memberOf _.templateSettings
        * @type {Object}
-       */ 'imports': {
+       */ "imports": {
                 /**
          * A reference to the `lodash` function.
          *
          * @memberOf _.templateSettings.imports
          * @type {Function}
-         */ '_': lodash
+         */ "_": lodash
             }
         };
         // Ensure wrappers are instances of `baseLodash`.
@@ -7258,8 +7234,7 @@ var global = arguments[3];
      * @name clear
      * @memberOf Hash
      */ function hashClear() {
-            this.__data__ = nativeCreate ? nativeCreate(null) : {
-            };
+            this.__data__ = nativeCreate ? nativeCreate(null) : {};
             this.size = 0;
         }
         /**
@@ -7321,7 +7296,7 @@ var global = arguments[3];
         }
         // Add methods to `Hash`.
         Hash.prototype.clear = hashClear;
-        Hash.prototype['delete'] = hashDelete;
+        Hash.prototype["delete"] = hashDelete;
         Hash.prototype.get = hashGet;
         Hash.prototype.has = hashHas;
         Hash.prototype.set = hashSet;
@@ -7411,7 +7386,7 @@ var global = arguments[3];
         }
         // Add methods to `ListCache`.
         ListCache.prototype.clear = listCacheClear;
-        ListCache.prototype['delete'] = listCacheDelete;
+        ListCache.prototype["delete"] = listCacheDelete;
         ListCache.prototype.get = listCacheGet;
         ListCache.prototype.has = listCacheHas;
         ListCache.prototype.set = listCacheSet;
@@ -7438,9 +7413,9 @@ var global = arguments[3];
      */ function mapCacheClear() {
             this.size = 0;
             this.__data__ = {
-                'hash': new Hash,
-                'map': new (Map || ListCache),
-                'string': new Hash
+                "hash": new Hash,
+                "map": new (Map || ListCache),
+                "string": new Hash
             };
         }
         /**
@@ -7452,7 +7427,7 @@ var global = arguments[3];
      * @param {string} key The key of the value to remove.
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */ function mapCacheDelete(key) {
-            var result = getMapData(this, key)['delete'](key);
+            var result = getMapData(this, key)["delete"](key);
             this.size -= result ? 1 : 0;
             return result;
         }
@@ -7495,7 +7470,7 @@ var global = arguments[3];
         }
         // Add methods to `MapCache`.
         MapCache.prototype.clear = mapCacheClear;
-        MapCache.prototype['delete'] = mapCacheDelete;
+        MapCache.prototype["delete"] = mapCacheDelete;
         MapCache.prototype.get = mapCacheGet;
         MapCache.prototype.has = mapCacheHas;
         MapCache.prototype.set = mapCacheSet;
@@ -7567,7 +7542,7 @@ var global = arguments[3];
      * @param {string} key The key of the value to remove.
      * @returns {boolean} Returns `true` if the entry was removed, else `false`.
      */ function stackDelete(key) {
-            var data = this.__data__, result = data['delete'](key);
+            var data = this.__data__, result = data["delete"](key);
             this.size = data.size;
             return result;
         }
@@ -7622,7 +7597,7 @@ var global = arguments[3];
         }
         // Add methods to `Stack`.
         Stack.prototype.clear = stackClear;
-        Stack.prototype['delete'] = stackDelete;
+        Stack.prototype["delete"] = stackDelete;
         Stack.prototype.get = stackGet;
         Stack.prototype.has = stackHas;
         Stack.prototype.set = stackSet;
@@ -7636,7 +7611,7 @@ var global = arguments[3];
      */ function arrayLikeKeys(value, inherited) {
             var isArr = isArray(value), isArg = !isArr && isArguments(value), isBuff = !isArr && !isArg && isBuffer(value), isType = !isArr && !isArg && !isBuff && isTypedArray(value), skipIndexes = isArr || isArg || isBuff || isType, result = skipIndexes ? baseTimes(value.length, String) : [], length = result.length;
             for(var key in value)if ((inherited || hasOwnProperty.call(value, key)) && !(skipIndexes && // Safari 9 has enumerable `arguments.length` in strict mode.
-            (key == 'length' || isBuff && (key == 'offset' || key == 'parent') || isType && (key == 'buffer' || key == 'byteLength' || key == 'byteOffset') || // Skip index properties.
+            (key == "length" || isBuff && (key == "offset" || key == "parent") || isType && (key == "buffer" || key == "byteLength" || key == "byteOffset") || // Skip index properties.
             isIndex(key, length)))) result.push(key);
             return result;
         }
@@ -7717,8 +7692,8 @@ var global = arguments[3];
      * @param {Function} iteratee The iteratee to transform keys.
      * @param {Object} accumulator The initial aggregated object.
      * @returns {Function} Returns `accumulator`.
-     */ function baseAggregator(collection3, setter, iteratee, accumulator) {
-            baseEach(collection3, function(value, key, collection) {
+     */ function baseAggregator(collection, setter, iteratee, accumulator) {
+            baseEach(collection, function(value, key, collection) {
                 setter(accumulator, value, iteratee(value), collection);
             });
             return accumulator;
@@ -7754,11 +7729,11 @@ var global = arguments[3];
      * @param {string} key The key of the property to assign.
      * @param {*} value The value to assign.
      */ function baseAssignValue(object, key, value) {
-            if (key == '__proto__' && defineProperty) defineProperty(object, key, {
-                'configurable': true,
-                'enumerable': true,
-                'value': value,
-                'writable': true
+            if (key == "__proto__" && defineProperty) defineProperty(object, key, {
+                "configurable": true,
+                "enumerable": true,
+                "value": value,
+                "writable": true
             });
             else object[key] = value;
         }
@@ -7770,7 +7745,7 @@ var global = arguments[3];
      * @param {string[]} paths The property paths to pick.
      * @returns {Array} Returns the picked elements.
      */ function baseAt(object, paths) {
-            var index = -1, length = paths.length, result = Array(length), skip = object == null;
+            var index = -1, length = paths.length, result = Array1(length), skip = object == null;
             while(++index < length)result[index] = skip ? undefined : get(object, paths[index]);
             return result;
         }
@@ -7804,9 +7779,9 @@ var global = arguments[3];
      * @param {Object} [object] The parent object of `value`.
      * @param {Object} [stack] Tracks traversed objects and their clone counterparts.
      * @returns {*} Returns the cloned value.
-     */ function baseClone(value, bitmask, customizer, key1, object, stack) {
+     */ function baseClone(value, bitmask, customizer, key, object, stack) {
             var result, isDeep = bitmask & CLONE_DEEP_FLAG, isFlat = bitmask & CLONE_FLAT_FLAG, isFull = bitmask & CLONE_SYMBOLS_FLAG;
-            if (customizer) result = object ? customizer(value, key1, object, stack) : customizer(value);
+            if (customizer) result = object ? customizer(value, key, object, stack) : customizer(value);
             if (result !== undefined) return result;
             if (!isObject(value)) return value;
             var isArr = isArray(value);
@@ -7817,12 +7792,10 @@ var global = arguments[3];
                 var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
                 if (isBuffer(value)) return cloneBuffer(value, isDeep);
                 if (tag == objectTag || tag == argsTag || isFunc && !object) {
-                    result = isFlat || isFunc ? {
-                    } : initCloneObject(value);
+                    result = isFlat || isFunc ? {} : initCloneObject(value);
                     if (!isDeep) return isFlat ? copySymbolsIn(value, baseAssignIn(result, value)) : copySymbols(value, baseAssign(result, value));
                 } else {
-                    if (!cloneableTags[tag]) return object ? value : {
-                    };
+                    if (!cloneableTags[tag]) return object ? value : {};
                     result = initCloneByTag(value, tag, isDeep);
                 }
             }
@@ -7871,7 +7844,7 @@ var global = arguments[3];
      */ function baseConformsTo(object, source, props) {
             var length = props.length;
             if (object == null) return !length;
-            object = Object(object);
+            object = Object1(object);
             while(length--){
                 var key = props[length], predicate = source[key], value = object[key];
                 if (value === undefined && !(key in object) || !predicate(value)) return false;
@@ -7888,7 +7861,7 @@ var global = arguments[3];
      * @param {Array} args The arguments to provide to `func`.
      * @returns {number|Object} Returns the timer id or timeout object.
      */ function baseDelay(func, wait, args) {
-            if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             return setTimeout(function() {
                 func.apply(undefined, args);
             }, wait);
@@ -7952,9 +7925,9 @@ var global = arguments[3];
      * @param {Function} predicate The function invoked per iteration.
      * @returns {boolean} Returns `true` if all elements pass the predicate check,
      *  else `false`
-     */ function baseEvery(collection4, predicate) {
+     */ function baseEvery(collection, predicate) {
             var result = true;
-            baseEach(collection4, function(value, index, collection) {
+            baseEach(collection, function(value, index, collection) {
                 result = !!predicate(value, index, collection);
                 return result;
             });
@@ -8003,9 +7976,9 @@ var global = arguments[3];
      * @param {Array|Object} collection The collection to iterate over.
      * @param {Function} predicate The function invoked per iteration.
      * @returns {Array} Returns the new filtered array.
-     */ function baseFilter(collection5, predicate) {
+     */ function baseFilter(collection, predicate) {
             var result = [];
-            baseEach(collection5, function(value, index, collection) {
+            baseEach(collection, function(value, index, collection) {
                 if (predicate(value, index, collection)) result.push(value);
             });
             return result;
@@ -8123,7 +8096,7 @@ var global = arguments[3];
      * @returns {string} Returns the `toStringTag`.
      */ function baseGetTag(value) {
             if (value == null) return value === undefined ? undefinedTag : nullTag;
-            return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
+            return symToStringTag && symToStringTag in Object1(value) ? getRawTag(value) : objectToString(value);
         }
         /**
      * The base implementation of `_.gt` which doesn't coerce arguments.
@@ -8154,7 +8127,7 @@ var global = arguments[3];
      * @param {Array|string} key The key to check.
      * @returns {boolean} Returns `true` if `key` exists, else `false`.
      */ function baseHasIn(object, key) {
-            return object != null && key in Object(object);
+            return object != null && key in Object1(object);
         }
         /**
      * The base implementation of `_.inRange` which doesn't coerce arguments.
@@ -8177,7 +8150,7 @@ var global = arguments[3];
      * @param {Function} [comparator] The comparator invoked per element.
      * @returns {Array} Returns the new array of shared values.
      */ function baseIntersection(arrays, iteratee, comparator) {
-            var includes = comparator ? arrayIncludesWith : arrayIncludes, length = arrays[0].length, othLength = arrays.length, othIndex = othLength, caches = Array(othLength), maxLength = Infinity, result = [];
+            var includes = comparator ? arrayIncludesWith : arrayIncludes, length = arrays[0].length, othLength = arrays.length, othIndex = othLength, caches = Array1(othLength), maxLength = Infinity, result = [];
             while(othIndex--){
                 var array = arrays[othIndex];
                 if (othIndex && iteratee) array = arrayMap(array, baseUnary(iteratee));
@@ -8211,8 +8184,8 @@ var global = arguments[3];
      * @param {Function} iteratee The iteratee to transform values.
      * @param {Object} accumulator The initial inverted object.
      * @returns {Function} Returns `accumulator`.
-     */ function baseInverter(object1, setter, iteratee, accumulator) {
-            baseForOwn(object1, function(value, key, object) {
+     */ function baseInverter(object, setter, iteratee, accumulator) {
+            baseForOwn(object, function(value, key, object) {
                 setter(accumulator, iteratee(value), key, object);
             });
             return accumulator;
@@ -8228,7 +8201,7 @@ var global = arguments[3];
      * @returns {*} Returns the result of the invoked method.
      */ function baseInvoke(object, path, args) {
             path = castPath(path, object);
-            object = parent1(object, path);
+            object = parent(object, path);
             var func = object == null ? object : object[toKey(last(path))];
             return func == null ? undefined : apply(func, object, args);
         }
@@ -8305,7 +8278,7 @@ var global = arguments[3];
                 return objIsArr || isTypedArray(object) ? equalArrays(object, other, bitmask, customizer, equalFunc, stack) : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
             }
             if (!(bitmask & COMPARE_PARTIAL_FLAG)) {
-                var objIsWrapped = objIsObj && hasOwnProperty.call(object, '__wrapped__'), othIsWrapped = othIsObj && hasOwnProperty.call(other, '__wrapped__');
+                var objIsWrapped = objIsObj && hasOwnProperty.call(object, "__wrapped__"), othIsWrapped = othIsObj && hasOwnProperty.call(other, "__wrapped__");
                 if (objIsWrapped || othIsWrapped) {
                     var objUnwrapped = objIsWrapped ? object.value() : object, othUnwrapped = othIsWrapped ? other.value() : other;
                     stack || (stack = new Stack);
@@ -8337,7 +8310,7 @@ var global = arguments[3];
      */ function baseIsMatch(object, source, matchData, customizer) {
             var index = matchData.length, length = index, noCustomizer = !customizer;
             if (object == null) return !length;
-            object = Object(object);
+            object = Object1(object);
             while(index--){
                 var data = matchData[index];
                 if (noCustomizer && data[2] ? data[1] !== object[data[0]] : !(data[0] in object)) return false;
@@ -8403,9 +8376,9 @@ var global = arguments[3];
      */ function baseIteratee(value) {
             // Don't store the `typeof` result in a variable to avoid a JIT bug in Safari 9.
             // See https://bugs.webkit.org/show_bug.cgi?id=156034 for more details.
-            if (typeof value == 'function') return value;
+            if (typeof value == "function") return value;
             if (value == null) return identity;
-            if (typeof value == 'object') return isArray(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
+            if (typeof value == "object") return isArray(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
             return property(value);
         }
         /**
@@ -8417,7 +8390,7 @@ var global = arguments[3];
      */ function baseKeys(object) {
             if (!isPrototype(object)) return nativeKeys(object);
             var result = [];
-            for(var key in Object(object))if (hasOwnProperty.call(object, key) && key != 'constructor') result.push(key);
+            for(var key in Object1(object))if (hasOwnProperty.call(object, key) && key != "constructor") result.push(key);
             return result;
         }
         /**
@@ -8429,7 +8402,7 @@ var global = arguments[3];
      */ function baseKeysIn(object) {
             if (!isObject(object)) return nativeKeysIn(object);
             var isProto = isPrototype(object), result = [];
-            for(var key in object)if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) result.push(key);
+            for(var key in object)if (!(key == "constructor" && (isProto || !hasOwnProperty.call(object, key)))) result.push(key);
             return result;
         }
         /**
@@ -8450,9 +8423,9 @@ var global = arguments[3];
      * @param {Array|Object} collection The collection to iterate over.
      * @param {Function} iteratee The function invoked per iteration.
      * @returns {Array} Returns the new mapped array.
-     */ function baseMap(collection6, iteratee) {
-            var index = -1, result = isArrayLike(collection6) ? Array(collection6.length) : [];
-            baseEach(collection6, function(value, key, collection) {
+     */ function baseMap(collection, iteratee) {
+            var index = -1, result = isArrayLike(collection) ? Array1(collection.length) : [];
+            baseEach(collection, function(value, key, collection) {
                 result[++index] = iteratee(value, key, collection);
             });
             return result;
@@ -8500,7 +8473,7 @@ var global = arguments[3];
                 stack || (stack = new Stack);
                 if (isObject(srcValue)) baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
                 else {
-                    var newValue = customizer ? customizer(safeGet(object, key), srcValue, key + '', object, source, stack) : undefined;
+                    var newValue = customizer ? customizer(safeGet(object, key), srcValue, key + "", object, source, stack) : undefined;
                     if (newValue === undefined) newValue = srcValue;
                     assignMergeValue(object, key, newValue);
                 }
@@ -8526,7 +8499,7 @@ var global = arguments[3];
                 assignMergeValue(object, key, stacked);
                 return;
             }
-            var newValue = customizer ? customizer(objValue, srcValue, key + '', object, source, stack) : undefined;
+            var newValue = customizer ? customizer(objValue, srcValue, key + "", object, source, stack) : undefined;
             var isCommon = newValue === undefined;
             if (isCommon) {
                 var isArr = isArray(srcValue), isBuff = !isArr && isBuffer(srcValue), isTyped = !isArr && !isBuff && isTypedArray(srcValue);
@@ -8551,7 +8524,7 @@ var global = arguments[3];
                 // Recursively merge objects and arrays (susceptible to call stack limits).
                 stack.set(srcValue, newValue);
                 mergeFunc(newValue, srcValue, srcIndex, customizer, stack);
-                stack['delete'](srcValue);
+                stack["delete"](srcValue);
             }
             assignMergeValue(object, key, newValue);
         }
@@ -8593,9 +8566,9 @@ var global = arguments[3];
                     return iteratee(value);
                 });
                 return {
-                    'criteria': criteria,
-                    'index': ++index,
-                    'value': value
+                    "criteria": criteria,
+                    "index": ++index,
+                    "value": value
                 };
             });
             return baseSortBy(result, function(object, other) {
@@ -8624,8 +8597,7 @@ var global = arguments[3];
      * @param {Function} predicate The function invoked per property.
      * @returns {Object} Returns the new object.
      */ function basePickBy(object, paths, predicate) {
-            var index = -1, length = paths.length, result = {
-            };
+            var index = -1, length = paths.length, result = {};
             while(++index < length){
                 var path = paths[index], value = baseGet(object, path);
                 if (predicate(value, path)) baseSet(result, castPath(path, object), value);
@@ -8708,7 +8680,7 @@ var global = arguments[3];
      * @param {boolean} [fromRight] Specify iterating from right to left.
      * @returns {Array} Returns the range of numbers.
      */ function baseRange(start, end, step, fromRight) {
-            var index = -1, length = nativeMax(nativeCeil((end - start) / (step || 1)), 0), result = Array(length);
+            var index = -1, length = nativeMax(nativeCeil((end - start) / (step || 1)), 0), result = Array1(length);
             while(length--){
                 result[fromRight ? length : ++index] = start;
                 start += step;
@@ -8723,7 +8695,7 @@ var global = arguments[3];
      * @param {number} n The number of times to repeat the string.
      * @returns {string} Returns the repeated string.
      */ function baseRepeat(string, n) {
-            var result = '';
+            var result = "";
             if (!string || n < 1 || n > MAX_SAFE_INTEGER) return result;
             // Leverage the exponentiation by squaring algorithm for a faster repeat.
             // See https://en.wikipedia.org/wiki/Exponentiation_by_squaring for more details.
@@ -8731,7 +8703,7 @@ var global = arguments[3];
                 if (n % 2) result += string;
                 n = nativeFloor(n / 2);
                 if (n) string += string;
-            }while (n)
+            }while (n);
             return result;
         }
         /**
@@ -8742,7 +8714,7 @@ var global = arguments[3];
      * @param {number} [start=func.length-1] The start position of the rest parameter.
      * @returns {Function} Returns the new function.
      */ function baseRest(func, start) {
-            return setToString(overRest(func, start, identity), func + '');
+            return setToString(overRest(func, start, identity), func + "");
         }
         /**
      * The base implementation of `_.sample`.
@@ -8751,7 +8723,7 @@ var global = arguments[3];
      * @param {Array|Object} collection The collection to sample.
      * @returns {*} Returns the random element.
      */ function baseSample(collection) {
-            return arraySample(values1(collection));
+            return arraySample(values(collection));
         }
         /**
      * The base implementation of `_.sampleSize` without param guards.
@@ -8761,7 +8733,7 @@ var global = arguments[3];
      * @param {number} n The number of elements to sample.
      * @returns {Array} Returns the random elements.
      */ function baseSampleSize(collection, n) {
-            var array = values1(collection);
+            var array = values(collection);
             return shuffleSelf(array, baseClamp(n, 0, array.length));
         }
         /**
@@ -8779,12 +8751,11 @@ var global = arguments[3];
             var index = -1, length = path.length, lastIndex = length - 1, nested = object;
             while(nested != null && ++index < length){
                 var key = toKey(path[index]), newValue = value;
-                if (key === '__proto__' || key === 'constructor' || key === 'prototype') return object;
+                if (key === "__proto__" || key === "constructor" || key === "prototype") return object;
                 if (index != lastIndex) {
                     var objValue = nested[key];
                     newValue = customizer ? customizer(objValue, key, nested) : undefined;
-                    if (newValue === undefined) newValue = isObject(objValue) ? objValue : isIndex(path[index + 1]) ? [] : {
-                    };
+                    if (newValue === undefined) newValue = isObject(objValue) ? objValue : isIndex(path[index + 1]) ? [] : {};
                 }
                 assignValue(nested, key, newValue);
                 nested = nested[key];
@@ -8810,11 +8781,11 @@ var global = arguments[3];
      * @param {Function} string The `toString` result.
      * @returns {Function} Returns `func`.
      */ var baseSetToString = !defineProperty ? identity : function(func, string) {
-            return defineProperty(func, 'toString', {
-                'configurable': true,
-                'enumerable': false,
-                'value': constant(string),
-                'writable': true
+            return defineProperty(func, "toString", {
+                "configurable": true,
+                "enumerable": false,
+                "value": constant(string),
+                "writable": true
             });
         };
         /**
@@ -8824,7 +8795,7 @@ var global = arguments[3];
      * @param {Array|Object} collection The collection to shuffle.
      * @returns {Array} Returns the new shuffled array.
      */ function baseShuffle(collection) {
-            return shuffleSelf(values1(collection));
+            return shuffleSelf(values(collection));
         }
         /**
      * The base implementation of `_.slice` without an iteratee call guard.
@@ -8841,7 +8812,7 @@ var global = arguments[3];
             if (end < 0) end += length;
             length = start > end ? 0 : end - start >>> 0;
             start >>>= 0;
-            var result = Array(length);
+            var result = Array1(length);
             while(++index < length)result[index] = array[index + start];
             return result;
         }
@@ -8853,9 +8824,9 @@ var global = arguments[3];
      * @param {Function} predicate The function invoked per iteration.
      * @returns {boolean} Returns `true` if any element passes the predicate check,
      *  else `false`.
-     */ function baseSome(collection7, predicate) {
+     */ function baseSome(collection, predicate) {
             var result;
-            baseEach(collection7, function(value, index, collection) {
+            baseEach(collection, function(value, index, collection) {
                 result = predicate(value, index, collection);
                 return !result;
             });
@@ -8874,7 +8845,7 @@ var global = arguments[3];
      *  into `array`.
      */ function baseSortedIndex(array, value, retHighest) {
             var low = 0, high = array == null ? low : array.length;
-            if (typeof value == 'number' && value === value && high <= HALF_MAX_ARRAY_LENGTH) {
+            if (typeof value == "number" && value === value && high <= HALF_MAX_ARRAY_LENGTH) {
                 while(low < high){
                     var mid = low + high >>> 1, computed = array[mid];
                     if (computed !== null && !isSymbol(computed) && (retHighest ? computed <= value : computed < value)) low = mid + 1;
@@ -8941,7 +8912,7 @@ var global = arguments[3];
      * @param {*} value The value to process.
      * @returns {number} Returns the number.
      */ function baseToNumber(value) {
-            if (typeof value == 'number') return value;
+            if (typeof value == "number") return value;
             if (isSymbol(value)) return NAN;
             return +value;
         }
@@ -8954,12 +8925,12 @@ var global = arguments[3];
      * @returns {string} Returns the string.
      */ function baseToString(value) {
             // Exit early for strings to avoid a performance hit in some environments.
-            if (typeof value == 'string') return value;
+            if (typeof value == "string") return value;
             if (isArray(value)) // Recursively convert values (susceptible to call stack limits).
-            return arrayMap(value, baseToString) + '';
-            if (isSymbol(value)) return symbolToString ? symbolToString.call(value) : '';
-            var result = value + '';
-            return result == '0' && 1 / value == -INFINITY ? '-0' : result;
+            return arrayMap(value, baseToString) + "";
+            if (isSymbol(value)) return symbolToString ? symbolToString.call(value) : "";
+            var result = value + "";
+            return result == "0" && 1 / value == -INFINITY ? "-0" : result;
         }
         /**
      * The base implementation of `_.uniqBy` without support for iteratee shorthands.
@@ -9007,7 +8978,7 @@ var global = arguments[3];
      * @returns {boolean} Returns `true` if the property is deleted, else `false`.
      */ function baseUnset(object, path) {
             path = castPath(path, object);
-            object = parent1(object, path);
+            object = parent(object, path);
             return object == null || delete object[toKey(last(path))];
         }
         /**
@@ -9047,13 +9018,13 @@ var global = arguments[3];
      * @param {Array} actions Actions to perform to resolve the unwrapped value.
      * @returns {*} Returns the resolved value.
      */ function baseWrapperValue(value, actions) {
-            var result2 = value;
-            if (result2 instanceof LazyWrapper) result2 = result2.value();
+            var result = value;
+            if (result instanceof LazyWrapper) result = result.value();
             return arrayReduce(actions, function(result, action) {
                 return action.func.apply(action.thisArg, arrayPush([
                     result
                 ], action.args));
-            }, result2);
+            }, result);
         }
         /**
      * The base implementation of methods like `_.xor`, without support for
@@ -9067,7 +9038,7 @@ var global = arguments[3];
      */ function baseXor(arrays, iteratee, comparator) {
             var length = arrays.length;
             if (length < 2) return length ? baseUniq(arrays[0]) : [];
-            var index = -1, result = Array(length);
+            var index = -1, result = Array1(length);
             while(++index < length){
                 var array = arrays[index], othIndex = -1;
                 while(++othIndex < length)if (othIndex != index) result[index] = baseDifference(result[index] || array, arrays[othIndex], iteratee, comparator);
@@ -9083,8 +9054,7 @@ var global = arguments[3];
      * @param {Function} assignFunc The function to assign values.
      * @returns {Object} Returns the new object.
      */ function baseZipObject(props, values, assignFunc) {
-            var index = -1, length = props.length, valsLength = values.length, result = {
-            };
+            var index = -1, length = props.length, valsLength = values.length, result = {};
             while(++index < length){
                 var value = index < valsLength ? values[index] : undefined;
                 assignFunc(result, props[index], value);
@@ -9107,7 +9077,7 @@ var global = arguments[3];
      * @param {*} value The value to inspect.
      * @returns {Function} Returns cast function.
      */ function castFunction(value) {
-            return typeof value == 'function' ? value : identity;
+            return typeof value == "function" ? value : identity;
         }
         /**
      * Casts `value` to a path array if it's not one.
@@ -9205,8 +9175,7 @@ var global = arguments[3];
      * @param {Object} symbol The symbol object to clone.
      * @returns {Object} Returns the cloned symbol object.
      */ function cloneSymbol(symbol) {
-            return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {
-            };
+            return symbolValueOf ? Object1(symbolValueOf.call(symbol)) : {};
         }
         /**
      * Creates a clone of `typedArray`.
@@ -9255,7 +9224,7 @@ var global = arguments[3];
                 if (result) {
                     if (index >= ordersLength) return result;
                     var order = orders[index];
-                    return result * (order == 'desc' ? -1 : 1);
+                    return result * (order == "desc" ? -1 : 1);
                 }
             }
             // Fixes an `Array#sort` bug in the JS engine embedded in Adobe applications
@@ -9278,7 +9247,7 @@ var global = arguments[3];
      * @params {boolean} [isCurried] Specify composing for a curried function.
      * @returns {Array} Returns the new array of composed arguments.
      */ function composeArgs(args, partials, holders, isCurried) {
-            var argsIndex = -1, argsLength = args.length, holdersLength = holders.length, leftIndex = -1, leftLength = partials.length, rangeLength = nativeMax(argsLength - holdersLength, 0), result = Array(leftLength + rangeLength), isUncurried = !isCurried;
+            var argsIndex = -1, argsLength = args.length, holdersLength = holders.length, leftIndex = -1, leftLength = partials.length, rangeLength = nativeMax(argsLength - holdersLength, 0), result = Array1(leftLength + rangeLength), isUncurried = !isCurried;
             while(++leftIndex < leftLength)result[leftIndex] = partials[leftIndex];
             while(++argsIndex < holdersLength)if (isUncurried || argsIndex < argsLength) result[holders[argsIndex]] = args[argsIndex];
             while(rangeLength--)result[leftIndex++] = args[argsIndex++];
@@ -9295,7 +9264,7 @@ var global = arguments[3];
      * @params {boolean} [isCurried] Specify composing for a curried function.
      * @returns {Array} Returns the new array of composed arguments.
      */ function composeArgsRight(args, partials, holders, isCurried) {
-            var argsIndex = -1, argsLength = args.length, holdersIndex = -1, holdersLength = holders.length, rightIndex = -1, rightLength = partials.length, rangeLength = nativeMax(argsLength - holdersLength, 0), result = Array(rangeLength + rightLength), isUncurried = !isCurried;
+            var argsIndex = -1, argsLength = args.length, holdersIndex = -1, holdersLength = holders.length, rightIndex = -1, rightLength = partials.length, rangeLength = nativeMax(argsLength - holdersLength, 0), result = Array1(rangeLength + rightLength), isUncurried = !isCurried;
             while(++argsIndex < rangeLength)result[argsIndex] = args[argsIndex];
             var offset = argsIndex;
             while(++rightIndex < rightLength)result[offset + rightIndex] = partials[rightIndex];
@@ -9311,7 +9280,7 @@ var global = arguments[3];
      * @returns {Array} Returns `array`.
      */ function copyArray(source, array) {
             var index = -1, length = source.length;
-            array || (array = Array(length));
+            array || (array = Array1(length));
             while(++index < length)array[index] = source[index];
             return array;
         }
@@ -9326,8 +9295,7 @@ var global = arguments[3];
      * @returns {Object} Returns `object`.
      */ function copyObject(source, props, object, customizer) {
             var isNew = !object;
-            object || (object = {
-            });
+            object || (object = {});
             var index = -1, length = props.length;
             while(++index < length){
                 var key = props[index];
@@ -9367,8 +9335,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new aggregator function.
      */ function createAggregator(setter, initializer) {
             return function(collection, iteratee) {
-                var func = isArray(collection) ? arrayAggregator : baseAggregator, accumulator = initializer ? initializer() : {
-                };
+                var func = isArray(collection) ? arrayAggregator : baseAggregator, accumulator = initializer ? initializer() : {};
                 return func(collection, setter, getIteratee(iteratee, 2), accumulator);
             };
         }
@@ -9381,12 +9348,12 @@ var global = arguments[3];
      */ function createAssigner(assigner) {
             return baseRest(function(object, sources) {
                 var index = -1, length = sources.length, customizer = length > 1 ? sources[length - 1] : undefined, guard = length > 2 ? sources[2] : undefined;
-                customizer = assigner.length > 3 && typeof customizer == 'function' ? (length--, customizer) : undefined;
+                customizer = assigner.length > 3 && typeof customizer == "function" ? (length--, customizer) : undefined;
                 if (guard && isIterateeCall(sources[0], sources[1], guard)) {
                     customizer = length < 3 ? undefined : customizer;
                     length = 1;
                 }
-                object = Object(object);
+                object = Object1(object);
                 while(++index < length){
                     var source = sources[index];
                     if (source) assigner(object, source, index, customizer);
@@ -9405,7 +9372,7 @@ var global = arguments[3];
             return function(collection, iteratee) {
                 if (collection == null) return collection;
                 if (!isArrayLike(collection)) return eachFunc(collection, iteratee);
-                var length = collection.length, index = fromRight ? length : -1, iterable = Object(collection);
+                var length = collection.length, index = fromRight ? length : -1, iterable = Object1(collection);
                 while(fromRight ? index-- : ++index < length){
                     if (iteratee(iterable[index], index, iterable) === false) break;
                 }
@@ -9420,7 +9387,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new base function.
      */ function createBaseFor(fromRight) {
             return function(object, iteratee, keysFunc) {
-                var index = -1, iterable = Object(object), props = keysFunc(object), length = props.length;
+                var index = -1, iterable = Object1(object), props = keysFunc(object), length = props.length;
                 while(length--){
                     var key = props[fromRight ? length : ++index];
                     if (iteratee(iterable[key], key, iterable) === false) break;
@@ -9456,7 +9423,7 @@ var global = arguments[3];
                 string = toString(string);
                 var strSymbols = hasUnicode(string) ? stringToArray(string) : undefined;
                 var chr = strSymbols ? strSymbols[0] : string.charAt(0);
-                var trailing = strSymbols ? castSlice(strSymbols, 1).join('') : string.slice(1);
+                var trailing = strSymbols ? castSlice(strSymbols, 1).join("") : string.slice(1);
                 return chr[methodName]() + trailing;
             };
         }
@@ -9468,7 +9435,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new compounder function.
      */ function createCompounder(callback) {
             return function(string) {
-                return arrayReduce(words(deburr(string).replace(reApos, '')), callback, '');
+                return arrayReduce(words(deburr(string).replace(reApos, "")), callback, "");
             };
         }
         /**
@@ -9519,7 +9486,7 @@ var global = arguments[3];
      */ function createCurry(func, bitmask, arity) {
             var Ctor = createCtor(func);
             function wrapper() {
-                var length = arguments.length, args = Array(length), index = length, placeholder = getHolder(wrapper);
+                var length = arguments.length, args = Array1(length), index = length, placeholder = getHolder(wrapper);
                 while(index--)args[index] = arguments[index];
                 var holders = length < 3 && args[0] !== placeholder && args[length - 1] !== placeholder ? [] : replaceHolders(args, placeholder);
                 length -= holders.length;
@@ -9537,7 +9504,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new find function.
      */ function createFind(findIndexFunc) {
             return function(collection, predicate, fromIndex) {
-                var iterable = Object(collection);
+                var iterable = Object1(collection);
                 if (!isArrayLike(collection)) {
                     var iteratee = getIteratee(predicate, 3);
                     collection = keys(collection);
@@ -9557,17 +9524,17 @@ var global = arguments[3];
      * @returns {Function} Returns the new flow function.
      */ function createFlow(fromRight) {
             return flatRest(function(funcs) {
-                var length = funcs.length, index1 = length, prereq = LodashWrapper.prototype.thru;
+                var length = funcs.length, index = length, prereq = LodashWrapper.prototype.thru;
                 if (fromRight) funcs.reverse();
-                while(index1--){
-                    var func = funcs[index1];
-                    if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
-                    if (prereq && !wrapper && getFuncName(func) == 'wrapper') var wrapper = new LodashWrapper([], true);
+                while(index--){
+                    var func = funcs[index];
+                    if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
+                    if (prereq && !wrapper && getFuncName(func) == "wrapper") var wrapper = new LodashWrapper([], true);
                 }
-                index1 = wrapper ? index1 : length;
-                while(++index1 < length){
-                    func = funcs[index1];
-                    var funcName = getFuncName(func), data = funcName == 'wrapper' ? getData(func) : undefined;
+                index = wrapper ? index : length;
+                while(++index < length){
+                    func = funcs[index];
+                    var funcName = getFuncName(func), data = funcName == "wrapper" ? getData(func) : undefined;
                     if (data && isLaziable(data[0]) && data[1] == (WRAP_ARY_FLAG | WRAP_CURRY_FLAG | WRAP_PARTIAL_FLAG | WRAP_REARG_FLAG) && !data[4].length && data[9] == 1) wrapper = wrapper[getFuncName(data[0])].apply(wrapper, data[3]);
                     else wrapper = func.length == 1 && isLaziable(func) ? wrapper[funcName]() : wrapper.thru(func);
                 }
@@ -9601,7 +9568,7 @@ var global = arguments[3];
      */ function createHybrid(func, bitmask, thisArg, partials, holders, partialsRight, holdersRight, argPos, ary, arity) {
             var isAry = bitmask & WRAP_ARY_FLAG, isBind = bitmask & WRAP_BIND_FLAG, isBindKey = bitmask & WRAP_BIND_KEY_FLAG, isCurried = bitmask & (WRAP_CURRY_FLAG | WRAP_CURRY_RIGHT_FLAG), isFlip = bitmask & WRAP_FLIP_FLAG, Ctor = isBindKey ? undefined : createCtor(func);
             function wrapper() {
-                var length = arguments.length, args = Array(length), index = length;
+                var length = arguments.length, args = Array1(length), index = length;
                 while(index--)args[index] = arguments[index];
                 if (isCurried) var placeholder = getHolder(wrapper), holdersCount = countHolders(args, placeholder);
                 if (partials) args = composeArgs(args, partials, holders, isCurried);
@@ -9630,8 +9597,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new inverter function.
      */ function createInverter(setter, toIteratee) {
             return function(object, iteratee) {
-                return baseInverter(object, setter, toIteratee(iteratee), {
-                });
+                return baseInverter(object, setter, toIteratee(iteratee), {});
             };
         }
         /**
@@ -9648,7 +9614,7 @@ var global = arguments[3];
                 if (value !== undefined) result = value;
                 if (other !== undefined) {
                     if (result === undefined) return other;
-                    if (typeof value == 'string' || typeof other == 'string') {
+                    if (typeof value == "string" || typeof other == "string") {
                         value = baseToString(value);
                         other = baseToString(other);
                     } else {
@@ -9686,11 +9652,11 @@ var global = arguments[3];
      * @param {string} [chars=' '] The string used as padding.
      * @returns {string} Returns the padding for `string`.
      */ function createPadding(length, chars) {
-            chars = chars === undefined ? ' ' : baseToString(chars);
+            chars = chars === undefined ? " " : baseToString(chars);
             var charsLength = chars.length;
             if (charsLength < 2) return charsLength ? baseRepeat(chars, length) : chars;
             var result = baseRepeat(chars, nativeCeil(length / stringSize(chars)));
-            return hasUnicode(chars) ? castSlice(stringToArray(result), 0, length).join('') : result.slice(0, length);
+            return hasUnicode(chars) ? castSlice(stringToArray(result), 0, length).join("") : result.slice(0, length);
         }
         /**
      * Creates a function that wraps `func` to invoke it with the `this` binding
@@ -9706,7 +9672,7 @@ var global = arguments[3];
      */ function createPartial(func, bitmask, thisArg, partials) {
             var isBind = bitmask & WRAP_BIND_FLAG, Ctor = createCtor(func);
             function wrapper() {
-                var argsIndex = -1, argsLength = arguments.length, leftIndex = -1, leftLength = partials.length, args = Array(leftLength + argsLength), fn = this && this !== root && this instanceof wrapper ? Ctor : func;
+                var argsIndex = -1, argsLength = arguments.length, leftIndex = -1, leftLength = partials.length, args = Array1(leftLength + argsLength), fn = this && this !== root && this instanceof wrapper ? Ctor : func;
                 while(++leftIndex < leftLength)args[leftIndex] = partials[leftIndex];
                 while(argsLength--)args[leftIndex++] = arguments[++argsIndex];
                 return apply(fn, isBind ? thisArg : this, args);
@@ -9721,7 +9687,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new range function.
      */ function createRange(fromRight) {
             return function(start, end, step) {
-                if (step && typeof step != 'number' && isIterateeCall(start, end, step)) end = step = undefined;
+                if (step && typeof step != "number" && isIterateeCall(start, end, step)) end = step = undefined;
                 // Ensure the sign of `-0` is preserved.
                 start = toFinite(start);
                 if (end === undefined) {
@@ -9740,7 +9706,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new relational operation function.
      */ function createRelationalOperation(operator) {
             return function(value, other) {
-                if (!(typeof value == 'string' && typeof other == 'string')) {
+                if (!(typeof value == "string" && typeof other == "string")) {
                     value = toNumber(value);
                     other = toNumber(other);
                 }
@@ -9799,9 +9765,9 @@ var global = arguments[3];
                 if (precision && nativeIsFinite(number)) {
                     // Shift with exponential notation to avoid floating-point issues.
                     // See [MDN](https://mdn.io/round#Examples) for more details.
-                    var pair = (toString(number) + 'e').split('e'), value = func(pair[0] + 'e' + (+pair[1] + precision));
-                    pair = (toString(value) + 'e').split('e');
-                    return +(pair[0] + 'e' + (+pair[1] - precision));
+                    var pair = (toString(number) + "e").split("e"), value = func(pair[0] + "e" + (+pair[1] + precision));
+                    pair = (toString(value) + "e").split("e");
+                    return +(pair[0] + "e" + (+pair[1] - precision));
                 }
                 return func(number);
             };
@@ -9858,7 +9824,7 @@ var global = arguments[3];
      * @returns {Function} Returns the new wrapped function.
      */ function createWrap(func, bitmask, thisArg, partials, holders, argPos, ary, arity) {
             var isBindKey = bitmask & WRAP_BIND_KEY_FLAG;
-            if (!isBindKey && typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (!isBindKey && typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             var length = partials ? partials.length : 0;
             if (!length) {
                 bitmask &= ~(WRAP_PARTIAL_FLAG | WRAP_PARTIAL_RIGHT_FLAG);
@@ -9932,7 +9898,7 @@ var global = arguments[3];
                 // Recursively merge objects and arrays (susceptible to call stack limits).
                 stack.set(srcValue, objValue);
                 baseMerge(objValue, srcValue, undefined, customDefaultsMerge, stack);
-                stack['delete'](srcValue);
+                stack["delete"](srcValue);
             }
             return objValue;
         }
@@ -9971,8 +9937,8 @@ var global = arguments[3];
             stack.set(other, array);
             // Ignore non-index properties.
             while(++index < arrLength){
-                var arrValue = array[index], othValue1 = other[index];
-                if (customizer) var compared = isPartial ? customizer(othValue1, arrValue, index, other, array, stack) : customizer(arrValue, othValue1, index, array, other, stack);
+                var arrValue = array[index], othValue = other[index];
+                if (customizer) var compared = isPartial ? customizer(othValue, arrValue, index, other, array, stack) : customizer(arrValue, othValue, index, array, other, stack);
                 if (compared !== undefined) {
                     if (compared) continue;
                     result = false;
@@ -9986,13 +9952,13 @@ var global = arguments[3];
                         result = false;
                         break;
                     }
-                } else if (!(arrValue === othValue1 || equalFunc(arrValue, othValue1, bitmask, customizer, stack))) {
+                } else if (!(arrValue === othValue || equalFunc(arrValue, othValue, bitmask, customizer, stack))) {
                     result = false;
                     break;
                 }
             }
-            stack['delete'](array);
-            stack['delete'](other);
+            stack["delete"](array);
+            stack["delete"](other);
             return result;
         }
         /**
@@ -10033,7 +9999,7 @@ var global = arguments[3];
                     // Coerce regexes to strings and treat strings, primitives and objects,
                     // as equal. See http://www.ecma-international.org/ecma-262/7.0/#sec-regexp.prototype.tostring
                     // for more details.
-                    return object == other + '';
+                    return object == other + "";
                 case mapTag:
                     var convert = mapToArray;
                 case setTag:
@@ -10047,7 +10013,7 @@ var global = arguments[3];
                     // Recursively compare objects (susceptible to call stack limits).
                     stack.set(object, other);
                     var result = equalArrays(convert(object), convert(other), bitmask, customizer, equalFunc, stack);
-                    stack['delete'](object);
+                    stack["delete"](object);
                     return result;
                 case symbolTag:
                     if (symbolValueOf) return symbolValueOf.call(object) == symbolValueOf.call(other);
@@ -10091,15 +10057,15 @@ var global = arguments[3];
                     result = false;
                     break;
                 }
-                skipCtor || (skipCtor = key == 'constructor');
+                skipCtor || (skipCtor = key == "constructor");
             }
             if (result && !skipCtor) {
                 var objCtor = object.constructor, othCtor = other.constructor;
                 // Non `Object` object instances with different constructors are not equal.
-                if (objCtor != othCtor && 'constructor' in object && 'constructor' in other && !(typeof objCtor == 'function' && objCtor instanceof objCtor && typeof othCtor == 'function' && othCtor instanceof othCtor)) result = false;
+                if (objCtor != othCtor && "constructor" in object && "constructor" in other && !(typeof objCtor == "function" && objCtor instanceof objCtor && typeof othCtor == "function" && othCtor instanceof othCtor)) result = false;
             }
-            stack['delete'](object);
-            stack['delete'](other);
+            stack["delete"](object);
+            stack["delete"](other);
             return result;
         }
         /**
@@ -10109,7 +10075,7 @@ var global = arguments[3];
      * @param {Function} func The function to apply a rest parameter to.
      * @returns {Function} Returns the new function.
      */ function flatRest(func) {
-            return setToString(overRest(func, undefined, flatten), func + '');
+            return setToString(overRest(func, undefined, flatten), func + "");
         }
         /**
      * Creates an array of own enumerable property names and symbols of `object`.
@@ -10146,7 +10112,7 @@ var global = arguments[3];
      * @param {Function} func The function to query.
      * @returns {string} Returns the function name.
      */ function getFuncName(func) {
-            var result = func.name + '', array = realNames[result], length = hasOwnProperty.call(realNames, result) ? array.length : 0;
+            var result = func.name + "", array = realNames[result], length = hasOwnProperty.call(realNames, result) ? array.length : 0;
             while(length--){
                 var data = array[length], otherFunc = data.func;
                 if (otherFunc == null || otherFunc == func) return data.name;
@@ -10160,7 +10126,7 @@ var global = arguments[3];
      * @param {Function} func The function to inspect.
      * @returns {*} Returns the placeholder value.
      */ function getHolder(func) {
-            var object = hasOwnProperty.call(lodash, 'placeholder') ? lodash : func;
+            var object = hasOwnProperty.call(lodash, "placeholder") ? lodash : func;
             return object.placeholder;
         }
         /**
@@ -10174,8 +10140,8 @@ var global = arguments[3];
      * @param {number} [arity] The arity of the created iteratee.
      * @returns {Function} Returns the chosen function or its result.
      */ function getIteratee() {
-            var result = lodash.iteratee || iteratee1;
-            result = result === iteratee1 ? baseIteratee : result;
+            var result = lodash.iteratee || iteratee;
+            result = result === iteratee ? baseIteratee : result;
             return arguments.length ? result(arguments[0], arguments[1]) : result;
         }
         /**
@@ -10187,7 +10153,7 @@ var global = arguments[3];
      * @returns {*} Returns the map data.
      */ function getMapData(map, key) {
             var data = map.__data__;
-            return isKeyable(key) ? data[typeof key == 'string' ? 'string' : 'hash'] : data.map;
+            return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
         }
         /**
      * Gets the property names, values, and compare flags of `object`.
@@ -10229,8 +10195,7 @@ var global = arguments[3];
             try {
                 value[symToStringTag] = undefined;
                 var unmasked = true;
-            } catch (e) {
-            }
+            } catch (e) {}
             var result = nativeObjectToString.call(value);
             if (unmasked) {
                 if (isOwn) value[symToStringTag] = tag;
@@ -10246,7 +10211,7 @@ var global = arguments[3];
      * @returns {Array} Returns the array of symbols.
      */ var getSymbols = !nativeGetSymbols ? stubArray : function(object) {
             if (object == null) return [];
-            object = Object(object);
+            object = Object1(object);
             return arrayFilter(nativeGetSymbols(object), function(symbol) {
                 return propertyIsEnumerable.call(object, symbol);
             });
@@ -10274,7 +10239,7 @@ var global = arguments[3];
      */ var getTag = baseGetTag;
         // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
         if (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag || Map && getTag(new Map) != mapTag || Promise && getTag(Promise.resolve()) != promiseTag || Set && getTag(new Set) != setTag || WeakMap && getTag(new WeakMap) != weakMapTag) getTag = function(value) {
-            var result = baseGetTag(value), Ctor = result == objectTag ? value.constructor : undefined, ctorString = Ctor ? toSource(Ctor) : '';
+            var result = baseGetTag(value), Ctor = result == objectTag ? value.constructor : undefined, ctorString = Ctor ? toSource(Ctor) : "";
             if (ctorString) switch(ctorString){
                 case dataViewCtorString:
                     return dataViewTag;
@@ -10303,23 +10268,23 @@ var global = arguments[3];
             while(++index < length){
                 var data = transforms[index], size = data.size;
                 switch(data.type){
-                    case 'drop':
+                    case "drop":
                         start += size;
                         break;
-                    case 'dropRight':
+                    case "dropRight":
                         end -= size;
                         break;
-                    case 'take':
+                    case "take":
                         end = nativeMin(end, start + size);
                         break;
-                    case 'takeRight':
+                    case "takeRight":
                         start = nativeMax(start, end - size);
                         break;
                 }
             }
             return {
-                'start': start,
-                'end': end
+                "start": start,
+                "end": end
             };
         }
         /**
@@ -10361,7 +10326,7 @@ var global = arguments[3];
      */ function initCloneArray(array) {
             var length = array.length, result = new array.constructor(length);
             // Add properties assigned by `RegExp#exec`.
-            if (length && typeof array[0] == 'string' && hasOwnProperty.call(array, 'index')) {
+            if (length && typeof array[0] == "string" && hasOwnProperty.call(array, "index")) {
                 result.index = array.index;
                 result.input = array.input;
             }
@@ -10374,8 +10339,7 @@ var global = arguments[3];
      * @param {Object} object The object to clone.
      * @returns {Object} Returns the initialized clone.
      */ function initCloneObject(object) {
-            return typeof object.constructor == 'function' && !isPrototype(object) ? baseCreate(getPrototype(object)) : {
-            };
+            return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
         }
         /**
      * Initializes an object clone based on its `toStringTag`.
@@ -10432,9 +10396,9 @@ var global = arguments[3];
             var length = details.length;
             if (!length) return source;
             var lastIndex = length - 1;
-            details[lastIndex] = (length > 1 ? '& ' : '') + details[lastIndex];
-            details = details.join(length > 2 ? ', ' : ' ');
-            return source.replace(reWrapComment, '{\n/* [wrapped with ' + details + '] */\n');
+            details[lastIndex] = (length > 1 ? "& " : "") + details[lastIndex];
+            details = details.join(length > 2 ? ", " : " ");
+            return source.replace(reWrapComment, "{\n/* [wrapped with " + details + "] */\n");
         }
         /**
      * Checks if `value` is a flattenable `arguments` object or array.
@@ -10455,7 +10419,7 @@ var global = arguments[3];
      */ function isIndex(value, length) {
             var type = typeof value;
             length = length == null ? MAX_SAFE_INTEGER : length;
-            return !!length && (type == 'number' || type != 'symbol' && reIsUint.test(value)) && value > -1 && value % 1 == 0 && value < length;
+            return !!length && (type == "number" || type != "symbol" && reIsUint.test(value)) && value > -1 && value % 1 == 0 && value < length;
         }
         /**
      * Checks if the given arguments are from an iteratee call.
@@ -10469,7 +10433,7 @@ var global = arguments[3];
      */ function isIterateeCall(value, index, object) {
             if (!isObject(object)) return false;
             var type = typeof index;
-            if (type == 'number' ? isArrayLike(object) && isIndex(index, object.length) : type == 'string' && index in object) return eq(object[index], value);
+            if (type == "number" ? isArrayLike(object) && isIndex(index, object.length) : type == "string" && index in object) return eq(object[index], value);
             return false;
         }
         /**
@@ -10482,8 +10446,8 @@ var global = arguments[3];
      */ function isKey(value, object) {
             if (isArray(value)) return false;
             var type = typeof value;
-            if (type == 'number' || type == 'symbol' || type == 'boolean' || value == null || isSymbol(value)) return true;
-            return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object(object);
+            if (type == "number" || type == "symbol" || type == "boolean" || value == null || isSymbol(value)) return true;
+            return reIsPlainProp.test(value) || !reIsDeepProp.test(value) || object != null && value in Object1(object);
         }
         /**
      * Checks if `value` is suitable for use as unique object key.
@@ -10493,7 +10457,7 @@ var global = arguments[3];
      * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
      */ function isKeyable(value) {
             var type = typeof value;
-            return type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean' ? value !== '__proto__' : value === null;
+            return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
         }
         /**
      * Checks if `func` has a lazy counterpart.
@@ -10504,7 +10468,7 @@ var global = arguments[3];
      *  else `false`.
      */ function isLaziable(func) {
             var funcName = getFuncName(func), other = lodash[funcName];
-            if (typeof other != 'function' || !(funcName in LazyWrapper.prototype)) return false;
+            if (typeof other != "function" || !(funcName in LazyWrapper.prototype)) return false;
             if (func === other) return true;
             var data = getData(other);
             return !!data && func === data[0];
@@ -10532,7 +10496,7 @@ var global = arguments[3];
      * @param {*} value The value to check.
      * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
      */ function isPrototype(value) {
-            var Ctor = value && value.constructor, proto = typeof Ctor == 'function' && Ctor.prototype || objectProto;
+            var Ctor = value && value.constructor, proto = typeof Ctor == "function" && Ctor.prototype || objectProto;
             return value === proto;
         }
         /**
@@ -10556,7 +10520,7 @@ var global = arguments[3];
      */ function matchesStrictComparable(key, srcValue) {
             return function(object) {
                 if (object == null) return false;
-                return object[key] === srcValue && (srcValue !== undefined || key in Object(object));
+                return object[key] === srcValue && (srcValue !== undefined || key in Object1(object));
             };
         }
         /**
@@ -10636,7 +10600,7 @@ var global = arguments[3];
      * @returns {Array} Returns the array of property names.
      */ function nativeKeysIn(object) {
             var result = [];
-            if (object != null) for(var key in Object(object))result.push(key);
+            if (object != null) for(var key in Object1(object))result.push(key);
             return result;
         }
         /**
@@ -10659,10 +10623,10 @@ var global = arguments[3];
      */ function overRest(func, start, transform) {
             start = nativeMax(start === undefined ? func.length - 1 : start, 0);
             return function() {
-                var args = arguments, index = -1, length = nativeMax(args.length - start, 0), array = Array(length);
+                var args = arguments, index = -1, length = nativeMax(args.length - start, 0), array = Array1(length);
                 while(++index < length)array[index] = args[start + index];
                 index = -1;
-                var otherArgs = Array(start + 1);
+                var otherArgs = Array1(start + 1);
                 while(++index < start)otherArgs[index] = args[index];
                 otherArgs[start] = transform(array);
                 return apply(func, this, otherArgs);
@@ -10675,7 +10639,7 @@ var global = arguments[3];
      * @param {Object} object The object to query.
      * @param {Array} path The path to get the parent value of.
      * @returns {*} Returns the parent value.
-     */ function parent1(object, path) {
+     */ function parent(object, path) {
             return path.length < 2 ? object : baseGet(object, baseSlice(path, 0, -1));
         }
         /**
@@ -10703,8 +10667,8 @@ var global = arguments[3];
      * @param {string} key The key of the property to get.
      * @returns {*} Returns the property value.
      */ function safeGet(object, key) {
-            if (key === 'constructor' && typeof object[key] === 'function') return;
-            if (key == '__proto__') return;
+            if (key === "constructor" && typeof object[key] === "function") return;
+            if (key == "__proto__") return;
             return object[key];
         }
         /**
@@ -10749,7 +10713,7 @@ var global = arguments[3];
      * @param {number} bitmask The bitmask flags. See `createWrap` for more details.
      * @returns {Function} Returns `wrapper`.
      */ function setWrapToString(wrapper, reference, bitmask) {
-            var source = reference + '';
+            var source = reference + "";
             return setToString(wrapper, insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)));
         }
         /**
@@ -10797,9 +10761,9 @@ var global = arguments[3];
      * @returns {Array} Returns the property path array.
      */ var stringToPath = memoizeCapped(function(string) {
             var result = [];
-            if (string.charCodeAt(0) === 46 /* . */ ) result.push('');
+            if (string.charCodeAt(0) === 46 /* . */ ) result.push("");
             string.replace(rePropName, function(match, number, quote, subString) {
-                result.push(quote ? subString.replace(reEscapeChar, '$1') : number || match);
+                result.push(quote ? subString.replace(reEscapeChar, "$1") : number || match);
             });
             return result;
         });
@@ -10810,9 +10774,9 @@ var global = arguments[3];
      * @param {*} value The value to inspect.
      * @returns {string|symbol} Returns the key.
      */ function toKey(value) {
-            if (typeof value == 'string' || isSymbol(value)) return value;
-            var result = value + '';
-            return result == '0' && 1 / value == -INFINITY ? '-0' : result;
+            if (typeof value == "string" || isSymbol(value)) return value;
+            var result = value + "";
+            return result == "0" && 1 / value == -INFINITY ? "-0" : result;
         }
         /**
      * Converts `func` to its source code.
@@ -10824,14 +10788,12 @@ var global = arguments[3];
             if (func != null) {
                 try {
                     return funcToString.call(func);
-                } catch (e) {
-                }
+                } catch (e) {}
                 try {
-                    return func + '';
-                } catch (e1) {
-                }
+                    return func + "";
+                } catch (e1) {}
             }
-            return '';
+            return "";
         }
         /**
      * Updates wrapper `details` based on `bitmask` flags.
@@ -10842,7 +10804,7 @@ var global = arguments[3];
      * @returns {Array} Returns `details`.
      */ function updateWrapDetails(details, bitmask) {
             arrayEach(wrapFlags, function(pair) {
-                var value = '_.' + pair[0];
+                var value = "_." + pair[0];
                 if (bitmask & pair[1] && !arrayIncludes(details, value)) details.push(value);
             });
             return details.sort();
@@ -10886,7 +10848,7 @@ var global = arguments[3];
             else size = nativeMax(toInteger(size), 0);
             var length = array == null ? 0 : array.length;
             if (!length || size < 1) return [];
-            var index = 0, resIndex = 0, result = Array(nativeCeil(length / size));
+            var index = 0, resIndex = 0, result = Array1(nativeCeil(length / size));
             while(index < length)result[resIndex++] = baseSlice(array, index, index += size);
             return result;
         }
@@ -10936,7 +10898,7 @@ var global = arguments[3];
      */ function concat() {
             var length = arguments.length;
             if (!length) return [];
-            var args = Array(length - 1), array = arguments[0], index = length;
+            var args = Array1(length - 1), array = arguments[0], index = length;
             while(index--)args[index - 1] = arguments[index];
             return arrayPush(isArray(array) ? copyArray(array) : [
                 array
@@ -11188,7 +11150,7 @@ var global = arguments[3];
      */ function fill(array, value, start, end) {
             var length = array == null ? 0 : array.length;
             if (!length) return [];
-            if (start && typeof start != 'number' && isIterateeCall(array, value, start)) {
+            if (start && typeof start != "number" && isIterateeCall(array, value, start)) {
                 start = 0;
                 end = length;
             }
@@ -11353,8 +11315,7 @@ var global = arguments[3];
      * _.fromPairs([['a', 1], ['b', 2]]);
      * // => { 'a': 1, 'b': 2 }
      */ function fromPairs(pairs) {
-            var index = -1, length = pairs == null ? 0 : pairs.length, result = {
-            };
+            var index = -1, length = pairs == null ? 0 : pairs.length, result = {};
             while(++index < length){
                 var pair = pairs[index];
                 result[pair[0]] = pair[1];
@@ -11403,7 +11364,7 @@ var global = arguments[3];
      * // Search from the `fromIndex`.
      * _.indexOf([1, 2, 1, 2], 2, 2);
      * // => 3
-     */ function indexOf1(array, value, fromIndex) {
+     */ function indexOf(array, value, fromIndex) {
             var length = array == null ? 0 : array.length;
             if (!length) return -1;
             var index = fromIndex == null ? 0 : toInteger(fromIndex);
@@ -11497,7 +11458,7 @@ var global = arguments[3];
      * // => [{ 'x': 1, 'y': 2 }]
      */ var intersectionWith = baseRest(function(arrays) {
             var comparator = last(arrays), mapped = arrayMap(arrays, castArrayLikeObject);
-            comparator = typeof comparator == 'function' ? comparator : undefined;
+            comparator = typeof comparator == "function" ? comparator : undefined;
             if (comparator) mapped.pop();
             return mapped.length && mapped[0] === arrays[0] ? baseIntersection(mapped, undefined, comparator) : [];
         });
@@ -11516,7 +11477,7 @@ var global = arguments[3];
      * _.join(['a', 'b', 'c'], '~');
      * // => 'a~b~c'
      */ function join(array, separator) {
-            return array == null ? '' : nativeJoin.call(array, separator);
+            return array == null ? "" : nativeJoin.call(array, separator);
         }
         /**
      * Gets the last element of `array`.
@@ -11798,7 +11759,7 @@ var global = arguments[3];
      */ function slice(array, start, end) {
             var length = array == null ? 0 : array.length;
             if (!length) return [];
-            if (end && typeof end != 'number' && isIterateeCall(array, start, end)) {
+            if (end && typeof end != "number" && isIterateeCall(array, start, end)) {
                 start = 0;
                 end = length;
             } else {
@@ -12199,7 +12160,7 @@ var global = arguments[3];
      * // => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
      */ var unionWith = baseRest(function(arrays) {
             var comparator = last(arrays);
-            comparator = typeof comparator == 'function' ? comparator : undefined;
+            comparator = typeof comparator == "function" ? comparator : undefined;
             return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), undefined, comparator);
         });
         /**
@@ -12267,7 +12228,7 @@ var global = arguments[3];
      * _.uniqWith(objects, _.isEqual);
      * // => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }]
      */ function uniqWith(array, comparator) {
-            comparator = typeof comparator == 'function' ? comparator : undefined;
+            comparator = typeof comparator == "function" ? comparator : undefined;
             return array && array.length ? baseUniq(array, undefined, comparator) : [];
         }
         /**
@@ -12420,7 +12381,7 @@ var global = arguments[3];
      * // => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
      */ var xorWith = baseRest(function(arrays) {
             var comparator = last(arrays);
-            comparator = typeof comparator == 'function' ? comparator : undefined;
+            comparator = typeof comparator == "function" ? comparator : undefined;
             return baseXor(arrayFilter(arrays, isArrayLikeObject), undefined, comparator);
         });
         /**
@@ -12495,7 +12456,7 @@ var global = arguments[3];
      * // => [111, 222]
      */ var zipWith = baseRest(function(arrays) {
             var length = arrays.length, iteratee = length > 1 ? arrays[length - 1] : undefined;
-            iteratee = typeof iteratee == 'function' ? (arrays.pop(), iteratee) : undefined;
+            iteratee = typeof iteratee == "function" ? (arrays.pop(), iteratee) : undefined;
             return unzipWith(arrays, iteratee);
         });
         /*------------------------------------------------------------------------*/ /**
@@ -12526,7 +12487,7 @@ var global = arguments[3];
      *   .head()
      *   .value();
      * // => 'pebbles is 1'
-     */ function chain1(value) {
+     */ function chain(value) {
             var result = lodash(value);
             result.__chain__ = true;
             return result;
@@ -12604,11 +12565,11 @@ var global = arguments[3];
             if (length > 1 || this.__actions__.length || !(value instanceof LazyWrapper) || !isIndex(start)) return this.thru(interceptor);
             value = value.slice(start, +start + (length ? 1 : 0));
             value.__actions__.push({
-                'func': thru,
-                'args': [
+                "func": thru,
+                "args": [
                     interceptor
                 ],
-                'thisArg': undefined
+                "thisArg": undefined
             });
             return new LodashWrapper(value, this.__chain__).thru(function(array) {
                 if (length && !array.length) array.push(undefined);
@@ -12642,7 +12603,7 @@ var global = arguments[3];
      *   .value();
      * // => { 'user': 'barney' }
      */ function wrapperChain() {
-            return chain1(this);
+            return chain(this);
         }
         /**
      * Executes the chain sequence and returns the wrapped result.
@@ -12697,8 +12658,8 @@ var global = arguments[3];
             if (this.__values__ === undefined) this.__values__ = toArray(this.value());
             var done = this.__index__ >= this.__values__.length, value = done ? undefined : this.__values__[this.__index__++];
             return {
-                'done': done,
-                'value': value
+                "done": done,
+                "value": value
             };
         }
         /**
@@ -12784,11 +12745,11 @@ var global = arguments[3];
                 if (this.__actions__.length) wrapped = new LazyWrapper(this);
                 wrapped = wrapped.reverse();
                 wrapped.__actions__.push({
-                    'func': thru,
-                    'args': [
+                    "func": thru,
+                    "args": [
                         reverse
                     ],
-                    'thisArg': undefined
+                    "thisArg": undefined
                 });
                 return new LodashWrapper(wrapped, this.__chain__);
             }
@@ -13000,7 +12961,7 @@ var global = arguments[3];
      * _.flatMap([1, 2], duplicate);
      * // => [1, 1, 2, 2]
      */ function flatMap(collection, iteratee) {
-            return baseFlatten(map1(collection, iteratee), 1);
+            return baseFlatten(map(collection, iteratee), 1);
         }
         /**
      * This method is like `_.flatMap` except that it recursively flattens the
@@ -13022,7 +12983,7 @@ var global = arguments[3];
      * _.flatMapDeep([1, 2], duplicate);
      * // => [1, 1, 2, 2]
      */ function flatMapDeep(collection, iteratee) {
-            return baseFlatten(map1(collection, iteratee), INFINITY);
+            return baseFlatten(map(collection, iteratee), INFINITY);
         }
         /**
      * This method is like `_.flatMap` except that it recursively flattens the
@@ -13046,7 +13007,7 @@ var global = arguments[3];
      * // => [[1, 1], [2, 2]]
      */ function flatMapDepth(collection, iteratee, depth) {
             depth = depth === undefined ? 1 : toInteger(depth);
-            return baseFlatten(map1(collection, iteratee), depth);
+            return baseFlatten(map(collection, iteratee), depth);
         }
         /**
      * Iterates over elements of `collection` and invokes `iteratee` for each element.
@@ -13161,8 +13122,8 @@ var global = arguments[3];
      *
      * _.includes('abcd', 'bc');
      * // => true
-     */ function includes1(collection, value, fromIndex, guard) {
-            collection = isArrayLike(collection) ? collection : values1(collection);
+     */ function includes(collection, value, fromIndex, guard) {
+            collection = isArrayLike(collection) ? collection : values(collection);
             fromIndex = fromIndex && !guard ? toInteger(fromIndex) : 0;
             var length = collection.length;
             if (fromIndex < 0) fromIndex = nativeMax(length + fromIndex, 0);
@@ -13191,7 +13152,7 @@ var global = arguments[3];
      * _.invokeMap([123, 456], String.prototype.split, '');
      * // => [['1', '2', '3'], ['4', '5', '6']]
      */ var invokeMap = baseRest(function(collection, path, args) {
-            var index = -1, isFunc = typeof path == 'function', result = isArrayLike(collection) ? Array(collection.length) : [];
+            var index = -1, isFunc = typeof path == "function", result = isArrayLike(collection) ? Array1(collection.length) : [];
             baseEach(collection, function(value) {
                 result[++index] = isFunc ? apply(path, value, args) : baseInvoke(value, path, args);
             });
@@ -13268,7 +13229,7 @@ var global = arguments[3];
      * // The `_.property` iteratee shorthand.
      * _.map(users, 'user');
      * // => ['barney', 'fred']
-     */ function map1(collection, iteratee) {
+     */ function map(collection, iteratee) {
             var func = isArray(collection) ? arrayMap : baseMap;
             return func(collection, getIteratee(iteratee, 3));
         }
@@ -13536,7 +13497,7 @@ var global = arguments[3];
      *
      * _.size('pebbles');
      * // => 7
-     */ function size1(collection) {
+     */ function size(collection) {
             if (collection == null) return 0;
             if (isArrayLike(collection)) return isString(collection) ? stringSize(collection) : collection.length;
             var tag = getTag(collection);
@@ -13662,7 +13623,7 @@ var global = arguments[3];
      * });
      * // => Logs 'done saving!' after the two async saves have completed.
      */ function after(n, func) {
-            if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             n = toInteger(n);
             return function() {
                 if (--n < 1) return func.apply(this, arguments);
@@ -13684,7 +13645,7 @@ var global = arguments[3];
      *
      * _.map(['6', '8', '10'], _.ary(parseInt, 1));
      * // => [6, 8, 10]
-     */ function ary1(func, n, guard) {
+     */ function ary(func, n, guard) {
             n = guard ? undefined : n;
             n = func && n == null ? func.length : n;
             return createWrap(func, WRAP_ARY_FLAG, undefined, undefined, undefined, undefined, n);
@@ -13707,7 +13668,7 @@ var global = arguments[3];
      * // => Allows adding up to 4 contacts to the list.
      */ function before(n, func) {
             var result;
-            if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             n = toInteger(n);
             return function() {
                 if (--n > 0) result = func.apply(this, arguments);
@@ -13953,13 +13914,13 @@ var global = arguments[3];
      * jQuery(window).on('popstate', debounced.cancel);
      */ function debounce(func, wait, options) {
             var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
-            if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             wait = toNumber(wait) || 0;
             if (isObject(options)) {
                 leading = !!options.leading;
-                maxing = 'maxWait' in options;
+                maxing = "maxWait" in options;
                 maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
-                trailing = 'trailing' in options ? !!options.trailing : trailing;
+                trailing = "trailing" in options ? !!options.trailing : trailing;
             }
             function invokeFunc(time) {
                 var args = lastArgs, thisArg = lastThis;
@@ -14135,7 +14096,7 @@ var global = arguments[3];
      * // Replace `_.memoize.Cache`.
      * _.memoize.Cache = WeakMap;
      */ function memoize(func, resolver) {
-            if (typeof func != 'function' || resolver != null && typeof resolver != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function" || resolver != null && typeof resolver != "function") throw new TypeError(FUNC_ERROR_TEXT);
             var memoized = function() {
                 var args = arguments, key = resolver ? resolver.apply(this, args) : args[0], cache = memoized.cache;
                 if (cache.has(key)) return cache.get(key);
@@ -14168,7 +14129,7 @@ var global = arguments[3];
      * _.filter([1, 2, 3, 4, 5, 6], _.negate(isEven));
      * // => [1, 3, 5]
      */ function negate(predicate) {
-            if (typeof predicate != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof predicate != "function") throw new TypeError(FUNC_ERROR_TEXT);
             return function() {
                 var args = arguments;
                 switch(args.length){
@@ -14363,7 +14324,7 @@ var global = arguments[3];
      * say('hello', 'fred', 'barney', 'pebbles');
      * // => 'hello fred, barney, & pebbles'
      */ function rest(func, start) {
-            if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             start = start === undefined ? start : toInteger(start);
             return baseRest(func, start);
         }
@@ -14401,7 +14362,7 @@ var global = arguments[3];
      * }));
      * // => a Promise of 76
      */ function spread(func, start) {
-            if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             start = start == null ? 0 : nativeMax(toInteger(start), 0);
             return baseRest(function(args) {
                 var array = args[start], otherArgs = castSlice(args, 0, start);
@@ -14454,15 +14415,15 @@ var global = arguments[3];
      * jQuery(window).on('popstate', throttled.cancel);
      */ function throttle(func, wait, options) {
             var leading = true, trailing = true;
-            if (typeof func != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+            if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
             if (isObject(options)) {
-                leading = 'leading' in options ? !!options.leading : leading;
-                trailing = 'trailing' in options ? !!options.trailing : trailing;
+                leading = "leading" in options ? !!options.leading : leading;
+                trailing = "trailing" in options ? !!options.trailing : trailing;
             }
             return debounce(func, wait, {
-                'leading': leading,
-                'maxWait': wait,
-                'trailing': trailing
+                "leading": leading,
+                "maxWait": wait,
+                "trailing": trailing
             });
         }
         /**
@@ -14480,7 +14441,7 @@ var global = arguments[3];
      * _.map(['6', '8', '10'], _.unary(parseInt));
      * // => [6, 8, 10]
      */ function unary(func) {
-            return ary1(func, 1);
+            return ary(func, 1);
         }
         /**
      * Creates a function that provides `value` to `wrapper` as its first
@@ -14570,7 +14531,7 @@ var global = arguments[3];
      * var shallow = _.clone(objects);
      * console.log(shallow[0] === objects[0]);
      * // => true
-     */ function clone1(value) {
+     */ function clone(value) {
             return baseClone(value, CLONE_SYMBOLS_FLAG);
         }
         /**
@@ -14604,7 +14565,7 @@ var global = arguments[3];
      * console.log(el.childNodes.length);
      * // => 0
      */ function cloneWith(value, customizer) {
-            customizer = typeof customizer == 'function' ? customizer : undefined;
+            customizer = typeof customizer == "function" ? customizer : undefined;
             return baseClone(value, CLONE_SYMBOLS_FLAG, customizer);
         }
         /**
@@ -14655,7 +14616,7 @@ var global = arguments[3];
      * console.log(el.childNodes.length);
      * // => 20
      */ function cloneDeepWith(value, customizer) {
-            customizer = typeof customizer == 'function' ? customizer : undefined;
+            customizer = typeof customizer == "function" ? customizer : undefined;
             return baseClone(value, CLONE_DEEP_FLAG | CLONE_SYMBOLS_FLAG, customizer);
         }
         /**
@@ -14786,7 +14747,7 @@ var global = arguments[3];
      */ var isArguments = baseIsArguments(function() {
             return arguments;
         }()) ? baseIsArguments : function(value) {
-            return isObjectLike(value) && hasOwnProperty.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee');
+            return isObjectLike(value) && hasOwnProperty.call(value, "callee") && !propertyIsEnumerable.call(value, "callee");
         };
         /**
      * Checks if `value` is classified as an `Array` object.
@@ -14810,7 +14771,7 @@ var global = arguments[3];
      *
      * _.isArray(_.noop);
      * // => false
-     */ var isArray = Array.isArray;
+     */ var isArray = Array1.isArray;
         /**
      * Checks if `value` is classified as an `ArrayBuffer` object.
      *
@@ -14988,7 +14949,7 @@ var global = arguments[3];
      * // => false
      */ function isEmpty(value) {
             if (value == null) return true;
-            if (isArrayLike(value) && (isArray(value) || typeof value == 'string' || typeof value.splice == 'function' || isBuffer(value) || isTypedArray(value) || isArguments(value))) return !value.length;
+            if (isArrayLike(value) && (isArray(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer(value) || isTypedArray(value) || isArguments(value))) return !value.length;
             var tag = getTag(value);
             if (tag == mapTag || tag == setTag) return !value.size;
             if (isPrototype(value)) return !baseKeys(value).length;
@@ -15059,7 +15020,7 @@ var global = arguments[3];
      * _.isEqualWith(array, other, customizer);
      * // => true
      */ function isEqualWith(value, other, customizer) {
-            customizer = typeof customizer == 'function' ? customizer : undefined;
+            customizer = typeof customizer == "function" ? customizer : undefined;
             var result = customizer ? customizer(value, other) : undefined;
             return result === undefined ? baseIsEqual(value, other, undefined, customizer) : !!result;
         }
@@ -15083,7 +15044,7 @@ var global = arguments[3];
      */ function isError(value) {
             if (!isObjectLike(value)) return false;
             var tag = baseGetTag(value);
-            return tag == errorTag || tag == domExcTag || typeof value.message == 'string' && typeof value.name == 'string' && !isPlainObject(value);
+            return tag == errorTag || tag == domExcTag || typeof value.message == "string" && typeof value.name == "string" && !isPlainObject(value);
         }
         /**
      * Checks if `value` is a finite primitive number.
@@ -15111,7 +15072,7 @@ var global = arguments[3];
      * _.isFinite('3');
      * // => false
      */ function isFinite(value) {
-            return typeof value == 'number' && nativeIsFinite(value);
+            return typeof value == "number" && nativeIsFinite(value);
         }
         /**
      * Checks if `value` is classified as a `Function` object.
@@ -15162,7 +15123,7 @@ var global = arguments[3];
      * _.isInteger('3');
      * // => false
      */ function isInteger(value) {
-            return typeof value == 'number' && value == toInteger(value);
+            return typeof value == "number" && value == toInteger(value);
         }
         /**
      * Checks if `value` is a valid array-like length.
@@ -15190,7 +15151,7 @@ var global = arguments[3];
      * _.isLength('3');
      * // => false
      */ function isLength(value) {
-            return typeof value == 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+            return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
         }
         /**
      * Checks if `value` is the
@@ -15218,7 +15179,7 @@ var global = arguments[3];
      * // => false
      */ function isObject(value) {
             var type = typeof value;
-            return value != null && (type == 'object' || type == 'function');
+            return value != null && (type == "object" || type == "function");
         }
         /**
      * Checks if `value` is object-like. A value is object-like if it's not `null`
@@ -15244,7 +15205,7 @@ var global = arguments[3];
      * _.isObjectLike(null);
      * // => false
      */ function isObjectLike(value) {
-            return value != null && typeof value == 'object';
+            return value != null && typeof value == "object";
         }
         /**
      * Checks if `value` is classified as a `Map` object.
@@ -15325,7 +15286,7 @@ var global = arguments[3];
      * _.isMatchWith(object, source, customizer);
      * // => true
      */ function isMatchWith(object, source, customizer) {
-            customizer = typeof customizer == 'function' ? customizer : undefined;
+            customizer = typeof customizer == "function" ? customizer : undefined;
             return baseIsMatch(object, source, getMatchData(source), customizer);
         }
         /**
@@ -15457,7 +15418,7 @@ var global = arguments[3];
      * _.isNumber('3');
      * // => false
      */ function isNumber(value) {
-            return typeof value == 'number' || isObjectLike(value) && baseGetTag(value) == numberTag;
+            return typeof value == "number" || isObjectLike(value) && baseGetTag(value) == numberTag;
         }
         /**
      * Checks if `value` is a plain object, that is, an object created by the
@@ -15490,8 +15451,8 @@ var global = arguments[3];
             if (!isObjectLike(value) || baseGetTag(value) != objectTag) return false;
             var proto = getPrototype(value);
             if (proto === null) return true;
-            var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
-            return typeof Ctor == 'function' && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
+            var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
+            return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
         }
         /**
      * Checks if `value` is classified as a `RegExp` object.
@@ -15573,7 +15534,7 @@ var global = arguments[3];
      * _.isString(1);
      * // => false
      */ function isString(value) {
-            return typeof value == 'string' || !isArray(value) && isObjectLike(value) && baseGetTag(value) == stringTag;
+            return typeof value == "string" || !isArray(value) && isObjectLike(value) && baseGetTag(value) == stringTag;
         }
         /**
      * Checks if `value` is classified as a `Symbol` primitive or object.
@@ -15592,7 +15553,7 @@ var global = arguments[3];
      * _.isSymbol('abc');
      * // => false
      */ function isSymbol(value) {
-            return typeof value == 'symbol' || isObjectLike(value) && baseGetTag(value) == symbolTag;
+            return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag;
         }
         /**
      * Checks if `value` is classified as a typed array.
@@ -15742,7 +15703,7 @@ var global = arguments[3];
             if (!value) return [];
             if (isArrayLike(value)) return isString(value) ? stringToArray(value) : copyArray(value);
             if (symIterator && value[symIterator]) return iteratorToArray(value[symIterator]());
-            var tag = getTag(value), func = tag == mapTag ? mapToArray : tag == setTag ? setToArray : values1;
+            var tag = getTag(value), func = tag == mapTag ? mapToArray : tag == setTag ? setToArray : values;
             return func(value);
         }
         /**
@@ -15857,13 +15818,13 @@ var global = arguments[3];
      * _.toNumber('3.2');
      * // => 3.2
      */ function toNumber(value) {
-            if (typeof value == 'number') return value;
+            if (typeof value == "number") return value;
             if (isSymbol(value)) return NAN;
             if (isObject(value)) {
-                var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-                value = isObject(other) ? other + '' : other;
+                var other = typeof value.valueOf == "function" ? value.valueOf() : value;
+                value = isObject(other) ? other + "" : other;
             }
-            if (typeof value != 'string') return value === 0 ? value : +value;
+            if (typeof value != "string") return value === 0 ? value : +value;
             value = baseTrim(value);
             var isBinary = reIsBinary.test(value);
             return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
@@ -15941,7 +15902,7 @@ var global = arguments[3];
      * _.toString([1, 2, 3]);
      * // => '1,2,3'
      */ function toString(value) {
-            return value == null ? '' : baseToString(value);
+            return value == null ? "" : baseToString(value);
         }
         /*------------------------------------------------------------------------*/ /**
      * Assigns own enumerable string keyed properties of source objects to the
@@ -16150,7 +16111,7 @@ var global = arguments[3];
      * _.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
      * // => { 'a': 1, 'b': 2 }
      */ var defaults = baseRest(function(object, sources) {
-            object = Object(object);
+            object = Object1(object);
             var index = -1;
             var length = sources.length;
             var guard = length > 2 ? sources[2] : undefined;
@@ -16533,7 +16494,7 @@ var global = arguments[3];
      * _.invert(object);
      * // => { '1': 'c', '2': 'b' }
      */ var invert = createInverter(function(result, value, key) {
-            if (value != null && typeof value.toString != 'function') value = nativeObjectToString.call(value);
+            if (value != null && typeof value.toString != "function") value = nativeObjectToString.call(value);
             result[value] = key;
         }, constant(identity));
         /**
@@ -16562,7 +16523,7 @@ var global = arguments[3];
      * });
      * // => { 'group1': ['a', 'c'], 'group2': ['b'] }
      */ var invertBy = createInverter(function(result, value, key) {
-            if (value != null && typeof value.toString != 'function') value = nativeObjectToString.call(value);
+            if (value != null && typeof value.toString != "function") value = nativeObjectToString.call(value);
             if (hasOwnProperty.call(result, value)) result[value].push(key);
             else result[value] = [
                 key
@@ -16661,11 +16622,10 @@ var global = arguments[3];
      *   return key + value;
      * });
      * // => { 'a1': 1, 'b2': 2 }
-     */ function mapKeys(object2, iteratee) {
-            var result = {
-            };
+     */ function mapKeys(object, iteratee) {
+            var result = {};
             iteratee = getIteratee(iteratee, 3);
-            baseForOwn(object2, function(value, key, object) {
+            baseForOwn(object, function(value, key, object) {
                 baseAssignValue(result, iteratee(value, key, object), value);
             });
             return result;
@@ -16697,11 +16657,10 @@ var global = arguments[3];
      * // The `_.property` iteratee shorthand.
      * _.mapValues(users, 'age');
      * // => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
-     */ function mapValues(object3, iteratee) {
-            var result = {
-            };
+     */ function mapValues(object, iteratee) {
+            var result = {};
             iteratee = getIteratee(iteratee, 3);
-            baseForOwn(object3, function(value, key, object) {
+            baseForOwn(object, function(value, key, object) {
                 baseAssignValue(result, key, iteratee(value, key, object));
             });
             return result;
@@ -16792,8 +16751,7 @@ var global = arguments[3];
      * _.omit(object, ['a', 'c']);
      * // => { 'b': '2' }
      */ var omit = flatRest(function(object, paths) {
-            var result = {
-            };
+            var result = {};
             if (object == null) return result;
             var isDeep = false;
             paths = arrayMap(paths, function(path) {
@@ -16846,8 +16804,7 @@ var global = arguments[3];
      * _.pick(object, ['a', 'c']);
      * // => { 'a': 1, 'c': 3 }
      */ var pick = flatRest(function(object, paths) {
-            return object == null ? {
-            } : basePick(object, paths);
+            return object == null ? {} : basePick(object, paths);
         });
         /**
      * Creates an object composed of the `object` properties `predicate` returns
@@ -16867,8 +16824,7 @@ var global = arguments[3];
      * _.pickBy(object, _.isNumber);
      * // => { 'a': 1, 'c': 3 }
      */ function pickBy(object, predicate) {
-            if (object == null) return {
-            };
+            if (object == null) return {};
             var props = arrayMap(getAllKeysIn(object), function(prop) {
                 return [
                     prop
@@ -16907,7 +16863,7 @@ var global = arguments[3];
      *
      * _.result(object, 'a[0].b.c3', _.constant('default'));
      * // => 'default'
-     */ function result1(object, path, defaultValue) {
+     */ function result(object, path, defaultValue) {
             path = castPath(path, object);
             var index = -1, length = path.length;
             // Ensure the loop is entered when path is empty.
@@ -16952,7 +16908,7 @@ var global = arguments[3];
      * _.set(object, ['x', '0', 'y', 'z'], 5);
      * console.log(object.x[0].y.z);
      * // => 5
-     */ function set1(object, path, value) {
+     */ function set(object, path, value) {
             return object == null ? object : baseSet(object, path, value);
         }
         /**
@@ -16979,7 +16935,7 @@ var global = arguments[3];
      * _.setWith(object, '[0][1]', 'a', Object);
      * // => { '0': { '1': 'a' } }
      */ function setWith(object, path, value, customizer) {
-            customizer = typeof customizer == 'function' ? customizer : undefined;
+            customizer = typeof customizer == "function" ? customizer : undefined;
             return object == null ? object : baseSet(object, path, value, customizer);
         }
         /**
@@ -17059,18 +17015,16 @@ var global = arguments[3];
      *   (result[value] || (result[value] = [])).push(key);
      * }, {});
      * // => { '1': ['a', 'c'], '2': ['b'] }
-     */ function transform1(object4, iteratee, accumulator) {
-            var isArr = isArray(object4), isArrLike = isArr || isBuffer(object4) || isTypedArray(object4);
+     */ function transform(object, iteratee, accumulator) {
+            var isArr = isArray(object), isArrLike = isArr || isBuffer(object) || isTypedArray(object);
             iteratee = getIteratee(iteratee, 4);
             if (accumulator == null) {
-                var Ctor = object4 && object4.constructor;
+                var Ctor = object && object.constructor;
                 if (isArrLike) accumulator = isArr ? new Ctor : [];
-                else if (isObject(object4)) accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object4)) : {
-                };
-                else accumulator = {
-                };
+                else if (isObject(object)) accumulator = isFunction(Ctor) ? baseCreate(getPrototype(object)) : {};
+                else accumulator = {};
             }
-            (isArrLike ? arrayEach : baseForOwn)(object4, function(value, index, object) {
+            (isArrLike ? arrayEach : baseForOwn)(object, function(value, index, object) {
                 return iteratee(accumulator, value, index, object);
             });
             return accumulator;
@@ -17157,7 +17111,7 @@ var global = arguments[3];
      * _.updateWith(object, '[0][1]', _.constant('a'), Object);
      * // => { '0': { '1': 'a' } }
      */ function updateWith(object, path, updater, customizer) {
-            customizer = typeof customizer == 'function' ? customizer : undefined;
+            customizer = typeof customizer == "function" ? customizer : undefined;
             return object == null ? object : baseUpdate(object, path, castFunction(updater), customizer);
         }
         /**
@@ -17185,7 +17139,7 @@ var global = arguments[3];
      *
      * _.values('hi');
      * // => ['h', 'i']
-     */ function values1(object) {
+     */ function values(object) {
             return object == null ? [] : baseValues(object, keys(object));
         }
         /**
@@ -17324,12 +17278,12 @@ var global = arguments[3];
      * _.random(1.2, 5.2);
      * // => a floating-point number between 1.2 and 5.2
      */ function random(lower, upper, floating) {
-            if (floating && typeof floating != 'boolean' && isIterateeCall(lower, upper, floating)) upper = floating = undefined;
+            if (floating && typeof floating != "boolean" && isIterateeCall(lower, upper, floating)) upper = floating = undefined;
             if (floating === undefined) {
-                if (typeof upper == 'boolean') {
+                if (typeof upper == "boolean") {
                     floating = upper;
                     upper = undefined;
-                } else if (typeof lower == 'boolean') {
+                } else if (typeof lower == "boolean") {
                     floating = lower;
                     lower = undefined;
                 }
@@ -17351,7 +17305,7 @@ var global = arguments[3];
             }
             if (floating || lower % 1 || upper % 1) {
                 var rand = nativeRandom();
-                return nativeMin(lower + rand * (upper - lower + freeParseFloat('1e-' + ((rand + '').length - 1))), upper);
+                return nativeMin(lower + rand * (upper - lower + freeParseFloat("1e-" + ((rand + "").length - 1))), upper);
             }
             return baseRandom(lower, upper);
         }
@@ -17414,7 +17368,7 @@ var global = arguments[3];
      * // => 'deja vu'
      */ function deburr(string) {
             string = toString(string);
-            return string && string.replace(reLatin, deburrLetter).replace(reComboMark, '');
+            return string && string.replace(reLatin, deburrLetter).replace(reComboMark, "");
         }
         /**
      * Checks if `string` ends with the given target string.
@@ -17494,7 +17448,7 @@ var global = arguments[3];
      * // => '\[lodash\]\(https://lodash\.com/\)'
      */ function escapeRegExp(string) {
             string = toString(string);
-            return string && reHasRegExpChar.test(string) ? string.replace(reRegExpChar, '\\$&') : string;
+            return string && reHasRegExpChar.test(string) ? string.replace(reRegExpChar, "\\$&") : string;
         }
         /**
      * Converts `string` to
@@ -17517,7 +17471,7 @@ var global = arguments[3];
      * _.kebabCase('__FOO_BAR__');
      * // => 'foo-bar'
      */ var kebabCase = createCompounder(function(result, word, index) {
-            return result + (index ? '-' : '') + word.toLowerCase();
+            return result + (index ? "-" : "") + word.toLowerCase();
         });
         /**
      * Converts `string`, as space separated words, to lower case.
@@ -17539,7 +17493,7 @@ var global = arguments[3];
      * _.lowerCase('__FOO_BAR__');
      * // => 'foo bar'
      */ var lowerCase = createCompounder(function(result, word, index) {
-            return result + (index ? ' ' : '') + word.toLowerCase();
+            return result + (index ? " " : "") + word.toLowerCase();
         });
         /**
      * Converts the first character of `string` to lower case.
@@ -17557,7 +17511,7 @@ var global = arguments[3];
      *
      * _.lowerFirst('FRED');
      * // => 'fRED'
-     */ var lowerFirst = createCaseFirst('toLowerCase');
+     */ var lowerFirst = createCaseFirst("toLowerCase");
         /**
      * Pads `string` on the left and right sides if it's shorter than `length`.
      * Padding characters are truncated if they can't be evenly divided by `length`.
@@ -17667,10 +17621,10 @@ var global = arguments[3];
      *
      * _.map(['6', '08', '10'], _.parseInt);
      * // => [6, 8, 10]
-     */ function parseInt(string, radix, guard) {
+     */ function parseInt1(string, radix, guard) {
             if (guard || radix == null) radix = 0;
             else if (radix) radix = +radix;
-            return nativeParseInt(toString(string).replace(reTrimStart, ''), radix || 0);
+            return nativeParseInt(toString(string).replace(reTrimStart, ""), radix || 0);
         }
         /**
      * Repeats the given string `n` times.
@@ -17741,7 +17695,7 @@ var global = arguments[3];
      * _.snakeCase('--FOO-BAR--');
      * // => 'foo_bar'
      */ var snakeCase = createCompounder(function(result, word, index) {
-            return result + (index ? '_' : '') + word.toLowerCase();
+            return result + (index ? "_" : "") + word.toLowerCase();
         });
         /**
      * Splits `string` by `separator`.
@@ -17762,11 +17716,11 @@ var global = arguments[3];
      * _.split('a-b-c', '-', 2);
      * // => ['a', 'b']
      */ function split(string, separator, limit) {
-            if (limit && typeof limit != 'number' && isIterateeCall(string, separator, limit)) separator = limit = undefined;
+            if (limit && typeof limit != "number" && isIterateeCall(string, separator, limit)) separator = limit = undefined;
             limit = limit === undefined ? MAX_ARRAY_LENGTH : limit >>> 0;
             if (!limit) return [];
             string = toString(string);
-            if (string && (typeof separator == 'string' || separator != null && !isRegExp(separator))) {
+            if (string && (typeof separator == "string" || separator != null && !isRegExp(separator))) {
                 separator = baseToString(separator);
                 if (!separator && hasUnicode(string)) return castSlice(stringToArray(string), 0, limit);
             }
@@ -17793,7 +17747,7 @@ var global = arguments[3];
      * _.startCase('__FOO_BAR__');
      * // => 'FOO BAR'
      */ var startCase = createCompounder(function(result, word, index) {
-            return result + (index ? ' ' : '') + upperFirst(word);
+            return result + (index ? " " : "") + upperFirst(word);
         });
         /**
      * Checks if `string` starts with the given target string.
@@ -17933,18 +17887,16 @@ var global = arguments[3];
             var settings = lodash.templateSettings;
             if (guard && isIterateeCall(string, options, guard)) options = undefined;
             string = toString(string);
-            options = assignInWith({
-            }, options, settings, customDefaultsAssignIn);
-            var imports = assignInWith({
-            }, options.imports, settings.imports, customDefaultsAssignIn), importsKeys = keys(imports), importsValues = baseValues(imports, importsKeys);
+            options = assignInWith({}, options, settings, customDefaultsAssignIn);
+            var imports = assignInWith({}, options.imports, settings.imports, customDefaultsAssignIn), importsKeys = keys(imports), importsValues = baseValues(imports, importsKeys);
             var isEscaping, isEvaluating, index = 0, interpolate = options.interpolate || reNoMatch, source = "__p += '";
             // Compile the regexp to match each delimiter.
-            var reDelimiters = RegExp((options.escape || reNoMatch).source + '|' + interpolate.source + '|' + (interpolate === reInterpolate ? reEsTemplate : reNoMatch).source + '|' + (options.evaluate || reNoMatch).source + '|$', 'g');
+            var reDelimiters = RegExp1((options.escape || reNoMatch).source + "|" + interpolate.source + "|" + (interpolate === reInterpolate ? reEsTemplate : reNoMatch).source + "|" + (options.evaluate || reNoMatch).source + "|$", "g");
             // Use a sourceURL for easier debugging.
             // The sourceURL gets injected into the source that's eval-ed, so be careful
             // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
             // and escape the comment, thus injecting code that gets evaled.
-            var sourceURL = '//# sourceURL=' + (hasOwnProperty.call(options, 'sourceURL') ? (options.sourceURL + '').replace(/\s/g, ' ') : 'lodash.templateSources[' + ++templateCounter + ']') + '\n';
+            var sourceURL = "//# sourceURL=" + (hasOwnProperty.call(options, "sourceURL") ? (options.sourceURL + "").replace(/\s/g, " ") : "lodash.templateSources[" + ++templateCounter + "]") + "\n";
             string.replace(reDelimiters, function(match, escapeValue, interpolateValue, esTemplateValue, evaluateValue, offset) {
                 interpolateValue || (interpolateValue = esTemplateValue);
                 // Escape characters that can't be included in string literals.
@@ -17967,15 +17919,15 @@ var global = arguments[3];
             source += "';\n";
             // If `variable` is not specified wrap a with-statement around the generated
             // code to add the data object to the top of the scope chain.
-            var variable = hasOwnProperty.call(options, 'variable') && options.variable;
-            if (!variable) source = 'with (obj) {\n' + source + '\n}\n';
+            var variable = hasOwnProperty.call(options, "variable") && options.variable;
+            if (!variable) source = "with (obj) {\n" + source + "\n}\n";
             else if (reForbiddenIdentifierChars.test(variable)) throw new Error(INVALID_TEMPL_VAR_ERROR_TEXT);
             // Cleanup code by stripping empty strings.
-            source = (isEvaluating ? source.replace(reEmptyStringLeading, '') : source).replace(reEmptyStringMiddle, '$1').replace(reEmptyStringTrailing, '$1;');
+            source = (isEvaluating ? source.replace(reEmptyStringLeading, "") : source).replace(reEmptyStringMiddle, "$1").replace(reEmptyStringTrailing, "$1;");
             // Frame code as the function body.
-            source = 'function(' + (variable || 'obj') + ') {\n' + (variable ? '' : 'obj || (obj = {});\n') + "var __t, __p = ''" + (isEscaping ? ', __e = _.escape' : '') + (isEvaluating ? ", __j = Array.prototype.join;\nfunction print() { __p += __j.call(arguments, '') }\n" : ';\n') + source + 'return __p\n}';
+            source = "function(" + (variable || "obj") + ") {\n" + (variable ? "" : "obj || (obj = {});\n") + "var __t, __p = ''" + (isEscaping ? ", __e = _.escape" : "") + (isEvaluating ? ", __j = Array.prototype.join;\nfunction print() { __p += __j.call(arguments, '') }\n" : ";\n") + source + "return __p\n}";
             var result = attempt(function() {
-                return Function(importsKeys, sourceURL + 'return ' + source).apply(undefined, importsValues);
+                return Function1(importsKeys, sourceURL + "return " + source).apply(undefined, importsValues);
             });
             // Provide the compiled function's source by its `toString` method or
             // the `source` property as a convenience for inlining compiled templates.
@@ -18055,7 +18007,7 @@ var global = arguments[3];
             if (string && (guard || chars === undefined)) return baseTrim(string);
             if (!string || !(chars = baseToString(chars))) return string;
             var strSymbols = stringToArray(string), chrSymbols = stringToArray(chars), start = charsStartIndex(strSymbols, chrSymbols), end = charsEndIndex(strSymbols, chrSymbols) + 1;
-            return castSlice(strSymbols, start, end).join('');
+            return castSlice(strSymbols, start, end).join("");
         }
         /**
      * Removes trailing whitespace or specified characters from `string`.
@@ -18080,7 +18032,7 @@ var global = arguments[3];
             if (string && (guard || chars === undefined)) return string.slice(0, trimmedEndIndex(string) + 1);
             if (!string || !(chars = baseToString(chars))) return string;
             var strSymbols = stringToArray(string), end = charsEndIndex(strSymbols, stringToArray(chars)) + 1;
-            return castSlice(strSymbols, 0, end).join('');
+            return castSlice(strSymbols, 0, end).join("");
         }
         /**
      * Removes leading whitespace or specified characters from `string`.
@@ -18102,10 +18054,10 @@ var global = arguments[3];
      * // => 'abc-_-'
      */ function trimStart(string, chars, guard) {
             string = toString(string);
-            if (string && (guard || chars === undefined)) return string.replace(reTrimStart, '');
+            if (string && (guard || chars === undefined)) return string.replace(reTrimStart, "");
             if (!string || !(chars = baseToString(chars))) return string;
             var strSymbols = stringToArray(string), start = charsStartIndex(strSymbols, stringToArray(chars));
-            return castSlice(strSymbols, start).join('');
+            return castSlice(strSymbols, start).join("");
         }
         /**
      * Truncates `string` if it's longer than the given maximum string length.
@@ -18146,9 +18098,9 @@ var global = arguments[3];
      */ function truncate(string, options) {
             var length = DEFAULT_TRUNC_LENGTH, omission = DEFAULT_TRUNC_OMISSION;
             if (isObject(options)) {
-                var separator = 'separator' in options ? options.separator : separator;
-                length = 'length' in options ? toInteger(options.length) : length;
-                omission = 'omission' in options ? baseToString(options.omission) : omission;
+                var separator = "separator" in options ? options.separator : separator;
+                length = "length" in options ? toInteger(options.length) : length;
+                omission = "omission" in options ? baseToString(options.omission) : omission;
             }
             string = toString(string);
             var strLength = string.length;
@@ -18159,13 +18111,13 @@ var global = arguments[3];
             if (length >= strLength) return string;
             var end = length - stringSize(omission);
             if (end < 1) return omission;
-            var result = strSymbols ? castSlice(strSymbols, 0, end).join('') : string.slice(0, end);
+            var result = strSymbols ? castSlice(strSymbols, 0, end).join("") : string.slice(0, end);
             if (separator === undefined) return result + omission;
             if (strSymbols) end += result.length - end;
             if (isRegExp(separator)) {
                 if (string.slice(end).search(separator)) {
                     var match, substring = result;
-                    if (!separator.global) separator = RegExp(separator.source, toString(reFlags.exec(separator)) + 'g');
+                    if (!separator.global) separator = RegExp1(separator.source, toString(reFlags.exec(separator)) + "g");
                     separator.lastIndex = 0;
                     while(match = separator.exec(substring))var newEnd = match.index;
                     result = result.slice(0, newEnd === undefined ? end : newEnd);
@@ -18218,7 +18170,7 @@ var global = arguments[3];
      * _.upperCase('__foo_bar__');
      * // => 'FOO BAR'
      */ var upperCase = createCompounder(function(result, word, index) {
-            return result + (index ? ' ' : '') + word.toUpperCase();
+            return result + (index ? " " : "") + word.toUpperCase();
         });
         /**
      * Converts the first character of `string` to upper case.
@@ -18236,7 +18188,7 @@ var global = arguments[3];
      *
      * _.upperFirst('FRED');
      * // => 'FRED'
-     */ var upperFirst = createCaseFirst('toUpperCase');
+     */ var upperFirst = createCaseFirst("toUpperCase");
         /**
      * Splits `string` into an array of its words.
      *
@@ -18352,7 +18304,7 @@ var global = arguments[3];
      */ function cond(pairs) {
             var length = pairs == null ? 0 : pairs.length, toIteratee = getIteratee();
             pairs = !length ? [] : arrayMap(pairs, function(pair) {
-                if (typeof pair[1] != 'function') throw new TypeError(FUNC_ERROR_TEXT);
+                if (typeof pair[1] != "function") throw new TypeError(FUNC_ERROR_TEXT);
                 return [
                     toIteratee(pair[0]),
                     pair[1]
@@ -18539,8 +18491,8 @@ var global = arguments[3];
      *
      * _.filter(['abc', 'def'], /ef/);
      * // => ['def']
-     */ function iteratee1(func) {
-            return baseIteratee(typeof func == 'function' ? func : baseClone(func, CLONE_DEEP_FLAG));
+     */ function iteratee(func) {
+            return baseIteratee(typeof func == "function" ? func : baseClone(func, CLONE_DEEP_FLAG));
         }
         /**
      * Creates a function that performs a partial deep comparison between a given
@@ -18712,7 +18664,7 @@ var global = arguments[3];
                 object = this;
                 methodNames = baseFunctions(source, keys(source));
             }
-            var chain = !(isObject(options) && 'chain' in options) || !!options.chain, isFunc = isFunction(object);
+            var chain = !(isObject(options) && "chain" in options) || !!options.chain, isFunc = isFunction(object);
             arrayEach(methodNames, function(methodName) {
                 var func = source[methodName];
                 object[methodName] = func;
@@ -18721,9 +18673,9 @@ var global = arguments[3];
                     if (chain || chainAll) {
                         var result = object(this.__wrapped__), actions = result.__actions__ = copyArray(this.__actions__);
                         actions.push({
-                            'func': func,
-                            'args': arguments,
-                            'thisArg': object
+                            "func": func,
+                            "args": arguments,
+                            "thisArg": object
                         });
                         result.__chain__ = chainAll;
                         return result;
@@ -19046,8 +18998,7 @@ var global = arguments[3];
      * console.log(objects[0] === objects[1]);
      * // => false
      */ function stubObject() {
-            return {
-            };
+            return {};
         }
         /**
      * This method returns an empty string.
@@ -19062,7 +19013,7 @@ var global = arguments[3];
      * _.times(2, _.stubString);
      * // => ['', '']
      */ function stubString() {
-            return '';
+            return "";
         }
         /**
      * This method returns `true`.
@@ -19186,7 +19137,7 @@ var global = arguments[3];
      *
      * _.ceil(6040, -2);
      * // => 6100
-     */ var ceil = createRound('ceil');
+     */ var ceil = createRound("ceil");
         /**
      * Divide two numbers.
      *
@@ -19224,7 +19175,7 @@ var global = arguments[3];
      *
      * _.floor(4060, -2);
      * // => 4000
-     */ var floor = createRound('floor');
+     */ var floor = createRound("floor");
         /**
      * Computes the maximum value of `array`. If `array` is empty or falsey,
      * `undefined` is returned.
@@ -19393,7 +19344,7 @@ var global = arguments[3];
      *
      * _.round(4060, -2);
      * // => 4100
-     */ var round = createRound('round');
+     */ var round = createRound("round");
         /**
      * Subtract two numbers.
      *
@@ -19454,7 +19405,7 @@ var global = arguments[3];
         }
         /*------------------------------------------------------------------------*/ // Add methods that return wrapped values in chain sequences.
         lodash.after = after;
-        lodash.ary = ary1;
+        lodash.ary = ary;
         lodash.assign = assign;
         lodash.assignIn = assignIn;
         lodash.assignInWith = assignInWith;
@@ -19465,7 +19416,7 @@ var global = arguments[3];
         lodash.bindAll = bindAll;
         lodash.bindKey = bindKey;
         lodash.castArray = castArray;
-        lodash.chain = chain1;
+        lodash.chain = chain;
         lodash.chunk = chunk;
         lodash.compact = compact;
         lodash.concat = concat;
@@ -19510,11 +19461,11 @@ var global = arguments[3];
         lodash.invert = invert;
         lodash.invertBy = invertBy;
         lodash.invokeMap = invokeMap;
-        lodash.iteratee = iteratee1;
+        lodash.iteratee = iteratee;
         lodash.keyBy = keyBy;
         lodash.keys = keys;
         lodash.keysIn = keysIn;
-        lodash.map = map1;
+        lodash.map = map;
         lodash.mapKeys = mapKeys;
         lodash.mapValues = mapValues;
         lodash.matches = matches;
@@ -19555,7 +19506,7 @@ var global = arguments[3];
         lodash.rest = rest;
         lodash.reverse = reverse;
         lodash.sampleSize = sampleSize;
-        lodash.set = set1;
+        lodash.set = set;
         lodash.setWith = setWith;
         lodash.shuffle = shuffle;
         lodash.slice = slice;
@@ -19577,7 +19528,7 @@ var global = arguments[3];
         lodash.toPairsIn = toPairsIn;
         lodash.toPath = toPath;
         lodash.toPlainObject = toPlainObject;
-        lodash.transform = transform1;
+        lodash.transform = transform;
         lodash.unary = unary;
         lodash.union = union;
         lodash.unionBy = unionBy;
@@ -19590,7 +19541,7 @@ var global = arguments[3];
         lodash.unzipWith = unzipWith;
         lodash.update = update;
         lodash.updateWith = updateWith;
-        lodash.values = values1;
+        lodash.values = values;
         lodash.valuesIn = valuesIn;
         lodash.without = without;
         lodash.words = words;
@@ -19616,7 +19567,7 @@ var global = arguments[3];
         lodash.capitalize = capitalize;
         lodash.ceil = ceil;
         lodash.clamp = clamp;
-        lodash.clone = clone1;
+        lodash.clone = clone;
         lodash.cloneDeep = cloneDeep;
         lodash.cloneDeepWith = cloneDeepWith;
         lodash.cloneWith = cloneWith;
@@ -19649,8 +19600,8 @@ var global = arguments[3];
         lodash.hasIn = hasIn;
         lodash.head = head;
         lodash.identity = identity;
-        lodash.includes = includes1;
-        lodash.indexOf = indexOf1;
+        lodash.includes = includes;
+        lodash.indexOf = indexOf;
         lodash.inRange = inRange;
         lodash.invoke = invoke;
         lodash.isArguments = isArguments;
@@ -19717,17 +19668,17 @@ var global = arguments[3];
         lodash.pad = pad;
         lodash.padEnd = padEnd;
         lodash.padStart = padStart;
-        lodash.parseInt = parseInt;
+        lodash.parseInt = parseInt1;
         lodash.random = random;
         lodash.reduce = reduce;
         lodash.reduceRight = reduceRight;
         lodash.repeat = repeat;
         lodash.replace = replace;
-        lodash.result = result1;
+        lodash.result = result;
         lodash.round = round;
         lodash.runInContext = runInContext;
         lodash.sample = sample;
-        lodash.size = size1;
+        lodash.size = size;
         lodash.snakeCase = snakeCase;
         lodash.some = some;
         lodash.sortedIndex = sortedIndex;
@@ -19764,14 +19715,13 @@ var global = arguments[3];
         lodash.eachRight = forEachRight;
         lodash.first = head;
         mixin(lodash, function() {
-            var source = {
-            };
+            var source = {};
             baseForOwn(lodash, function(func, methodName) {
                 if (!hasOwnProperty.call(lodash.prototype, methodName)) source[methodName] = func;
             });
             return source;
         }(), {
-            'chain': false
+            "chain": false
         });
         /*------------------------------------------------------------------------*/ /**
      * The semantic version number.
@@ -19782,46 +19732,46 @@ var global = arguments[3];
      */ lodash.VERSION = VERSION;
         // Assign default placeholders.
         arrayEach([
-            'bind',
-            'bindKey',
-            'curry',
-            'curryRight',
-            'partial',
-            'partialRight'
+            "bind",
+            "bindKey",
+            "curry",
+            "curryRight",
+            "partial",
+            "partialRight"
         ], function(methodName) {
             lodash[methodName].placeholder = lodash;
         });
         // Add `LazyWrapper` methods for `_.drop` and `_.take` variants.
         arrayEach([
-            'drop',
-            'take'
+            "drop",
+            "take"
         ], function(methodName, index) {
             LazyWrapper.prototype[methodName] = function(n) {
                 n = n === undefined ? 1 : nativeMax(toInteger(n), 0);
                 var result = this.__filtered__ && !index ? new LazyWrapper(this) : this.clone();
                 if (result.__filtered__) result.__takeCount__ = nativeMin(n, result.__takeCount__);
                 else result.__views__.push({
-                    'size': nativeMin(n, MAX_ARRAY_LENGTH),
-                    'type': methodName + (result.__dir__ < 0 ? 'Right' : '')
+                    "size": nativeMin(n, MAX_ARRAY_LENGTH),
+                    "type": methodName + (result.__dir__ < 0 ? "Right" : "")
                 });
                 return result;
             };
-            LazyWrapper.prototype[methodName + 'Right'] = function(n) {
+            LazyWrapper.prototype[methodName + "Right"] = function(n) {
                 return this.reverse()[methodName](n).reverse();
             };
         });
         // Add `LazyWrapper` methods that accept an `iteratee` value.
         arrayEach([
-            'filter',
-            'map',
-            'takeWhile'
+            "filter",
+            "map",
+            "takeWhile"
         ], function(methodName, index) {
             var type = index + 1, isFilter = type == LAZY_FILTER_FLAG || type == LAZY_WHILE_FLAG;
             LazyWrapper.prototype[methodName] = function(iteratee) {
                 var result = this.clone();
                 result.__iteratees__.push({
-                    'iteratee': getIteratee(iteratee, 3),
-                    'type': type
+                    "iteratee": getIteratee(iteratee, 3),
+                    "type": type
                 });
                 result.__filtered__ = result.__filtered__ || isFilter;
                 return result;
@@ -19829,20 +19779,20 @@ var global = arguments[3];
         });
         // Add `LazyWrapper` methods for `_.head` and `_.last`.
         arrayEach([
-            'head',
-            'last'
+            "head",
+            "last"
         ], function(methodName, index) {
-            var takeName = 'take' + (index ? 'Right' : '');
+            var takeName = "take" + (index ? "Right" : "");
             LazyWrapper.prototype[methodName] = function() {
                 return this[takeName](1).value()[0];
             };
         });
         // Add `LazyWrapper` methods for `_.initial` and `_.tail`.
         arrayEach([
-            'initial',
-            'tail'
+            "initial",
+            "tail"
         ], function(methodName, index) {
-            var dropName = 'drop' + (index ? '' : 'Right');
+            var dropName = "drop" + (index ? "" : "Right");
             LazyWrapper.prototype[methodName] = function() {
                 return this.__filtered__ ? new LazyWrapper(this) : this[dropName](1);
             };
@@ -19857,7 +19807,7 @@ var global = arguments[3];
             return this.reverse().find(predicate);
         };
         LazyWrapper.prototype.invokeMap = baseRest(function(path, args) {
-            if (typeof path == 'function') return new LazyWrapper(this);
+            if (typeof path == "function") return new LazyWrapper(this);
             return this.map(function(value) {
                 return baseInvoke(value, path, args);
             });
@@ -19885,48 +19835,48 @@ var global = arguments[3];
         };
         // Add `LazyWrapper` methods to `lodash.prototype`.
         baseForOwn(LazyWrapper.prototype, function(func, methodName) {
-            var checkIteratee = /^(?:filter|find|map|reject)|While$/.test(methodName), isTaker = /^(?:head|last)$/.test(methodName), lodashFunc = lodash[isTaker ? 'take' + (methodName == 'last' ? 'Right' : '') : methodName], retUnwrapped = isTaker || /^find/.test(methodName);
+            var checkIteratee = /^(?:filter|find|map|reject)|While$/.test(methodName), isTaker = /^(?:head|last)$/.test(methodName), lodashFunc = lodash[isTaker ? "take" + (methodName == "last" ? "Right" : "") : methodName], retUnwrapped = isTaker || /^find/.test(methodName);
             if (!lodashFunc) return;
             lodash.prototype[methodName] = function() {
-                var value1 = this.__wrapped__, args = isTaker ? [
+                var value = this.__wrapped__, args = isTaker ? [
                     1
-                ] : arguments, isLazy = value1 instanceof LazyWrapper, iteratee = args[0], useLazy = isLazy || isArray(value1);
+                ] : arguments, isLazy = value instanceof LazyWrapper, iteratee = args[0], useLazy = isLazy || isArray(value);
                 var interceptor = function(value) {
                     var result = lodashFunc.apply(lodash, arrayPush([
                         value
                     ], args));
                     return isTaker && chainAll ? result[0] : result;
                 };
-                if (useLazy && checkIteratee && typeof iteratee == 'function' && iteratee.length != 1) // Avoid lazy use if the iteratee has a "length" value other than `1`.
+                if (useLazy && checkIteratee && typeof iteratee == "function" && iteratee.length != 1) // Avoid lazy use if the iteratee has a "length" value other than `1`.
                 isLazy = useLazy = false;
                 var chainAll = this.__chain__, isHybrid = !!this.__actions__.length, isUnwrapped = retUnwrapped && !chainAll, onlyLazy = isLazy && !isHybrid;
                 if (!retUnwrapped && useLazy) {
-                    value1 = onlyLazy ? value1 : new LazyWrapper(this);
-                    var result3 = func.apply(value1, args);
-                    result3.__actions__.push({
-                        'func': thru,
-                        'args': [
+                    value = onlyLazy ? value : new LazyWrapper(this);
+                    var result = func.apply(value, args);
+                    result.__actions__.push({
+                        "func": thru,
+                        "args": [
                             interceptor
                         ],
-                        'thisArg': undefined
+                        "thisArg": undefined
                     });
-                    return new LodashWrapper(result3, chainAll);
+                    return new LodashWrapper(result, chainAll);
                 }
                 if (isUnwrapped && onlyLazy) return func.apply(this, args);
-                result3 = this.thru(interceptor);
-                return isUnwrapped ? isTaker ? result3.value()[0] : result3.value() : result3;
+                result = this.thru(interceptor);
+                return isUnwrapped ? isTaker ? result.value()[0] : result.value() : result;
             };
         });
         // Add `Array` methods to `lodash.prototype`.
         arrayEach([
-            'pop',
-            'push',
-            'shift',
-            'sort',
-            'splice',
-            'unshift'
+            "pop",
+            "push",
+            "shift",
+            "sort",
+            "splice",
+            "unshift"
         ], function(methodName) {
-            var func = arrayProto[methodName], chainName = /^(?:push|sort|unshift)$/.test(methodName) ? 'tap' : 'thru', retUnwrapped = /^(?:pop|shift)$/.test(methodName);
+            var func = arrayProto[methodName], chainName = /^(?:push|sort|unshift)$/.test(methodName) ? "tap" : "thru", retUnwrapped = /^(?:pop|shift)$/.test(methodName);
             lodash.prototype[methodName] = function() {
                 var args = arguments;
                 if (retUnwrapped && !this.__chain__) {
@@ -19942,18 +19892,18 @@ var global = arguments[3];
         baseForOwn(LazyWrapper.prototype, function(func, methodName) {
             var lodashFunc = lodash[methodName];
             if (lodashFunc) {
-                var key = lodashFunc.name + '';
+                var key = lodashFunc.name + "";
                 if (!hasOwnProperty.call(realNames, key)) realNames[key] = [];
                 realNames[key].push({
-                    'name': methodName,
-                    'func': lodashFunc
+                    "name": methodName,
+                    "func": lodashFunc
                 });
             }
         });
         realNames[createHybrid(undefined, WRAP_BIND_KEY_FLAG).name] = [
             {
-                'name': 'wrapper',
-                'func': undefined
+                "name": "wrapper",
+                "func": undefined
             }
         ];
         // Add methods to `LazyWrapper`.
@@ -19974,9 +19924,9 @@ var global = arguments[3];
         return lodash;
     };
     /*--------------------------------------------------------------------------*/ // Export lodash.
-    var _ = runInContext1();
+    var _ = runInContext();
     // Some AMD build optimizers, like r.js, check for condition patterns like:
-    if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
+    if (typeof define == "function" && typeof define.amd == "object" && define.amd) {
         // Expose Lodash on the global object to prevent errors when Lodash is
         // loaded by a script tag in the presence of an AMD loader.
         // See http://requirejs.org/docs/errors.html#mismatch for more details.
@@ -19996,24 +19946,23 @@ var global = arguments[3];
     root._ = _;
 }).call(this);
 
-},{}],"8bV5p":[function(require,module,exports) {
+},{}],"1PVD7":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _uuid = require("uuid");
 class MarkerHandler {
     constructor(morphaweb){
-        this.color = '#ff990a';
+        this.color = "#ff990a";
         this.colorHighlight = "#ff1111";
         this.colorTopMarker = "#ff00bb";
         this.morphaweb = morphaweb;
-        this.morphaweb.wavesurfer.on('marker-click', this.onClick.bind(this));
+        this.morphaweb.wavesurfer.on("marker-click", this.onClick.bind(this));
     }
     addMarkers = (markers)=>{
         for (let marker of markers)this.createMarker(marker.position / 1000);
     };
     removeTopMarker() {
-        const i = this.morphaweb.wavesurfer.markers.markers.map((m)=>m.position
-        ).indexOf('top');
+        const i = this.morphaweb.wavesurfer.markers.markers.map((m)=>m.position).indexOf("top");
         this.morphaweb.wavesurfer.markers.remove(i);
     }
     removeSelectedMarker() {
@@ -20024,8 +19973,8 @@ class MarkerHandler {
     highlightMarker(time) {
         this.morphaweb.wavesurfer.markers.markers.map((m)=>{
             if (m.position == "bottom") {
-                if (m.time == time) m.el.children[1].children[0].children[0].setAttribute('fill', this.colorHighlight);
-                else m.el.children[1].children[0].children[0].setAttribute('fill', this.color);
+                if (m.time == time) m.el.children[1].children[0].children[0].setAttribute("fill", this.colorHighlight);
+                else m.el.children[1].children[0].children[0].setAttribute("fill", this.color);
             }
         });
     }
@@ -20040,7 +19989,7 @@ class MarkerHandler {
             time: time,
             position: "bottom",
             color: this.color,
-            uuid: _uuid.v4(),
+            uuid: (0, _uuid.v4)(),
             draggable: true
         };
         if (type == "top") o.position = "top", o.color = this.colorTopMarker;
@@ -20055,27 +20004,18 @@ class MarkerHandler {
 }
 exports.default = MarkerHandler;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs","uuid":"cTnqo"}],"cTnqo":[function(require,module,exports) {
+},{"uuid":"j4KJi","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"j4KJi":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "v1", ()=>_v1JsDefault.default
-);
-parcelHelpers.export(exports, "v3", ()=>_v3JsDefault.default
-);
-parcelHelpers.export(exports, "v4", ()=>_v4JsDefault.default
-);
-parcelHelpers.export(exports, "v5", ()=>_v5JsDefault.default
-);
-parcelHelpers.export(exports, "NIL", ()=>_nilJsDefault.default
-);
-parcelHelpers.export(exports, "version", ()=>_versionJsDefault.default
-);
-parcelHelpers.export(exports, "validate", ()=>_validateJsDefault.default
-);
-parcelHelpers.export(exports, "stringify", ()=>_stringifyJsDefault.default
-);
-parcelHelpers.export(exports, "parse", ()=>_parseJsDefault.default
-);
+parcelHelpers.export(exports, "v1", ()=>(0, _v1JsDefault.default));
+parcelHelpers.export(exports, "v3", ()=>(0, _v3JsDefault.default));
+parcelHelpers.export(exports, "v4", ()=>(0, _v4JsDefault.default));
+parcelHelpers.export(exports, "v5", ()=>(0, _v5JsDefault.default));
+parcelHelpers.export(exports, "NIL", ()=>(0, _nilJsDefault.default));
+parcelHelpers.export(exports, "version", ()=>(0, _versionJsDefault.default));
+parcelHelpers.export(exports, "validate", ()=>(0, _validateJsDefault.default));
+parcelHelpers.export(exports, "stringify", ()=>(0, _stringifyJsDefault.default));
+parcelHelpers.export(exports, "parse", ()=>(0, _parseJsDefault.default));
 var _v1Js = require("./v1.js");
 var _v1JsDefault = parcelHelpers.interopDefault(_v1Js);
 var _v3Js = require("./v3.js");
@@ -20095,7 +20035,7 @@ var _stringifyJsDefault = parcelHelpers.interopDefault(_stringifyJs);
 var _parseJs = require("./parse.js");
 var _parseJsDefault = parcelHelpers.interopDefault(_parseJs);
 
-},{"./v1.js":false,"./v3.js":false,"./v4.js":"jwHrJ","./v5.js":false,"./nil.js":false,"./version.js":false,"./validate.js":"lSTnM","./stringify.js":"626pp","./parse.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"jwHrJ":[function(require,module,exports) {
+},{"./v1.js":false,"./v3.js":false,"./v4.js":"8zJtu","./v5.js":false,"./nil.js":false,"./version.js":false,"./validate.js":"eHPgI","./stringify.js":"5Y9F1","./parse.js":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8zJtu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _rngJs = require("./rng.js");
@@ -20103,21 +20043,20 @@ var _rngJsDefault = parcelHelpers.interopDefault(_rngJs);
 var _stringifyJs = require("./stringify.js");
 var _stringifyJsDefault = parcelHelpers.interopDefault(_stringifyJs);
 function v4(options, buf, offset) {
-    options = options || {
-    };
-    var rnds = options.random || (options.rng || _rngJsDefault.default)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
-    rnds[6] = rnds[6] & 15 | 64;
-    rnds[8] = rnds[8] & 63 | 128; // Copy bytes to buffer, if provided
+    options = options || {};
+    var rnds = options.random || (options.rng || (0, _rngJsDefault.default))(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+    rnds[6] = rnds[6] & 0x0f | 0x40;
+    rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
     if (buf) {
         offset = offset || 0;
         for(var i = 0; i < 16; ++i)buf[offset + i] = rnds[i];
         return buf;
     }
-    return _stringifyJsDefault.default(rnds);
+    return (0, _stringifyJsDefault.default)(rnds);
 }
 exports.default = v4;
 
-},{"./rng.js":"8Vby4","./stringify.js":"626pp","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"8Vby4":[function(require,module,exports) {
+},{"./rng.js":"2psyE","./stringify.js":"5Y9F1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2psyE":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // Unique ID creation requires a high quality random # generator. In the browser we therefore
@@ -20130,14 +20069,14 @@ function rng() {
     if (!getRandomValues) {
         // getRandomValues needs to be invoked in a context where "this" is a Crypto implementation. Also,
         // find the complete implementation of crypto (msCrypto) on IE11.
-        getRandomValues = typeof crypto !== 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== 'undefined' && typeof msCrypto.getRandomValues === 'function' && msCrypto.getRandomValues.bind(msCrypto);
-        if (!getRandomValues) throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+        getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== "undefined" && typeof msCrypto.getRandomValues === "function" && msCrypto.getRandomValues.bind(msCrypto);
+        if (!getRandomValues) throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
     }
     return getRandomValues(rnds8);
 }
 exports.default = rng;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"626pp":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5Y9F1":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _validateJs = require("./validate.js");
@@ -20146,37 +20085,37 @@ var _validateJsDefault = parcelHelpers.interopDefault(_validateJs);
  * Convert array of 16 byte values to UUID string format of the form:
  * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
  */ var byteToHex = [];
-for(var i = 0; i < 256; ++i)byteToHex.push((i + 256).toString(16).substr(1));
+for(var i = 0; i < 256; ++i)byteToHex.push((i + 0x100).toString(16).substr(1));
 function stringify(arr) {
     var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
     // Note: Be careful editing this code!  It's been tuned for performance
     // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
-    var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
+    var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
     // of the following:
     // - One or more input array values don't map to a hex octet (leading to
     // "undefined" in the uuid)
     // - Invalid input values for the RFC `version` or `variant` fields
-    if (!_validateJsDefault.default(uuid)) throw TypeError('Stringified UUID is invalid');
+    if (!(0, _validateJsDefault.default)(uuid)) throw TypeError("Stringified UUID is invalid");
     return uuid;
 }
 exports.default = stringify;
 
-},{"./validate.js":"lSTnM","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"lSTnM":[function(require,module,exports) {
+},{"./validate.js":"eHPgI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eHPgI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _regexJs = require("./regex.js");
 var _regexJsDefault = parcelHelpers.interopDefault(_regexJs);
 function validate(uuid) {
-    return typeof uuid === 'string' && _regexJsDefault.default.test(uuid);
+    return typeof uuid === "string" && (0, _regexJsDefault.default).test(uuid);
 }
 exports.default = validate;
 
-},{"./regex.js":"0zwNl","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"0zwNl":[function(require,module,exports) {
+},{"./regex.js":"bUa5g","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bUa5g":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 exports.default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"gsBYB":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6ZK6N":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _wavefile = require("wavefile");
@@ -20187,7 +20126,7 @@ class WavHandler {
         let cues = [];
         fr.readAsDataURL(file);
         fr.onloadend = ()=>{
-            let f = new _wavefile.WaveFile();
+            let f = new (0, _wavefile.WaveFile)();
             const base64String = fr.result.replace("data:", "").replace(/^.+,/, "");
             f.fromBase64(base64String);
             cues = f.listCuePoints();
@@ -20195,25 +20134,24 @@ class WavHandler {
         };
     }
     createFileFromBuffer(buffer, markers) {
-        let file = new _wavefile.WaveFile();
-        file.fromScratch(2, 48000, '32f', buffer);
+        let file = new (0, _wavefile.WaveFile)();
+        file.fromScratch(2, 48000, "32f", buffer);
         for (let marker of markers)if (marker.position != "top") file.setCuePoint({
             position: marker.time * 1000
         });
         const data = file.toDataURI();
-        _fileSaver.saveAs(data, "export.wav");
+        (0, _fileSaver.saveAs)(data, "export.wav");
     }
 }
 exports.default = WavHandler;
 
-},{"wavefile":"04Guo","file-saver":"kkr7o","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"04Guo":[function(require,module,exports) {
+},{"wavefile":"lqvFu","file-saver":"3ILQE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lqvFu":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to manipulate wav files.
  * @extends WaveFileConverter
- */ parcelHelpers.export(exports, "WaveFile", ()=>WaveFile
-);
+ */ parcelHelpers.export(exports, "WaveFile", ()=>WaveFile);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -20241,7 +20179,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @see https://github.com/rochars/wavefile
  */ /** @module wavefile */ var _base64ArraybufferJs = require("./lib/parsers/base64-arraybuffer.js");
 var _wavefileConverter = require("./lib/wavefile-converter");
-class WaveFile extends _wavefileConverter.WaveFileConverter {
+class WaveFile extends (0, _wavefileConverter.WaveFileConverter) {
     /**
    * @param {Uint8Array=} wav A wave file buffer.
    * @throws {Error} If container is not RIFF, RIFX or RF64.
@@ -20257,14 +20195,14 @@ class WaveFile extends _wavefileConverter.WaveFileConverter {
    * @param {string} base64String A .wav file as a base64 string.
    * @throws {Error} If any property of the object appears invalid.
    */ fromBase64(base64String) {
-        this.fromBuffer(_base64ArraybufferJs.decode(base64String));
+        this.fromBuffer((0, _base64ArraybufferJs.decode)(base64String));
     }
     /**
    * Return a base64 string representig the WaveFile object as a .wav file.
    * @return {string} A .wav file as a base64 string.
    * @throws {Error} If any property of the object appears invalid.
    */ toBase64() {
-        return _base64ArraybufferJs.encode(this.toBuffer());
+        return (0, _base64ArraybufferJs.encode)(this.toBuffer());
     }
     /**
    * Return a DataURI string representig the WaveFile object as a .wav file.
@@ -20272,32 +20210,30 @@ class WaveFile extends _wavefileConverter.WaveFileConverter {
    * @return {string} A .wav file as a DataURI.
    * @throws {Error} If any property of the object appears invalid.
    */ toDataURI() {
-        return 'data:audio/wav;base64,' + this.toBase64();
+        return "data:audio/wav;base64," + this.toBase64();
     }
     /**
    * Use a .wav file encoded as a DataURI to load the WaveFile object.
    * @param {string} dataURI A .wav file as DataURI.
    * @throws {Error} If any property of the object appears invalid.
    */ fromDataURI(dataURI) {
-        this.fromBase64(dataURI.replace('data:audio/wav;base64,', ''));
+        this.fromBase64(dataURI.replace("data:audio/wav;base64,", ""));
     }
 }
 
-},{"./lib/parsers/base64-arraybuffer.js":"b8i1A","./lib/wavefile-converter":"jadst","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"b8i1A":[function(require,module,exports) {
+},{"./lib/parsers/base64-arraybuffer.js":"84geF","./lib/wavefile-converter":"gKQdx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"84geF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * Encode a byte buffer as a base64 string.
  * @param {!Uint8Array} bytes The buffer.
  * @return {string} A .wav file as a DataURI.
- */ parcelHelpers.export(exports, "encode", ()=>encode
-);
+ */ parcelHelpers.export(exports, "encode", ()=>encode);
 /**
  * Decode a base64 string as a byte as buffer.
  * @param {string} base64 A .wav file as a DataURI.
  * @return {!Uint8Array} A .wav file as a DataURI.
- */ parcelHelpers.export(exports, "decode", ()=>decode
-);
+ */ parcelHelpers.export(exports, "decode", ()=>decode);
 /*
  * Copyright (c) 2019 Rafael da Silva Rocha.
  * Copyright (c) 2017 Brett Zamir, 2012 Niklas von Hertzen
@@ -20321,26 +20257,26 @@ parcelHelpers.defineInteropFlag(exports);
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- */ const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+ */ const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 function encode(bytes) {
-    /** @type {string} */ let base64 = '';
+    /** @type {string} */ let base64 = "";
     for(let i = 0; i < bytes.length; i += 3){
         base64 += chars[bytes[i] >> 2];
         base64 += chars[(bytes[i] & 3) << 4 | bytes[i + 1] >> 4];
         base64 += chars[(bytes[i + 1] & 15) << 2 | bytes[i + 2] >> 6];
         base64 += chars[bytes[i + 2] & 63];
     }
-    if (bytes.length % 3 === 2) base64 = base64.substring(0, base64.length - 1) + '=';
-    else if (bytes.length % 3 === 1) base64 = base64.substring(0, base64.length - 2) + '==';
+    if (bytes.length % 3 === 2) base64 = base64.substring(0, base64.length - 1) + "=";
+    else if (bytes.length % 3 === 1) base64 = base64.substring(0, base64.length - 2) + "==";
     return base64;
 }
 function decode(base64) {
     /** @type {!Uint8Array} */ let lookup = new Uint8Array(256);
     for(let i = 0; i < chars.length; i++)lookup[chars.charCodeAt(i)] = i;
     /** @type {number} */ let bufferLength = base64.length * 0.75;
-    if (base64[base64.length - 1] === '=') {
+    if (base64[base64.length - 1] === "=") {
         bufferLength--;
-        if (base64[base64.length - 2] === '=') bufferLength--;
+        if (base64[base64.length - 2] === "=") bufferLength--;
     }
     /** @type {!Uint8Array} */ let bytes = new Uint8Array(bufferLength);
     for(let i1 = 0, j = 0; i1 < base64.length; i1 += 4){
@@ -20355,15 +20291,14 @@ function decode(base64) {
     return bytes;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"jadst":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gKQdx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to convert wav files to other types of wav files.
  * @extends WaveFileCueEditor
  * @ignore
- */ parcelHelpers.export(exports, "WaveFileConverter", ()=>WaveFileConverter
-);
+ */ parcelHelpers.export(exports, "WaveFileConverter", ()=>WaveFileConverter);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -20397,23 +20332,23 @@ var _binary = require("./parsers/binary");
 var _wavefileCueEditor = require("./wavefile-cue-editor");
 var _validateSampleRate = require("./validators/validate-sample-rate");
 var _resampler = require("./resampler");
-class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
+class WaveFileConverter extends (0, _wavefileCueEditor.WaveFileCueEditor) {
     /**
    * Force a file as RIFF.
    */ toRIFF() {
         /** @type {!Float64Array} */ let output = new Float64Array(outputSize_(this.data.samples.length, this.dataType.bits / 8));
-        _binary.unpackArrayTo(this.data.samples, this.dataType, output, 0, this.data.samples.length);
+        (0, _binary.unpackArrayTo)(this.data.samples, this.dataType, output, 0, this.data.samples.length);
         this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, this.bitDepth, output, {
-            container: 'RIFF'
+            container: "RIFF"
         });
     }
     /**
    * Force a file as RIFX.
    */ toRIFX() {
         /** @type {!Float64Array} */ let output = new Float64Array(outputSize_(this.data.samples.length, this.dataType.bits / 8));
-        _binary.unpackArrayTo(this.data.samples, this.dataType, output, 0, this.data.samples.length);
+        (0, _binary.unpackArrayTo)(this.data.samples, this.dataType, output, 0, this.data.samples.length);
         this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, this.bitDepth, output, {
-            container: 'RIFX'
+            container: "RIFX"
         });
     }
     /**
@@ -20421,13 +20356,13 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
    * @throws {Error} If sample rate is not 8000.
    * @throws {Error} If number of channels is not 1.
    */ toIMAADPCM() {
-        if (this.fmt.sampleRate !== 8000) throw new Error('Only 8000 Hz files can be compressed as IMA-ADPCM.');
-        else if (this.fmt.numChannels !== 1) throw new Error('Only mono files can be compressed as IMA-ADPCM.');
+        if (this.fmt.sampleRate !== 8000) throw new Error("Only 8000 Hz files can be compressed as IMA-ADPCM.");
+        else if (this.fmt.numChannels !== 1) throw new Error("Only mono files can be compressed as IMA-ADPCM.");
         else {
             this.assure16Bit_();
             /** @type {!Int16Array} */ let output = new Int16Array(outputSize_(this.data.samples.length, 2));
-            _binary.unpackArrayTo(this.data.samples, this.dataType, output, 0, this.data.samples.length);
-            this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, '4', _imaadpcm.encode(output), {
+            (0, _binary.unpackArrayTo)(this.data.samples, this.dataType, output, 0, this.data.samples.length);
+            this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, "4", _imaadpcm.encode(output), {
                 container: this.correctContainer_()
             });
         }
@@ -20436,19 +20371,19 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
    * Decode a 4-bit IMA ADPCM wave file as a 16-bit wave file.
    * @param {string=} [bitDepthCode='16'] The new bit depth of the samples.
    *    One of '8' ... '32' (integers), '32f' or '64' (floats).
-   */ fromIMAADPCM(bitDepthCode = '16') {
-        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, '16', _imaadpcm.decode(this.data.samples, this.fmt.blockAlign), {
+   */ fromIMAADPCM(bitDepthCode = "16") {
+        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, "16", _imaadpcm.decode(this.data.samples, this.fmt.blockAlign), {
             container: this.correctContainer_()
         });
-        if (bitDepthCode != '16') this.toBitDepth(bitDepthCode);
+        if (bitDepthCode != "16") this.toBitDepth(bitDepthCode);
     }
     /**
    * Encode a 16-bit wave file as 8-bit A-Law.
    */ toALaw() {
         this.assure16Bit_();
         /** @type {!Int16Array} */ let output = new Int16Array(outputSize_(this.data.samples.length, 2));
-        _binary.unpackArrayTo(this.data.samples, this.dataType, output, 0, this.data.samples.length);
-        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, '8a', _alaw.encode(output), {
+        (0, _binary.unpackArrayTo)(this.data.samples, this.dataType, output, 0, this.data.samples.length);
+        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, "8a", _alaw.encode(output), {
             container: this.correctContainer_()
         });
     }
@@ -20456,19 +20391,19 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
    * Decode a 8-bit A-Law wave file into a 16-bit wave file.
    * @param {string=} [bitDepthCode='16'] The new bit depth of the samples.
    *    One of '8' ... '32' (integers), '32f' or '64' (floats).
-   */ fromALaw(bitDepthCode = '16') {
-        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, '16', _alaw.decode(this.data.samples), {
+   */ fromALaw(bitDepthCode = "16") {
+        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, "16", _alaw.decode(this.data.samples), {
             container: this.correctContainer_()
         });
-        if (bitDepthCode != '16') this.toBitDepth(bitDepthCode);
+        if (bitDepthCode != "16") this.toBitDepth(bitDepthCode);
     }
     /**
    * Encode 16-bit wave file as 8-bit mu-Law.
    */ toMuLaw() {
         this.assure16Bit_();
         /** @type {!Int16Array} */ let output = new Int16Array(outputSize_(this.data.samples.length, 2));
-        _binary.unpackArrayTo(this.data.samples, this.dataType, output, 0, this.data.samples.length);
-        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, '8m', _mulaw.encode(output), {
+        (0, _binary.unpackArrayTo)(this.data.samples, this.dataType, output, 0, this.data.samples.length);
+        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, "8m", _mulaw.encode(output), {
             container: this.correctContainer_()
         });
     }
@@ -20476,11 +20411,11 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
    * Decode a 8-bit mu-Law wave file into a 16-bit wave file.
    * @param {string=} [bitDepthCode='16'] The new bit depth of the samples.
    *    One of '8' ... '32' (integers), '32f' or '64' (floats).
-   */ fromMuLaw(bitDepthCode = '16') {
-        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, '16', _mulaw.decode(this.data.samples), {
+   */ fromMuLaw(bitDepthCode = "16") {
+        this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, "16", _mulaw.decode(this.data.samples), {
             container: this.correctContainer_()
         });
-        if (bitDepthCode != '16') this.toBitDepth(bitDepthCode);
+        if (bitDepthCode != "16") this.toBitDepth(bitDepthCode);
     }
     /**
    * Change the bit depth of the samples.
@@ -20493,8 +20428,8 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
         /** @type {string} */ let toBitDepth = newBitDepth;
         /** @type {string} */ let thisBitDepth = this.bitDepth;
         if (!changeResolution) {
-            if (newBitDepth != '32f') toBitDepth = this.dataType.bits.toString();
-            thisBitDepth = '' + this.dataType.bits;
+            if (newBitDepth != "32f") toBitDepth = this.dataType.bits.toString();
+            thisBitDepth = "" + this.dataType.bits;
         }
         // If the file is compressed, make it
         // PCM before changing the bit depth
@@ -20508,7 +20443,7 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
      * @type {!Float64Array}
      */ let newSamples = new Float64Array(samples.length);
         // Change the bit depth
-        _bitdepth.changeBitDepth(samples, thisBitDepth, newSamples, toBitDepth);
+        (0, _bitdepth.changeBitDepth)(samples, thisBitDepth, newSamples, toBitDepth);
         // Re-create the file
         this.fromExisting_(this.fmt.numChannels, this.fmt.sampleRate, newBitDepth, newSamples, {
             container: this.correctContainer_()
@@ -20523,11 +20458,11 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
         /** @type {!(Array|TypedArray)} */ let samples = this.getSamples();
         /** @type {!(Array|Float64Array)} */ let newSamples = [];
         // Mono files
-        if (samples.constructor === Float64Array) newSamples = _resampler.resample(samples, this.fmt.sampleRate, sampleRate, options);
-        else for(let i = 0; i < samples.length; i++)newSamples.push(_resampler.resample(samples[i], this.fmt.sampleRate, sampleRate, options));
+        if (samples.constructor === Float64Array) newSamples = (0, _resampler.resample)(samples, this.fmt.sampleRate, sampleRate, options);
+        else for(let i = 0; i < samples.length; i++)newSamples.push((0, _resampler.resample)(samples[i], this.fmt.sampleRate, sampleRate, options));
         // Recreate the file
         this.fromExisting_(this.fmt.numChannels, sampleRate, this.bitDepth, newSamples, {
-            'container': this.correctContainer_()
+            "container": this.correctContainer_()
         });
     }
     /**
@@ -20536,27 +20471,27 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
    * @throws {Error} If the file cant be resampled.
    * @private
    */ validateResample_(sampleRate) {
-        if (!_validateSampleRate.validateSampleRate(this.fmt.numChannels, this.fmt.bitsPerSample, sampleRate)) throw new Error('Invalid sample rate.');
+        if (!(0, _validateSampleRate.validateSampleRate)(this.fmt.numChannels, this.fmt.bitsPerSample, sampleRate)) throw new Error("Invalid sample rate.");
         else if ([
-            '4',
-            '8a',
-            '8m'
-        ].indexOf(this.bitDepth) > -1) throw new Error('wavefile can\'t change the sample rate of compressed files.');
+            "4",
+            "8a",
+            "8m"
+        ].indexOf(this.bitDepth) > -1) throw new Error("wavefile can't change the sample rate of compressed files.");
     }
     /**
    * Make the file 16-bit if it is not.
    * @private
    */ assure16Bit_() {
         this.assureUncompressed_();
-        if (this.bitDepth != '16') this.toBitDepth('16');
+        if (this.bitDepth != "16") this.toBitDepth("16");
     }
     /**
    * Uncompress the samples in case of a compressed file.
    * @private
    */ assureUncompressed_() {
-        if (this.bitDepth == '8a') this.fromALaw();
-        else if (this.bitDepth == '8m') this.fromMuLaw();
-        else if (this.bitDepth == '4') this.fromIMAADPCM();
+        if (this.bitDepth == "8a") this.fromALaw();
+        else if (this.bitDepth == "8m") this.fromMuLaw();
+        else if (this.bitDepth == "4") this.fromIMAADPCM();
     }
     /**
    * Return 'RIFF' if the container is 'RF64', the current container name
@@ -20564,7 +20499,7 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
    * @return {string}
    * @private
    */ correctContainer_() {
-        return this.container == 'RF64' ? 'RIFF' : this.container;
+        return this.container == "RF64" ? "RIFF" : this.container;
     }
     /**
    * Set up the WaveFileCreator object based on the arguments passed.
@@ -20582,7 +20517,7 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
    * @throws {Error} If any argument does not meet the criteria.
    * @private
    */ fromExisting_(numChannels, sampleRate, bitDepthCode, samples, options) {
-        /** @type {!Object} */ let tmpWav = new _wavefileCueEditor.WaveFileCueEditor();
+        /** @type {!Object} */ let tmpWav = new (0, _wavefileCueEditor.WaveFileCueEditor)();
         Object.assign(this.fmt, tmpWav.fmt);
         Object.assign(this.fact, tmpWav.fact);
         Object.assign(this.ds64, tmpWav.ds64);
@@ -20601,7 +20536,7 @@ class WaveFileConverter extends _wavefileCueEditor.WaveFileCueEditor {
     return outputSize;
 }
 
-},{"./codecs/bitdepth":"9sG88","./codecs/imaadpcm":"2cKqR","./codecs/alaw":"5jhz2","./codecs/mulaw":"7AiFi","./parsers/binary":"jNIxc","./wavefile-cue-editor":"hISE1","./validators/validate-sample-rate":"4rEm4","./resampler":"kpVZu","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"9sG88":[function(require,module,exports) {
+},{"./codecs/bitdepth":"3xHKl","./codecs/imaadpcm":"i2jPT","./codecs/alaw":"lq0wd","./codecs/mulaw":"jh4If","./parsers/binary":"aIH4K","./wavefile-cue-editor":"ebVuY","./validators/validate-sample-rate":"1Xegf","./resampler":"5KhFV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xHKl":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -20637,8 +20572,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {!TypedArray} newSamples The output array.
  * @param {string} targetBitDepth The target bit depth.
  * @throws {Error} If original or target bit depths are not valid.
- */ parcelHelpers.export(exports, "changeBitDepth", ()=>changeBitDepth
-);
+ */ parcelHelpers.export(exports, "changeBitDepth", ()=>changeBitDepth);
 function changeBitDepth(samples, bithDepth, newSamples, targetBitDepth) {
     // float to float, just copy the values
     if ([
@@ -20740,22 +20674,20 @@ function changeBitDepth(samples, bithDepth, newSamples, targetBitDepth) {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"2cKqR":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i2jPT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * Encode 16-bit PCM samples into 4-bit IMA ADPCM samples.
  * @param {!Int16Array} samples A array of samples.
  * @return {!Uint8Array}
- */ parcelHelpers.export(exports, "encode", ()=>encode
-);
+ */ parcelHelpers.export(exports, "encode", ()=>encode);
 /**
  * Decode IMA ADPCM samples into 16-bit PCM samples.
  * @param {!Uint8Array} adpcmSamples A array of ADPCM samples.
  * @param {number} blockAlign The block size.
  * @return {!Int16Array}
- */ parcelHelpers.export(exports, "decode", ()=>decode
-);
+ */ parcelHelpers.export(exports, "decode", ()=>decode);
 /*
  * imaadpcm: IMA ADPCM codec in JavaScript.
  * Copyright (c) 2018-2019 Rafael da Silva Rocha.
@@ -21032,7 +20964,7 @@ function decode(adpcmSamples, blockAlign = 256) {
     if (value & 8) state.predicted -= diff;
     else state.predicted += diff;
     if (state.predicted < -32768) state.predicted = -32768;
-    else if (state.predicted > 32767) state.predicted = 32767;
+    else if (state.predicted > 0x7fff) state.predicted = 0x7fff;
     state.index += INDEX_TABLE[value & 7];
     if (state.index < 0) state.index = 0;
     else if (state.index > 88) state.index = 88;
@@ -21076,40 +21008,36 @@ function decode(adpcmSamples, blockAlign = 256) {
  */ function blockHead_(sample, state) {
     encodeSample_(sample, state);
     /** @type {!Array<number>} */ let adpcmSamples = [];
-    adpcmSamples.push(sample & 255);
-    adpcmSamples.push(sample >> 8 & 255);
+    adpcmSamples.push(sample & 0xFF);
+    adpcmSamples.push(sample >> 8 & 0xFF);
     adpcmSamples.push(state.index);
     adpcmSamples.push(0);
     return adpcmSamples;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"5jhz2":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lq0wd":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * Encode a 16-bit linear PCM sample as 8-bit A-Law.
  * @param {number} sample A 16-bit PCM sample
  * @return {number}
- */ parcelHelpers.export(exports, "encodeSample", ()=>encodeSample
-);
+ */ parcelHelpers.export(exports, "encodeSample", ()=>encodeSample);
 /**
  * Decode a 8-bit A-Law sample as 16-bit PCM.
  * @param {number} aLawSample The 8-bit A-Law sample
  * @return {number}
- */ parcelHelpers.export(exports, "decodeSample", ()=>decodeSample
-);
+ */ parcelHelpers.export(exports, "decodeSample", ()=>decodeSample);
 /**
  * Encode 16-bit linear PCM samples as 8-bit A-Law samples.
  * @param {!Int16Array} samples A array of 16-bit PCM samples.
  * @return {!Uint8Array}
- */ parcelHelpers.export(exports, "encode", ()=>encode
-);
+ */ parcelHelpers.export(exports, "encode", ()=>encode);
 /**
  * Decode 8-bit A-Law samples into 16-bit linear PCM samples.
  * @param {!Uint8Array} samples A array of 8-bit A-Law samples.
  * @return {!Int16Array}
- */ parcelHelpers.export(exports, "decode", ()=>decode
-);
+ */ parcelHelpers.export(exports, "decode", ()=>decode);
 /*
  * alawmulaw: A-Law and mu-Law codecs in JavaScript.
  * https://github.com/rochars/alawmulaw
@@ -21272,26 +21200,26 @@ parcelHelpers.defineInteropFlag(exports);
 function encodeSample(sample) {
     /** @type {number} */ let compandedValue;
     sample = sample == -32768 ? -32767 : sample;
-    /** @type {number} */ let sign = ~sample >> 8 & 128;
+    /** @type {number} */ let sign = ~sample >> 8 & 0x80;
     if (!sign) sample = sample * -1;
     if (sample > 32635) sample = 32635;
     if (sample >= 256) {
-        /** @type {number} */ let exponent = LOG_TABLE[sample >> 8 & 127];
-        /** @type {number} */ let mantissa = sample >> exponent + 3 & 15;
+        /** @type {number} */ let exponent = LOG_TABLE[sample >> 8 & 0x7F];
+        /** @type {number} */ let mantissa = sample >> exponent + 3 & 0x0F;
         compandedValue = exponent << 4 | mantissa;
     } else compandedValue = sample >> 4;
-    return compandedValue ^ (sign ^ 85);
+    return compandedValue ^ (sign ^ 0x55);
 }
 function decodeSample(aLawSample) {
     /** @type {number} */ let sign = 0;
-    aLawSample ^= 85;
-    if ((aLawSample & 128) !== 0) {
+    aLawSample ^= 0x55;
+    if ((aLawSample & 0x80) !== 0) {
         aLawSample &= -129;
         sign = -1;
     }
-    /** @type {number} */ let position = ((aLawSample & 240) >> 4) + 4;
+    /** @type {number} */ let position = ((aLawSample & 0xF0) >> 4) + 4;
     /** @type {number} */ let decoded = 0;
-    if (position != 4) decoded = 1 << position | (aLawSample & 15) << position - 4 | 1 << position - 5;
+    if (position != 4) decoded = 1 << position | (aLawSample & 0x0F) << position - 4 | 1 << position - 5;
     else decoded = aLawSample << 1 | 1;
     decoded = sign === 0 ? decoded : -decoded;
     return decoded * -8;
@@ -21307,33 +21235,29 @@ function decode(samples) {
     return pcmSamples;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"7AiFi":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jh4If":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * Encode a 16-bit linear PCM sample as 8-bit mu-Law.
  * @param {number} sample A 16-bit PCM sample
  * @return {number}
- */ parcelHelpers.export(exports, "encodeSample", ()=>encodeSample
-);
+ */ parcelHelpers.export(exports, "encodeSample", ()=>encodeSample);
 /**
  * Decode a 8-bit mu-Law sample as 16-bit PCM.
  * @param {number} muLawSample The 8-bit mu-Law sample
  * @return {number}
- */ parcelHelpers.export(exports, "decodeSample", ()=>decodeSample
-);
+ */ parcelHelpers.export(exports, "decodeSample", ()=>decodeSample);
 /**
  * Encode 16-bit linear PCM samples into 8-bit mu-Law samples.
  * @param {!Int16Array} samples A array of 16-bit PCM samples.
  * @return {!Uint8Array}
- */ parcelHelpers.export(exports, "encode", ()=>encode
-);
+ */ parcelHelpers.export(exports, "encode", ()=>encode);
 /**
  * Decode 8-bit mu-Law samples into 16-bit PCM samples.
  * @param {!Uint8Array} samples A array of 8-bit mu-Law samples.
  * @return {!Int16Array}
- */ parcelHelpers.export(exports, "decode", ()=>decode
-);
+ */ parcelHelpers.export(exports, "decode", ()=>decode);
 /*
  * alawmulaw: A-Law and mu-Law codecs in JavaScript.
  * https://github.com/rochars/alawmulaw
@@ -21366,7 +21290,7 @@ parcelHelpers.defineInteropFlag(exports);
  */ /**
  * @type {number}
  * @private
- */ const BIAS = 132;
+ */ const BIAS = 0x84;
 /**
  * @type {number}
  * @private
@@ -21650,12 +21574,12 @@ function encodeSample(sample) {
     /** @type {number} */ let exponent;
     /** @type {number} */ let mantissa;
     /** @type {number} */ let muLawSample;
-    /** get the sample into sign-magnitude **/ sign = sample >> 8 & 128;
+    /** get the sample into sign-magnitude **/ sign = sample >> 8 & 0x80;
     if (sign != 0) sample = -sample;
     /** convert from 16 bit linear to ulaw **/ sample = sample + BIAS;
     if (sample > CLIP) sample = CLIP;
-    exponent = encodeTable[sample >> 7 & 255];
-    mantissa = sample >> exponent + 3 & 15;
+    exponent = encodeTable[sample >> 7 & 0xFF];
+    mantissa = sample >> exponent + 3 & 0x0F;
     muLawSample = ~(sign | exponent << 4 | mantissa);
     /** return the result **/ return muLawSample;
 }
@@ -21665,9 +21589,9 @@ function decodeSample(muLawSample) {
     /** @type {number} */ let mantissa;
     /** @type {number} */ let sample;
     muLawSample = ~muLawSample;
-    sign = muLawSample & 128;
-    exponent = muLawSample >> 4 & 7;
-    mantissa = muLawSample & 15;
+    sign = muLawSample & 0x80;
+    exponent = muLawSample >> 4 & 0x07;
+    mantissa = muLawSample & 0x0F;
     sample = decodeTable[exponent] + (mantissa << exponent + 3);
     if (sign != 0) sample = -sample;
     return sample;
@@ -21683,7 +21607,7 @@ function decode(samples) {
     return pcmSamples;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"jNIxc":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aIH4K":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
@@ -21692,22 +21616,19 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} [index=0] The buffer index to start reading.
  * @param {number} [end=buffer.length] The index to stop reading, non inclusive.
  * @return {string}
- */ parcelHelpers.export(exports, "unpackString", ()=>unpackString
-);
+ */ parcelHelpers.export(exports, "unpackString", ()=>unpackString);
 /**
  * Write a string of UTF-8 characters as a byte buffer.
  * @param {string} str The string to pack.
  * @return {!Array<number>} The UTF-8 string bytes.
- */ parcelHelpers.export(exports, "packString", ()=>packString
-);
+ */ parcelHelpers.export(exports, "packString", ()=>packString);
 /**
  * Write a string of UTF-8 characters to a byte buffer.
  * @param {string} str The string to pack.
  * @param {!(Uint8Array|Array<number>)} buffer The output buffer.
  * @param {number} [index=0] The buffer index to start writing.
  * @return {number} The next index to write in the buffer.
- */ parcelHelpers.export(exports, "packStringTo", ()=>packStringTo
-);
+ */ parcelHelpers.export(exports, "packStringTo", ()=>packStringTo);
 // Numbers
 /**
  * Pack a array of numbers to a byte buffer.
@@ -21721,8 +21642,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} [index=0] The buffer index to start writing.
  * @return {number} The next index to write.
  * @throws {Error} If the type definition is not valid.
- */ parcelHelpers.export(exports, "packArrayTo", ()=>packArrayTo
-);
+ */ parcelHelpers.export(exports, "packArrayTo", ()=>packArrayTo);
 /**
  * Unpack a array of numbers from a byte buffer to a array or a typed array.
  * All other unpacking functions are interfaces to this function.
@@ -21735,8 +21655,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} [start=0] The buffer index to start reading.
  * @param {number} [end=buffer.length] The buffer index to stop reading.
  * @throws {Error} If the type definition is not valid.
- */ parcelHelpers.export(exports, "unpackArrayTo", ()=>unpackArrayTo
-);
+ */ parcelHelpers.export(exports, "unpackArrayTo", ()=>unpackArrayTo);
 /**
  * Pack a number to a byte buffer.
  * @param {number} value The value.
@@ -21748,8 +21667,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} [index=0] The buffer index to write.
  * @return {number} The next index to write.
  * @throws {Error} If the type definition is not valid.
- */ parcelHelpers.export(exports, "packTo", ()=>packTo
-);
+ */ parcelHelpers.export(exports, "packTo", ()=>packTo);
 /**
  * Pack a number as a array of bytes.
  * @param {number} value The number to pack.
@@ -21759,8 +21677,7 @@ parcelHelpers.defineInteropFlag(exports);
  *   be: (boolean|undefined)}} theType The type definition.
  * @return {!Array<number>} The packed value.
  * @throws {Error} If the type definition is not valid.
- */ parcelHelpers.export(exports, "pack", ()=>pack
-);
+ */ parcelHelpers.export(exports, "pack", ()=>pack);
 /**
  * Unpack a number from a byte buffer.
  * @param {!(Uint8Array|Array<number>)} buffer The byte buffer.
@@ -21771,8 +21688,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} [index=0] The buffer index to read.
  * @return {number}
  * @throws {Error} If the type definition is not valid.
- */ parcelHelpers.export(exports, "unpack", ()=>unpack
-);
+ */ parcelHelpers.export(exports, "unpack", ()=>unpack);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -21804,30 +21720,28 @@ var _utf8Parser = require("./lib/utf8-parser");
 var _intParser = require("./lib/int-parser");
 var _floatParser = require("./lib/float-parser");
 function unpackString(buffer, index = 0, end = buffer.length) {
-    return _utf8Parser.unpack(buffer, index, end);
+    return (0, _utf8Parser.unpack)(buffer, index, end);
 }
 function packString(str) {
     /** @type {!Array<number>} */ let buffer = [];
-    _utf8Parser.pack(str, buffer);
+    (0, _utf8Parser.pack)(str, buffer);
     return buffer;
 }
 function packStringTo(str, buffer, index = 0) {
-    return _utf8Parser.pack(str, buffer, index);
+    return (0, _utf8Parser.pack)(str, buffer, index);
 }
 function packArrayTo(values, theType, buffer, index = 0) {
-    theType = theType || {
-    };
+    theType = theType || {};
     /** @type {!Object} */ let packer = getParser_(theType.bits, theType.fp, theType.signed);
     /** @type {number} */ let offset = Math.ceil(theType.bits / 8);
     /** @type {number} */ let i = 0;
     /** @type {number} */ let start = index;
     for(let valuesLen = values.length; i < valuesLen; i++)index = packer.pack(buffer, values[i], index);
-    if (theType.be) _endianness.endianness(buffer, offset, start, index);
+    if (theType.be) (0, _endianness.endianness)(buffer, offset, start, index);
     return index;
 }
 function unpackArrayTo(buffer, theType, output, start = 0, end = buffer.length) {
-    theType = theType || {
-    };
+    theType = theType || {};
     /** @type {!Object} */ let parser = getParser_(theType.bits, theType.fp, theType.signed);
     // getUnpackLen_ will adjust the end index according to the size
     // of the input buffer and the byte offset or throw a error on bad
@@ -21835,7 +21749,7 @@ function unpackArrayTo(buffer, theType, output, start = 0, end = buffer.length) 
     end = getUnpackLen_(buffer, start, end, parser.offset);
     if (theType.be) {
         /** @type {!(Uint8Array|Array<number>)} */ let readBuffer = copyBuffer_(buffer);
-        if (theType.be) _endianness.endianness(readBuffer, parser.offset, start, end);
+        if (theType.be) (0, _endianness.endianness)(readBuffer, parser.offset, start, end);
         unpack_(readBuffer, output, start, end, parser);
     } else unpack_(buffer, output, start, end, parser);
 }
@@ -21894,12 +21808,12 @@ function unpack(buffer, theType, index = 0) {
  * @return {!Object}
  * @private
  */ function getParser_(bits, fp, signed) {
-    if (fp && bits == 32) return new _floatParser.FloatParser(8, 23);
-    else if (fp && bits == 64) return new _floatParser.FloatParser(11, 52);
-    return new _intParser.IntParser(bits, signed);
+    if (fp && bits == 32) return new (0, _floatParser.FloatParser)(8, 23);
+    else if (fp && bits == 64) return new (0, _floatParser.FloatParser)(11, 52);
+    return new (0, _intParser.IntParser)(bits, signed);
 }
 
-},{"./lib/endianness":"5PLGb","./lib/utf8-parser":"5ORaf","./lib/int-parser":"aKiuV","./lib/float-parser":"dD4Fg","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"5PLGb":[function(require,module,exports) {
+},{"./lib/endianness":"3uAJy","./lib/utf8-parser":"aI1W3","./lib/int-parser":"5SFpw","./lib/float-parser":"loIax","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3uAJy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -21934,8 +21848,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} offset The byte offset.
  * @param {number=} [start=0] The start index.
  * @param {number=} [end=bytes.length] The end index.
- */ parcelHelpers.export(exports, "endianness", ()=>endianness
-);
+ */ parcelHelpers.export(exports, "endianness", ()=>endianness);
 function endianness(bytes, offset, start = 0, end = bytes.length) {
     for(let index = start; index < end; index += offset)swap_(bytes, offset, index);
 }
@@ -21955,7 +21868,7 @@ function endianness(bytes, offset, start = 0, end = bytes.length) {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"5ORaf":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aI1W3":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -21996,8 +21909,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} [end=0] The buffer index to stop reading.
  *   Assumes the buffer length if undefined.
  * @return {string}
- */ parcelHelpers.export(exports, "unpack", ()=>unpack
-);
+ */ parcelHelpers.export(exports, "unpack", ()=>unpack);
 /**
  * Write a string of UTF-8 characters to a byte buffer.
  * @see https://encoding.spec.whatwg.org/#utf-8-encoder
@@ -22005,39 +21917,38 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {!Uint8Array|!Array<number>} buffer The buffer to pack the string to.
  * @param {number=} index The buffer index to start writing.
  * @return {number} The next index to write in the buffer.
- */ parcelHelpers.export(exports, "pack", ()=>pack
-);
+ */ parcelHelpers.export(exports, "pack", ()=>pack);
 function unpack(buffer, start = 0, end = buffer.length) {
-    /** @type {string} */ let str = '';
+    /** @type {string} */ let str = "";
     for(let index = start; index < end;){
-        /** @type {number} */ let lowerBoundary = 128;
-        /** @type {number} */ let upperBoundary = 191;
+        /** @type {number} */ let lowerBoundary = 0x80;
+        /** @type {number} */ let upperBoundary = 0xBF;
         /** @type {boolean} */ let replace = false;
         /** @type {number} */ let charCode = buffer[index++];
-        if (charCode >= 0 && charCode <= 127) str += String.fromCharCode(charCode);
+        if (charCode >= 0x00 && charCode <= 0x7F) str += String.fromCharCode(charCode);
         else {
             /** @type {number} */ let count = 0;
-            if (charCode >= 194 && charCode <= 223) count = 1;
-            else if (charCode >= 224 && charCode <= 239) {
+            if (charCode >= 0xC2 && charCode <= 0xDF) count = 1;
+            else if (charCode >= 0xE0 && charCode <= 0xEF) {
                 count = 2;
-                if (buffer[index] === 224) lowerBoundary = 160;
-                if (buffer[index] === 237) upperBoundary = 159;
-            } else if (charCode >= 240 && charCode <= 244) {
+                if (buffer[index] === 0xE0) lowerBoundary = 0xA0;
+                if (buffer[index] === 0xED) upperBoundary = 0x9F;
+            } else if (charCode >= 0xF0 && charCode <= 0xF4) {
                 count = 3;
-                if (buffer[index] === 240) lowerBoundary = 144;
-                if (buffer[index] === 244) upperBoundary = 143;
+                if (buffer[index] === 0xF0) lowerBoundary = 0x90;
+                if (buffer[index] === 0xF4) upperBoundary = 0x8F;
             } else replace = true;
             charCode = charCode & (1 << 8 - count - 1) - 1;
             for(let i = 0; i < count; i++){
                 if (buffer[index] < lowerBoundary || buffer[index] > upperBoundary) replace = true;
-                charCode = charCode << 6 | buffer[index] & 63;
+                charCode = charCode << 6 | buffer[index] & 0x3f;
                 index++;
             }
-            if (replace) str += String.fromCharCode(65533);
-            else if (charCode <= 65535) str += String.fromCharCode(charCode);
+            if (replace) str += String.fromCharCode(0xFFFD);
+            else if (charCode <= 0xffff) str += String.fromCharCode(charCode);
             else {
-                charCode -= 65536;
-                str += String.fromCharCode((charCode >> 10 & 1023) + 55296, (charCode & 1023) + 56320);
+                charCode -= 0x10000;
+                str += String.fromCharCode((charCode >> 10 & 0x3ff) + 0xd800, (charCode & 0x3ff) + 0xdc00);
             }
         }
     }
@@ -22054,21 +21965,21 @@ function pack(str, buffer, index = 0) {
         } else {
             /** @type {number} */ let count = 0;
             /** @type {number} */ let offset = 0;
-            if (codePoint <= 2047) {
+            if (codePoint <= 0x07FF) {
                 count = 1;
-                offset = 192;
-            } else if (codePoint <= 65535) {
+                offset = 0xC0;
+            } else if (codePoint <= 0xFFFF) {
                 count = 2;
-                offset = 224;
-            } else if (codePoint <= 1114111) {
+                offset = 0xE0;
+            } else if (codePoint <= 0x10FFFF) {
                 count = 3;
-                offset = 240;
+                offset = 0xF0;
                 i++;
             }
             buffer[index] = (codePoint >> 6 * count) + offset;
             index++;
             while(count > 0){
-                buffer[index] = 128 | codePoint >> 6 * (count - 1) & 63;
+                buffer[index] = 0x80 | codePoint >> 6 * (count - 1) & 0x3F;
                 index++;
                 count--;
             }
@@ -22078,7 +21989,7 @@ function pack(str, buffer, index = 0) {
     return index;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"aKiuV":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5SFpw":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -22109,8 +22020,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @see https://github.com/rochars/wavefile
  */ /**
  * A class to write and read integer numbers to and from byte buffers.
- */ parcelHelpers.export(exports, "IntParser", ()=>IntParser
-);
+ */ parcelHelpers.export(exports, "IntParser", ()=>IntParser);
 class IntParser {
     /**
    * @param {number} bits The number of bits used by the integer.
@@ -22196,7 +22106,7 @@ class IntParser {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"dD4Fg":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"loIax":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -22231,8 +22141,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @see https://github.com/kazuho/ieee754.js/blob/master/ieee754.js
  */ /**
  * A class to encode and decode IEEE 754 floating-point numbers.
- */ parcelHelpers.export(exports, "FloatParser", ()=>FloatParser
-);
+ */ parcelHelpers.export(exports, "FloatParser", ()=>FloatParser);
 class FloatParser {
     /**
    * Pack a IEEE 754 floating point number.
@@ -22364,7 +22273,7 @@ class FloatParser {
             fraction = Math.floor(fraction / 2);
         }
         // pack as bytes
-        /** @type {string} */ let str = bits.join('');
+        /** @type {string} */ let str = bits.join("");
         /** @type {number} */ let offset = this.offset + index - 1;
         /** @type {number} */ let k = index;
         while(offset >= index){
@@ -22389,15 +22298,14 @@ class FloatParser {
     return w % 2 ? w + 1 : w;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"hISE1":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ebVuY":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to edit meta information in wav files.
  * @extends WaveFileTagEditor
  * @ignore
- */ parcelHelpers.export(exports, "WaveFileCueEditor", ()=>WaveFileCueEditor
-);
+ */ parcelHelpers.export(exports, "WaveFileCueEditor", ()=>WaveFileCueEditor);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -22424,7 +22332,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @fileoverview The WaveFileCueEditor class.
  * @see https://github.com/rochars/wavefile
  */ var _wavefileTagEditor = require("./wavefile-tag-editor");
-class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
+class WaveFileCueEditor extends (0, _wavefileTagEditor.WaveFileTagEditor) {
     /**
    * Return an array with all cue points in the file, in the order they appear
    * in the file.
@@ -22495,9 +22403,9 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
    * pointData.dwDialect
    * pointData.dwCodePage
    */ setCuePoint(pointData) {
-        this.cue.chunkId = 'cue ';
+        this.cue.chunkId = "cue ";
         // label attr should always exist
-        if (!pointData.label) pointData.label = '';
+        if (!pointData.label) pointData.label = "";
         /**
      * Load the existing points before erasing
      * the LIST 'adtl' chunk and the cue attr
@@ -22534,16 +22442,16 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
    * @param {number} index the index of the point. First is 1,
    *    second is 2, and so on.
    */ deleteCuePoint(index) {
-        this.cue.chunkId = 'cue ';
+        this.cue.chunkId = "cue ";
         /** @type {!Array<!Object>} */ let existingPoints = this.getCuePoints_();
         this.clearLISTadtl_();
         /** @type {number} */ let len = this.cue.points.length;
         this.cue.points = [];
         for(let i = 0; i < len; i++)if (i + 1 !== index) this.setCuePoint_(existingPoints[i], i + 1);
         this.cue.dwCuePoints = this.cue.points.length;
-        if (this.cue.dwCuePoints) this.cue.chunkId = 'cue ';
+        if (this.cue.dwCuePoints) this.cue.chunkId = "cue ";
         else {
-            this.cue.chunkId = '';
+            this.cue.chunkId = "";
             this.clearLISTadtl_();
         }
     }
@@ -22552,7 +22460,7 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
    * @param {number} pointIndex The ID of the cue point.
    * @param {string} label The new text for the label.
    */ updateLabel(pointIndex, label) {
-        /** @type {?number} */ let cIndex = this.getLISTIndex('adtl');
+        /** @type {?number} */ let cIndex = this.getLISTIndex("adtl");
         if (cIndex !== null) {
             for(let i = 0, len = this.LIST[cIndex].subChunks.length; i < len; i++)if (this.LIST[cIndex].subChunks[i].dwName == pointIndex) this.LIST[cIndex].subChunks[i].value = label;
         }
@@ -22567,7 +22475,7 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
         for(let i = 0; i < this.cue.points.length; i++){
             /** @type {!Object} */ let chunk = this.cue.points[i];
             /** @type {!Object} */ let pointData = this.getDataForCuePoint_(chunk.dwName);
-            pointData.label = pointData.value ? pointData.value : '';
+            pointData.label = pointData.value ? pointData.value : "";
             pointData.dwPosition = chunk.dwPosition;
             pointData.fccChunk = chunk.fccChunk;
             pointData.dwChunkStart = chunk.dwChunkStart;
@@ -22583,9 +22491,8 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
    * @return {!Object}
    * @private
    */ getDataForCuePoint_(pointDwName) {
-        /** @type {?number} */ let LISTindex = this.getLISTIndex('adtl');
-        /** @type {!Object} */ let pointData = {
-        };
+        /** @type {?number} */ let LISTindex = this.getLISTIndex("adtl");
+        /** @type {!Object} */ let pointData = {};
         // If there is a adtl LIST in the file, look for
         // LIST subchunks with data referencing this point
         if (LISTindex !== null) this.getCueDataFromLIST_(pointData, LISTindex, pointDwName);
@@ -22628,7 +22535,7 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
         this.cue.points.push({
             dwName: dwName,
             dwPosition: pointData.dwPosition ? pointData.dwPosition : 0,
-            fccChunk: pointData.fccChunk ? pointData.fccChunk : 'data',
+            fccChunk: pointData.fccChunk ? pointData.fccChunk : "data",
             dwChunkStart: pointData.dwChunkStart ? pointData.dwChunkStart : 0,
             dwBlockStart: pointData.dwBlockStart ? pointData.dwBlockStart : 0,
             dwSampleOffset: pointData.dwSampleOffset
@@ -22663,7 +22570,7 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
    * Clear any LIST chunk labeled as 'adtl'.
    * @private
    */ clearLISTadtl_() {
-        for(let i = 0, len = this.LIST.length; i < len; i++)if (this.LIST[i].format == 'adtl') this.LIST.splice(i);
+        for(let i = 0, len = this.LIST.length; i < len; i++)if (this.LIST[i].format == "adtl") this.LIST.splice(i);
     }
     /**
    * Create a new 'labl' subchunk in a 'LIST' chunk of type 'adtl'.
@@ -22677,14 +22584,14 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
      * Get the index of the LIST chunk labeled as adtl.
      * A file can have many LIST chunks with unique labels.
      * @type {?number}
-     */ let adtlIndex = this.getLISTIndex('adtl');
+     */ let adtlIndex = this.getLISTIndex("adtl");
         // If there is no adtl LIST, create one
         if (adtlIndex === null) {
             // Include a new item LIST chunk
             this.LIST.push({
-                chunkId: 'LIST',
+                chunkId: "LIST",
                 chunkSize: 4,
-                format: 'adtl',
+                format: "adtl",
                 subChunks: []
             });
             // Get the index of the new LIST chunk
@@ -22701,7 +22608,7 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
    * @private
    */ setLabelText_(adtlIndex, pointData, dwName) {
         this.LIST[adtlIndex].subChunks.push({
-            chunkId: 'labl',
+            chunkId: "labl",
             chunkSize: 4,
             dwName: dwName,
             value: pointData.label
@@ -22716,7 +22623,7 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
    * @private
    */ setLtxtChunk_(adtlIndex, pointData, dwName) {
         this.LIST[adtlIndex].subChunks.push({
-            chunkId: 'ltxt',
+            chunkId: "ltxt",
             chunkSize: 20,
             dwName: dwName,
             dwSampleLength: pointData.dwSampleLength,
@@ -22731,15 +22638,14 @@ class WaveFileCueEditor extends _wavefileTagEditor.WaveFileTagEditor {
     }
 }
 
-},{"./wavefile-tag-editor":"4JGDr","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"4JGDr":[function(require,module,exports) {
+},{"./wavefile-tag-editor":"aeYJO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aeYJO":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to edit meta information in wav files.
  * @extends WaveFileCreator
  * @ignore
- */ parcelHelpers.export(exports, "WaveFileTagEditor", ()=>WaveFileTagEditor
-);
+ */ parcelHelpers.export(exports, "WaveFileTagEditor", ()=>WaveFileTagEditor);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -22766,7 +22672,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @fileoverview The WaveFileTagEditor class.
  * @see https://github.com/rochars/wavefile
  */ var _wavefileCreator = require("./wavefile-creator");
-class WaveFileTagEditor extends _wavefileCreator.WaveFileCreator {
+class WaveFileTagEditor extends (0, _wavefileCreator.WaveFileCreator) {
     /**
    * Return the value of a RIFF tag in the INFO chunk.
    * @param {string} tag The tag name.
@@ -22795,9 +22701,9 @@ class WaveFileTagEditor extends _wavefileCreator.WaveFileCreator {
         });
         else {
             this.LIST.push({
-                chunkId: 'LIST',
+                chunkId: "LIST",
                 chunkSize: 8 + value.length + 1,
-                format: 'INFO',
+                format: "INFO",
                 subChunks: []
             });
             this.LIST[this.LIST.length - 1].subChunks.push({
@@ -22823,9 +22729,8 @@ class WaveFileTagEditor extends _wavefileCreator.WaveFileCreator {
    * Return a Object<tag, value> with the RIFF tags in the file.
    * @return {!Object<string, string>} The file tags.
    */ listTags() {
-        /** @type {?number} */ let index = this.getLISTIndex('INFO');
-        /** @type {!Object} */ let tags = {
-        };
+        /** @type {?number} */ let index = this.getLISTIndex("INFO");
+        /** @type {!Object} */ let tags = {};
         if (index !== null) for(let i = 0, len = this.LIST[index].subChunks.length; i < len; i++)tags[this.LIST[index].subChunks[i].chunkId] = this.LIST[index].subChunks[i].value;
         return tags;
     }
@@ -22852,7 +22757,7 @@ class WaveFileTagEditor extends _wavefileCreator.WaveFileCreator {
             LIST: null,
             TAG: null
         };
-        for(let i = 0, len = this.LIST.length; i < len; i++)if (this.LIST[i].format == 'INFO') {
+        for(let i = 0, len = this.LIST.length; i < len; i++)if (this.LIST[i].format == "INFO") {
             index.LIST = i;
             for(let j = 0, subLen = this.LIST[i].subChunks.length; j < subLen; j++)if (this.LIST[i].subChunks[j].chunkId == tag) {
                 index.TAG = j;
@@ -22869,20 +22774,19 @@ class WaveFileTagEditor extends _wavefileCreator.WaveFileCreator {
  * @return {string} The tag name in proper fourCC format.
  * @private
  */ function fixRIFFTag_(tag) {
-    if (tag.constructor !== String) throw new Error('Invalid tag name.');
-    else if (tag.length < 4) for(let i = 0, len = 4 - tag.length; i < len; i++)tag += ' ';
+    if (tag.constructor !== String) throw new Error("Invalid tag name.");
+    else if (tag.length < 4) for(let i = 0, len = 4 - tag.length; i < len; i++)tag += " ";
     return tag;
 }
 
-},{"./wavefile-creator":"77IeK","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"77IeK":[function(require,module,exports) {
+},{"./wavefile-creator":"7tJdT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7tJdT":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to read, write and create wav files.
  * @extends WaveFileParser
  * @ignore
- */ parcelHelpers.export(exports, "WaveFileCreator", ()=>WaveFileCreator
-);
+ */ parcelHelpers.export(exports, "WaveFileCreator", ()=>WaveFileCreator);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -22913,13 +22817,13 @@ var _interleave = require("./parsers/interleave");
 var _validateNumChannels = require("./validators/validate-num-channels");
 var _validateSampleRate = require("./validators/validate-sample-rate");
 var _binary = require("./parsers/binary");
-class WaveFileCreator extends _wavefileParser.WaveFileParser {
+class WaveFileCreator extends (0, _wavefileParser.WaveFileParser) {
     constructor(){
         super();
         /**
      * The bit depth code according to the samples.
      * @type {string}
-     */ this.bitDepth = '0';
+     */ this.bitDepth = "0";
         /**
      * @type {!{bits: number, be: boolean}}
      * @protected
@@ -22934,15 +22838,15 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
      * @enum {number}
      * @protected
      */ this.WAV_AUDIO_FORMATS = {
-            '4': 17,
-            '8': 1,
-            '8a': 6,
-            '8m': 7,
-            '16': 1,
-            '24': 1,
-            '32': 1,
-            '32f': 3,
-            '64': 3
+            "4": 17,
+            "8": 1,
+            "8a": 6,
+            "8m": 7,
+            "16": 1,
+            "24": 1,
+            "32": 1,
+            "32f": 3,
+            "64": 3
         };
     }
     /**
@@ -22959,8 +22863,7 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    *    as RIFX with {'container': 'RIFX'}
    * @throws {Error} If any argument does not meet the criteria.
    */ fromScratch(numChannels, sampleRate, bitDepthCode, samples, options) {
-        options = options || {
-        };
+        options = options || {};
         // reset all chunks
         this.clearHeaders();
         this.newWavFile_(numChannels, sampleRate, bitDepthCode, samples, options);
@@ -23002,8 +22905,8 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
      * @type {!(Array|TypedArray)}
      */ let samples = new OutputObject(this.data.samples.length / (this.dataType.bits / 8));
         // Unpack all the samples
-        _binary.unpackArrayTo(this.data.samples, this.dataType, samples, 0, this.data.samples.length);
-        if (!interleaved && this.fmt.numChannels > 1) return _interleave.deInterleave(samples, this.fmt.numChannels, OutputObject);
+        (0, _binary.unpackArrayTo)(this.data.samples, this.dataType, samples, 0, this.data.samples.length);
+        if (!interleaved && this.fmt.numChannels > 1) return (0, _interleave.deInterleave)(samples, this.fmt.numChannels, OutputObject);
         return samples;
     }
     /**
@@ -23013,8 +22916,8 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * @throws {Error} If the sample index is off range.
    */ getSample(index) {
         index = index * (this.dataType.bits / 8);
-        if (index + this.dataType.bits / 8 > this.data.samples.length) throw new Error('Range error');
-        return _binary.unpack(this.data.samples.slice(index, index + this.dataType.bits / 8), this.dataType);
+        if (index + this.dataType.bits / 8 > this.data.samples.length) throw new Error("Range error");
+        return (0, _binary.unpack)(this.data.samples.slice(index, index + this.dataType.bits / 8), this.dataType);
     }
     /**
    * Set the sample at a given index.
@@ -23023,8 +22926,8 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * @throws {Error} If the sample index is off range.
    */ setSample(index, sample) {
         index = index * (this.dataType.bits / 8);
-        if (index + this.dataType.bits / 8 > this.data.samples.length) throw new Error('Range error');
-        _binary.packTo(sample, this.dataType, this.data.samples, index, true);
+        if (index + this.dataType.bits / 8 > this.data.samples.length) throw new Error("Range error");
+        (0, _binary.packTo)(sample, this.dataType, this.data.samples, index, true);
     }
     /**
    * Return the value of the iXML chunk.
@@ -23037,9 +22940,9 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * @param {string} iXMLValue The value for the iXML chunk.
    * @throws {TypeError} If the value is not a string.
    */ setiXML(iXMLValue) {
-        if (typeof iXMLValue !== 'string') throw new TypeError('iXML value must be a string.');
+        if (typeof iXMLValue !== "string") throw new TypeError("iXML value must be a string.");
         this.iXML.value = iXMLValue;
-        this.iXML.chunkId = 'iXML';
+        this.iXML.chunkId = "iXML";
     }
     /**
    * Get the value of the _PMX chunk.
@@ -23052,9 +22955,9 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * @param {string} _PMXValue The value for the _PMX chunk.
    * @throws {TypeError} If the value is not a string.
    */ set_PMX(_PMXValue) {
-        if (typeof _PMXValue !== 'string') throw new TypeError('_PMX value must be a string.');
+        if (typeof _PMXValue !== "string") throw new TypeError("_PMX value must be a string.");
         this._PMX.value = _PMXValue;
-        this._PMX.chunkId = '_PMX';
+        this._PMX.chunkId = "_PMX";
     }
     /**
    * Set up the WaveFileCreator object based on the arguments passed.
@@ -23069,16 +22972,16 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * @throws {Error} If any argument does not meet the criteria.
    * @private
    */ newWavFile_(numChannels, sampleRate, bitDepthCode, samples, options) {
-        if (!options.container) options.container = 'RIFF';
+        if (!options.container) options.container = "RIFF";
         this.container = options.container;
         this.bitDepth = bitDepthCode;
-        samples = _interleave.interleave(samples);
+        samples = (0, _interleave.interleave)(samples);
         this.updateDataType_();
         /** @type {number} */ let numBytes = this.dataType.bits / 8;
         this.data.samples = new Uint8Array(samples.length * numBytes);
-        _binary.packArrayTo(samples, this.dataType, this.data.samples, 0, true);
+        (0, _binary.packArrayTo)(samples, this.dataType, this.data.samples, 0, true);
         this.makeWavHeader_(bitDepthCode, numChannels, sampleRate, numBytes, this.data.samples.length, options);
-        this.data.chunkId = 'data';
+        this.data.chunkId = "data";
         this.data.chunkSize = this.data.samples.length;
         this.validateWavHeader_();
     }
@@ -23092,8 +22995,8 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * @param {!Object} options The extra options, like container defintion.
    * @private
    */ makeWavHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options) {
-        if (bitDepthCode == '4') this.createADPCMHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options);
-        else if (bitDepthCode == '8a' || bitDepthCode == '8m') this.createALawMulawHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options);
+        if (bitDepthCode == "4") this.createADPCMHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options);
+        else if (bitDepthCode == "8a" || bitDepthCode == "8m") this.createALawMulawHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options);
         else if (Object.keys(this.WAV_AUDIO_FORMATS).indexOf(bitDepthCode) == -1 || numChannels > 2) this.createExtensibleHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options);
         else this.createPCMHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options);
     }
@@ -23109,10 +23012,10 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    */ createPCMHeader_(bitDepthCode, numChannels, sampleRate, numBytes, samplesLength, options) {
         this.container = options.container;
         this.chunkSize = 36 + samplesLength;
-        this.format = 'WAVE';
+        this.format = "WAVE";
         this.bitDepth = bitDepthCode;
         this.fmt = {
-            chunkId: 'fmt ',
+            chunkId: "fmt ",
             chunkSize: 16,
             audioFormat: this.WAV_AUDIO_FORMATS[bitDepthCode] || 65534,
             numChannels: numChannels,
@@ -23145,7 +23048,7 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
         this.fmt.cbSize = 2;
         this.fmt.validBitsPerSample = 505;
         this.fact = {
-            chunkId: 'fact',
+            chunkId: "fact",
             chunkSize: 4,
             dwSampleLength: samplesLength * 2
         };
@@ -23192,7 +23095,7 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
         this.fmt.cbSize = 2;
         this.fmt.validBitsPerSample = 8;
         this.fact = {
-            chunkId: 'fact',
+            chunkId: "fact",
             chunkSize: 4,
             dwSampleLength: samplesLength
         };
@@ -23201,9 +23104,9 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * Set the string code of the bit depth based on the 'fmt ' chunk.
    * @private
    */ bitDepthFromFmt_() {
-        if (this.fmt.audioFormat === 3 && this.fmt.bitsPerSample === 32) this.bitDepth = '32f';
-        else if (this.fmt.audioFormat === 6) this.bitDepth = '8a';
-        else if (this.fmt.audioFormat === 7) this.bitDepth = '8m';
+        if (this.fmt.audioFormat === 3 && this.fmt.bitsPerSample === 32) this.bitDepth = "32f";
+        else if (this.fmt.audioFormat === 6) this.bitDepth = "8a";
+        else if (this.fmt.audioFormat === 7) this.bitDepth = "8m";
         else this.bitDepth = this.fmt.bitsPerSample.toString();
     }
     /**
@@ -23214,7 +23117,7 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    */ validateBitDepth_() {
         if (!this.WAV_AUDIO_FORMATS[this.bitDepth]) {
             if (parseInt(this.bitDepth, 10) > 8 && parseInt(this.bitDepth, 10) < 54) return true;
-            throw new Error('Invalid bit depth.');
+            throw new Error("Invalid bit depth.");
         }
         return true;
     }
@@ -23224,14 +23127,14 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    */ updateDataType_() {
         this.dataType = {
             bits: (parseInt(this.bitDepth, 10) - 1 | 7) + 1,
-            fp: this.bitDepth == '32f' || this.bitDepth == '64',
-            signed: this.bitDepth != '8',
-            be: this.container == 'RIFX'
+            fp: this.bitDepth == "32f" || this.bitDepth == "64",
+            signed: this.bitDepth != "8",
+            be: this.container == "RIFX"
         };
         if ([
-            '4',
-            '8a',
-            '8m'
+            "4",
+            "8a",
+            "8m"
         ].indexOf(this.bitDepth) > -1) {
             this.dataType.bits = 8;
             this.dataType.signed = false;
@@ -23246,8 +23149,8 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
    * @private
    */ validateWavHeader_() {
         this.validateBitDepth_();
-        if (!_validateNumChannels.validateNumChannels(this.fmt.numChannels, this.fmt.bitsPerSample)) throw new Error('Invalid number of channels.');
-        if (!_validateSampleRate.validateSampleRate(this.fmt.numChannels, this.fmt.bitsPerSample, this.fmt.sampleRate)) throw new Error('Invalid sample rate.');
+        if (!(0, _validateNumChannels.validateNumChannels)(this.fmt.numChannels, this.fmt.bitsPerSample)) throw new Error("Invalid number of channels.");
+        if (!(0, _validateSampleRate.validateSampleRate)(this.fmt.numChannels, this.fmt.bitsPerSample, this.fmt.sampleRate)) throw new Error("Invalid sample rate.");
     }
 }
 /**
@@ -23258,22 +23161,21 @@ class WaveFileCreator extends _wavefileParser.WaveFileParser {
  */ function dwChannelMask_(numChannels) {
     /** @type {number} */ let mask = 0;
     // mono = FC
-    if (numChannels === 1) mask = 4;
-    else if (numChannels === 2) mask = 3;
-    else if (numChannels === 4) mask = 51;
-    else if (numChannels === 6) mask = 63;
-    else if (numChannels === 8) mask = 1599;
+    if (numChannels === 1) mask = 0x4;
+    else if (numChannels === 2) mask = 0x3;
+    else if (numChannels === 4) mask = 0x33;
+    else if (numChannels === 6) mask = 0x3F;
+    else if (numChannels === 8) mask = 0x63F;
     return mask;
 }
 
-},{"./wavefile-parser":"gnp8a","./parsers/interleave":"1pzHl","./validators/validate-num-channels":"zQbZn","./validators/validate-sample-rate":"4rEm4","./parsers/binary":"jNIxc","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"gnp8a":[function(require,module,exports) {
+},{"./wavefile-parser":"hC47U","./parsers/interleave":"cDZrM","./validators/validate-num-channels":"7RYBU","./validators/validate-sample-rate":"1Xegf","./parsers/binary":"aIH4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hC47U":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to read and write wav files.
  * @extends WaveFileReader
- */ parcelHelpers.export(exports, "WaveFileParser", ()=>WaveFileParser
-);
+ */ parcelHelpers.export(exports, "WaveFileParser", ()=>WaveFileParser);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -23302,13 +23204,13 @@ parcelHelpers.defineInteropFlag(exports);
  */ var _wavefileReader = require("./wavefile-reader");
 var _writeString = require("./parsers/write-string");
 var _binary = require("./parsers/binary");
-class WaveFileParser extends _wavefileReader.WaveFileReader {
+class WaveFileParser extends (0, _wavefileReader.WaveFileReader) {
     /**
    * Return a byte buffer representig the WaveFileParser object as a .wav file.
    * The return value of this method can be written straight to disk.
    * @return {!Uint8Array} A wav file.
    */ toBuffer() {
-        this.uInt16.be = this.container === 'RIFX';
+        this.uInt16.be = this.container === "RIFX";
         this.uInt32.be = this.uInt16.be;
         /** @type {!Array<!Array<number>>} */ let fileBody = [
             this.getJunkBytes_(),
@@ -23317,8 +23219,8 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
             this.getiXMLBytes_(),
             this.getFmtBytes_(),
             this.getFactBytes_(),
-            _binary.packString(this.data.chunkId),
-            _binary.pack(this.data.samples.length, this.uInt32),
+            (0, _binary.packString)(this.data.chunkId),
+            (0, _binary.pack)(this.data.samples.length, this.uInt32),
             this.data.samples,
             this.getCueBytes_(),
             this.getSmplBytes_(),
@@ -23329,9 +23231,9 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
         for(let i = 0; i < fileBody.length; i++)fileBodyLength += fileBody[i].length;
         /** @type {!Uint8Array} */ let file = new Uint8Array(fileBodyLength + 12);
         /** @type {number} */ let index = 0;
-        index = _binary.packStringTo(this.container, file, index);
-        index = _binary.packTo(fileBodyLength + 4, this.uInt32, file, index);
-        index = _binary.packStringTo(this.format, file, index);
+        index = (0, _binary.packStringTo)(this.container, file, index);
+        index = (0, _binary.packTo)(fileBodyLength + 4, this.uInt32, file, index);
+        index = (0, _binary.packStringTo)(this.format, file, index);
         for(let i1 = 0; i1 < fileBody.length; i1++){
             file.set(fileBody[i1], index);
             index += fileBody[i1].length;
@@ -23346,7 +23248,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
         this.enforceBext_();
         if (this.bext.chunkId) {
             this.bext.chunkSize = 602 + this.bext.codingHistory.length;
-            bytes = bytes.concat(_binary.packString(this.bext.chunkId), _binary.pack(602 + this.bext.codingHistory.length, this.uInt32), _writeString.writeString(this.bext.description, 256), _writeString.writeString(this.bext.originator, 32), _writeString.writeString(this.bext.originatorReference, 32), _writeString.writeString(this.bext.originationDate, 10), _writeString.writeString(this.bext.originationTime, 8), _binary.pack(this.bext.timeReference[0], this.uInt32), _binary.pack(this.bext.timeReference[1], this.uInt32), _binary.pack(this.bext.version, this.uInt16), _writeString.writeString(this.bext.UMID, 64), _binary.pack(this.bext.loudnessValue, this.uInt16), _binary.pack(this.bext.loudnessRange, this.uInt16), _binary.pack(this.bext.maxTruePeakLevel, this.uInt16), _binary.pack(this.bext.maxMomentaryLoudness, this.uInt16), _binary.pack(this.bext.maxShortTermLoudness, this.uInt16), _writeString.writeString(this.bext.reserved, 180), _writeString.writeString(this.bext.codingHistory, this.bext.codingHistory.length));
+            bytes = bytes.concat((0, _binary.packString)(this.bext.chunkId), (0, _binary.pack)(602 + this.bext.codingHistory.length, this.uInt32), (0, _writeString.writeString)(this.bext.description, 256), (0, _writeString.writeString)(this.bext.originator, 32), (0, _writeString.writeString)(this.bext.originatorReference, 32), (0, _writeString.writeString)(this.bext.originationDate, 10), (0, _writeString.writeString)(this.bext.originationTime, 8), (0, _binary.pack)(this.bext.timeReference[0], this.uInt32), (0, _binary.pack)(this.bext.timeReference[1], this.uInt32), (0, _binary.pack)(this.bext.version, this.uInt16), (0, _writeString.writeString)(this.bext.UMID, 64), (0, _binary.pack)(this.bext.loudnessValue, this.uInt16), (0, _binary.pack)(this.bext.loudnessRange, this.uInt16), (0, _binary.pack)(this.bext.maxTruePeakLevel, this.uInt16), (0, _binary.pack)(this.bext.maxMomentaryLoudness, this.uInt16), (0, _binary.pack)(this.bext.maxShortTermLoudness, this.uInt16), (0, _writeString.writeString)(this.bext.reserved, 180), (0, _writeString.writeString)(this.bext.codingHistory, this.bext.codingHistory.length));
         }
         this.enforceByteLen_(bytes);
         return bytes;
@@ -23357,13 +23259,13 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    */ enforceBext_() {
         for(let prop in this.bext){
             if (this.bext.hasOwnProperty(prop)) {
-                if (this.bext[prop] && prop != 'timeReference') {
-                    this.bext.chunkId = 'bext';
+                if (this.bext[prop] && prop != "timeReference") {
+                    this.bext.chunkId = "bext";
                     break;
                 }
             }
         }
-        if (this.bext.timeReference[0] || this.bext.timeReference[1]) this.bext.chunkId = 'bext';
+        if (this.bext.timeReference[0] || this.bext.timeReference[1]) this.bext.chunkId = "bext";
     }
     /**
    * Return the bytes of the 'iXML' chunk.
@@ -23372,9 +23274,9 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    */ getiXMLBytes_() {
         /** @type {!Array<number>} */ let bytes = [];
         if (this.iXML.chunkId) {
-            /** @type {!Array<number>} */ let iXMLPackedValue = _binary.packString(this.iXML.value);
+            /** @type {!Array<number>} */ let iXMLPackedValue = (0, _binary.packString)(this.iXML.value);
             this.iXML.chunkSize = iXMLPackedValue.length;
-            bytes = bytes.concat(_binary.packString(this.iXML.chunkId), _binary.pack(this.iXML.chunkSize, this.uInt32), iXMLPackedValue);
+            bytes = bytes.concat((0, _binary.packString)(this.iXML.chunkId), (0, _binary.pack)(this.iXML.chunkSize, this.uInt32), iXMLPackedValue);
         }
         this.enforceByteLen_(bytes);
         return bytes;
@@ -23385,7 +23287,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @private
    */ getDs64Bytes_() {
         /** @type {!Array<number>} */ let bytes = [];
-        if (this.ds64.chunkId) bytes = bytes.concat(_binary.packString(this.ds64.chunkId), _binary.pack(this.ds64.chunkSize, this.uInt32), _binary.pack(this.ds64.riffSizeHigh, this.uInt32), _binary.pack(this.ds64.riffSizeLow, this.uInt32), _binary.pack(this.ds64.dataSizeHigh, this.uInt32), _binary.pack(this.ds64.dataSizeLow, this.uInt32), _binary.pack(this.ds64.originationTime, this.uInt32), _binary.pack(this.ds64.sampleCountHigh, this.uInt32), _binary.pack(this.ds64.sampleCountLow, this.uInt32));
+        if (this.ds64.chunkId) bytes = bytes.concat((0, _binary.packString)(this.ds64.chunkId), (0, _binary.pack)(this.ds64.chunkSize, this.uInt32), (0, _binary.pack)(this.ds64.riffSizeHigh, this.uInt32), (0, _binary.pack)(this.ds64.riffSizeLow, this.uInt32), (0, _binary.pack)(this.ds64.dataSizeHigh, this.uInt32), (0, _binary.pack)(this.ds64.dataSizeLow, this.uInt32), (0, _binary.pack)(this.ds64.originationTime, this.uInt32), (0, _binary.pack)(this.ds64.sampleCountHigh, this.uInt32), (0, _binary.pack)(this.ds64.sampleCountLow, this.uInt32));
         //if (this.ds64.tableLength) {
         //  ds64Bytes = ds64Bytes.concat(
         //    pack(this.ds64.tableLength, this.uInt32),
@@ -23402,7 +23304,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
         /** @type {!Array<number>} */ let bytes = [];
         if (this.cue.chunkId) {
             /** @type {!Array<number>} */ let cuePointsBytes = this.getCuePointsBytes_();
-            bytes = bytes.concat(_binary.packString(this.cue.chunkId), _binary.pack(cuePointsBytes.length + 4, this.uInt32), _binary.pack(this.cue.dwCuePoints, this.uInt32), cuePointsBytes);
+            bytes = bytes.concat((0, _binary.packString)(this.cue.chunkId), (0, _binary.pack)(cuePointsBytes.length + 4, this.uInt32), (0, _binary.pack)(this.cue.dwCuePoints, this.uInt32), cuePointsBytes);
         }
         this.enforceByteLen_(bytes);
         return bytes;
@@ -23413,7 +23315,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @private
    */ getCuePointsBytes_() {
         /** @type {!Array<number>} */ let points = [];
-        for(let i = 0; i < this.cue.dwCuePoints; i++)points = points.concat(_binary.pack(this.cue.points[i].dwName, this.uInt32), _binary.pack(this.cue.points[i].dwPosition, this.uInt32), _binary.packString(this.cue.points[i].fccChunk), _binary.pack(this.cue.points[i].dwChunkStart, this.uInt32), _binary.pack(this.cue.points[i].dwBlockStart, this.uInt32), _binary.pack(this.cue.points[i].dwSampleOffset, this.uInt32));
+        for(let i = 0; i < this.cue.dwCuePoints; i++)points = points.concat((0, _binary.pack)(this.cue.points[i].dwName, this.uInt32), (0, _binary.pack)(this.cue.points[i].dwPosition, this.uInt32), (0, _binary.packString)(this.cue.points[i].fccChunk), (0, _binary.pack)(this.cue.points[i].dwChunkStart, this.uInt32), (0, _binary.pack)(this.cue.points[i].dwBlockStart, this.uInt32), (0, _binary.pack)(this.cue.points[i].dwSampleOffset, this.uInt32));
         return points;
     }
     /**
@@ -23424,7 +23326,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
         /** @type {!Array<number>} */ let bytes = [];
         if (this.smpl.chunkId) {
             /** @type {!Array<number>} */ let smplLoopsBytes = this.getSmplLoopsBytes_();
-            bytes = bytes.concat(_binary.packString(this.smpl.chunkId), _binary.pack(smplLoopsBytes.length + 36, this.uInt32), _binary.pack(this.smpl.dwManufacturer, this.uInt32), _binary.pack(this.smpl.dwProduct, this.uInt32), _binary.pack(this.smpl.dwSamplePeriod, this.uInt32), _binary.pack(this.smpl.dwMIDIUnityNote, this.uInt32), _binary.pack(this.smpl.dwMIDIPitchFraction, this.uInt32), _binary.pack(this.smpl.dwSMPTEFormat, this.uInt32), _binary.pack(this.smpl.dwSMPTEOffset, this.uInt32), _binary.pack(this.smpl.dwNumSampleLoops, this.uInt32), _binary.pack(this.smpl.dwSamplerData, this.uInt32), smplLoopsBytes);
+            bytes = bytes.concat((0, _binary.packString)(this.smpl.chunkId), (0, _binary.pack)(smplLoopsBytes.length + 36, this.uInt32), (0, _binary.pack)(this.smpl.dwManufacturer, this.uInt32), (0, _binary.pack)(this.smpl.dwProduct, this.uInt32), (0, _binary.pack)(this.smpl.dwSamplePeriod, this.uInt32), (0, _binary.pack)(this.smpl.dwMIDIUnityNote, this.uInt32), (0, _binary.pack)(this.smpl.dwMIDIPitchFraction, this.uInt32), (0, _binary.pack)(this.smpl.dwSMPTEFormat, this.uInt32), (0, _binary.pack)(this.smpl.dwSMPTEOffset, this.uInt32), (0, _binary.pack)(this.smpl.dwNumSampleLoops, this.uInt32), (0, _binary.pack)(this.smpl.dwSamplerData, this.uInt32), smplLoopsBytes);
         }
         this.enforceByteLen_(bytes);
         return bytes;
@@ -23435,7 +23337,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @private
    */ getSmplLoopsBytes_() {
         /** @type {!Array<number>} */ let loops = [];
-        for(let i = 0; i < this.smpl.dwNumSampleLoops; i++)loops = loops.concat(_binary.pack(this.smpl.loops[i].dwName, this.uInt32), _binary.pack(this.smpl.loops[i].dwType, this.uInt32), _binary.pack(this.smpl.loops[i].dwStart, this.uInt32), _binary.pack(this.smpl.loops[i].dwEnd, this.uInt32), _binary.pack(this.smpl.loops[i].dwFraction, this.uInt32), _binary.pack(this.smpl.loops[i].dwPlayCount, this.uInt32));
+        for(let i = 0; i < this.smpl.dwNumSampleLoops; i++)loops = loops.concat((0, _binary.pack)(this.smpl.loops[i].dwName, this.uInt32), (0, _binary.pack)(this.smpl.loops[i].dwType, this.uInt32), (0, _binary.pack)(this.smpl.loops[i].dwStart, this.uInt32), (0, _binary.pack)(this.smpl.loops[i].dwEnd, this.uInt32), (0, _binary.pack)(this.smpl.loops[i].dwFraction, this.uInt32), (0, _binary.pack)(this.smpl.loops[i].dwPlayCount, this.uInt32));
         return loops;
     }
     /**
@@ -23444,7 +23346,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @private
    */ getFactBytes_() {
         /** @type {!Array<number>} */ let bytes = [];
-        if (this.fact.chunkId) bytes = bytes.concat(_binary.packString(this.fact.chunkId), _binary.pack(this.fact.chunkSize, this.uInt32), _binary.pack(this.fact.dwSampleLength, this.uInt32));
+        if (this.fact.chunkId) bytes = bytes.concat((0, _binary.packString)(this.fact.chunkId), (0, _binary.pack)(this.fact.chunkSize, this.uInt32), (0, _binary.pack)(this.fact.dwSampleLength, this.uInt32));
         this.enforceByteLen_(bytes);
         return bytes;
     }
@@ -23456,7 +23358,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    */ getFmtBytes_() {
         /** @type {!Array<number>} */ let fmtBytes = [];
         if (this.fmt.chunkId) {
-            /** @type {!Array<number>} */ let bytes = fmtBytes.concat(_binary.packString(this.fmt.chunkId), _binary.pack(this.fmt.chunkSize, this.uInt32), _binary.pack(this.fmt.audioFormat, this.uInt16), _binary.pack(this.fmt.numChannels, this.uInt16), _binary.pack(this.fmt.sampleRate, this.uInt32), _binary.pack(this.fmt.byteRate, this.uInt32), _binary.pack(this.fmt.blockAlign, this.uInt16), _binary.pack(this.fmt.bitsPerSample, this.uInt16), this.getFmtExtensionBytes_());
+            /** @type {!Array<number>} */ let bytes = fmtBytes.concat((0, _binary.packString)(this.fmt.chunkId), (0, _binary.pack)(this.fmt.chunkSize, this.uInt32), (0, _binary.pack)(this.fmt.audioFormat, this.uInt16), (0, _binary.pack)(this.fmt.numChannels, this.uInt16), (0, _binary.pack)(this.fmt.sampleRate, this.uInt32), (0, _binary.pack)(this.fmt.byteRate, this.uInt32), (0, _binary.pack)(this.fmt.blockAlign, this.uInt16), (0, _binary.pack)(this.fmt.bitsPerSample, this.uInt16), this.getFmtExtensionBytes_());
             this.enforceByteLen_(bytes);
             return bytes;
         }
@@ -23468,10 +23370,10 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @private
    */ getFmtExtensionBytes_() {
         /** @type {!Array<number>} */ let extension = [];
-        if (this.fmt.chunkSize > 16) extension = extension.concat(_binary.pack(this.fmt.cbSize, this.uInt16));
-        if (this.fmt.chunkSize > 18) extension = extension.concat(_binary.pack(this.fmt.validBitsPerSample, this.uInt16));
-        if (this.fmt.chunkSize > 20) extension = extension.concat(_binary.pack(this.fmt.dwChannelMask, this.uInt32));
-        if (this.fmt.chunkSize > 24) extension = extension.concat(_binary.pack(this.fmt.subformat[0], this.uInt32), _binary.pack(this.fmt.subformat[1], this.uInt32), _binary.pack(this.fmt.subformat[2], this.uInt32), _binary.pack(this.fmt.subformat[3], this.uInt32));
+        if (this.fmt.chunkSize > 16) extension = extension.concat((0, _binary.pack)(this.fmt.cbSize, this.uInt16));
+        if (this.fmt.chunkSize > 18) extension = extension.concat((0, _binary.pack)(this.fmt.validBitsPerSample, this.uInt16));
+        if (this.fmt.chunkSize > 20) extension = extension.concat((0, _binary.pack)(this.fmt.dwChannelMask, this.uInt32));
+        if (this.fmt.chunkSize > 24) extension = extension.concat((0, _binary.pack)(this.fmt.subformat[0], this.uInt32), (0, _binary.pack)(this.fmt.subformat[1], this.uInt32), (0, _binary.pack)(this.fmt.subformat[2], this.uInt32), (0, _binary.pack)(this.fmt.subformat[3], this.uInt32));
         return extension;
     }
     /**
@@ -23482,7 +23384,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
         /** @type {!Array<number>} */ let bytes = [];
         for(let i = 0; i < this.LIST.length; i++){
             /** @type {!Array<number>} */ let subChunksBytes = this.getLISTSubChunksBytes_(this.LIST[i].subChunks, this.LIST[i].format);
-            bytes = bytes.concat(_binary.packString(this.LIST[i].chunkId), _binary.pack(subChunksBytes.length + 4, this.uInt32), _binary.packString(this.LIST[i].format), subChunksBytes);
+            bytes = bytes.concat((0, _binary.packString)(this.LIST[i].chunkId), (0, _binary.pack)(subChunksBytes.length + 4, this.uInt32), (0, _binary.packString)(this.LIST[i].format), subChunksBytes);
         }
         this.enforceByteLen_(bytes);
         return bytes;
@@ -23497,8 +23399,8 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    */ getLISTSubChunksBytes_(subChunks, format) {
         /** @type {!Array<number>} */ let bytes = [];
         for(let i = 0, len = subChunks.length; i < len; i++){
-            if (format == 'INFO') bytes = bytes.concat(this.getLISTINFOSubChunksBytes_(subChunks[i]));
-            else if (format == 'adtl') bytes = bytes.concat(this.getLISTadtlSubChunksBytes_(subChunks[i]));
+            if (format == "INFO") bytes = bytes.concat(this.getLISTINFOSubChunksBytes_(subChunks[i]));
+            else if (format == "adtl") bytes = bytes.concat(this.getLISTadtlSubChunksBytes_(subChunks[i]));
             this.enforceByteLen_(bytes);
         }
         return bytes;
@@ -23510,8 +23412,8 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @private
    */ getLISTINFOSubChunksBytes_(subChunk) {
         /** @type {!Array<number>} */ let bytes = [];
-        /** @type {!Array<number>} */ let LISTsubChunkValue = _writeString.writeString(subChunk.value, subChunk.value.length);
-        bytes = bytes.concat(_binary.packString(subChunk.chunkId), _binary.pack(LISTsubChunkValue.length + 1, this.uInt32), LISTsubChunkValue);
+        /** @type {!Array<number>} */ let LISTsubChunkValue = (0, _writeString.writeString)(subChunk.value, subChunk.value.length);
+        bytes = bytes.concat((0, _binary.packString)(subChunk.chunkId), (0, _binary.pack)(LISTsubChunkValue.length + 1, this.uInt32), LISTsubChunkValue);
         bytes.push(0);
         return bytes;
     }
@@ -23523,13 +23425,13 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    */ getLISTadtlSubChunksBytes_(subChunk) {
         /** @type {!Array<number>} */ let bytes = [];
         if ([
-            'labl',
-            'note'
+            "labl",
+            "note"
         ].indexOf(subChunk.chunkId) > -1) {
-            /** @type {!Array<number>} */ let LISTsubChunkValue = _writeString.writeString(subChunk.value, subChunk.value.length);
-            bytes = bytes.concat(_binary.packString(subChunk.chunkId), _binary.pack(LISTsubChunkValue.length + 4 + 1, this.uInt32), _binary.pack(subChunk.dwName, this.uInt32), LISTsubChunkValue);
+            /** @type {!Array<number>} */ let LISTsubChunkValue = (0, _writeString.writeString)(subChunk.value, subChunk.value.length);
+            bytes = bytes.concat((0, _binary.packString)(subChunk.chunkId), (0, _binary.pack)(LISTsubChunkValue.length + 4 + 1, this.uInt32), (0, _binary.pack)(subChunk.dwName, this.uInt32), LISTsubChunkValue);
             bytes.push(0);
-        } else if (subChunk.chunkId == 'ltxt') bytes = bytes.concat(this.getLtxtChunkBytes_(subChunk));
+        } else if (subChunk.chunkId == "ltxt") bytes = bytes.concat(this.getLtxtChunkBytes_(subChunk));
         return bytes;
     }
     /**
@@ -23538,9 +23440,9 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @return {!Array<number>}
    * @private
    */ getLtxtChunkBytes_(ltxt) {
-        return [].concat(_binary.packString(ltxt.chunkId), _binary.pack(ltxt.value.length + 20, this.uInt32), _binary.pack(ltxt.dwName, this.uInt32), _binary.pack(ltxt.dwSampleLength, this.uInt32), _binary.pack(ltxt.dwPurposeID, this.uInt32), _binary.pack(ltxt.dwCountry, this.uInt16), _binary.pack(ltxt.dwLanguage, this.uInt16), _binary.pack(ltxt.dwDialect, this.uInt16), _binary.pack(ltxt.dwCodePage, this.uInt16), // should always be a empty string;
+        return [].concat((0, _binary.packString)(ltxt.chunkId), (0, _binary.pack)(ltxt.value.length + 20, this.uInt32), (0, _binary.pack)(ltxt.dwName, this.uInt32), (0, _binary.pack)(ltxt.dwSampleLength, this.uInt32), (0, _binary.pack)(ltxt.dwPurposeID, this.uInt32), (0, _binary.pack)(ltxt.dwCountry, this.uInt16), (0, _binary.pack)(ltxt.dwLanguage, this.uInt16), (0, _binary.pack)(ltxt.dwDialect, this.uInt16), (0, _binary.pack)(ltxt.dwCodePage, this.uInt16), // should always be a empty string;
         // kept for compatibility
-        _writeString.writeString(ltxt.value, ltxt.value.length));
+        (0, _writeString.writeString)(ltxt.value, ltxt.value.length));
     }
     /**
    * Return the bytes of the '_PMX' chunk.
@@ -23549,9 +23451,9 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    */ get_PMXBytes_() {
         /** @type {!Array<number>} */ let bytes = [];
         if (this._PMX.chunkId) {
-            /** @type {!Array<number>} */ let _PMXPackedValue = _binary.packString(this._PMX.value);
+            /** @type {!Array<number>} */ let _PMXPackedValue = (0, _binary.packString)(this._PMX.value);
             this._PMX.chunkSize = _PMXPackedValue.length;
-            bytes = bytes.concat(_binary.packString(this._PMX.chunkId), _binary.pack(this._PMX.chunkSize, this.uInt32), _PMXPackedValue);
+            bytes = bytes.concat((0, _binary.packString)(this._PMX.chunkId), (0, _binary.pack)(this._PMX.chunkSize, this.uInt32), _PMXPackedValue);
         }
         this.enforceByteLen_(bytes);
         return bytes;
@@ -23561,7 +23463,7 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
    * @private
    */ getJunkBytes_() {
         /** @type {!Array<number>} */ let bytes = [];
-        if (this.junk.chunkId) return bytes.concat(_binary.packString(this.junk.chunkId), _binary.pack(this.junk.chunkData.length, this.uInt32), this.junk.chunkData);
+        if (this.junk.chunkId) return bytes.concat((0, _binary.packString)(this.junk.chunkId), (0, _binary.pack)(this.junk.chunkData.length, this.uInt32), this.junk.chunkData);
         this.enforceByteLen_(bytes);
         return bytes;
     }
@@ -23575,14 +23477,13 @@ class WaveFileParser extends _wavefileReader.WaveFileReader {
     }
 }
 
-},{"./wavefile-reader":"97xNU","./parsers/write-string":"di9ea","./parsers/binary":"jNIxc","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"97xNU":[function(require,module,exports) {
+},{"./wavefile-reader":"9Xclc","./parsers/write-string":"er6k5","./parsers/binary":"aIH4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9Xclc":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to read wav files.
  * @extends RIFFFile
- */ parcelHelpers.export(exports, "WaveFileReader", ()=>WaveFileReader
-);
+ */ parcelHelpers.export(exports, "WaveFileReader", ()=>WaveFileReader);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -23610,16 +23511,16 @@ parcelHelpers.defineInteropFlag(exports);
  * @see https://github.com/rochars/wavefile
  */ var _riffFile = require("./riff-file");
 var _binary = require("./parsers/binary");
-class WaveFileReader extends _riffFile.RIFFFile {
+class WaveFileReader extends (0, _riffFile.RIFFFile) {
     constructor(){
         super();
         // Include 'RF64' as a supported container format
-        this.supported_containers.push('RF64');
+        this.supported_containers.push("RF64");
         /**
      * The data of the 'fmt' chunk.
      * @type {!Object<string, *>}
      */ this.fmt = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
             /** @type {number} */ audioFormat: 0,
             /** @type {number} */ numChannels: 0,
@@ -23639,7 +23540,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
      * The data of the 'fact' chunk.
      * @type {!Object<string, *>}
      */ this.fact = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
             /** @type {number} */ dwSampleLength: 0
         };
@@ -23647,7 +23548,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
      * The data of the 'cue ' chunk.
      * @type {!Object<string, *>}
      */ this.cue = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
             /** @type {number} */ dwCuePoints: 0,
             /** @type {!Array<!Object>} */ points: []
@@ -23656,7 +23557,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
      * The data of the 'smpl' chunk.
      * @type {!Object<string, *>}
      */ this.smpl = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
             /** @type {number} */ dwManufacturer: 0,
             /** @type {number} */ dwProduct: 0,
@@ -23673,13 +23574,13 @@ class WaveFileReader extends _riffFile.RIFFFile {
      * The data of the 'bext' chunk.
      * @type {!Object<string, *>}
      */ this.bext = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
-            /** @type {string} */ description: '',
-            /** @type {string} */ originator: '',
-            /** @type {string} */ originatorReference: '',
-            /** @type {string} */ originationDate: '',
-            /** @type {string} */ originationTime: '',
+            /** @type {string} */ description: "",
+            /** @type {string} */ originator: "",
+            /** @type {string} */ originatorReference: "",
+            /** @type {string} */ originationDate: "",
+            /** @type {string} */ originationTime: "",
             /**
        * 2 32-bit values, timeReference high and low
        * @type {!Array<number>}
@@ -23688,29 +23589,29 @@ class WaveFileReader extends _riffFile.RIFFFile {
                 0
             ],
             /** @type {number} */ version: 0,
-            /** @type {string} */ UMID: '',
+            /** @type {string} */ UMID: "",
             /** @type {number} */ loudnessValue: 0,
             /** @type {number} */ loudnessRange: 0,
             /** @type {number} */ maxTruePeakLevel: 0,
             /** @type {number} */ maxMomentaryLoudness: 0,
             /** @type {number} */ maxShortTermLoudness: 0,
-            /** @type {string} */ reserved: '',
-            /** @type {string} */ codingHistory: '' // string, unlimited
+            /** @type {string} */ reserved: "",
+            /** @type {string} */ codingHistory: "" // string, unlimited
         };
         /**
      * The data of the 'iXML' chunk.
      * @type {!Object<string, *>}
      */ this.iXML = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
-            /** @type {string} */ value: ''
+            /** @type {string} */ value: ""
         };
         /**
      * The data of the 'ds64' chunk.
      * Used only with RF64 files.
      * @type {!Object<string, *>}
      */ this.ds64 = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
             /** @type {number} */ riffSizeHigh: 0,
             /** @type {number} */ riffSizeLow: 0,
@@ -23724,7 +23625,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
      * The data of the 'data' chunk.
      * @type {!Object<string, *>}
      */ this.data = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
             /** @type {!Uint8Array} */ samples: new Uint8Array(0)
         };
@@ -23743,7 +23644,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
      * The data of the 'junk' chunk.
      * @type {!Object<string, *>}
      */ this.junk = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
             /** @type {!Array<number>} */ chunkData: []
         };
@@ -23751,9 +23652,9 @@ class WaveFileReader extends _riffFile.RIFFFile {
      * The data of the '_PMX' chunk.
      * @type {!Object<string, *>}
      */ this._PMX = {
-            /** @type {string} */ chunkId: '',
+            /** @type {string} */ chunkId: "",
             /** @type {number} */ chunkSize: 0,
-            /** @type {string} */ value: ''
+            /** @type {string} */ value: ""
         };
         /**
      * @type {{be: boolean, bits: number, fp: boolean, signed: boolean}}
@@ -23778,7 +23679,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
         this.clearHeaders();
         this.setSignature(wavBuffer);
         this.uInt16.be = this.uInt32.be;
-        if (this.format != 'WAVE') throw Error('Could not find the "WAVE" format identifier');
+        if (this.format != "WAVE") throw Error('Could not find the "WAVE" format identifier');
         this.readDs64Chunk_(wavBuffer);
         this.readFmtChunk_(wavBuffer);
         this.readFactChunk_(wavBuffer);
@@ -23815,7 +23716,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @throws {Error} If no 'fmt ' chunk is found.
    * @private
    */ readFmtChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('fmt ');
+        /** @type {?Object} */ let chunk = this.findChunk("fmt ");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this.fmt.chunkId = chunk.chunkId;
@@ -23855,7 +23756,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readFactChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('fact');
+        /** @type {?Object} */ let chunk = this.findChunk("fact");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this.fact.chunkId = chunk.chunkId;
@@ -23868,7 +23769,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readCueChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('cue ');
+        /** @type {?Object} */ let chunk = this.findChunk("cue ");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this.cue.chunkId = chunk.chunkId;
@@ -23889,7 +23790,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readSmplChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('smpl');
+        /** @type {?Object} */ let chunk = this.findChunk("smpl");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this.smpl.chunkId = chunk.chunkId;
@@ -23920,9 +23821,9 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @throws {Error} If no 'data' chunk is found.
    * @private
    */ readDataChunk_(buffer, samples) {
-        /** @type {?Object} */ let chunk = this.findChunk('data');
+        /** @type {?Object} */ let chunk = this.findChunk("data");
         if (chunk) {
-            this.data.chunkId = 'data';
+            this.data.chunkId = "data";
             this.data.chunkSize = chunk.chunkSize;
             if (samples) this.data.samples = buffer.slice(chunk.chunkData.start, chunk.chunkData.end);
         } else throw Error('Could not find the "data" chunk');
@@ -23932,7 +23833,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readBextChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('bext');
+        /** @type {?Object} */ let chunk = this.findChunk("bext");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this.bext.chunkId = chunk.chunkId;
@@ -23962,12 +23863,12 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readiXMLChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('iXML');
+        /** @type {?Object} */ let chunk = this.findChunk("iXML");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this.iXML.chunkId = chunk.chunkId;
             this.iXML.chunkSize = chunk.chunkSize;
-            this.iXML.value = _binary.unpackString(buffer, this.head, this.head + this.iXML.chunkSize);
+            this.iXML.value = (0, _binary.unpackString)(buffer, this.head, this.head + this.iXML.chunkSize);
         }
     }
     /**
@@ -23976,7 +23877,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @throws {Error} If no 'ds64' chunk is found and the file is RF64.
    * @private
    */ readDs64Chunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('ds64');
+        /** @type {?Object} */ let chunk = this.findChunk("ds64");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this.ds64.chunkId = chunk.chunkId;
@@ -23995,7 +23896,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
         //     32, 32 + wav.ds64.tableLength);
         //}
         } else {
-            if (this.container == 'RF64') throw Error('Could not find the "ds64" chunk');
+            if (this.container == "RF64") throw Error('Could not find the "ds64" chunk');
         }
     }
     /**
@@ -24003,7 +23904,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readLISTChunk_(buffer) {
-        /** @type {?Object} */ let listChunks = this.findChunk('LIST', true);
+        /** @type {?Object} */ let listChunks = this.findChunk("LIST", true);
         if (listChunks !== null) for(let j = 0; j < listChunks.length; j++){
             /** @type {!Object} */ let subChunk = listChunks[j];
             this.LIST.push({
@@ -24022,13 +23923,13 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readLISTSubChunks_(subChunk, format, buffer) {
-        if (format == 'adtl') {
+        if (format == "adtl") {
             if ([
-                'labl',
-                'note',
-                'ltxt'
+                "labl",
+                "note",
+                "ltxt"
             ].indexOf(subChunk.chunkId) > -1) this.readLISTadtlSubChunks_(buffer, subChunk);
-        } else if (format == 'INFO') this.readLISTINFOSubChunks_(buffer, subChunk);
+        } else if (format == "INFO") this.readLISTINFOSubChunks_(buffer, subChunk);
     }
     /**
    * Read the sub chunks of a 'LIST' chunk of type 'adtl'.
@@ -24042,14 +23943,14 @@ class WaveFileReader extends _riffFile.RIFFFile {
             chunkSize: subChunk.chunkSize,
             dwName: this.readUInt32(buffer)
         };
-        if (subChunk.chunkId == 'ltxt') {
+        if (subChunk.chunkId == "ltxt") {
             item.dwSampleLength = this.readUInt32(buffer);
             item.dwPurposeID = this.readUInt32(buffer);
             item.dwCountry = this.readUInt16_(buffer);
             item.dwLanguage = this.readUInt16_(buffer);
             item.dwDialect = this.readUInt16_(buffer);
             item.dwCodePage = this.readUInt16_(buffer);
-            item.value = ''; // kept for compatibility
+            item.value = ""; // kept for compatibility
         } else item.value = this.readZSTR_(buffer, this.head);
         this.LIST[this.LIST.length - 1].subChunks.push(item);
     }
@@ -24071,7 +23972,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ readJunkChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('junk');
+        /** @type {?Object} */ let chunk = this.findChunk("junk");
         if (chunk) this.junk = {
             chunkId: chunk.chunkId,
             chunkSize: chunk.chunkSize,
@@ -24083,12 +23984,12 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @param {!Uint8Array} buffer The wav file buffer.
    * @private
    */ read_PMXChunk_(buffer) {
-        /** @type {?Object} */ let chunk = this.findChunk('_PMX');
+        /** @type {?Object} */ let chunk = this.findChunk("_PMX");
         if (chunk) {
             this.head = chunk.chunkData.start;
             this._PMX.chunkId = chunk.chunkId;
             this._PMX.chunkSize = chunk.chunkSize;
-            this._PMX.value = _binary.unpackString(buffer, this.head, this.head + this._PMX.chunkSize);
+            this._PMX.value = (0, _binary.unpackString)(buffer, this.head, this.head + this._PMX.chunkSize);
         }
     }
     /**
@@ -24102,7 +24003,7 @@ class WaveFileReader extends _riffFile.RIFFFile {
             this.head++;
             if (bytes[i] === 0) break;
         }
-        return _binary.unpackString(bytes, index, this.head - 1);
+        return (0, _binary.unpackString)(bytes, index, this.head - 1);
     }
     /**
    * Read a number from a chunk.
@@ -24110,19 +24011,18 @@ class WaveFileReader extends _riffFile.RIFFFile {
    * @return {number} The number.
    * @private
    */ readUInt16_(bytes) {
-        /** @type {number} */ let value = _binary.unpack(bytes, this.uInt16, this.head);
+        /** @type {number} */ let value = (0, _binary.unpack)(bytes, this.uInt16, this.head);
         this.head += 2;
         return value;
     }
 }
 
-},{"./riff-file":"295Cf","./parsers/binary":"jNIxc","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"295Cf":[function(require,module,exports) {
+},{"./riff-file":"hOAjg","./parsers/binary":"aIH4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hOAjg":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
  * A class to perform low-level reading of RIFF/RIFX files.
- */ parcelHelpers.export(exports, "RIFFFile", ()=>RIFFFile
-);
+ */ parcelHelpers.export(exports, "RIFFFile", ()=>RIFFFile);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -24155,14 +24055,14 @@ class RIFFFile {
      * The container identifier.
      * 'RIFF', 'RIFX' and 'RF64' are supported.
      * @type {string}
-     */ this.container = '';
+     */ this.container = "";
         /**
      * @type {number}
      */ this.chunkSize = 0;
         /**
      * The format.
      * @type {string}
-     */ this.format = '';
+     */ this.format = "";
         /**
      * A object defining the start and end of all chunks in a wav buffer.
      * @type {Object}
@@ -24184,8 +24084,8 @@ class RIFFFile {
      * @type {!Array<string>}
      * @protected
      */ this.supported_containers = [
-            'RIFF',
-            'RIFX'
+            "RIFF",
+            "RIFX"
         ];
     }
     /**
@@ -24195,8 +24095,8 @@ class RIFFFile {
    */ setSignature(buffer) {
         this.head = 0;
         this.container = this.readString(buffer, 4);
-        if (this.supported_containers.indexOf(this.container) === -1) throw Error('Not a supported format.');
-        this.uInt32.be = this.container === 'RIFX';
+        if (this.supported_containers.indexOf(this.container) === -1) throw Error("Not a supported format.");
+        this.uInt32.be = this.container === "RIFX";
         this.chunkSize = this.readUInt32(buffer);
         this.format = this.readString(buffer, 4);
         // The RIFF file signature
@@ -24221,7 +24121,7 @@ class RIFFFile {
             if (multiple) chunk.push(chunks[i]);
             else return chunks[i];
         }
-        if (chunkId == 'LIST') return chunk.length ? chunk : null;
+        if (chunkId == "LIST") return chunk.length ? chunk : null;
         return null;
     }
     /**
@@ -24231,8 +24131,8 @@ class RIFFFile {
    * @return {string} The string.
    * @protected
    */ readString(bytes, maxSize) {
-        /** @type {string} */ let str = '';
-        str = _binary.unpackString(bytes, this.head, this.head + maxSize);
+        /** @type {string} */ let str = "";
+        str = (0, _binary.unpackString)(bytes, this.head, this.head + maxSize);
         this.head += maxSize;
         return str;
     }
@@ -24242,7 +24142,7 @@ class RIFFFile {
    * @return {number} The number.
    * @protected
    */ readUInt32(bytes) {
-        /** @type {number} */ let value = _binary.unpack(bytes, this.uInt32, this.head);
+        /** @type {number} */ let value = (0, _binary.unpack)(bytes, this.uInt32, this.head);
         this.head += 4;
         return value;
     }
@@ -24272,8 +24172,8 @@ class RIFFFile {
             chunkId: this.getChunkId_(buffer, index),
             chunkSize: this.getChunkSize_(buffer, index)
         };
-        if (chunk.chunkId == 'LIST') {
-            chunk.format = _binary.unpackString(buffer, index + 8, index + 12);
+        if (chunk.chunkId == "LIST") {
+            chunk.format = (0, _binary.unpackString)(buffer, index + 8, index + 12);
             this.head += 4;
             chunk.subChunks = this.getSubChunksIndex_(buffer);
         } else {
@@ -24294,7 +24194,7 @@ class RIFFFile {
    * @private
    */ getChunkId_(buffer, index) {
         this.head += 4;
-        return _binary.unpackString(buffer, index, index + 4);
+        return (0, _binary.unpackString)(buffer, index, index + 4);
     }
     /**
    * Return the size of a chunk.
@@ -24304,11 +24204,11 @@ class RIFFFile {
    * @private
    */ getChunkSize_(buffer, index) {
         this.head += 4;
-        return _binary.unpack(buffer, this.uInt32, index + 4);
+        return (0, _binary.unpack)(buffer, this.uInt32, index + 4);
     }
 }
 
-},{"./parsers/binary":"jNIxc","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"di9ea":[function(require,module,exports) {
+},{"./parsers/binary":"aIH4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"er6k5":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
@@ -24317,8 +24217,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {string} str The string to be written as bytes.
  * @param {number} byteLength the size of the string in bytes.
  * @return {!Array<number>} The packed string.
- */ parcelHelpers.export(exports, "writeString", ()=>writeString
-);
+ */ parcelHelpers.export(exports, "writeString", ()=>writeString);
 /*
  * Copyright (c) 2017-2019 Rafael da Silva Rocha.
  *
@@ -24346,12 +24245,12 @@ parcelHelpers.defineInteropFlag(exports);
  * @see https://github.com/rochars/wavefile
  */ var _binary = require("./binary");
 function writeString(str, byteLength) {
-    /** @type {!Array<number>} */ let packedString = _binary.packString(str);
+    /** @type {!Array<number>} */ let packedString = (0, _binary.packString)(str);
     for(let i = packedString.length; i < byteLength; i++)packedString.push(0);
     return packedString;
 }
 
-},{"./binary":"jNIxc","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"1pzHl":[function(require,module,exports) {
+},{"./binary":"aIH4K","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cDZrM":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -24383,8 +24282,7 @@ parcelHelpers.defineInteropFlag(exports);
  * Interleave de-interleaved samples.
  * @param {!(Array|TypedArray)} samples The samples.
  * @return {!(Array|TypedArray)}
- */ parcelHelpers.export(exports, "interleave", ()=>interleave
-);
+ */ parcelHelpers.export(exports, "interleave", ()=>interleave);
 /**
  * De-interleave samples into multiple channels.
  * @param {!(Array|TypedArray)} samples The samples.
@@ -24392,8 +24290,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {Function} [OutputObject=Float64Array] The type of object to
  *   write the de-interleaved samples.
  * @return {!(Array|TypedArray)}
- */ parcelHelpers.export(exports, "deInterleave", ()=>deInterleave
-);
+ */ parcelHelpers.export(exports, "deInterleave", ()=>deInterleave);
 function interleave(samples) {
     /** @type {!(Array|TypedArray)} */ let finalSamples = [];
     if (samples.length > 0) {
@@ -24411,7 +24308,7 @@ function deInterleave(samples, numChannels, OutputObject = Float64Array) {
     return finalSamples;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"zQbZn":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7RYBU":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -24445,15 +24342,14 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} channels The number of channels in the file.
  * @param {number} bits The number of bits per sample.
  * @return {boolean} True is the number of channels is valid.
- */ parcelHelpers.export(exports, "validateNumChannels", ()=>validateNumChannels
-);
+ */ parcelHelpers.export(exports, "validateNumChannels", ()=>validateNumChannels);
 function validateNumChannels(channels, bits) {
     /** @type {number} */ let blockAlign = channels * bits / 8;
     if (channels < 1 || blockAlign > 65535) return false;
     return true;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"4rEm4":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1Xegf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -24488,15 +24384,14 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} bits The number of bits per sample.
  * @param {number} sampleRate The sample rate to be validated.
  * @return {boolean} True is the sample rate is valid, false otherwise.
- */ parcelHelpers.export(exports, "validateSampleRate", ()=>validateSampleRate
-);
+ */ parcelHelpers.export(exports, "validateSampleRate", ()=>validateSampleRate);
 function validateSampleRate(channels, bits, sampleRate) {
     /** @type {number} */ let byteRate = channels * (bits / 8) * sampleRate;
     if (sampleRate < 1 || byteRate > 4294967295) return false;
     return true;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"kpVZu":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5KhFV":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /**
@@ -24506,8 +24401,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @param {number} sampleRate The target sample rate.
  * @param {Object=} options The extra configuration, if needed.
  * @return {!Float64Array} the new samples.
- */ parcelHelpers.export(exports, "resample", ()=>resample
-);
+ */ parcelHelpers.export(exports, "resample", ()=>resample);
 /*
  * Copyright (c) 2019 Rafael da Silva Rocha.
  *
@@ -24542,10 +24436,10 @@ var _butterworthLpf = require("./butterworth-lpf");
  * @enum {boolean}
  * @private
  */ const DEFAULT_LPF_USE = {
-    'point': false,
-    'linear': false,
-    'cubic': true,
-    'sinc': true
+    "point": false,
+    "linear": false,
+    "cubic": true,
+    "sinc": true
 };
 /**
  * Default LPF order for each type of LPF.
@@ -24553,8 +24447,8 @@ var _butterworthLpf = require("./butterworth-lpf");
  * @enum {number}
  * @private
  */ const DEFAULT_LPF_ORDER = {
-    'IIR': 16,
-    'FIR': 71
+    "IIR": 16,
+    "FIR": 71
 };
 /**
  * Default LPF class for each type of LPF.
@@ -24562,28 +24456,27 @@ var _butterworthLpf = require("./butterworth-lpf");
  * @enum {!Function}
  * @private
  */ const DEFAULT_LPF = {
-    'IIR': _butterworthLpf.ButterworthLPF,
-    'FIR': _firLpf.FIRLPF
+    "IIR": (0, _butterworthLpf.ButterworthLPF),
+    "FIR": (0, _firLpf.FIRLPF)
 };
 function resample(samples, oldSampleRate, sampleRate, options = null) {
-    options = options || {
-    };
+    options = options || {};
     // Make the new sample container
     /** @type {number} */ let rate = (sampleRate - oldSampleRate) / oldSampleRate + 1;
     /** @type {!Float64Array} */ let newSamples = new Float64Array(samples.length * rate);
     // Create the interpolator
-    options.method = options.method || 'cubic';
-    /** @type {!Object} */ let interpolator = new _interpolator.Interpolator(samples.length, newSamples.length, {
+    options.method = options.method || "cubic";
+    /** @type {!Object} */ let interpolator = new (0, _interpolator.Interpolator)(samples.length, newSamples.length, {
         method: options.method,
         tension: options.tension || 0,
         sincFilterSize: options.sincFilterSize || 6,
         sincWindow: options.sincWindow || undefined,
-        clip: options.clip || 'mirror'
+        clip: options.clip || "mirror"
     });
     // Resample + LPF
     if (options.LPF === undefined) options.LPF = DEFAULT_LPF_USE[options.method];
     if (options.LPF) {
-        options.LPFType = options.LPFType || 'IIR';
+        options.LPFType = options.LPFType || "IIR";
         const LPF = DEFAULT_LPF[options.LPFType];
         // Upsampling
         if (sampleRate > oldSampleRate) {
@@ -24591,8 +24484,8 @@ function resample(samples, oldSampleRate, sampleRate, options = null) {
             upsample_(samples, newSamples, interpolator, filter);
         // Downsampling
         } else {
-            /** @type {!Object} */ let filter = new LPF(options.LPForder || DEFAULT_LPF_ORDER[options.LPFType], oldSampleRate, sampleRate / 2);
-            downsample_(samples, newSamples, interpolator, filter);
+            /** @type {!Object} */ let filter1 = new LPF(options.LPForder || DEFAULT_LPF_ORDER[options.LPFType], oldSampleRate, sampleRate / 2);
+            downsample_(samples, newSamples, interpolator, filter1);
         }
     // Resample, no LPF
     } else resample_(samples, newSamples, interpolator);
@@ -24634,12 +24527,12 @@ function resample(samples, oldSampleRate, sampleRate, options = null) {
     for(let i = 0, len = samples.length; i < len; i++)samples[i] = filter.filter(samples[i]);
     // Reverse filter
     filter.reset();
-    for(let i2 = samples.length - 1; i2 >= 0; i2--)samples[i2] = filter.filter(samples[i2]);
+    for(let i1 = samples.length - 1; i1 >= 0; i1--)samples[i1] = filter.filter(samples[i1]);
     // Resample
     resample_(samples, newSamples, interpolator);
 }
 
-},{"./interpolator":"3BUkV","./fir-lpf":"ehvXb","./butterworth-lpf":"5fQav","@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"3BUkV":[function(require,module,exports) {
+},{"./interpolator":"4adfs","./fir-lpf":"e6I0t","./butterworth-lpf":"3pklU","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4adfs":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -24672,8 +24565,7 @@ parcelHelpers.defineInteropFlag(exports);
  */ /**
  * A class to get scaled values out of arrays.
  * @extends WaveFileReader
- */ parcelHelpers.export(exports, "Interpolator", ()=>Interpolator
-);
+ */ parcelHelpers.export(exports, "Interpolator", ()=>Interpolator);
 class Interpolator {
     /**
    * @param {number} scaleFrom the length of the original array.
@@ -24692,9 +24584,9 @@ class Interpolator {
      * The interpolation function.
      * @type {Function}
      */ this.interpolate = this.sinc;
-        if (details.method === 'point') this.interpolate = this.point;
-        else if (details.method === 'linear') this.interpolate = this.linear;
-        else if (details.method === 'cubic') this.interpolate = this.cubic;
+        if (details.method === "point") this.interpolate = this.point;
+        else if (details.method === "linear") this.interpolate = this.linear;
+        else if (details.method === "cubic") this.interpolate = this.cubic;
         /**
      * The tanget factor for cubic interpolation.
      * @type {number}
@@ -24803,7 +24695,7 @@ class Interpolator {
     return Math.sin(Math.PI * x) / (Math.PI * x);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"ehvXb":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e6I0t":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -24835,8 +24727,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @see https://github.com/markert/fili.js
  */ /**
  * A FIR low pass filter.
- */ parcelHelpers.export(exports, "FIRLPF", ()=>FIRLPF
-);
+ */ parcelHelpers.export(exports, "FIRLPF", ()=>FIRLPF);
 class FIRLPF {
     /**
    * @param {number} order The order of the filter.
@@ -24887,7 +24778,7 @@ class FIRLPF {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"5fQav":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3pklU":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /*
@@ -24919,8 +24810,7 @@ parcelHelpers.defineInteropFlag(exports);
  * @see https://github.com/markert/fili.js
  */ /**
  * Butterworth LPF.
- */ parcelHelpers.export(exports, "ButterworthLPF", ()=>ButterworthLPF
-);
+ */ parcelHelpers.export(exports, "ButterworthLPF", ()=>ButterworthLPF);
 class ButterworthLPF {
     /**
    * @param {number} order The order of the filter.
@@ -24959,8 +24849,7 @@ class ButterworthLPF {
    * @param {!Object} params The filter params.
    * @return {!Object}
    */ getCoeffs_(params) {
-        /** @type {!Object} */ let coeffs = {
-        };
+        /** @type {!Object} */ let coeffs = {};
         coeffs.a = [];
         coeffs.b = [];
         /** @type {!Object} */ let p = this.preCalc_(params, coeffs);
@@ -24975,8 +24864,7 @@ class ButterworthLPF {
    * @param {!Object} coeffs The coefficients template.
    * @return {!Object}
    */ preCalc_(params, coeffs) {
-        /** @type {!Object} */ let pre = {
-        };
+        /** @type {!Object} */ let pre = {};
         /** @type {number} */ let w = 2 * Math.PI * params.Fc / params.Fs;
         pre.alpha = Math.sin(w) / (2 * params.Q);
         pre.cw = Math.cos(w);
@@ -25008,16 +24896,14 @@ class ButterworthLPF {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"j3Gbs"}],"kkr7o":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3ILQE":[function(require,module,exports) {
 var global = arguments[3];
 (function(a, b) {
     if ("function" == typeof define && define.amd) define([], b);
-    else if ("undefined" != typeof exports) b();
-    else b(), a.FileSaver = {
-    };
+    else b();
 })(this, function() {
     "use strict";
-    function b1(a, b) {
+    function b(a, b) {
         return "undefined" == typeof b ? b = {
             autoBom: !1
         } : "object" != typeof b && (console.warn("Deprecated: Expected third argument to be a object"), b = {
@@ -25029,24 +24915,23 @@ var global = arguments[3];
             type: a.type
         }) : a;
     }
-    function c1(a, b, c) {
+    function c(a, b, c) {
         var d = new XMLHttpRequest;
         d.open("GET", a), d.responseType = "blob", d.onload = function() {
-            g1(d.response, b, c);
+            g(d.response, b, c);
         }, d.onerror = function() {
             console.error("could not download file");
         }, d.send();
     }
-    function d1(a) {
+    function d(a) {
         var b = new XMLHttpRequest;
         b.open("HEAD", a, !1);
         try {
             b.send();
-        } catch (a2) {
-        }
+        } catch (a1) {}
         return 200 <= b.status && 299 >= b.status;
     }
-    function e1(a) {
+    function e(a) {
         try {
             a.dispatchEvent(new MouseEvent("click"));
         } catch (c) {
@@ -25054,42 +24939,86 @@ var global = arguments[3];
             b.initMouseEvent("click", !0, !0, window, 0, 0, 0, 80, 20, !1, !1, !1, !1, 0, null), a.dispatchEvent(b);
         }
     }
-    var f1 = "object" == typeof window && window.window === window ? window : "object" == typeof self && self.self === self ? self : "object" == typeof global && global.global === global ? global : void 0, a1 = f1.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent), g1 = f1.saveAs || ("object" != typeof window || window !== f1 ? function() {
-    } : "download" in HTMLAnchorElement.prototype && !a1 ? function(b, g, h) {
-        var i = f1.URL || f1.webkitURL, j = document.createElement("a");
-        g = g || b.name || "download", j.download = g, j.rel = "noopener", "string" == typeof b ? (j.href = b, j.origin === location.origin ? e1(j) : d1(j.href) ? c1(b, g, h) : e1(j, j.target = "_blank")) : (j.href = i.createObjectURL(b), setTimeout(function() {
+    var f = "object" == typeof window && window.window === window ? window : "object" == typeof self && self.self === self ? self : "object" == typeof global && global.global === global ? global : void 0, a = f.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent), g = f.saveAs || ("object" != typeof window || window !== f ? function() {} : "download" in HTMLAnchorElement.prototype && !a ? function(b, g, h) {
+        var i = f.URL || f.webkitURL, j = document.createElement("a");
+        g = g || b.name || "download", j.download = g, j.rel = "noopener", "string" == typeof b ? (j.href = b, j.origin === location.origin ? e(j) : d(j.href) ? c(b, g, h) : e(j, j.target = "_blank")) : (j.href = i.createObjectURL(b), setTimeout(function() {
             i.revokeObjectURL(j.href);
-        }, 40000), setTimeout(function() {
-            e1(j);
+        }, 4E4), setTimeout(function() {
+            e(j);
         }, 0));
     } : "msSaveOrOpenBlob" in navigator ? function(f, g, h) {
-        if (g = g || f.name || "download", "string" != typeof f) navigator.msSaveOrOpenBlob(b1(f, h), g);
-        else if (d1(f)) c1(f, g, h);
+        if (g = g || f.name || "download", "string" != typeof f) navigator.msSaveOrOpenBlob(b(f, h), g);
+        else if (d(f)) c(f, g, h);
         else {
             var i = document.createElement("a");
             i.href = f, i.target = "_blank", setTimeout(function() {
-                e1(i);
+                e(i);
             });
         }
     } : function(b, d, e, g) {
-        if (g = g || open("", "_blank"), g && (g.document.title = g.document.body.innerText = "downloading..."), "string" == typeof b) return c1(b, d, e);
-        var h = "application/octet-stream" === b.type, i = /constructor/i.test(f1.HTMLElement) || f1.safari, j = /CriOS\/[\d]+/.test(navigator.userAgent);
-        if ((j || h && i || a1) && "undefined" != typeof FileReader) {
+        if (g = g || open("", "_blank"), g && (g.document.title = g.document.body.innerText = "downloading..."), "string" == typeof b) return c(b, d, e);
+        var h = "application/octet-stream" === b.type, i = /constructor/i.test(f.HTMLElement) || f.safari, j = /CriOS\/[\d]+/.test(navigator.userAgent);
+        if ((j || h && i || a) && "undefined" != typeof FileReader) {
             var k = new FileReader;
             k.onloadend = function() {
                 var a = k.result;
                 a = j ? a : a.replace(/^data:[^;]*;/, "data:attachment/file;"), g ? g.location.href = a : location = a, g = null;
             }, k.readAsDataURL(b);
         } else {
-            var l = f1.URL || f1.webkitURL, m = l.createObjectURL(b);
+            var l = f.URL || f.webkitURL, m = l.createObjectURL(b);
             g ? g.location = m : location.href = m, g = null, setTimeout(function() {
                 l.revokeObjectURL(m);
-            }, 40000);
+            }, 4E4);
         }
     });
-    f1.saveAs = g1.saveAs = g1, "undefined" != typeof module && (module.exports = g1);
+    f.saveAs = g.saveAs = g, module.exports = g;
 });
 
-},{}]},["hN5yK","a104Y"], "a104Y", "parcelRequire5329")
+},{}],"2H3g6":[function(require,module,exports) {
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.track = exports.config = exports.trackPageview = exports.load = void 0;
+const interpret = (command, arg1)=>{
+    window.panelbear = window.panelbear || function() {
+        window.panelbearQ = window.panelbearQ || [];
+        window.panelbearQ.push(arguments);
+    };
+    try {
+        window.panelbear(command, arg1);
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.warn("There was an error while executing a Panelbear command", e);
+    }
+};
+const load = (site, config)=>{
+    var _a;
+    const tracker = document.createElement("script");
+    tracker.async = true;
+    tracker.src = `${(_a = config === null || config === void 0 ? void 0 : config.scriptSrc) !== null && _a !== void 0 ? _a : "https://cdn.panelbear.com/analytics.js"}?site=${site}`;
+    document.head.appendChild(tracker);
+    interpret("config", Object.assign({
+        site: site,
+        // Disable auto-track on the JS client. Most projects using this library need
+        // more control over the event handlers.
+        autoTrack: false
+    }, config));
+};
+exports.load = load;
+const trackPageview = ()=>{
+    interpret("trackPageview");
+};
+exports.trackPageview = trackPageview;
+const config = (config)=>{
+    interpret("config", config);
+};
+exports.config = config;
+const track = (eventName)=>{
+    interpret("track", eventName);
+};
+exports.track = track;
 
-//# sourceMappingURL=index.5ea6b9c6.js.map
+},{}]},["ShInH","8lqZg"], "8lqZg", "parcelRequired167")
+
+//# sourceMappingURL=index.975ef6c8.js.map
