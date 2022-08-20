@@ -15,12 +15,14 @@ export default class ControlsHandler {
         window.addEventListener("wheel",throttle(this.onWheel.bind(this),10))
     }
     exportWavFile = () => {
+        if(this.morphaweb.wavesurfer.getDuration() === 0) { return false; }
+        //if()
         const buffer = [
            this.morphaweb.wavesurfer.backend.buffer.getChannelData(0),
            this.morphaweb.wavesurfer.backend.buffer.getChannelData(1)
-       ]
-       const markers = this.morphaweb.wavesurfer.markers.markers
-       this.morphaweb.wavHandler.createFileFromBuffer(buffer,markers)
+        ]
+        const markers = this.morphaweb.wavesurfer.markers.markers
+        this.morphaweb.wavHandler.createFileFromBuffer(buffer,markers)
     }
 
     play = () => {
