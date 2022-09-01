@@ -8,7 +8,6 @@ export default class Morphaweb {
     constructor() {
         this.scrollPos = 0
         this.scrollMin = 0
-        this.activeFile = null
         this.playOffset = 0
         
         this.wavesurfer = WaveSurfer.create({
@@ -29,6 +28,6 @@ export default class Morphaweb {
     onReady = async () => {
         this.scrollMin = Math.round(this.wavesurfer.container.scrollWidth / this.wavesurfer.getDuration())
         this.scrollPos = this.scrollMin
-        this.wavHandler.loadMarkersFromFile(this.activeFile,this.markerHandler.addMarkers)
+        this.markerHandler.addMarkers(this.wavHandler.markers)
     }
 }

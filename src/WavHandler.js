@@ -3,19 +3,27 @@ import { saveAs } from "file-saver";
 
 export default class WavHandler {
 
-    async loadMarkersFromFile (file,callback) {
-        let fr = new FileReader()
-        let cues = []
-        fr.readAsDataURL(file)
-        fr.onloadend = () => {
-            let f = new WaveFile()
-            const base64String = fr.result
-            .replace("data:", "")
-            .replace(/^.+,/, "");
-            f.fromBase64(base64String)
-            cues = f.listCuePoints()
-            callback(cues)
-        }
+    constructor() {
+        this.markers = []
+    }
+
+    async getMarkersFromFile (file) {
+        return new Promise((resolve,reject) => {
+            let fr = new FileReader()
+            let cues = []
+            fr.readAsDataURL(file)
+            fr.onloadend = () => {
+                let f = new WaveFile()
+                const base64String = fr.result
+                .replace("data:", "")
+                .replace(/^.+,/, "");
+                f.fromBase64(base64String)
+                cues = f.listCuePoints()
+                resolve(cues)
+            }
+            fr.onerror=reject
+        })
+        
     }
 
     createFileFromBuffer(buffer,markers) {
