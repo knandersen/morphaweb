@@ -4,6 +4,7 @@ import DropHandler from "./DropHandler";
 import ControlsHandler from "./ControlsHandler";
 import MarkerHandler from "./MarkerHandler";
 import WavHandler from "./WavHandler";
+import * as Panelbear from '@panelbear/panelbear-js'
 export default class Morphaweb {
     constructor() {
         this.scrollPos = 0
@@ -22,6 +23,9 @@ export default class Morphaweb {
         this.controlsHandler = new ControlsHandler(this)
         this.wavHandler = new WavHandler()
 
+        this.panelbear = Panelbear
+        this.initAnalytics()
+
         this.wavesurfer.on('ready',this.onReady.bind(this))
     }
 
@@ -29,5 +33,15 @@ export default class Morphaweb {
         this.scrollMin = Math.round(this.wavesurfer.container.scrollWidth / this.wavesurfer.getDuration())
         this.scrollPos = this.scrollMin
         this.markerHandler.addMarkers(this.wavHandler.markers)
+    }
+
+    initAnalytics() {
+        this.panelbear.load("z6xwVIhy6M");
+        this.panelbear.trackPageview();
+
+        const exportButton = document.getElementById("export")
+        exportButton.addEventListener("click", (e) => {
+            this.panelbear.track("export")
+        })
     }
 }

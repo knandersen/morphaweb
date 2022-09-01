@@ -33,8 +33,12 @@ export default class DropHandler {
                     markers.push({position: buf.duration*1000})
                     offset += buf.duration*1000
                     audioBuffers.push(buf)
+                },() => {
+                    this.morphaweb.panelbear.track("ErrorFileUploadMarkers")
                 })
                 return p;
+            }, () => {
+                this.morphaweb.panelbear.track("ErrorFileUpload")
             })
         })
         const resolvedPromises = await Promise.all(promise)
