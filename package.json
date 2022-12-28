@@ -8,7 +8,7 @@
     "build": "yarn clean && parcel build --public-url ./",
     "clean": "rm -rf dist/",
     "deploy": "yarn generateVersion && yarn build && gh-pages -d dist",
-    "generateVersion": "git rev-parse --short HEAD > assets/VERSION.txt"
+    "generateVersion": "git describe --tags > assets/VERSION.txt"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",
