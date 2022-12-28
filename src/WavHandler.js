@@ -37,6 +37,11 @@ export default class WavHandler {
                 })
             }
         }
+
+        for (let i = 0; i < file.cue.points.length; i++) {
+            file.cue.points[i].dwPosition = file.cue.points[i].dwSampleOffset
+        }
+
         const data = file.toDataURI()
         saveAs(data, "export.wav")
     }
