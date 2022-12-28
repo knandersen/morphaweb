@@ -7,37 +7,37 @@ export default class WavHandler {
         this.markers = []
     }
 
-    async getMarkersFromFile (file) {
-        return new Promise((resolve,reject) => {
+    async getMarkersFromFile(file) {
+        return new Promise((resolve, reject) => {
             let fr = new FileReader()
             let cues = []
             fr.readAsDataURL(file)
             fr.onloadend = () => {
                 let f = new WaveFile()
                 const base64String = fr.result
-                .replace("data:", "")
-                .replace(/^.+,/, "");
+                    .replace("data:", "")
+                    .replace(/^.+,/, "");
                 f.fromBase64(base64String)
                 cues = f.listCuePoints()
                 resolve(cues)
             }
-            fr.onerror=reject
+            fr.onerror = reject
         })
-        
+
     }
 
-    createFileFromBuffer(buffer,markers) {
+    createFileFromBuffer(buffer, markers) {
         let file = new WaveFile()
         file.fromScratch(2, 48000, '32f', buffer)
 
         for (let marker of markers) {
-            if(marker.position != "top") {
+            if (marker.position != "top") {
                 file.setCuePoint({
-                    position: marker.time*1000
+                    position: marker.time * 1000
                 })
             }
         }
         const data = file.toDataURI()
-        saveAs(data,"export.wav")
+        saveAs(data, "export.wav")
     }
 }
