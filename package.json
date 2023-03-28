@@ -11,9 +11,10 @@
     "generateVersion": "git describe --tags > assets/VERSION.txt"
   },
   "devDependencies": {
+    "@parcel/transformer-inline-string": "2.8.3",
     "autoprefixer": "^10.4.2",
     "gh-pages": "^3.2.3",
-    "parcel": "^2.7.0"
+    "parcel": "^2.8.3"
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.5.8",

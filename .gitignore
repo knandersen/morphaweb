@@ -4,3 +4,4 @@ dist
 assets
 yarn.lock
 .parcel-cache/
+.yarn/
