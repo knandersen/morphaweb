@@ -8,6 +8,7 @@ export default class ControlsHandler {
         
         this.exportButton.addEventListener('click',this.exportWavFile)
         this.playButton.addEventListener('click',this.play)
+        this.pauseButton.addEventListener('click',this.pause)
 
         document.addEventListener('keydown',this.onKeydown.bind(this))
         this.morphaweb.wavesurfer.on('seek',this.onSeek.bind(this))
@@ -30,10 +31,22 @@ export default class ControlsHandler {
     }
 
     play = () => {
-        if(this.morphaweb.wavesurfer.isPlaying) {
+        if(this.morphaweb.wavesurfer.isPlaying()) {
             this.morphaweb.wavesurfer.seekTo(0)
         }
         this.morphaweb.wavesurfer.play()
+    }
+
+    pause = () => {
+        this.morphaweb.wavesurfer.pause()
+    }
+
+    playToggle = () => {
+        if (this.morphaweb.wavesurfer.isPlaying()) {
+            this.morphaweb.wavesurfer.pause()
+        } else {
+            this.morphaweb.wavesurfer.play()
+        }
     }
 
     onSeek = (p) => {
@@ -61,6 +74,9 @@ export default class ControlsHandler {
                 break;
             case "k":
                 this.morphaweb.markerHandler.removeSelectedMarker()
+                break;
+            case " ":
+                this.playToggle()
                 break;
         }
     }
