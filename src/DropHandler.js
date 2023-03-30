@@ -55,6 +55,7 @@ export default class DropHandler {
     onDrop(e) {
         e.preventDefault()
         this.overlayHide()
+        this.morphaweb.wavesurfer.clearMarkers()
         this.loadFiles(e.dataTransfer.files).then(res => {
             this.morphaweb.wavesurfer.loadBlob(res.blob)
             this.morphaweb.wavHandler.markers = res.markers
