@@ -70,9 +70,11 @@ export default class ControlsHandler {
     onKeydown = (e) => {
         switch(e.key) {
             case "j":
+            case "J":
                 this.morphaweb.markerHandler.createMarkerAtCurrentPosition()
                 break;
             case "k":
+            case "K":
                 this.morphaweb.markerHandler.removeSelectedMarker()
                 break;
             case " ":
