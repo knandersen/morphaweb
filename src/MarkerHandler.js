@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 export default class MarkerHandler {
     constructor(morphaweb){
         this.color = '#ff990a'
@@ -66,7 +64,6 @@ export default class MarkerHandler {
             time: time,
             position: "bottom",
             color: this.color,
-            uuid: uuidv4(),
             draggable:true
         }
         if(type == "top") {
