@@ -26,7 +26,7 @@ export default class ControlsHandler {
             const markers = this.morphaweb.wavesurfer.markers.markers
             this.morphaweb.wavHandler.createFileFromBuffer(buffer,markers)
         } catch(error) {
-            this.morphaweb.panelbear.track("ErrorExportWavFile")
+            this.morphaweb.track("ErrorExportWavFile")
         }
     }
 
