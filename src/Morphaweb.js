@@ -42,7 +42,7 @@ export default class Morphaweb {
 
     track(e) {
         if (window.umami) {
-            window.umami(e)
+            window.umami("morphaweb-"+e)
         }
     }
 }
