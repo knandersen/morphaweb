@@ -30,7 +30,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            morphaweb-mac
-            morphaweb-mac-intel
-            morphaweb-linux
-            morphaweb-windows.exe
+            morphaweb-mac-arm64
+            morphaweb-mac-x64
+            morphaweb-linux-arm64
+            morphaweb-windows-x64
