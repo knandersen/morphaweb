@@ -1,5 +1,5 @@
 import Morphaweb from './Morphaweb'
-import version from 'bundle-text:../assets/VERSION.txt'
+import{ version} from '../package.json'
 
 const morphaweb = new Morphaweb()
 
