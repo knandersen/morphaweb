@@ -33,4 +33,4 @@ jobs:
             morphaweb-mac-arm64
             morphaweb-mac-x64
             morphaweb-linux-arm64
-            morphaweb-windows-x64
+            morphaweb-windows-x64.exe
