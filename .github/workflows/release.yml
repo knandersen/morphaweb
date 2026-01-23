@@ -16,6 +16,9 @@ jobs:
         with:
           bun-version: latest
 
+      - name: Install Dependencies
+        run: bun install
+
       - name: Build Executables
         run: |
           bun run build:mac
