@@ -1,20 +1,22 @@
 {
   "name": "morphaweb",
   "version": "1.0.0",
-  "source": "src/index.html",
+  "module": "src/index.js",
+  "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "parcel",
-    "build": "yarn clean && parcel build --public-url ./",
-    "clean": "rm -rf dist/",
-    "deploy": "yarn generateVersion && yarn build && gh-pages -d dist",
+    "dev": "bun --watch server.ts",
+    "build": "bun build --compile ./server.ts --outfile morphaweb",
+    "build:mac": "bun build --compile ./server.ts --outfile morphaweb --target bun-darwin-arm64",
+    "build:mac-intel": "bun build --compile ./server.ts --outfile morphaweb --target bun-darwin-x64",
+    "build:linux": "bun build --compile ./server.ts --outfile morphaweb --target bun-linux-arm64",
+    "build:windows": "bun build --compile ./server.ts --outfile morphaweb --target bun-windows-x64-baseline",
     "generateVersion": "git describe --tags > assets/VERSION.txt"
   },
   "devDependencies": {
-    "@parcel/transformer-inline-string": "2.8.3",
+    "@types/bun": "latest",
     "autoprefixer": "^10.4.2",
-    "gh-pages": "^3.2.3",
-    "parcel": "latest"
+    "gh-pages": "^3.2.3"
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.5.8",
@@ -23,5 +25,9 @@
     "lodash": "^4.17.21",
     "wavefile": "^11.0.0",
     "wavesurfer.js": "^6.6.2"
-  }
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "private": true
 }

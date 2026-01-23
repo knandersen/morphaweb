@@ -1,0 +1,33 @@
+name: Release Executables
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Build Executables
+        run: |
+          bun run build:mac
+          bun run build:mac-intel
+          bun run build:linux
+          bun run build:windows
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            morphaweb-mac
+            morphaweb-mac-intel
+            morphaweb-linux
+            morphaweb-windows.exe

@@ -5,3 +5,6 @@ assets
 yarn.lock
 .parcel-cache/
 .yarn/
+docs
+morphaweb
+morphaweb.*
