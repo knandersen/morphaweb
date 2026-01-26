@@ -61,19 +61,24 @@ jobs:
           codesign --verify --deep --strict --verbose=2 morphaweb-mac-arm64
           codesign --verify --deep --strict --verbose=2 morphaweb-mac-x64
 
+      - name: Zip macOS binaries
+        run: |
+          zip -r morphaweb-mac-arm64.zip morphaweb-mac-arm64
+          zip -r morphaweb-mac-x64.zip morphaweb-mac-x64
+
       - name: Notarize
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
-          xcrun notarytool submit morphaweb-mac-arm64 \
+          xcrun notarytool submit morphaweb-mac-arm64.zip \
             --apple-id "$APPLE_ID" \
             --password "$APPLE_APP_PASSWORD" \
             --team-id "$APPLE_TEAM_ID" \
             --wait
 
-          xcrun notarytool submit morphaweb-mac-x64 \
+          xcrun notarytool submit morphaweb-mac-x64.zip \
             --apple-id "$APPLE_ID" \
             --password "$APPLE_APP_PASSWORD" \
             --team-id "$APPLE_TEAM_ID" \
