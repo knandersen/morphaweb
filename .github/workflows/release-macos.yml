@@ -31,6 +31,7 @@ jobs:
         env:
           MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
           MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+          MACOS_CERT_IDENTITY_ID: ${{ secrets.MACOS_CERT_IDENTITY_ID }}
         run: |
           echo "$MACOS_CERT_P12" | base64 --decode > cert.p12
 
@@ -38,6 +39,8 @@ jobs:
           security default-keychain -s build.keychain
           security unlock-keychain -p "" build.keychain
           security import cert.p12 \
+          security set-keychain-settings -lut 21600 build.keychain
+          security list-keychains -d user -s build.keychain $(security list-keychains -d user | xargs)
           -k build.keychain \
           -P "$MACOS_CERT_PASSWORD" \
           -T /usr/bin/codesign
@@ -49,11 +52,11 @@ jobs:
       - name: Codesign binaries
         run: |
           codesign --force --options runtime \
-          --sign "Developer ID Application" \
+          --sign "$MACOS_CERT_IDENTITY_ID" \
           morphaweb-mac-arm64
 
           codesign --force --options runtime \
-          --sign "Developer ID Application" \
+          --sign "$MACOS_CERT_IDENTITY_ID" \
           morphaweb-mac-x64
 
       - name: Verify signature
@@ -83,6 +86,8 @@ jobs:
             --password "$APPLE_APP_PASSWORD" \
             --team-id "$APPLE_TEAM_ID" \
             --wait
+
+          sleep 20
 
           xcrun stapler staple morphaweb-mac-arm64
           xcrun stapler staple morphaweb-mac-x64
