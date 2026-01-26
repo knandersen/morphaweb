@@ -4,6 +4,7 @@ import DropHandler from "./DropHandler";
 import ControlsHandler from "./ControlsHandler";
 import MarkerHandler from "./MarkerHandler";
 import WavHandler from "./WavHandler";
+import { track } from "./lib/umami";
 export default class Morphaweb {
     constructor() {
         this.scrollPos = 0
@@ -36,13 +37,7 @@ export default class Morphaweb {
     initAnalytics() {
         const exportButton = document.getElementById("export")
         exportButton.addEventListener("click", (e) => {
-            this.track("export")
+            track("export")
         })
-    }
-
-    track(e) {
-        if (window.umami) {
-            window.umami("morphaweb-"+e)
-        }
     }
 }

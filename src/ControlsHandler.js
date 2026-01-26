@@ -1,4 +1,5 @@
 import { throttle } from "lodash";
+import { track } from "./lib/umami";
 export default class ControlsHandler {
     constructor(morphaweb) {
         this.morphaweb = morphaweb
@@ -26,7 +27,7 @@ export default class ControlsHandler {
             const markers = this.morphaweb.wavesurfer.markers.markers
             this.morphaweb.wavHandler.createFileFromBuffer(buffer,markers)
         } catch(error) {
-            this.morphaweb.track("ErrorExportWavFile")
+            track("ErrorExportWavFile")
         }
     }
 

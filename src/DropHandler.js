@@ -1,9 +1,10 @@
 import Crunker from 'crunker'
+import { track } from './lib/umami'
 export default class DropHandler {
     constructor(morphaweb) {
         this.morphaweb = morphaweb
         this.overlay = document.getElementById("overlay")
-        this.crunker = new Crunker({sampleRate:48000})
+        this.crunker = new Crunker.default({sampleRate:48000})
         
         document.addEventListener("dragover", this.allowDrop.bind(this))
         document.addEventListener("drop", this.onDrop.bind(this))
@@ -34,11 +35,11 @@ export default class DropHandler {
                     offset += buf.duration*1000
                     audioBuffers.push(buf)
                 },() => {
-                    this.morphaweb.track("ErrorFileUploadMarkers")
+                    track("ErrorFileUploadMarkers")
                 })
                 return p;
             }, () => {
-                this.morphaweb.track("ErrorFileUpload")
+                track("ErrorFileUpload")
             })
         })
         const resolvedPromises = await Promise.all(promise)

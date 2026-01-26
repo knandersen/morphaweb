@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.5.8",
-    "crunker": "^1.3.0",
+    "crunker": "^2.4.0",
     "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
     "wavefile": "^11.0.0",
