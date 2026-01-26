@@ -1,0 +1,83 @@
+name: Release Executables for macOS
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  mac-build:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build macOS executables
+        run: |
+          bun run build:mac
+          bun run build:mac-intel
+
+      - name: Import signing certificate
+        env:
+          MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
+          MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
+        run: |
+          echo "$MACOS_CERT_P12" | base64 --decode > cert.p12
+
+          security create-keychain -p "" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "" build.keychain
+          security import cert.p12 \
+          -k build.keychain \
+          -P "$MACOS_CERT_PASSWORD" \
+          -T /usr/bin/codesign
+
+          security set-key-partition-list \
+          -S apple-tool:,apple: \
+          -s -k "" build.keychain
+
+      - name: Codesign binaries
+        run: |
+          codesign --force --options runtime \
+          --sign "Developer ID Application" \
+          morphaweb-mac-arm64
+
+          codesign --force --options runtime \
+          --sign "Developer ID Application" \
+          morphaweb-mac-x64
+
+      - name: Verify signature
+        run: |
+          codesign --verify --deep --strict --verbose=2 morphaweb-mac-arm64
+          codesign --verify --deep --strict --verbose=2 morphaweb-mac-x64
+
+      - name: Notarize
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          xcrun notarytool submit morphaweb-mac-arm64 \
+            --apple-id "$APPLE_ID" \
+            --password "$APPLE_APP_PASSWORD" \
+            --team-id "$APPLE_TEAM_ID" \
+            --wait
+
+          xcrun notarytool submit morphaweb-mac-x64 \
+            --apple-id "$APPLE_ID" \
+            --password "$APPLE_APP_PASSWORD" \
+            --team-id "$APPLE_TEAM_ID" \
+            --wait
+
+          xcrun stapler staple morphaweb-mac-arm64
+          xcrun stapler staple morphaweb-mac-x64

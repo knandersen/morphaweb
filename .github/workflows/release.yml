@@ -1,8 +1,9 @@
-name: Release Executables
+name: Release Executables for Windows and Linux
 on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,8 +22,6 @@ jobs:
 
       - name: Build Executables
         run: |
-          bun run build:mac
-          bun run build:mac-intel
           bun run build:linux
           bun run build:windows
 
@@ -30,7 +29,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            morphaweb-mac-arm64
-            morphaweb-mac-x64
             morphaweb-linux-arm64
             morphaweb-windows-x64.exe
