@@ -39,11 +39,11 @@ jobs:
           security default-keychain -s build.keychain
           security unlock-keychain -p "" build.keychain
           security import cert.p12 \
-          security set-keychain-settings -lut 21600 build.keychain
-          security list-keychains -d user -s build.keychain $(security list-keychains -d user | xargs)
           -k build.keychain \
           -P "$MACOS_CERT_PASSWORD" \
           -T /usr/bin/codesign
+          security set-keychain-settings -lut 21600 build.keychain
+          security list-keychains -d user -s build.keychain $(security list-keychains -d user | xargs)
 
           security set-key-partition-list \
           -S apple-tool:,apple: \
