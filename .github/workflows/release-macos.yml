@@ -31,7 +31,6 @@ jobs:
         env:
           MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
           MACOS_CERT_PASSWORD: ${{ secrets.MACOS_CERT_PASSWORD }}
-          MACOS_CERT_IDENTITY_ID: ${{ secrets.MACOS_CERT_IDENTITY_ID }}
         run: |
           echo "$MACOS_CERT_P12" | base64 --decode > cert.p12
 
@@ -50,6 +49,8 @@ jobs:
           -s -k "" build.keychain
 
       - name: Codesign binaries
+        env:
+          MACOS_CERT_IDENTITY_ID: ${{ secrets.MACOS_CERT_IDENTITY_ID }}
         run: |
           codesign --force --options runtime \
           --sign "$MACOS_CERT_IDENTITY_ID" \
