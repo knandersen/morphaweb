@@ -1,5 +1,5 @@
 import Morphaweb from './Morphaweb'
-import{ version} from '../package.json'
+import { version } from '../package.json'
 
 const morphaweb = new Morphaweb()
 
