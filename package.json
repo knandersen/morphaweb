@@ -1,6 +1,6 @@
 {
   "name": "morphaweb",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "module": "src/index.js",
   "type": "module",
   "license": "MIT",
