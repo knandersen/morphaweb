@@ -32,7 +32,6 @@ jobs:
           MACOS_CF_BUNDLE_IDENTIFIER: ${{ secrets.MACOS_CF_BUNDLE_IDENTIFIER }}
         run: |
           mkdir -p dist/macos/Morphaweb.app/Contents/MacOS
-          cp -r assets/macos/ dist/macos/
 
           cp dist/morphaweb-mac-arm64 dist/macos/Morphaweb.app/Contents/MacOS/Morphaweb
 
@@ -51,6 +50,8 @@ jobs:
               <string>APPL</string>
               <key>LSMinimumSystemVersion</key>
               <string>11.0</string>
+              <key>LSUIElement</key>
+              <true />
           </dict>
           </plist>
           EOF
@@ -95,7 +96,8 @@ jobs:
 
       - name: Zip macOS binaries
         run: |
-          zip -r morphaweb-mac-arm64.zip dist/macos/Morphaweb.app
+          mv dist/macos/Morphaweb.app ./Morphaweb.app
+          zip -r morphaweb-mac-arm64.zip Morphaweb.app
           #zip -r morphaweb-mac-x64.zip morphaweb-mac-x64
 
       - name: Notarize
