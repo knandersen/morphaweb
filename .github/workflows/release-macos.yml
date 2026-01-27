@@ -27,6 +27,33 @@ jobs:
           bun run build:mac
           bun run build:mac-intel
 
+      - name: Create App Bundle
+        env:
+          MACOS_CF_BUNDLE_IDENTIFIER: ${{ secrets.MACOS_CF_BUNDLE_IDENTIFIER }}
+        run: |
+          mkdir -p dist/macos/Morphaweb.app/Contents/MacOS
+
+          cp morphaweb-mac-arm64 dist/macos/Morphaweb.app/Contents/MacOS/Morphaweb
+
+          cat <<EOF > Morphaweb.app/Contents/Info.plist
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+              <key>CFBundleExecutable</key>
+              <string>Morphaweb</string>
+              <key>CFBundleIdentifier</key>
+              <string>${MACOS_CF_BUNDLE_IDENTIFIER}</string>
+              <key>CFBundleName</key>
+              <string>Morphaweb</string>
+              <key>CFBundlePackageType</key>
+              <string>APPL</string>
+              <key>LSMinimumSystemVersion</key>
+              <string>11.0</string>
+          </dict>
+          </plist>
+          EOF
+
       - name: Import signing certificate
         env:
           MACOS_CERT_P12: ${{ secrets.MACOS_CERT_P12 }}
@@ -52,23 +79,23 @@ jobs:
         env:
           MACOS_CERT_IDENTITY_ID: ${{ secrets.MACOS_CERT_IDENTITY_ID }}
         run: |
-          codesign --force --options runtime \
+          codesign --force --options runtime --deep \
           --sign "$MACOS_CERT_IDENTITY_ID" \
-          morphaweb-mac-arm64
+          dist/macos/Morphaweb.app
 
-          codesign --force --options runtime \
-          --sign "$MACOS_CERT_IDENTITY_ID" \
-          morphaweb-mac-x64
+          #codesign --force --options runtime \
+          #--sign "$MACOS_CERT_IDENTITY_ID" \
+          #morphaweb-mac-x64
 
       - name: Verify signature
         run: |
-          codesign --verify --deep --strict --verbose=2 morphaweb-mac-arm64
-          codesign --verify --deep --strict --verbose=2 morphaweb-mac-x64
+          codesign --verify --deep --strict --verbose=2 dist/macos/Morphaweb.app
+          #codesign --verify --deep --strict --verbose=2 morphaweb-mac-x64
 
       - name: Zip macOS binaries
         run: |
-          zip -r morphaweb-mac-arm64.zip morphaweb-mac-arm64
-          zip -r morphaweb-mac-x64.zip morphaweb-mac-x64
+          zip -r morphaweb-mac-arm64.zip dist/macos/Morphaweb.app
+          #zip -r morphaweb-mac-x64.zip morphaweb-mac-x64
 
       - name: Notarize
         env:
@@ -82,13 +109,13 @@ jobs:
             --team-id "$APPLE_TEAM_ID" \
             --wait
 
-          xcrun notarytool submit morphaweb-mac-x64.zip \
-            --apple-id "$APPLE_ID" \
-            --password "$APPLE_APP_PASSWORD" \
-            --team-id "$APPLE_TEAM_ID" \
-            --wait
+          #xcrun notarytool submit morphaweb-mac-x64.zip \
+          #  --apple-id "$APPLE_ID" \
+          #  --password "$APPLE_APP_PASSWORD" \
+          #  --team-id "$APPLE_TEAM_ID" \
+          #  --wait
 
           sleep 20
 
           xcrun stapler staple morphaweb-mac-arm64
-          xcrun stapler staple morphaweb-mac-x64
+          #xcrun stapler staple morphaweb-mac-x64
