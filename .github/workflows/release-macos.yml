@@ -104,7 +104,7 @@ jobs:
           APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
-          xcrun notarytool submit morphaweb-mac-arm64.zip \
+          xcrun notarytool submit dist/macos/Morphaweb.app \
             --apple-id "$APPLE_ID" \
             --password "$APPLE_APP_PASSWORD" \
             --team-id "$APPLE_TEAM_ID" \
@@ -118,5 +118,5 @@ jobs:
 
           sleep 20
 
-          xcrun stapler staple morphaweb-mac-arm64.zip
+          xcrun stapler staple dist/macos/Morphaweb.app
           #xcrun stapler staple morphaweb-mac-x64
