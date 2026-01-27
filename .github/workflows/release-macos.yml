@@ -125,4 +125,4 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            dist/macos/Morphaweb.app
+            morphaweb-mac-arm64.zip
