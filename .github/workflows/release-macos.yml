@@ -118,5 +118,5 @@ jobs:
 
           sleep 20
 
-          xcrun stapler staple morphaweb-mac-arm64
+          xcrun stapler staple morphaweb-mac-arm64.zip
           #xcrun stapler staple morphaweb-mac-x64
