@@ -31,6 +31,7 @@ jobs:
         env:
           MACOS_CF_BUNDLE_IDENTIFIER: ${{ secrets.MACOS_CF_BUNDLE_IDENTIFIER }}
         run: |
+          cp assets/macos dist/macos/
           mkdir -p dist/macos/Morphaweb.app/Contents/MacOS
 
           cp morphaweb-mac-arm64 dist/macos/Morphaweb.app/Contents/MacOS/Morphaweb

@@ -6,13 +6,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "bun --watch server.ts",
-    "build": "bun build --compile ./server.ts --outfile morphaweb",
-    "build:mac": "bun build --compile ./server.ts --outfile morphaweb-mac-arm64 --target bun-darwin-arm64",
-    "build:mac-intel": "bun build --compile ./server.ts --outfile morphaweb-mac-x64 --target bun-darwin-x64",
-    "build:linux": "bun build --compile ./server.ts --outfile morphaweb-linux-arm64 --target bun-linux-arm64",
-    "build:windows": "bun build --compile ./server.ts --outfile morphaweb-windows-x64 --target bun-windows-x64-baseline",
-    "release:patch": "npm version patch && git push origin main --tags",
-    "generateVersion": "git describe --tags > assets/VERSION.txt"
+    "build": "bun build --compile ./server.ts --outfile dist/morphaweb",
+    "build:mac": "bun build --compile ./server.ts --outfile dist/morphaweb-mac-arm64 --target bun-darwin-arm64",
+    "build:mac-intel": "bun build --compile ./server.ts --outfile dist/morphaweb-mac-x64 --target bun-darwin-x64",
+    "build:linux": "bun build --compile ./server.ts --outfile dist/morphaweb-linux-arm64 --target bun-linux-arm64",
+    "build:windows": "bun build --compile ./server.ts --outfile dist/morphaweb-windows-x64 --target bun-windows-x64-baseline",
+    "release:patch": "npm version patch && git push origin main --tags"
   },
   "devDependencies": {
     "@types/bun": "latest",
