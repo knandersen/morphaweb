@@ -31,10 +31,10 @@ jobs:
         env:
           MACOS_CF_BUNDLE_IDENTIFIER: ${{ secrets.MACOS_CF_BUNDLE_IDENTIFIER }}
         run: |
-          cp assets/macos dist/macos/
           mkdir -p dist/macos/Morphaweb.app/Contents/MacOS
+          cp -r assets/macos/ dist/macos/
 
-          cp morphaweb-mac-arm64 dist/macos/Morphaweb.app/Contents/MacOS/Morphaweb
+          cp dist/morphaweb-mac-arm64 dist/macos/Morphaweb.app/Contents/MacOS/Morphaweb
 
           cat <<EOF > Morphaweb.app/Contents/Info.plist
           <?xml version="1.0" encoding="UTF-8"?>
