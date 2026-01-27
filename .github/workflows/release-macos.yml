@@ -120,7 +120,7 @@ jobs:
 
           sleep 20
 
-          xcrun stapler staple dist/macos/Morphaweb.app
+          xcrun stapler staple Morphaweb.app
           #xcrun stapler staple morphaweb-mac-x64
 
       - name: Release
