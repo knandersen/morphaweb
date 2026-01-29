@@ -18,6 +18,7 @@ const openBrowser = (url: string) => {
 };
 
 const server = serve({
+  port: 3876,
   routes: {
     "/": index,
   },
