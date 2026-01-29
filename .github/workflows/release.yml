@@ -25,6 +25,11 @@ jobs:
           bun run build:linux
           bun run build:windows
 
+      - name: Move Artifacts
+        run: |
+          mv dist/morphaweb-linux-arm64 morphaweb-linux-arm64
+          mv dist/morphaweb-windows-x64.exe morphaweb-windows-x64.exe
+
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
